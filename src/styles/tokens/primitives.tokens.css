@@ -144,9 +144,11 @@
   --tracking-wide: 0.02em;
   --tracking-wider: 0.05em;
 
-  /* ----------------------------------------------------------
+/* ----------------------------------------------------------
      1.4 Radius (intentional per component — Appendix B)
-  ---------------------------------------------------------- */
+     --radius-app: global application radius (new method of design)
+     --radius-app-lg: large radius for cards/sections
+   ---------------------------------------------------------- */
   --radius-none: 0;
   --radius-xs: 2px;
   --radius-sm: 4px;
@@ -155,6 +157,8 @@
   --radius-xl: 14px;
   --radius-2xl: 20px;
   --radius-full: 9999px;
+  --radius-app: 16px;
+  --radius-app-lg: 24px;
 
   /* ----------------------------------------------------------
      1.5 Shadows

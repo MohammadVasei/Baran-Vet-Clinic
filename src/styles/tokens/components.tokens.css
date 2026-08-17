@@ -11,7 +11,7 @@
   --button-bg-hover: var(--primary-hover);
   --button-border: transparent;
   --button-border-hover: var(--primary-hover);
-  --button-radius: var(--radius-md);
+  --button-radius: var(--radius-app);
   --button-padding-y: var(--space-2-5);
   --button-padding-x: var(--space-5);
   --button-min-height: var(--space-11);
@@ -37,7 +37,7 @@
   --input-border-hover: var(--ring);
   --input-placeholder: var(--muted-foreground);
   --input-focus-ring: var(--ring);
-  --input-radius: var(--radius-md);
+  --input-radius: var(--radius-app);
   --input-padding-y: var(--space-3);
   --input-padding-x: var(--space-4);
 
@@ -45,7 +45,7 @@
   --card-bg: var(--surface);
   --card-fg: var(--foreground);
   --card-border: var(--border);
-  --card-radius: var(--radius-lg);
+  --card-radius: var(--radius-app-lg);
   --card-padding: var(--space-6);
   --card-shadow: var(--shadow-soft);
 
@@ -60,11 +60,12 @@
   --link-underline: var(--primary-soft-fg);
 
   /* ---------- Header / nav (Step 5) ---------- */
-  --nav-bg: color-mix(in srgb, var(--background) 88%, transparent);
+  --nav-bg: color-mix(in srgb, var(--background) 95%, transparent);
   --nav-border: var(--border);
   --nav-fg: var(--foreground);
   --nav-link-fg: var(--foreground);
   --nav-link-hover-fg: var(--primary);
+  --nav-radius: var(--radius-app);
 
   /* ---------- Preloader (Step 5) ---------- */
   --preloader-bg: var(--background);
