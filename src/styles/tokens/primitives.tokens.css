@@ -1,0 +1,199 @@
+/* ============================================================
+   LAYER 1 — PRIMITIVE TOKENS
+   Raw design values with no semantic meaning.
+   Derived from: design-system/baran-vet-clinic/MASTER.md
+   (Appendix B — White + Blue brand, deep anchor blue #0B2E59)
+   ============================================================ */
+
+:root {
+  /* ----------------------------------------------------------
+     1.1 Color — Blue scale (brand anchor #0B2E59)
+  ---------------------------------------------------------- */
+  --blue-25: #f4f8fc;
+  --blue-50: #ebf2fa;
+  --blue-100: #d9e7f4;
+  --blue-200: #b4cde4;
+  --blue-300: #8ab0d1;
+  --blue-400: #5c8cb8;
+  --blue-500: #3c6a96;
+  --blue-600: #2c5479;
+  --blue-700: #1e3f5f;
+  --blue-800: #143052;
+  --blue-900: #0b2e59;
+  --blue-950: #071d3a;
+
+  /* Ink scale — navy-tinged neutrals (text + structure) */
+  --ink-50: #f6f8fa;
+  --ink-100: #eef1f5;
+  --ink-200: #dde3ea;
+  --ink-300: #c3ccd7;
+  --ink-400: #9aa8b9;
+  --ink-500: #748495;
+  --ink-600: #546473;
+  --ink-700: #3c4a59;
+  --ink-800: #27323f;
+  --ink-900: #141b24;
+  --ink-950: #0b1016;
+
+  /* Cream scale — warm-white surfaces */
+  --cream-50: #fdfcfa;
+  --cream-100: #f9f6f1;
+  --cream-200: #f1ebe3;
+  --cream-300: #e5dccf;
+
+  /* Accent — yellow (soft, controlled moment) */
+  --yellow-100: #fcf3dc;
+  --yellow-500: #e9a319;
+  --yellow-600: #c98a0e;
+  --yellow-700: #8a6208;
+
+  /* Accent — warm coral */
+  --coral-100: #fce8e3;
+  --coral-500: #e8634a;
+  --coral-600: #ce4a32;
+  --coral-700: #ac3a27;
+
+  /* Accent — fresh green (health) */
+  --green-100: #e6f3ec;
+  --green-500: #2e9e62;
+  --green-600: #1e7d4f;
+  --green-700: #17603e;
+
+  /* Accent — lavender */
+  --lavender-100: #efeafb;
+  --lavender-500: #8b76c9;
+  --lavender-600: #6f5bb0;
+  --lavender-700: #584392;
+
+  /* Status — destructive red */
+  --red-100: #fbeae8;
+  --red-500: #d64541;
+  --red-600: #be3a2e;
+  --red-700: #9c2e24;
+
+  /* ----------------------------------------------------------
+     1.2 Spacing (4px base unit)
+  ---------------------------------------------------------- */
+  --space-0: 0px;
+  --space-1: 0.25rem;
+  --space-1-5: 0.375rem;
+  --space-2: 0.5rem;
+  --space-2-5: 0.625rem;
+  --space-3: 0.75rem;
+  --space-3-5: 0.875rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 1.75rem;
+  --space-8: 2rem;
+  --space-9: 2.25rem;
+  --space-10: 2.5rem;
+  --space-11: 2.75rem;
+  --space-12: 3rem;
+  --space-14: 3.5rem;
+  --space-16: 4rem;
+  --space-18: 4.5rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ----------------------------------------------------------
+     1.3 Typography scale
+  ---------------------------------------------------------- */
+  /* Font families (font files wired in Step 4) */
+  --font-body: var(--font-vazirmatn), "Vazirmatn", ui-sans-serif, system-ui,
+    "Segoe UI", Tahoma, Arial, sans-serif;
+  --font-heading: var(--font-vazirmatn), "Vazirmatn", ui-sans-serif, system-ui,
+    "Segoe UI", sans-serif;
+  --font-numeral: var(--font-estedad), "Estedad", ui-sans-serif, system-ui,
+    "Segoe UI", Tahoma, sans-serif;
+  --font-code: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+
+  /* Font sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl: 4.5rem;
+
+  /* Line heights (Persian-safe, slightly generous) */
+  --leading-none: 1;
+  --leading-tight: 1.2;
+  --leading-heading: 1.35;
+  --leading-snug: 1.45;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+  --leading-loose: 2;
+
+  /* Font weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* Letter spacing */
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.05em;
+
+  /* ----------------------------------------------------------
+     1.4 Radius (intentional per component — Appendix B)
+  ---------------------------------------------------------- */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-2xl: 20px;
+  --radius-full: 9999px;
+
+  /* ----------------------------------------------------------
+     1.5 Shadows
+  ---------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.06);
+  --shadow-soft: 0 2px 12px -4px rgb(0 0 0 / 0.08);
+  --shadow-md: 0 6px 16px -4px rgb(0 0 0 / 0.12);
+  --shadow-lg: 0 16px 32px -8px rgb(0 0 0 / 0.18);
+  --shadow-xl: 0 28px 56px -12px rgb(0 0 0 / 0.24);
+
+  /* ----------------------------------------------------------
+     1.6 Motion — durations & easings (consumed by GSAP in Step 6)
+  ---------------------------------------------------------- */
+  --duration-instant: 75ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+  --duration-slowest: 900ms;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ----------------------------------------------------------
+     1.7 Z-index scale
+  ---------------------------------------------------------- */
+  --z-0: 0;
+  --z-10: 10;
+  --z-20: 20;
+  --z-30: 30;
+  --z-40: 40;
+  --z-50: 50;
+  --z-header: 100;
+  --z-menu: 1100;
+  --z-dropdown: 1000;
+  --z-overlay: 1150;
+  --z-preloader: 1200;
+  --z-page-transition: 1250;
+  --z-toast: 1300;
+}

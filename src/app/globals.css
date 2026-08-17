@@ -1,0 +1,514 @@
+@import "tailwindcss";
+@import "../styles/tokens/index.css";
+
+/* Wire semantic tokens into the Tailwind v4 theme namespace.
+   `inline` keeps the var() reference so the dark-theme media query
+   swaps values at runtime with zero hydration flash. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-soft-fg: var(--primary-soft-fg);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-soft-fg: var(--accent-soft-fg);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ring: var(--ring);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-soft: var(--destructive-soft);
+  --color-destructive-soft-fg: var(--destructive-soft-fg);
+
+  --color-accent-yellow: var(--accent-yellow);
+  --color-accent-yellow-soft: var(--accent-yellow-soft);
+  --color-accent-yellow-fg: var(--accent-yellow-fg);
+
+  --color-accent-coral: var(--accent-coral);
+  --color-accent-coral-soft: var(--accent-coral-soft);
+  --color-accent-coral-fg: var(--accent-coral-fg);
+
+  --color-accent-green: var(--accent-green);
+  --color-accent-green-soft: var(--accent-green-soft);
+  --color-accent-green-fg: var(--accent-green-fg);
+
+  --color-accent-lavender: var(--accent-lavender);
+  --color-accent-lavender-soft: var(--accent-lavender-soft);
+  --color-accent-lavender-fg: var(--accent-lavender-fg);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+  --font-label: var(--font-numeral);
+  --font-mono: var(--font-code);
+
+  /* Motion durations (primitives.tokens.css) — enable duration-fast etc. */
+  --transition-duration-instant: var(--duration-instant);
+  --transition-duration-fast: var(--duration-fast);
+  --transition-duration-normal: var(--duration-normal);
+  --transition-duration-slow: var(--duration-slow);
+  --transition-duration-slower: var(--duration-slower);
+  --transition-duration-slowest: var(--duration-slowest);
+
+  /* Z-index scale (primitives.tokens.css) — enable z-header etc. */
+  --z-index-0: var(--z-0);
+  --z-index-10: var(--z-10);
+  --z-index-20: var(--z-20);
+  --z-index-30: var(--z-30);
+  --z-index-40: var(--z-40);
+  --z-index-50: var(--z-50);
+  --z-index-header: var(--z-header);
+  --z-index-menu: var(--z-menu);
+  --z-index-dropdown: var(--z-dropdown);
+  --z-index-overlay: var(--z-overlay);
+  --z-index-preloader: var(--z-preloader);
+  --z-index-toast: var(--z-toast);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--selection-bg);
+    color: var(--selection-fg);
+  }
+
+  :focus-visible {
+    outline: var(--focus-ring-width) solid var(--ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  /* Native scrollbar follows theme tokens */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: var(--radius-full);
+    border: 3px solid var(--background);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Site container — max width + gutters from tokens */
+  .container-site {
+    margin-inline: auto;
+    width: 100%;
+    max-width: var(--container-max);
+    padding-inline: var(--spacing-gutter);
+  }
+
+  /* Eyebrow / label chip */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-block: var(--space-1);
+    padding-inline: var(--space-3);
+    border-radius: var(--eyebrow-radius);
+    background: var(--eyebrow-bg);
+    color: var(--eyebrow-fg);
+    font-family: var(--font-numeral);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  /* Buttons — primary / outline */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    cursor: pointer;
+    border-radius: var(--button-radius);
+    padding-block: var(--button-padding-y);
+    padding-inline: var(--button-padding-x);
+    min-height: var(--button-min-height);
+    font-family: var(--font-numeral);
+    font-weight: var(--button-font-weight);
+    font-size: var(--text-base);
+    line-height: var(--leading-none);
+    transition-property: background-color, border-color, color, box-shadow;
+    transition-duration: var(--duration-normal);
+    transition-timing-function: var(--ease-out);
+  }
+
+  .btn-primary {
+    background: var(--button-bg);
+    color: var(--button-fg);
+    box-shadow: var(--button-shadow);
+  }
+  .btn-primary:hover {
+    background: var(--button-bg-hover);
+  }
+
+  .btn-outline {
+    background: var(--button-secondary-bg);
+    color: var(--button-secondary-fg);
+    border: 1px solid var(--button-secondary-border);
+  }
+  .btn-outline:hover {
+    background: var(--button-secondary-bg-hover);
+  }
+
+  /* Nav link — underline grows from the inline-start (RTL-aware) */
+  .nav-link {
+    position: relative;
+    color: var(--nav-link-fg);
+    font-family: var(--font-numeral);
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    padding-block: var(--space-2);
+    padding-inline: var(--space-1);
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    inset-inline: var(--space-1);
+    bottom: 0;
+    height: 2px;
+    border-radius: var(--radius-full);
+    background: var(--nav-link-hover-fg);
+    transform: scaleX(0);
+    transition: transform var(--duration-normal) var(--ease-out);
+  }
+  [dir="rtl"] .nav-link::after {
+    transform-origin: right center;
+  }
+  [dir="ltr"] .nav-link::after {
+    transform-origin: left center;
+  }
+  .nav-link:hover,
+  .nav-link[aria-current="page"] {
+    color: var(--nav-link-hover-fg);
+  }
+  .nav-link:hover::after,
+  .nav-link[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+
+  /* Preloader overlay */
+  .preloader {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-preloader);
+    display: grid;
+    place-items: center;
+    background: var(--preloader-bg);
+    transition: opacity var(--duration-normal) var(--ease-out);
+  }
+  @keyframes preloader-bar {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  /* Mobile menu panel — slides in from the inline-start edge */
+  .menu-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-menu);
+    background: rgb(7 13 24 / 0.45);
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out);
+  }
+  .menu-panel {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    z-index: var(--z-menu);
+    width: min(88vw, 22rem);
+    background: var(--surface);
+    border-inline-end: 1px solid var(--border);
+    overflow-y: auto;
+    transition: transform var(--duration-slow) var(--ease-out);
+  }
+  [dir="rtl"] .menu-panel {
+    transform: translateX(100%);
+  }
+  [dir="ltr"] .menu-panel {
+    transform: translateX(-100%);
+  }
+  .menu-panel[data-open="true"] {
+    transform: translateX(0);
+  }
+
+  /* Anchor scroll offset under the sticky header */
+  [id] {
+    scroll-margin-top: calc(var(--space-20) + var(--space-4));
+  }
+
+  /* Marquee strip (Step 7.2) — RTL-first right→left drift, token borders */
+  .marquee {
+    overflow: hidden;
+    background: var(--surface);
+    border-block: 1px solid var(--border-strong);
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    padding-block: var(--space-5);
+    will-change: transform;
+    animation: marquee-drift var(--marquee-duration) linear infinite;
+  }
+  .marquee-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding-inline-end: var(--space-8);
+    flex-shrink: 0;
+  }
+  @media (hover: hover) {
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+  }
+
+  /* Disabled buttons — keep the state perceivable, not just a color change */
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* AppointmentCTA (Step 7.11) — choice chips (radio role, RTL-safe) */
+  .choice-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--space-12);
+    padding-inline: var(--space-4);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--foreground);
+    font-family: var(--font-numeral);
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-none);
+    cursor: pointer;
+    transition-property: background-color, border-color, color, box-shadow;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--ease-out);
+  }
+  .choice-chip:not([aria-checked="true"]):hover {
+    border-color: var(--ring);
+  }
+  .choice-chip[aria-checked="true"] {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--on-primary);
+  }
+  .choice-chip:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  /* AppointmentCTA — form fields (consume the Step 3 input tokens) */
+  .field-label {
+    display: block;
+    font-family: var(--font-numeral);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--foreground);
+    margin-bottom: var(--space-2);
+  }
+  .field-input {
+    width: 100%;
+    min-height: var(--space-12);
+    padding-block: var(--input-padding-y);
+    padding-inline: var(--input-padding-x);
+    border-radius: var(--input-radius);
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--input-fg);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    transition-property: border-color, box-shadow;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--ease-out);
+  }
+  .field-input::placeholder {
+    color: var(--input-placeholder);
+  }
+  .field-input:hover {
+    border-color: var(--input-border-hover);
+  }
+  .field-input:focus-visible {
+    outline: none;
+    border-color: var(--input-focus-ring);
+    box-shadow: 0 0 0 var(--focus-ring-width) var(--input-focus-ring);
+  }
+  .field-input[aria-invalid="true"] {
+    border-color: var(--destructive);
+  }
+  .field-input[aria-invalid="true"]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 var(--focus-ring-width) var(--destructive-soft-fg);
+  }
+  .field-error {
+    display: block;
+    margin-top: var(--space-2);
+    font-family: var(--font-numeral);
+    font-size: var(--text-sm);
+    color: var(--destructive);
+  }
+
+  /* Text link with underline + arrow reveal (Step 9). The underline grows from
+     the inline-start (RTL-aware, same as .nav-link); the arrow slides "forward"
+     with explicit per-direction rules because transforms can't use logical props. */
+  .link-reveal {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--link-fg);
+    font-family: var(--font-numeral);
+    font-weight: var(--weight-semibold);
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+  .link-reveal::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: -2px;
+    height: 2px;
+    border-radius: var(--radius-full);
+    background: currentColor;
+    transform: scaleX(0);
+    transition: transform var(--duration-slow) var(--ease-out);
+  }
+  [dir="rtl"] .link-reveal::after {
+    transform-origin: right center;
+  }
+  [dir="ltr"] .link-reveal::after {
+    transform-origin: left center;
+  }
+  .link-reveal:hover {
+    color: var(--link-fg-hover);
+  }
+  .link-reveal:hover::after {
+    transform: scaleX(1);
+  }
+  .link-reveal .link-arrow {
+    transition: transform var(--duration-slow) var(--ease-smooth);
+  }
+  [dir="rtl"] .link-reveal:hover .link-arrow {
+    transform: translateX(-4px);
+  }
+  [dir="ltr"] .link-reveal:hover .link-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Card hover lift (Step 9) — pointer + no-reduced-motion only, so touch and
+     reduced-motion users keep a completely static card. */
+  .card-hover {
+    transition-property: transform, box-shadow, border-color;
+    transition-duration: var(--duration-slow);
+    transition-timing-function: var(--ease-out);
+  }
+  @media (hover: hover) {
+    .card-hover:hover {
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+  }
+}
+
+/* Page transition overlay panels (Step 9) — GSAP drives yPercent; hidden by
+   default so SSR/no-JS renders them invisible (aria-hidden + pointer-events-
+   none as well). NO transform baseline here: a CSS translateY(100%) would be
+   parsed by GSAP as a px offset and double-counted against its own
+   yPercent:100 (panel would travel 200%→100% and never cover the screen).
+   Panels consume semantic tokens (surface = white in light / card in dark;
+   primary = the blue brand). */
+.pt-panel {
+  visibility: hidden;
+  will-change: transform;
+}
+
+/* Marquee drift — translateX(-50%) = exactly one duplicated copy, so the
+   loop is seamless. Right→left matches Persian (RTL) reading direction. */
+@keyframes marquee-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Facilities cinematic (Step 7.7) — initial hidden state for non-first images */
+.fac-img.clip-hidden {
+  clip-path: inset(0% 0% 100% 0%);
+}
+
+/* Hero (Step 7.1) — status hints for the continuously-animated transform
+   layers. The `.hero-orb` wrappers are GSAP-transformed and CONTAIN the static
+   `blur` + `opacity` inner circle (filter not re-rasterized per frame). */
+.hero-orb,
+.hero-cat {
+  will-change: transform;
+}
+
+/* TEMP-EXPERIMENT: content-visibility on footer disabled to isolate CLS */
+
+/* ==========================================================================
+   Page transition (Step 9) — GSAP overlay sweep (native View Transitions API
+   disabled: Next 19.2 + React 19.2.8 never fires `startViewTransition`).
+   Implemented in <PageTransition/>: two `.pt-panel` layers sweep over the old
+   page, `router.push` runs fully covered, then the layers sweep off revealing
+   the new page. Direction-neutral (vertical) → RTL-correct by construction.
+   ========================================================================== */

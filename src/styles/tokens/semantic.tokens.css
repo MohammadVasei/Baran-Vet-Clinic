@@ -1,0 +1,141 @@
+/* ============================================================
+   LAYER 2 — SEMANTIC TOKENS
+   Purpose-based aliases over primitives. Each semantic token is
+   defined for BOTH themes with identical names so components
+   never switch — only the values do.
+   Theme switching: `@media (prefers-color-scheme: dark)`.
+   ============================================================ */
+
+:root {
+  color-scheme: light dark;
+
+  /* ---------- Surfaces ---------- */
+  --background: var(--cream-50);
+  --foreground: var(--blue-900);
+  --surface: #ffffff;
+  --surface-alt: var(--blue-50);
+
+  /* ---------- Primary (deep anchor blue) ---------- */
+  --primary: var(--blue-900);
+  --primary-hover: var(--blue-800);
+  --on-primary: #ffffff;
+  --primary-soft: var(--blue-50);
+  --primary-soft-fg: var(--blue-900);
+
+  /* ---------- Secondary ---------- */
+  --secondary: var(--blue-50);
+  --secondary-foreground: var(--blue-900);
+
+  /* ---------- Accent (fresh green — controlled moment) ---------- */
+  --accent: var(--green-600);
+  --accent-hover: var(--green-700);
+  --accent-foreground: #ffffff;
+  --accent-soft: var(--green-100);
+  --accent-soft-fg: var(--green-700);
+
+  /* ---------- Muted ---------- */
+  --muted: var(--ink-50);
+  --muted-foreground: #5a6b7e;
+
+  /* ---------- Borders ---------- */
+  --border: var(--ink-200);
+  --border-strong: var(--ink-300);
+
+  /* ---------- Focus ring ---------- */
+  --ring: var(--blue-900);
+
+  /* ---------- Destructive ---------- */
+  --destructive: var(--red-600);
+  --destructive-foreground: #ffffff;
+  --destructive-soft: var(--red-100);
+  --destructive-soft-fg: var(--red-700);
+
+  /* ---------- Category accents (animal explorer, Step 7.5) ---------- */
+  --accent-yellow: var(--yellow-500);
+  --accent-yellow-soft: var(--yellow-100);
+  --accent-yellow-fg: var(--yellow-700);
+
+  --accent-coral: var(--coral-500);
+  --accent-coral-soft: var(--coral-100);
+  --accent-coral-fg: var(--coral-700);
+
+  --accent-green: var(--green-600);
+  --accent-green-soft: var(--green-100);
+  --accent-green-fg: var(--green-700);
+
+  --accent-lavender: var(--lavender-600);
+  --accent-lavender-soft: var(--lavender-100);
+  --accent-lavender-fg: var(--lavender-700);
+
+  /* ---------- Semantic spacing / layout ---------- */
+  --spacing-gutter: var(--space-6);
+  --spacing-section: var(--space-16);
+  --spacing-section-lg: var(--space-24);
+  --container-max: 76rem;
+  --container-wide: 88rem;
+}
+
+/* ============================================================
+   DARK THEME — same semantic names, overridden values
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* ---------- Surfaces ---------- */
+    --background: #0b1626;
+    --foreground: #e9f0f7;
+    --surface: #111f33;
+    --surface-alt: #182a42;
+
+    /* ---------- Primary (lightens for dark surfaces) ---------- */
+    --primary: #7fb0da;
+    --primary-hover: #90bce2;
+    --on-primary: var(--blue-900);
+    --primary-soft: #1a2c46;
+    --primary-soft-fg: #9cc4e6;
+
+    /* ---------- Secondary ---------- */
+    --secondary: #22365a;
+    --secondary-foreground: #d7e6f5;
+
+    /* ---------- Accent ---------- */
+    --accent: #4fb37e;
+    --accent-hover: #61c08d;
+    --accent-foreground: #0a2417;
+    --accent-soft: #143428;
+    --accent-soft-fg: #6fcb9b;
+
+    /* ---------- Muted ---------- */
+    --muted: #16283f;
+    --muted-foreground: #a9bccf;
+
+    /* ---------- Borders ---------- */
+    --border: #24364f;
+    --border-strong: #33475f;
+
+    /* ---------- Focus ring ---------- */
+    --ring: #7fb0da;
+
+    /* ---------- Destructive ---------- */
+    --destructive: #e05a4e;
+    --destructive-foreground: #2b0a07;
+    --destructive-soft: #3a1611;
+    --destructive-soft-fg: #f08b80;
+
+    /* ---------- Category accents ---------- */
+    --accent-yellow: #f2be4d;
+    --accent-yellow-soft: #3a2e12;
+    --accent-yellow-fg: #f2ce7d;
+
+    --accent-coral: #f07862;
+    --accent-coral-soft: #3a1a14;
+    --accent-coral-fg: #f5a08f;
+
+    --accent-green: #4fb37e;
+    --accent-green-soft: #143428;
+    --accent-green-fg: #6fcb9b;
+
+    --accent-lavender: #a695db;
+    --accent-lavender-soft: #241e3d;
+    --accent-lavender-fg: #beb0e8;
+  }
+}

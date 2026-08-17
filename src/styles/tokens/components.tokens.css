@@ -1,0 +1,98 @@
+/* ============================================================
+   LAYER 3 — COMPONENT TOKENS
+   Per-component aliases over the semantic layer. Components
+   consume these (never raw primitives / never hex).
+   ============================================================ */
+
+:root {
+  /* ---------- Buttons ---------- */
+  --button-bg: var(--primary);
+  --button-fg: var(--on-primary);
+  --button-bg-hover: var(--primary-hover);
+  --button-border: transparent;
+  --button-border-hover: var(--primary-hover);
+  --button-radius: var(--radius-md);
+  --button-padding-y: var(--space-2-5);
+  --button-padding-x: var(--space-5);
+  --button-min-height: var(--space-11);
+  --button-font-weight: var(--weight-semibold);
+  --button-shadow: var(--shadow-sm);
+
+  --button-secondary-bg: var(--secondary);
+  --button-secondary-fg: var(--secondary-foreground);
+  --button-secondary-bg-hover: var(--surface-alt);
+  --button-secondary-border: var(--border-strong);
+
+  --button-ghost-fg: var(--foreground);
+  --button-ghost-hover-bg: var(--muted);
+
+  --button-accent-bg: var(--accent);
+  --button-accent-fg: var(--accent-foreground);
+  --button-accent-bg-hover: var(--accent-hover);
+
+  /* ---------- Inputs ---------- */
+  --input-bg: var(--surface);
+  --input-fg: var(--foreground);
+  --input-border: var(--border-strong);
+  --input-border-hover: var(--ring);
+  --input-placeholder: var(--muted-foreground);
+  --input-focus-ring: var(--ring);
+  --input-radius: var(--radius-md);
+  --input-padding-y: var(--space-3);
+  --input-padding-x: var(--space-4);
+
+  /* ---------- Cards ---------- */
+  --card-bg: var(--surface);
+  --card-fg: var(--foreground);
+  --card-border: var(--border);
+  --card-radius: var(--radius-lg);
+  --card-padding: var(--space-6);
+  --card-shadow: var(--shadow-soft);
+
+  /* ---------- Eyebrow / badge ---------- */
+  --eyebrow-bg: var(--surface-alt);
+  --eyebrow-fg: var(--primary);
+  --eyebrow-radius: var(--radius-full);
+
+  /* ---------- Links ---------- */
+  --link-fg: var(--primary);
+  --link-fg-hover: var(--primary-hover);
+  --link-underline: var(--primary-soft-fg);
+
+  /* ---------- Header / nav (Step 5) ---------- */
+  --nav-bg: color-mix(in srgb, var(--background) 88%, transparent);
+  --nav-border: var(--border);
+  --nav-fg: var(--foreground);
+  --nav-link-fg: var(--foreground);
+  --nav-link-hover-fg: var(--primary);
+
+  /* ---------- Preloader (Step 5) ---------- */
+  --preloader-bg: var(--background);
+  --preloader-fg: var(--primary);
+
+  /* ---------- Emergency bar (Step 5) ---------- */
+  --emergency-bg: var(--destructive);
+  --emergency-fg: #ffffff;
+
+  /* ---------- Focus & selection ---------- */
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 3px;
+  --selection-bg: var(--primary);
+  --selection-fg: var(--on-primary);
+
+  /* ---------- Scrollbar ---------- */
+  --scrollbar-thumb: var(--border-strong);
+  --scrollbar-track: transparent;
+
+  /* ---------- Motion defaults (consumed by GSAP, Step 6) ---------- */
+  --reveal-ease: var(--ease-out);
+  --reveal-duration: var(--duration-slower);
+  --stagger-step: 0.08;
+  --marquee-duration: 40s;
+
+  /* ---------- Header height (so full-viewport sections fit under it) ---------- */
+  --header-height: var(--space-16);
+
+  /* ---------- Sticky Services panel offset (Step 7.6, under the header) ---------- */
+  --services-panel-top: calc(var(--header-height) + var(--space-6));
+}

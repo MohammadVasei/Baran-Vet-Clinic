@@ -1,0 +1,9 @@
+/* Design tokens — single source of truth (three-layer)
+   Imported once from globals.css.
+   Layer 1: primitives.css   raw values
+   Layer 2: semantic.css     purpose aliases (light + dark)
+   Layer 3: components.css   per-component aliases     */
+
+@import "./primitives.tokens.css";
+@import "./semantic.tokens.css";
+@import "./components.tokens.css";
