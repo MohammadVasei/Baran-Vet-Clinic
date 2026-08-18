@@ -10,7 +10,7 @@
   color-scheme: light dark;
 
   /* ---------- Surfaces ---------- */
-  --background: var(--cream-50);
+  --background: #ffffff;
   --foreground: var(--blue-900);
   --surface: #ffffff;
   --surface-alt: var(--blue-50);

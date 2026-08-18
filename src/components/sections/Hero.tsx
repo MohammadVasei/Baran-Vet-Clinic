@@ -14,7 +14,7 @@ import {
   ArrowIcon,
 } from "@/components/icons";
 
-import { HeroCat } from "./HeroCat";
+import { GoldieVideo } from "@/components/mascot";
 
 const META_ICONS = {
   hours: ClockIcon,
@@ -76,12 +76,6 @@ export function Hero() {
         { autoAlpha: 0, y: 20 },
         { autoAlpha: 1, y: 0, duration: duration("--duration-normal"), stagger: 0.09 },
         "-=0.3"
-      );
-      tl.fromTo(
-        ".hero-cat",
-        { autoAlpha: 0, scale: 0.95 },
-        { autoAlpha: 1, scale: 1, duration: duration("--duration-slower") },
-        0
       );
       tl.fromTo(
         ".hero-scroll",
@@ -173,9 +167,22 @@ export function Hero() {
             ref={heroVisualRef}
             className="relative flex items-center justify-center aspect-[5/4] min-h-[500px] max-h-[70vh]"
           >
-            <HeroCat heroRef={heroVisualRef} className="hero-cat w-full h-full" />
+            <GoldieVideo
+              src="/videos/goldie/greeting.webm"
+              alt="گلدگی، سگ کلینیک باران"
+              className="hero-cat w-full h-full"
+            />
           </div>
         </div>
+      </div>
+
+      {/* Mobile compact Goldie — shows below CTA on <lg */}
+      <div className="lg:hidden mt-10 flex justify-center">
+        <GoldieVideo
+          src="/videos/goldie/greeting.webm"
+          alt="گلدگی، سگ کلینیک باران"
+          className="w-[28vw] max-w-[16rem]"
+        />
       </div>
 
       <a

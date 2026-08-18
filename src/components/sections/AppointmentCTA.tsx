@@ -7,6 +7,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { APPOINTMENT, ANIMALS, CLINIC, SERVICES } from "@/lib/content";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { ArrowIcon, CheckIcon, ClockIcon, PhoneIcon, PinIcon } from "@/components/icons";
+import { GoldieVideo } from "@/components/mascot";
 
 const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
 const toFa = (n: number) => String(n).replace(/\d/g, (d) => FA_DIGITS[+d]);
@@ -308,9 +309,11 @@ export function AppointmentCTA() {
                 key="done"
                 className="flex flex-col items-center py-2 text-center sm:py-6"
               >
-                <span className="grid size-16 place-items-center rounded-full bg-accent-soft text-accent-soft-fg">
-                  <CheckIcon className="size-8" />
-                </span>
+                <GoldieVideo
+                  src="/videos/goldie/celebrating.webm"
+                  alt="گلدگی، جشن موفقیت"
+                  className="w-48 h-48 sm:w-64 sm:h-64 mx-auto mb-4"
+                />
                 <h3
                   ref={titleRef}
                   tabIndex={-1}

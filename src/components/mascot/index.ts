@@ -1,0 +1,1 @@
+export { GoldieVideo } from "./GoldieVideo";
