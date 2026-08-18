@@ -4,6 +4,7 @@ import { useState } from "react";
 import { PawIcon, MenuIcon, CloseIcon } from "@/components/icons";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
 const NAV_LINKS = [
   { label: "خانه", href: "#top" },
@@ -44,6 +45,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           <MagneticButton href="#appointment" className="btn btn-primary hidden sm:inline-flex">
             رزرو نوبت
           </MagneticButton>

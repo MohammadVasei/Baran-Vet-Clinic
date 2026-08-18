@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "../styles/tokens/index.css";
 
+@custom-variant dark (&:is(.dark *));
+
 /* Wire semantic tokens into the Tailwind v4 theme namespace.
    `inline` keeps the var() reference so the dark-theme media query
    swaps values at runtime with zero hydration flash. */

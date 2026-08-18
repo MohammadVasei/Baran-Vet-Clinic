@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Preloader } from "@/components/layout/Preloader";
 import { ThemeColorSync } from "@/components/layout/ThemeColorSync";
 import { PageTransition } from "@/components/motion/PageTransition";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // Self-hosted via next/font/google (variable, arabic subset for Persian).
 // CSS variables feed the token system (--font-body/--font-heading/--font-numeral).
@@ -51,17 +52,25 @@ export default function RootLayout({
       lang="fa"
       dir="rtl"
       className={`${vazirmatn.variable} ${estedad.variable} h-full`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <ThemeColorSync />
-        <PageTransition />
-        <Preloader />
-        <EmergencyBar />
-        <Header />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          storageKey="baran-theme"
+        >
+          <ThemeColorSync />
+          <PageTransition />
+          <Preloader />
+          <EmergencyBar />
+          <Header />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

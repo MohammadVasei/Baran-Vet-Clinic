@@ -77,9 +77,73 @@
 
 /* ============================================================
    DARK THEME — same semantic names, overridden values
+   Supports both class-based (.dark) and media query-based dark mode.
    ============================================================ */
+
+/* Class-based dark mode (via next-themes adding .dark to <html>) */
+.dark {
+  /* ---------- Surfaces ---------- */
+  --background: #0b1626;
+  --foreground: #e9f0f7;
+  --surface: #111f33;
+  --surface-alt: #182a42;
+
+  /* ---------- Primary (lightens for dark surfaces) ---------- */
+  --primary: #7fb0da;
+  --primary-hover: #90bce2;
+  --on-primary: var(--blue-900);
+  --primary-soft: #1a2c46;
+  --primary-soft-fg: #9cc4e6;
+
+  /* ---------- Secondary ---------- */
+  --secondary: #22365a;
+  --secondary-foreground: #d7e6f5;
+
+  /* ---------- Accent ---------- */
+  --accent: #4fb37e;
+  --accent-hover: #61c08d;
+  --accent-foreground: #0a2417;
+  --accent-soft: #143428;
+  --accent-soft-fg: #6fcb9b;
+
+  /* ---------- Muted ---------- */
+  --muted: #16283f;
+  --muted-foreground: #a9bccf;
+
+  /* ---------- Borders ---------- */
+  --border: #24364f;
+  --border-strong: #33475f;
+
+  /* ---------- Focus ring ---------- */
+  --ring: #7fb0da;
+
+  /* ---------- Destructive ---------- */
+  --destructive: #e05a4e;
+  --destructive-foreground: #2b0a07;
+  --destructive-soft: #3a1611;
+  --destructive-soft-fg: #f08b80;
+
+  /* ---------- Category accents ---------- */
+  --accent-yellow: #f2be4d;
+  --accent-yellow-soft: #3a2e12;
+  --accent-yellow-fg: #f2ce7d;
+
+  --accent-coral: #f07862;
+  --accent-coral-soft: #3a1a14;
+  --accent-coral-fg: #f5a08f;
+
+  --accent-green: #4fb37e;
+  --accent-green-soft: #143428;
+  --accent-green-fg: #6fcb9b;
+
+  --accent-lavender: #a695db;
+  --accent-lavender-soft: #241e3d;
+  --accent-lavender-fg: #beb0e8;
+}
+
+/* System preference dark mode (when no explicit .light/.dark class) */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light) {
     /* ---------- Surfaces ---------- */
     --background: #0b1626;
     --foreground: #e9f0f7;
