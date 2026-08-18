@@ -29,16 +29,15 @@ export function Facilities() {
       revealUp(".fac-eyebrow", { once: true });
       revealUp(".fac-intro", { once: true });
 
-      // Fade out the header as the section scrolls into view so the
-      // pinned panel fills the viewport cleanly when pinning starts.
+      // Keep the header readable for much longer before the pinned panel takes over.
       gsap.to(".fac-header", {
         autoAlpha: 0,
-        y: -30,
-        ease: "power1.in",
+        y: -12,
+        ease: "none",
         scrollTrigger: {
           trigger: root.current,
-          start: "top 80%",
-          end: "top top",
+          start: "top 15%",
+          end: "top 0%",
           scrub: true,
         },
       });
@@ -54,17 +53,17 @@ export function Facilities() {
         },
       });
 
-      // Each image: clip-in → hold → clip-out.
-      // Segment duration per image = 1 / IMG_COUNT of the total timeline.
+      // Make each frame stay on screen noticeably longer so the section feels
+      // slower, more premium, and less like it is fading out too early.
       const seg = 1 / IMG_COUNT;
 
       FACILITIES.items.forEach((_, i) => {
         const sel = `.fac-img[data-idx="${i}"]`;
         const label = `.fac-label[data-idx="${i}"]`;
         const start = i * seg;
-        const revealDur = seg * 0.35;
-        const holdDur = seg * 0.3;
-        const hideDur = seg * 0.35;
+        const revealDur = seg * 0.22;
+        const holdDur = seg * 0.68;
+        const hideDur = seg * 0.18;
 
         // Reveal: clip from bottom edge up.
         tl.fromTo(

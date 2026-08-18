@@ -498,8 +498,7 @@
 /* Hero (Step 7.1) — status hints for the continuously-animated transform
    layers. The `.hero-orb` wrappers are GSAP-transformed and CONTAIN the static
    `blur` + `opacity` inner circle (filter not re-rasterized per frame). */
-.hero-orb,
-.hero-cat {
+.hero-orb {
   will-change: transform;
 }
 
