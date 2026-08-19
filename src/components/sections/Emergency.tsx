@@ -4,10 +4,17 @@ import { useRef } from "react";
 import { useGSAP } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { EMERGENCY } from "@/lib/content";
+import { EmergencyMobile } from "@/components/sections/mobile/EmergencyMobile";
 
 export function Emergency() {
+  const isMobile = useIsMobile();
+  return isMobile ? <EmergencyMobile /> : <EmergencyDesktop />;
+}
+
+function EmergencyDesktop() {
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

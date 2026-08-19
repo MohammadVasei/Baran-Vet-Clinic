@@ -4,10 +4,17 @@ import { Fragment, useRef } from "react";
 import { useGSAP } from "@/lib/gsap";
 import { revealLines, revealUp } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { TRUST } from "@/lib/content";
 import { HeartPulseIcon } from "@/components/icons";
+import { TrustMobile } from "@/components/sections/mobile/TrustMobile";
 
 export function Trust() {
+  const isMobile = useIsMobile();
+  return isMobile ? <TrustMobile /> : <TrustDesktop />;
+}
+
+function TrustDesktop() {
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

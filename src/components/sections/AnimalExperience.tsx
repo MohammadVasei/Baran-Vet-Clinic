@@ -5,41 +5,20 @@ import Image from "next/image";
 import { useGSAP, gsap } from "@/lib/gsap";
 import { duration, ease, revealLines, revealUp } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { moveTabFocus } from "@/lib/tabs";
 import { ANIMALS, type AnimalCategory } from "@/lib/content";
+import { ANIMAL_ACCENTS as ACCENTS } from "@/lib/accents";
+import { AnimalExperienceMobile } from "@/components/sections/mobile/AnimalExperienceMobile";
+
+export function AnimalExperience() {
+  const isMobile = useIsMobile();
+  return isMobile ? <AnimalExperienceMobile /> : <AnimalExperienceDesktop />;
+}
 
 const AUTO_ADVANCE_MS = 5000;
 
-// Per-category accent (home.md §7.5). Literal class strings so Tailwind emits them.
-type AccentClasses = { chip: string; dot: string; bar: string };
-const ACCENTS: Record<AnimalCategory["key"], AccentClasses> = {
-  dog: {
-    chip: "bg-accent-yellow-soft text-accent-yellow-fg",
-    dot: "bg-accent-yellow",
-    bar: "bg-accent-yellow",
-  },
-  cat: {
-    chip: "bg-accent-coral-soft text-accent-coral-fg",
-    dot: "bg-accent-coral",
-    bar: "bg-accent-coral",
-  },
-  bird: {
-    chip: "bg-accent-green-soft text-accent-green-fg",
-    dot: "bg-accent-green",
-    bar: "bg-accent-green",
-  },
-  exotic: {
-    chip: "bg-accent-lavender-soft text-accent-lavender-fg",
-    dot: "bg-accent-lavender",
-    bar: "bg-accent-lavender",
-  },
-  other: {
-    chip: "bg-accent-soft text-accent-soft-fg",
-    dot: "bg-accent",
-    bar: "bg-accent",
-  },
-};
-
-export function AnimalExperience() {
+export function AnimalExperienceDesktop() {
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();
@@ -67,21 +46,9 @@ export function AnimalExperience() {
 
   function handleTabsKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     const keys = ANIMALS.categories.map((c) => c.key);
-    if (keys.length === 0) return;
-    const rtl = document.documentElement.dir === "rtl";
-    // In RTL prev = ArrowLeft→next-in-DOM… kept APG order via dir flip.
-    const dir = (k: string) => {
-      if (k === "Home") return 0;
-      if (k === "End") return keys.length - 1;
-      if (k === "ArrowLeft") return rtl ? 1 : -1;
-      if (k === "ArrowRight") return rtl ? -1 : 1;
-      return null;
-    };
-    const step = dir(e.key);
-    if (step === null) return;
+    const next = moveTabFocus(keys, active, e.key);
+    if (next === null) return;
     e.preventDefault();
-    const idx = (keys.indexOf(active) + step + keys.length) % keys.length;
-    const next = keys[idx];
     setActive(next);
     document.getElementById(`animal-tab-${next}`)?.focus();
   }

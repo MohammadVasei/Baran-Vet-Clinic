@@ -5,9 +5,16 @@ import Image from "next/image";
 import { useGSAP, gsap } from "@/lib/gsap";
 import { duration, ease, fadeMask, revealLines, revealUp } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { WHY } from "@/lib/content";
+import { WhyBaranMobile } from "@/components/sections/mobile/WhyBaranMobile";
 
 export function WhyBaran() {
+  const isMobile = useIsMobile();
+  return isMobile ? <WhyBaranMobile /> : <WhyBaranDesktop />;
+}
+
+function WhyBaranDesktop() {
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

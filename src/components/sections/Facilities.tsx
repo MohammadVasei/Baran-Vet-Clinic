@@ -5,11 +5,18 @@ import Image from "next/image";
 import { useGSAP, gsap } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { FACILITIES } from "@/lib/content";
+import { FacilitiesMobile } from "@/components/sections/mobile/FacilitiesMobile";
+
+export function Facilities() {
+  const isMobile = useIsMobile();
+  return isMobile ? <FacilitiesMobile /> : <FacilitiesDesktop />;
+}
 
 const IMG_COUNT = FACILITIES.items.length;
 
-export function Facilities() {
+function FacilitiesDesktop() {
   const root = useRef<HTMLElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);

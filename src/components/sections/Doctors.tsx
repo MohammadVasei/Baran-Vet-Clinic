@@ -6,9 +6,16 @@ import Image from "next/image";
 import { useGSAP } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { DOCTORS } from "@/lib/content";
+import { DoctorsMobile } from "@/components/sections/mobile/DoctorsMobile";
 
 export function Doctors() {
+  const isMobile = useIsMobile();
+  return isMobile ? <DoctorsMobile /> : <DoctorsDesktop />;
+}
+
+function DoctorsDesktop() {
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();
