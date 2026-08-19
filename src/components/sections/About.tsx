@@ -15,7 +15,7 @@ export function About() {
   // Scroll reveals: eyebrow, split-line statement, body, signature, image curtain.
   useGSAP(
     () => {
-      if (prefersReducedMotion() || reduced || !root.current || !headline.current) return;
+      if (reduced || !root.current || !headline.current) return;
 
       const { split } = revealLines(headline.current, {
         mask: true,
@@ -108,7 +108,7 @@ export function About() {
                 src={ABOUT.image.src}
                 alt={ABOUT.image.alt}
                 fill
-                sizes="(min-width: 1024px) 50vw, 90vw"
+                sizes="(min-width: 1024px) 500px, 800px"
                 className="scale-[1.2] object-cover transition-transform duration-slow ease-out group-hover:scale-[1.26]"
               />
             </div>

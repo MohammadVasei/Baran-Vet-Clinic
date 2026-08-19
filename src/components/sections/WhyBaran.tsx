@@ -3,7 +3,7 @@
 import { Fragment, useRef } from "react";
 import Image from "next/image";
 import { useGSAP, gsap } from "@/lib/gsap";
-import { duration, ease, fadeMask, revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
+import { duration, ease, fadeMask, revealLines, revealUp } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { WHY } from "@/lib/content";
 
@@ -15,7 +15,7 @@ export function WhyBaran() {
   // Scroll reveals: eyebrow, split-line headline, intro, staggered steps, image sweep.
   useGSAP(
     () => {
-      if (prefersReducedMotion() || reduced || !root.current || !headline.current) return;
+      if (reduced || !root.current || !headline.current) return;
 
       const { split } = revealLines(headline.current, {
         mask: true,
@@ -101,7 +101,7 @@ export function WhyBaran() {
                 src={WHY.image.src}
                 alt={WHY.image.alt}
                 fill
-                sizes="(min-width: 1024px) 42vw, 90vw"
+                sizes="(min-width: 1024px) 420px, 800px"
                 className="object-cover"
               />
             </div>

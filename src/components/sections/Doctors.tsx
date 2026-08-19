@@ -72,7 +72,7 @@ export function Doctors() {
                   src={doc.image}
                   alt={doc.alt}
                   fill
-                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 90vw"
+                  sizes="(min-width: 1024px) 250px, (min-width: 640px) 320px, 800px"
                   className="object-cover transition-transform duration-slow ease-out group-hover:scale-105"
                 />
                 {/* Gradient overlay — always visible on mobile, reveal on hover desktop */}

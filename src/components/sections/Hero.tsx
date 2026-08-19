@@ -30,7 +30,7 @@ export function Hero() {
 
   useGSAP(
     () => {
-      if (prefersReducedMotion() || reduced || !root.current || !headline.current)
+      if (reduced || !root.current || !headline.current)
         return;
 
       const split = SplitText.create(headline.current, {

@@ -17,6 +17,7 @@ export function Facilities() {
 
   useGSAP(
     () => {
+      if (IMG_COUNT === 0) return;
       if (prefersReducedMotion() || reduced || !root.current || !pinRef.current || !headline.current) return;
 
       // Entry reveals for the chapter header (eyebrow, headline, intro).
@@ -143,7 +144,7 @@ export function Facilities() {
                   src={item.image}
                   alt={item.alt}
                   fill
-                  sizes="(min-width: 1024px) 45vw, 90vw"
+                  sizes="(min-width: 1024px) 450px, 800px"
                   className="object-cover transition-transform duration-slow ease-out group-hover:scale-[1.03]"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 to-transparent p-6">

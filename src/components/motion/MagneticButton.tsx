@@ -13,8 +13,6 @@ type MagneticButtonProps = {
   disabled?: boolean;
   ariaLabel?: string;
   ariaBusy?: boolean;
-  /** How far the control is pulled toward the pointer (0 = off, 1 = full). */
-  strength?: number;
   onClick?: () => void;
 };
 
@@ -35,7 +33,6 @@ export function MagneticButton({
   disabled,
   ariaLabel,
   ariaBusy,
-  strength = 0.28,
   onClick,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLElement | null>(null);
@@ -66,8 +63,8 @@ export function MagneticButton({
     const onMove = (e: PointerEvent) => {
       const fromCenterX = e.clientX - (cached.left + cached.width / 2);
       const fromCenterY = e.clientY - (cached.top + cached.height / 2);
-      setX(fromCenterX * strength);
-      setY(fromCenterY * strength);
+      setX(fromCenterX * 0.28);
+      setY(fromCenterY * 0.28);
     };
     const onLeave = () => {
       gsap.to(el, { x: 0, y: 0, duration: 0.45, ease: "elastic.out(1, 0.4)" });
@@ -82,7 +79,7 @@ export function MagneticButton({
       window.removeEventListener("scroll", measure);
       gsap.killTweensOf(el);
     };
-  }, [strength]);
+  }, []); // removed strength dependency - strength defaults to 0.28 and is not passed explicitly from calling code
 
   if (href !== undefined) {
     return (

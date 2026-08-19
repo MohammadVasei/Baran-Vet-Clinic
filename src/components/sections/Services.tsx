@@ -53,6 +53,7 @@ export function Services() {
 
   function handleListKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     const keys = SERVICES.items.map((s) => s.key);
+    if (keys.length === 0) return;
     const cur = keys.indexOf(active);
     let next: string | null = null;
     if (e.key === "ArrowDown") next = keys[(cur + 1) % keys.length];
@@ -68,7 +69,7 @@ export function Services() {
   // Section entry reveals (eyebrow, split headline, intro, list, panel).
   useGSAP(
     () => {
-      if (prefersReducedMotion() || reduced || !root.current || !headline.current) return;
+      if (reduced || !root.current || !headline.current) return;
       const { split } = revealLines(headline.current, {
         mask: true,
         stagger: 0.1,
@@ -179,7 +180,7 @@ export function Services() {
                     src={s.image}
                     alt={s.alt}
                     fill
-                    sizes="(min-width: 1024px) 55vw, 90vw"
+                    sizes="(min-width: 1024px) 550px, 800px"
                     className="object-cover transition-transform duration-slow ease-out group-hover:scale-[1.03]"
                   />
                 </div>

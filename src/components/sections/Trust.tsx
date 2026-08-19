@@ -2,7 +2,7 @@
 
 import { Fragment, useRef } from "react";
 import { useGSAP } from "@/lib/gsap";
-import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
+import { revealLines, revealUp } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { TRUST } from "@/lib/content";
 import { HeartPulseIcon } from "@/components/icons";
@@ -14,7 +14,7 @@ export function Trust() {
 
   useGSAP(
     () => {
-      if (prefersReducedMotion() || reduced || !root.current || !headline.current) return;
+      if (reduced || !root.current || !headline.current) return;
       const { split } = revealLines(headline.current, {
         mask: true,
         stagger: 0.1,
