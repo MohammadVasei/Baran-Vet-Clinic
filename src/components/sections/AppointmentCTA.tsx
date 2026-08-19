@@ -301,7 +301,7 @@ export function AppointmentCTA() {
 
         <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-12">
           {/* Booking flow card */}
-          <div className="ap-card lg:col-span-8 rounded-2xl border border-border bg-surface p-6 shadow-lg sm:p-8 lg:p-10">
+          <div className="ap-card lg:col-span-8 rounded-app-lg border border-border bg-surface p-6 shadow-lg sm:p-8 lg:p-10">
             {submitted ? (
               /* ---- Confirmation (step 5) ---- */
               <div
@@ -323,7 +323,7 @@ export function AppointmentCTA() {
                 </h3>
                 <p className="mt-3 max-w-md text-muted-foreground">{APPOINTMENT.note}</p>
 
-                <dl className="mt-8 grid w-full max-w-md gap-x-8 gap-y-3 rounded-xl border border-border bg-surface-alt p-6 text-start sm:grid-cols-2">
+                <dl className="mt-8 grid w-full max-w-md gap-x-8 gap-y-3 rounded-app border border-border bg-surface-alt p-6 text-start sm:grid-cols-2">
                   <div>
                     <dt className="font-label text-xs text-muted-foreground">خدمت</dt>
                     <dd className="mt-0.5 font-semibold text-foreground">{selectedService?.name}</dd>
@@ -597,7 +597,7 @@ export function AppointmentCTA() {
 
           {/* Direct-contact side card */}
           <aside
-            className="ap-side lg:col-span-4 flex flex-col gap-6 rounded-2xl border border-border bg-surface p-6 shadow-lg sm:p-8"
+            className="ap-side lg:col-span-4 flex flex-col gap-6 rounded-app-lg border border-border bg-surface p-6 shadow-lg sm:p-8"
             aria-label="تماس مستقیم با کلینیک"
           >
             <div>

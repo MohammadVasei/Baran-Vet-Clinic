@@ -176,7 +176,7 @@ export function AnimalExperience() {
         <div className="mt-12 grid items-start gap-10 lg:grid-cols-12 lg:gap-8">
           {/* Media — cross-fading category images (WOW 02) */}
           <div className="animal-media relative lg:col-span-7">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border bg-surface shadow-lg">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-app-lg border border-border bg-surface shadow-lg">
               <div className={`absolute inset-x-0 top-0 z-10 h-1.5 transition-colors duration-slow ${accent.bar}`} aria-hidden />
               {ANIMALS.categories.map((c) => (
                 <div

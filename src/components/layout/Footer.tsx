@@ -36,7 +36,7 @@ export function Footer() {
       <div className="container-site grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4">
           <a href="#top" className="flex items-center gap-2.5">
-            <span className="grid size-10 place-items-center rounded-xl bg-primary text-on-primary">
+            <span className="grid size-10 place-items-center rounded-app bg-primary text-on-primary">
               <PawIcon className="size-5" />
             </span>
             <span className="leading-tight">

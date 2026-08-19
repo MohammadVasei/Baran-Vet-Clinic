@@ -92,7 +92,7 @@ export function WhyBaran() {
         {/* Steps + supporting image */}
         <div className="mt-6 grid items-center gap-14 lg:mt-12 lg:grid-cols-12 lg:gap-10">
           <div className="relative lg:col-span-5 xl:col-span-5">
-            <div className="why-img relative aspect-[3/4] overflow-hidden rounded-2xl border border-border bg-surface shadow-lg">
+            <div className="why-img relative aspect-[3/4] overflow-hidden rounded-app-lg border border-border bg-surface shadow-lg">
               {/*
                 Token-validator exception: `sizes` media queries require literal
                 px breakpoints — CSS var() is invalid inside the `sizes` attribute.

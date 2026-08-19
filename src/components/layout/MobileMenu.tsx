@@ -65,7 +65,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
       >
         <div className="flex items-center justify-between">
           <span className="flex items-center gap-2.5">
-            <span className="grid size-10 place-items-center rounded-xl bg-primary text-on-primary">
+            <span className="grid size-10 place-items-center rounded-app bg-primary text-on-primary">
               <PawIcon className="size-5" />
             </span>
             <span className="font-display text-lg font-bold text-foreground">باران</span>
@@ -86,7 +86,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
             <li key={link.href}>
               <a
                 href={link.href}
-                className="block rounded-md px-3 py-3 font-display text-lg font-semibold text-foreground transition-colors duration-fast hover:bg-muted"
+                className="block rounded-app px-3 py-3 font-display text-lg font-semibold text-foreground transition-colors duration-fast hover:bg-muted"
                 aria-current={i === 0 ? "page" : undefined}
                 onClick={onClose}
               >
