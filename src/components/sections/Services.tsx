@@ -160,7 +160,7 @@ export function Services() {
         <div className="mt-12 grid items-start gap-10 lg:grid-cols-12 lg:gap-8">
           {/* Media panel — large swapped image + description + accent (WOW 03) */}
           <div className="svc-media lg:col-span-7 lg:sticky lg:self-start lg:top-[var(--services-panel-top)]">
-            <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-surface shadow-lg sm:aspect-[16/10] lg:aspect-auto lg:h-[min(72vh,40rem)]">
+            <div className="group relative aspect-[4/3] overflow-hidden rounded-app-lg border border-border bg-surface shadow-lg sm:aspect-[16/10] lg:aspect-auto lg:h-[min(72vh,40rem)]">
               <div
                 className={`absolute inset-x-0 top-0 z-10 h-1.5 transition-colors duration-slow ${accent.bar}`}
                 aria-hidden

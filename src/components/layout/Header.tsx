@@ -20,9 +20,9 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-header">
-      <div className="container-site flex h-16 items-center justify-between gap-6 border-b border-border bg-[var(--nav-bg)] backdrop-blur-lg rounded-[var(--nav-radius)]">
+      <div className="container-site flex h-16 items-center justify-between gap-6 border-b border-border bg-[var(--nav-bg)] backdrop-blur-lg rounded-app">
         <a href="#top" className="group flex items-center gap-2.5" aria-label="کلینیک دامپزشکی باران — صفحه اصلی">
-          <span className="grid size-10 place-items-center rounded-xl bg-primary text-on-primary transition-transform duration-normal ease-out group-hover:-rotate-6">
+          <span className="grid size-10 place-items-center rounded-app bg-primary text-on-primary transition-transform duration-normal ease-out group-hover:-rotate-6">
             <PawIcon className="size-5" />
           </span>
           <span className="leading-tight">

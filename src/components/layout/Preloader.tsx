@@ -34,7 +34,7 @@ export function Preloader() {
       aria-hidden={hidden}
     >
       <div className="flex flex-col items-center gap-4">
-        <span className="grid size-16 place-items-center rounded-2xl bg-primary text-on-primary">
+        <span className="grid size-16 place-items-center rounded-app-lg bg-primary text-on-primary">
           <PawIcon className="size-8" />
         </span>
         <div className="text-center">

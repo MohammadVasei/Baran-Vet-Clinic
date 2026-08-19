@@ -98,7 +98,7 @@ export function About() {
 
         {/* Editorial parallax image — inline-end (left in RTL) */}
         <div className="relative lg:col-span-6 xl:col-span-6">
-          <div className="about-img group relative aspect-[4/5] overflow-hidden rounded-2xl border border-border bg-surface shadow-lg">
+          <div className="about-img group relative aspect-[4/5] overflow-hidden rounded-app-lg border border-border bg-surface shadow-lg">
             <div className="about-img-inner absolute inset-0">
               {/*
                 Token-validator exception: `sizes` media queries require literal

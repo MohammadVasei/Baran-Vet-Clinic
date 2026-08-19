@@ -81,6 +81,10 @@
   --z-index-overlay: var(--z-overlay);
   --z-index-preloader: var(--z-preloader);
   --z-index-toast: var(--z-toast);
+
+  /* Radius scale (primitives.tokens.css) — enable rounded-app / rounded-app-lg */
+  --radius-app: var(--radius-app);
+  --radius-app-lg: var(--radius-app-lg);
 }
 
 @layer base {

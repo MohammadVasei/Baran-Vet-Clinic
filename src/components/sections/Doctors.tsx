@@ -64,7 +64,7 @@ export function Doctors() {
             <Link
               key={doc.key}
               href={`/doctors/${doc.slug}`}
-              className="group relative block overflow-hidden rounded-2xl border border-border bg-surface transition-shadow duration-normal hover:shadow-lg"
+              className="group relative block overflow-hidden rounded-app-lg border border-border bg-surface transition-shadow duration-normal hover:shadow-lg"
             >
               {/* Portrait */}
               <div className="relative aspect-[3/4] overflow-hidden">

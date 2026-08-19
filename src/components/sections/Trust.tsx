@@ -62,7 +62,7 @@ export function Trust() {
           {TRUST.items.map((item) => (
             <figure
               key={item.key}
-              className="card-hover flex flex-col justify-between rounded-2xl border border-border bg-surface p-7 shadow-sm"
+              className="card-hover flex flex-col justify-between rounded-app-lg border border-border bg-surface p-7 shadow-sm"
             >
               <blockquote className="text-lg leading-relaxed text-foreground">
                 {item.quote}

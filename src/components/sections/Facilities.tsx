@@ -138,7 +138,7 @@ export function Facilities() {
             {FACILITIES.items.map((item) => (
               <div
                 key={item.key}
-                className="card-hover group relative aspect-[16/10] overflow-hidden rounded-2xl border border-border bg-surface"
+                className="card-hover group relative aspect-[16/10] overflow-hidden rounded-app-lg border border-border bg-surface"
               >
                 <Image
                   src={item.image}
@@ -168,7 +168,7 @@ export function Facilities() {
       style={{ height: `${IMG_COUNT * 100}vh` }}
     >
       <div className="fac-header container-site absolute inset-x-0 top-0 z-30 pt-8 lg:pt-12">
-        <div className="max-w-2xl rounded-2xl bg-background/70 backdrop-blur-xl border border-white/[0.08] p-8 lg:p-10">
+        <div className="max-w-2xl rounded-app-lg bg-background/70 backdrop-blur-xl border border-white/[0.08] p-8 lg:p-10">
           <p className="fac-eyebrow eyebrow">{FACILITIES.eyebrow}</p>
           <h2
             ref={headline}
@@ -218,7 +218,7 @@ export function Facilities() {
               i === 0 ? "" : "opacity-0"
             }`}
           >
-            <div className="inline-block max-w-lg rounded-2xl bg-background/80 px-8 py-6 backdrop-blur-md">
+            <div className="inline-block max-w-lg rounded-app-lg bg-background/80 px-8 py-6 backdrop-blur-md">
               <span className="font-label text-sm font-semibold text-primary">{item.name}</span>
               <h3 className="mt-2 font-display text-2xl font-bold text-foreground sm:text-3xl">
                 {item.title}
