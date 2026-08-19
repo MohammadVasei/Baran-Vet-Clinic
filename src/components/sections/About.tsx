@@ -5,9 +5,16 @@ import Image from "next/image";
 import { useGSAP, gsap } from "@/lib/gsap";
 import { fadeMask, revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { ABOUT } from "@/lib/content";
+import { AboutMobile } from "@/components/sections/mobile/AboutMobile";
 
 export function About() {
+  const isMobile = useIsMobile();
+  return isMobile ? <AboutMobile /> : <AboutDesktop />;
+}
+
+function AboutDesktop() {
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

@@ -141,6 +141,15 @@
   }
 }
 
+/* Hide scrollbars on horizontal snap rails (touch-first carousels). */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer components {
   /* Site container — max width + gutters from tokens */
   .container-site {

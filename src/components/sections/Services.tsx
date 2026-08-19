@@ -5,43 +5,18 @@ import Image from "next/image";
 import { useGSAP, gsap } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion, duration, ease } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { SERVICES, type Service } from "@/lib/content";
+import { SERVICE_ACCENTS as ACCENTS } from "@/lib/accents";
 import { ArrowIcon } from "@/components/icons";
-
-// Per-service accent (home.md §7.6). Literal class strings so Tailwind emits them.
-type AccentClasses = { chip: string; dot: string; bar: string; edge: string; fg: string };
-const ACCENTS: Record<Service["accent"], AccentClasses> = {
-  yellow: {
-    chip: "bg-accent-yellow-soft text-accent-yellow-fg",
-    dot: "bg-accent-yellow",
-    bar: "bg-accent-yellow",
-    edge: "border-accent-yellow",
-    fg: "text-accent-yellow",
-  },
-  coral: {
-    chip: "bg-accent-coral-soft text-accent-coral-fg",
-    dot: "bg-accent-coral",
-    bar: "bg-accent-coral",
-    edge: "border-accent-coral",
-    fg: "text-accent-coral",
-  },
-  green: {
-    chip: "bg-accent-green-soft text-accent-green-fg",
-    dot: "bg-accent-green",
-    bar: "bg-accent-green",
-    edge: "border-accent-green",
-    fg: "text-accent-green",
-  },
-  lavender: {
-    chip: "bg-accent-lavender-soft text-accent-lavender-fg",
-    dot: "bg-accent-lavender",
-    bar: "bg-accent-lavender",
-    edge: "border-accent-lavender",
-    fg: "text-accent-lavender",
-  },
-};
+import { ServicesMobile } from "@/components/sections/mobile/ServicesMobile";
 
 export function Services() {
+  const isMobile = useIsMobile();
+  return isMobile ? <ServicesMobile /> : <ServicesDesktop />;
+}
+
+function ServicesDesktop() {
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();
