@@ -20,7 +20,6 @@ export function ThemeToggle() {
       <button
         className="btn btn-outline size-10 relative"
         aria-label="تبدیل تم"
-        disabled
       >
         <SunIcon className="h-5 w-5" aria-hidden="true" />
         <span className="sr-only">در حال بارگذاری...</span>

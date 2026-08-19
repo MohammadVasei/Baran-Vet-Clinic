@@ -2,9 +2,9 @@ import { Fragment } from "react";
 import { PawIcon } from "@/components/icons";
 import { MARQUEE } from "@/lib/content";
 
-function MarqueeGroup({ hidden = false }: { hidden?: boolean }) {
+function MarqueeGroup() {
   return (
-    <div className="marquee-group" aria-hidden={hidden || undefined}>
+    <div className="marquee-group">
       {MARQUEE.items.map((item) => (
         <Fragment key={item}>
           <span className="whitespace-nowrap font-display text-lg font-semibold text-foreground">
@@ -22,7 +22,7 @@ export function Marquee() {
     <div role="region" aria-label={MARQUEE.label} className="marquee">
       <div className="marquee-track">
         <MarqueeGroup />
-        <MarqueeGroup hidden />
+        <MarqueeGroup />
       </div>
     </div>
   );

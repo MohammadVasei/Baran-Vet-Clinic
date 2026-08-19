@@ -3,7 +3,7 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useGSAP, gsap } from "@/lib/gsap";
-import { duration, ease, revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
+import { duration, ease, revealLines, revealUp } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { ANIMALS, type AnimalCategory } from "@/lib/content";
 
@@ -67,6 +67,7 @@ export function AnimalExperience() {
 
   function handleTabsKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     const keys = ANIMALS.categories.map((c) => c.key);
+    if (keys.length === 0) return;
     const rtl = document.documentElement.dir === "rtl";
     // In RTL prev = ArrowLeft→next-in-DOM… kept APG order via dir flip.
     const dir = (k: string) => {
@@ -88,7 +89,7 @@ export function AnimalExperience() {
   // Section entry reveals (eyebrow, split headline, intro, media, tabs).
   useGSAP(
     () => {
-      if (prefersReducedMotion() || reduced || !root.current || !headline.current) return;
+      if (reduced || !root.current || !headline.current) return;
       const { split } = revealLines(headline.current, {
         mask: true,
         stagger: 0.1,
@@ -107,7 +108,7 @@ export function AnimalExperience() {
   // Cross-fade on category change (skipped on first mount to avoid a flash).
   useGSAP(
     () => {
-      if (prefersReducedMotion() || reduced || !root.current) return;
+      if (reduced || !root.current) return;
       if (first.current) {
         first.current = false;
         gsap.set(`.animal-img[data-key="${active}"]`, { autoAlpha: 1 });
@@ -192,7 +193,7 @@ export function AnimalExperience() {
                     src={c.image}
                     alt={c.alt}
                     fill
-                    sizes="(min-width: 1024px) 58vw, 90vw"
+                    sizes="(min-width: 1024px) 580px, 800px"
                     className="object-cover"
                   />
                 </div>
