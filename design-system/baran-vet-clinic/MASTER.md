@@ -281,7 +281,7 @@ gsap.from(split.chars, { opacity: 0, y: 20, rotateX: -40, duration: 0.6, stagger
 
 The generated palette/typography above is the *authority baseline*; the following Baran constraints refine it (recorded here so Steps 3–7 stay consistent). This is a **deliberate evolution**, not a replacement of the UI/UX Pro Max output:
 
-1. **Brand is White + Blue** — the generated cyan/green scheme is re-tuned to a **deep anchor blue** primary (`~#0B2E59` family), medium brand blue, and pale-blue surfaces on a warm-white canvas. Green/cyan energy is retained only as a controlled accent role.
+1. **Brand is White + Gold** — the generated cyan/green scheme is re-tuned to a **warm anchor gold** primary (`#EFAE4B`), deeper gold text tones, and pale-gold surfaces on a warm-white canvas. Green/cyan energy is retained only as a controlled accent role.
 2. **Accents are controlled moments** — soft yellow, warm coral, fresh green, lavender appear sparingly (animal categories, playful details), never as the primary visual language.
 3. **Persian-first typography** — the recommended Latin fonts (Lexend/Source Sans 3) are **not used**. Instead: **Vazirmatn** (variable, body + display) and **Estedad** (numerals/labels), both via `next/font/google`. UI/UX Pro Max's DB has no Persian font data, so this is a documented supplement.
 4. **Radius is intentional, not universal** — sharp (0) / subtle (4–6px) / high (999) per component purpose; no rounding-everything.

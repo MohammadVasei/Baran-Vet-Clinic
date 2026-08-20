@@ -18,7 +18,7 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="btn btn-outline size-10 relative"
+        className="btn btn-outline size-10 relative !p-0"
         aria-label="تبدیل تم"
       >
         <SunIcon className="h-5 w-5" aria-hidden="true" />
@@ -29,7 +29,7 @@ export function ThemeToggle() {
 
   return (
     <button
-      className="btn btn-outline size-10 relative"
+      className="btn btn-outline size-10 relative !p-0"
       onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
       aria-label={currentTheme === "dark" ? "حالت روشن" : "حالت تیره"}
       aria-pressed={currentTheme === "dark"}

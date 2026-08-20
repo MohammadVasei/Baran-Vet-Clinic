@@ -2,25 +2,25 @@
    LAYER 1 — PRIMITIVE TOKENS
    Raw design values with no semantic meaning.
    Derived from: design-system/baran-vet-clinic/MASTER.md
-   (Appendix B — White + Blue brand, deep anchor blue #0B2E59)
+   (Appendix B — White + Gold brand, warm anchor gold #EFAE4B)
    ============================================================ */
 
 :root {
   /* ----------------------------------------------------------
-     1.1 Color — Blue scale (brand anchor #0B2E59)
+     1.1 Color — Gold scale (brand anchor #EFAE4B)
   ---------------------------------------------------------- */
-  --blue-25: #f4f8fc;
-  --blue-50: #ebf2fa;
-  --blue-100: #d9e7f4;
-  --blue-200: #b4cde4;
-  --blue-300: #8ab0d1;
-  --blue-400: #5c8cb8;
-  --blue-500: #3c6a96;
-  --blue-600: #2c5479;
-  --blue-700: #1e3f5f;
-  --blue-800: #143052;
-  --blue-900: #0b2e59;
-  --blue-950: #071d3a;
+  --blue-25: #fffdf8;
+  --blue-50: #fff8e9;
+  --blue-100: #ffedc2;
+  --blue-200: #fbd995;
+  --blue-300: #f6c66d;
+  --blue-400: #f1b557;
+  --blue-500: #efae4b;
+  --blue-600: #d8922f;
+  --blue-700: #b8751c;
+  --blue-800: #87530b;
+  --blue-900: #5f3900;
+  --blue-950: #382000;
 
   /* Ink scale — navy-tinged neutrals (text + structure) */
   --ink-50: #f6f8fa;
