@@ -67,7 +67,7 @@
 
 ### 2.5 Design tokens (source of truth)
 - `src/styles/tokens/primitives.tokens.css` — `--duration-instant:75ms`, `--duration-fast:150ms`, `--duration-normal:250ms`, `--duration-slow:400ms`, `--duration-slower:600ms`, `--duration-slowest:900ms`; eases `--ease-out/-in-out/-spring/-smooth`; spacing `--space-*` (4px base); radii `--radius-*`; z-index `--z-*`.
-- `semantic.tokens.css` — light + dark surfaces, primary deep blue `--blue-900:#0b2e59`, accent green, categories (yellow/coral/green/lavender).
+- `semantic.tokens.css` — light + dark surfaces, primary warm gold `--blue-500:#efae4b`, accent green, categories (yellow/coral/green/lavender).
 - `components.tokens.css` — component aliases + `--header-height`, `--services-panel-top`.
 - Light/dark are swapped via `prefers-color-scheme`. Goldie art needs no recolor — golden line-art reads on both.
 - New styles go into `src/app/globals.css` `@layer components` (codebase convention, e.g. `.hero-orb`, `.svc-img`, `.marquee`). Do **not** introduce CSS modules.

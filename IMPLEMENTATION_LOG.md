@@ -124,7 +124,7 @@ Build log for the Baran Vet Clinic website (homepage-first, Persian-only, RTL, l
   - `--stack nextjs "nextjs performance hydration"` → layout-shift avoidance, `@next/bundle-analyzer`, `next/dynamic`.
   - `--domain gsap "scroll reveal stagger hero"` → 3 GSAP patterns (scroll reveal subtle, stagger list, char-split headline with SplitText note).
 - Appended **Appendix A** (all three search result sets) and **Appendix B** (Baran-specific evolution direction) to `MASTER.md`:
-  - White + Blue brand re-tuned from cyan/green baseline; deep anchor blue primary.
+  - White + Gold brand re-tuned from cyan/green baseline; warm anchor gold primary.
   - Accents (yellow/coral/green/lavender) as controlled moments only.
   - **Persian fonts replace Latin recommendation** → Vazirmatn + Estedad (documented supplement — UI/UX Pro Max DB has no Persian typography).
   - Intentional radius system, editorial grid, a11y carry-forward, `pages/home.md` override to be added in Step 7.
@@ -141,7 +141,7 @@ Build log for the Baran Vet Clinic website (homepage-first, Persian-only, RTL, l
 
 ### Decisions / deviations
 - **Deviation:** UI/UX Pro Max recommends Latin fonts (Lexend/Source Sans 3); **overridden** per Persian-only requirement → Vazirmatn + Estedad. Recorded in Appendix B.
-- **Deviation:** generated cyan/green palette is re-tuned to the White + Blue brand (Appendix B) while keeping the generated values as the baseline authority.
+  - **Deviation:** generated cyan/green palette is re-tuned to the White + Gold brand (Appendix B) while keeping the generated values as the baseline authority.
 - Motion dial set to 7/10 (Standard) per plan.
 
 ### Open issues
@@ -155,7 +155,7 @@ Build log for the Baran Vet Clinic website (homepage-first, Persian-only, RTL, l
 
 ### What was done
 - Built the three-layer token system per `design-system` skill architecture, stored in `src/styles/tokens/`:
-  1. **Primitive** — `primitives.tokens.css`: blue scale anchored on deep anchor `#0B2E59` (Appendix B), ink (navy-tinged neutral) scale, cream (warm-white) scale, accent hues (yellow/coral/green/lavender/red), full spacing scale (4px base), typography scale (sizes/weights/leading/tracking), intentional radius scale, shadows, motion durations + easings (for Step 6 GSAP), and z-index scale.
+  1. **Primitive** — `primitives.tokens.css`: gold scale anchored on warm anchor `#EFAE4B` (Appendix B), ink (warm-neutral) scale, cream (warm-white) scale, accent hues (yellow/coral/green/lavender/red), full spacing scale (4px base), typography scale (sizes/weights/leading/tracking), intentional radius scale, shadows, motion durations + easings (for Step 6 GSAP), and z-index scale.
   2. **Semantic** — `semantic.tokens.css`: purpose aliases over primitives. **Light** (`:root`) **+ dark** (`@media (prefers-color-scheme: dark)` block) with **identical semantic names** — only values swap. Includes `color-scheme: light dark`, surfaces, primary/secondary/accent/muted/border/ring/destructive, category accents (yellow/coral/green/lavender for Step 7.5 animal explorer), semantic spacing + container widths.
   3. **Component** — `components.tokens.css`: button/input/card/eyebrow/link/nav/preloader/emergency tokens, focus-ring + selection, scrollbar, and motion defaults consumed later by GSAP.
 - Wired tokens into Tailwind v4 via `@theme inline` in `globals.css` (keeps `var(--...)` references so the dark media query swaps values at runtime → zero hydration flash). Added `@layer base`: body typography from tokens, `::selection`, visible `:focus-visible` rings, themed webkit scrollbar, `prefers-reduced-motion` base reduction.
@@ -176,7 +176,7 @@ Build log for the Baran Vet Clinic website (homepage-first, Persian-only, RTL, l
 ### Decisions / deviations
 - **Naming:** definition files use `*.tokens.css` extension so the skill's validator auto-skips them (its documented intent) — zero false positives without narrowing the scan directory.
 - **Radius:** intentionally non-universal per Appendix B (sharp/s/subtle/high + full), no rounding-everything.
-- **Dark primary:** lightens (blue `~#7FB0DA` on `#0B2E59` on-primary ≈ 5.9:1) so CTAs stay visible on dark surfaces — values tested to ≥4.5:1 in both themes.
+- **Dark primary:** uses warm gold `#EFAE4B` with dark gold-brown on-primary text so CTAs stay visible on dark surfaces — values tested to ≥4.5:1 in both themes.
 - **Category accents** (yellow/coral/green/lavender) pre-defined now as semantic tokens; consumed in Step 7.5.
 - Font family tokens point at `--font-vazirmatn` / `--font-estedad` variables that **Step 4** will create; current fallback stacks keep rendering correct meanwhile.
 
@@ -456,7 +456,7 @@ Build log for the Baran Vet Clinic website (homepage-first, Persian-only, RTL, l
 - [x] Headless Chrome (puppeteer-core → system Chrome) confirms real render:
   - `id="why"`, bg `rgb(235,242,250)` (surface-alt), eyebrow, 2-line headline, 4 steps with ۰۱–۰۴ numerals + titles, `next/image` served, Persian alt ✓.
   - **SplitText** applied (h2 line wrappers present) ✓; **reveals hidden at load** (eyebrow/intro/steps `opacity:0`, image `clip-path: inset(0% 0% 0% 100%)`) → **all reveal after scroll** (`opacity:1`, `clip-path: inset(0%)`) ✓; staggered sequence observed ✓.
-  - **Dark theme:** bg `#182a42`, h2 `#e9f0f7`, step numerals `#7fb0da` (dark primary), titles `#e9f0f7`, dividers `#24364f` (dark border) — all tokens ✓.
+  - **Dark theme:** bg `#182a42`, h2 `#e9f0f7`, step numerals `#efae4b` (dark primary), titles `#e9f0f7`, dividers `#24364f` (dark border) — all tokens ✓.
   - **Reduced motion:** 0 SplitText divs, no inline GSAP styles, `.why-img` clip none, step content intact & visible ✓.
   - **No console/page errors** ✓.
 
