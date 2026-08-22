@@ -1,0 +1,9 @@
+/// <reference types="react" />
+
+declare namespace JSX {
+  interface IntrinsicElements {
+    "hana-viewer": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+      url: string;
+    };
+  }
+}
