@@ -1,33 +1,36 @@
-import { PawIcon, PinIcon, PhoneIcon, MailIcon, ClockIcon, InstagramIcon, TelegramIcon, WhatsAppIcon } from "@/components/icons";
+import { PawIcon, PinIcon, PhoneIcon, ClockIcon, InstagramIcon, ThreadsIcon } from "@/components/icons";
 
-// TODO: real data — replace all placeholder values below with clinic data
-const FOOTER = {
-  quickLinks: [
-    { label: "درباره ما", href: "#about" },
-    { label: "خدمات", href: "#services" },
-    { label: "پزشکان", href: "#doctors" },
-    { label: "رزرو نوبت", href: "#appointment" },
-    { label: "تماس با ما", href: "#contact" },
+const QUICK_LINKS = [
+  { label: "خانه", href: "#top" },
+  { label: "خدمات", href: "#services" },
+  { label: "پزشکان", href: "#doctors" },
+  { label: "تماس با ما", href: "#contact" },
+];
+
+const SERVICES = [
+  { label: "درمان", href: "/services/darman" },
+  { label: "شناسنامه سلامت", href: "/services/shenasname" },
+  { label: "شستشو و اصلاح", href: "/services/grooming" },
+  { label: "پت‌شاپ", href: "/services/petshop" },
+];
+
+const CONTACT = {
+  address: "مشهد، احمدآباد، بلوار بعثت، بین بلوار رضا و ابوذر غفاری، پلاک ۹۴",
+  phones: [
+    { label: "تلفن ثابت", number: "۰۵۱-۳۸۴۷-۵۳۷۷", href: "tel:+985138475377" },
+    { label: "موبایل و واتساپ ۱", number: "۰۹۱۵-۳۵۸-۸۱۶۰", href: "tel:+989153588160", whatsapp: "https://wa.me/989153588160" },
+    { label: "موبایل و واتساپ ۲", number: "۰۹۱۵-۹۹۰-۵۹۰۰", href: "tel:+989159905900", whatsapp: "https://wa.me/989159905900" },
   ],
-  services: [
-    { label: "داخلی و درمان", href: "#services" },
-    { label: "جراحی تخصصی", href: "#services" },
-    { label: "تصویربرداری و آزمایشگاه", href: "#services" },
-    { label: "دندان‌پزشکی", href: "#services" },
-    { label: "واکسیناسیون و پیشگیری", href: "#services" },
+  hours: [
+    { days: "شنبه تا پنج‌شنبه", time: "۱۰ صبح تا ۹:۳۰ شب" },
+    { days: "جمعه", time: "۴ عصر تا ۹ شب" },
   ],
-  contact: {
-    address: "تهران، خیابان ولیعصر، کوچه باران، پلاک ۱۲",
-    phone: "۰۲۱-۲۲۰۰۰۰۰۰",
-    email: "info@baran-vet.ir",
-    hours: "هر روز هفته: ۹ صبح تا ۱۰ شب",
-  },
+  hoursNote: "لطفاً قبل از مراجعه تماس بگیرید",
 };
 
 const SOCIALS = [
-  { label: "اینستاگرام", href: "#instagram", Icon: InstagramIcon },
-  { label: "تلگرام", href: "#telegram", Icon: TelegramIcon },
-  { label: "واتس‌اپ", href: "#whatsapp", Icon: WhatsAppIcon },
+  { label: "اینستاگرام", href: "https://www.instagram.com/baran_clinic_petshop/", Icon: InstagramIcon },
+  { label: "ترددز", href: "https://www.threads.com/@baran_clinic_petshop/", Icon: ThreadsIcon },
 ];
 
 export function Footer() {
@@ -41,12 +44,11 @@ export function Footer() {
             </span>
             <span className="leading-tight">
               <span className="block font-display text-lg font-bold text-foreground">باران</span>
-              <span className="block font-label text-xs text-muted-foreground">کلینیک دامپزشکی</span>
+              <span className="block font-label text-xs text-muted-foreground">کلینیک دام‌های کوچک باران</span>
             </span>
           </a>
           <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-            {/* TODO: real data — clinic mission/description */}
-            جایی که علم دامپزشکی با مهربانی همراه می‌شود؛ از نخستین واکسن تا پیچیده‌ترین جراحی، کنار شما و حیوان عزیزتان هستیم.
+            درمان • شناسنامه سلامت • شستشو و اصلاح حرفه‌ای • پت‌شاپ
           </p>
           <ul className="flex items-center gap-2">
             {SOCIALS.map(({ label, href, Icon }) => (
@@ -66,7 +68,7 @@ export function Footer() {
         <nav aria-label="دسترسی سریع">
           <h2 className="font-display text-base font-bold text-foreground">دسترسی سریع</h2>
           <ul className="mt-4 space-y-2.5">
-            {FOOTER.quickLinks.map((link) => (
+            {QUICK_LINKS.map((link) => (
               <li key={link.label}>
                 <a
                   href={link.href}
@@ -82,7 +84,7 @@ export function Footer() {
         <nav aria-label="خدمات">
           <h2 className="font-display text-base font-bold text-foreground">خدمات</h2>
           <ul className="mt-4 space-y-2.5">
-            {FOOTER.services.map((link) => (
+            {SERVICES.map((link) => (
               <li key={link.label}>
                 <a
                   href={link.href}
@@ -100,23 +102,31 @@ export function Footer() {
           <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
             <li className="flex items-start gap-2.5">
               <PinIcon className="mt-0.5 size-4 shrink-0 text-primary" />
-              <span className="leading-relaxed">{FOOTER.contact.address}</span>
+              <span className="leading-relaxed">{CONTACT.address}</span>
             </li>
-            <li className="flex items-center gap-2.5">
-              <PhoneIcon className="size-4 shrink-0 text-primary" />
-              <a href="tel:+982122000000" className="transition-colors duration-fast hover:text-primary" dir="ltr">
-                {FOOTER.contact.phone}
-              </a>
-            </li>
-            <li className="flex items-center gap-2.5">
-              <MailIcon className="size-4 shrink-0 text-primary" />
-              <a href="mailto:info@baran-vet.ir" className="transition-colors duration-fast hover:text-primary" dir="ltr">
-                {FOOTER.contact.email}
-              </a>
-            </li>
-            <li className="flex items-center gap-2.5">
-              <ClockIcon className="size-4 shrink-0 text-primary" />
-              <span>{FOOTER.contact.hours}</span>
+            {CONTACT.phones.map((phone) => (
+              <li key={phone.label} className="flex items-center gap-2.5">
+                <PhoneIcon className="size-4 shrink-0 text-primary" />
+                <a href={phone.href} className="transition-colors duration-fast hover:text-primary" dir="ltr">
+                  {phone.number}
+                </a>
+                {phone.whatsapp && (
+                  <a href={phone.whatsapp} className="text-primary hover:underline text-xs" target="_blank" rel="noopener">
+                    واتساپ
+                  </a>
+                )}
+              </li>
+            ))}
+            <li className="flex items-start gap-2.5">
+              <ClockIcon className="mt-0.5 size-4 shrink-0 text-primary" />
+              <div>
+                <p className="font-label text-xs text-primary">{CONTACT.hoursNote}</p>
+                {CONTACT.hours.map((h, i) => (
+                  <span key={i} className="block leading-relaxed">
+                    {h.days}: {h.time}
+                  </span>
+                ))}
+              </div>
             </li>
           </ul>
         </div>
@@ -124,7 +134,7 @@ export function Footer() {
 
       <div className="border-t border-border">
         <div className="container-site flex flex-col items-center justify-between gap-2 py-6 text-xs text-muted-foreground sm:flex-row">
-          <p>© ۱۴۰۵ کلینیک دامپزشکی باران — تمامی حقوق محفوظ است.</p>
+          <p>© ۱۴۰۵ کلینیک دام‌های کوچک باران — تمامی حقوق محفوظ است.</p>
           <p className="font-label">ساخته‌شده با دقت و مهربانی</p>
         </div>
       </div>

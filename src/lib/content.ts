@@ -2,20 +2,32 @@
 // production placeholders to be replaced with verified clinic data.
 
 export const CLINIC = {
-  name: "کلینیک دامپزشکی باران",
+  name: "کلینیک دام‌های کوچک باران",
   brand: "باران",
-  tagline: "کلینیک دامپزشکی",
-  phone: "۰۲۱-۲۲۰۰۰۰۰۰",
-  phoneHref: "tel:+982122000000",
-  emergencyPhone: "۰۲۱-۲۲۰۰۰۰۰۰",
-  emergencyPhoneHref: "tel:+982122000000",
+  tagline: "سلامت و آرامش پت شما، کنار ما",
+  phone: "۰۵۱-۳۸۴۷-۵۳۷۷",
+  phoneHref: "tel:+985138475377",
+  mobile1: "۰۹۱۵-۳۵۸-۸۱۶۰",
+  mobile1Href: "tel:+989153588160",
+  mobile1WhatsApp: "https://wa.me/989153588160",
+  mobile2: "۰۹۱۵-۹۹۰-۵۹۰۰",
+  mobile2Href: "tel:+989159905900",
+  mobile2WhatsApp: "https://wa.me/989159905900",
   email: "info@baran-vet.ir",
-  address: "تهران، خیابان ولیعصر، کوچه باران، پلاک ۱۲",
-  hours: "هر روز، ۸ صبح تا ۱۰ شب",
+  address: "مشهد، احمدآباد، بلوار بعثت، بین بلوار رضا و ابوذر غفاری، پلاک ۹۴",
+  addressShort: "احمدآباد، بلوار بعثت، پلاک ۹۴",
+  hours: [
+    { days: "شنبه تا پنج‌شنبه", time: "۱۰ صبح تا ۹:۳۰ شب" },
+    { days: "جمعه", time: "۴ عصر تا ۹ شب" },
+  ],
+  hoursNote: "لطفاً قبل از مراجعه تماس بگیرید",
+  instagram: "baran_clinic_petshop",
+  instagramUrl: "https://www.instagram.com/baran_clinic_petshop/",
+  threads: "baran_clinic_petshop",
+  threadsUrl: "https://www.threads.com/@baran_clinic_petshop/",
 };
 
 export const ABOUT = {
-  // TODO: real data — mission statement to be reviewed with the clinic.
   eyebrow: "آشنایی با باران",
   statement: [
     "هر حیوان خانگی،",
@@ -23,7 +35,7 @@ export const ABOUT = {
     "و ما همین‌طور با او رفتار می‌کنیم.",
   ],
   body:
-    "کلینیک دامپزشکی باران از سال ۱۳۸۹ با تیمی از دامپزشکان متخصص، تجهیزات مدرن و عشق به حیوانات، همراهِ خانواده‌های ایرانی بوده است؛ از نخستین معاینه تا جراحی‌های پیشرفته.",
+    "در محله احمدآباد مشهد، کلینیک دام‌های کوچک باران فضایی آرام و قابل اعتماد برای حیوانات خانگی فراهم کرده است. ما روی سه اصل ساده اما مهم تمرکز داریم: درمان دقیق، پیگیری منظم با شناسنامه سلامت، و مراقبت ظاهری با شستشو و اصلاح حرفه‌ای. پت‌شاپ مجموعه هم کنار شماست تا آنچه نیاز دارید را راحت تهیه کنید.",
   signature: "تیم دامپزشکان کلینیک باران",
   image: {
     src: "/images/about-vet.jpg",
@@ -32,31 +44,25 @@ export const ABOUT = {
 };
 
 export const WHY = {
-  // TODO: real data — the process of care to be confirmed with the clinic.
   eyebrow: "چرا باران؟",
-  headline: ["مسیر درمان،", "شفاف و قدم‌به‌قدم"],
+  headline: ["سه اصل،", "یک التزام"],
   intro:
-    "در باران، اول با دقت گوش می‌دهیم و بعد تصمیم می‌گیریم. هر مرحله از درمان را با زبان ساده برای شما توضیح می‌دهیم تا همیشه بدانید چه اتفاقی در حال رخ دادن است.",
+    "ما روی سه اصل ساده اما مهم تمرکز داریم تا مطمئن شویم پت شما بهترین مراقبت را دریافت می‌کند.",
   steps: [
     {
       number: "۰۱",
-      title: "مشاوره و پذیرش",
-      text: "در محیطی آرام، شرح حال حیوان شما به‌طور کامل ثبت می‌شود.",
+      title: "درمان دقیق",
+      text: "معاینه و مراقبت درمانی با توجه به نیاز واقعی پت شما، با آرامش و دقت کامل.",
     },
     {
       number: "۰۲",
-      title: "معاینه و تشخیص",
-      text: "معاینه بالینی و در صورت نیاز آزمایش و تصویربرداری برای تشخیص دقیق.",
+      title: "شناسنامه سلامت",
+      text: "سوابق درمانی و واکسیناسیون در یک دفترچه منظم برای پیگیری آسان و منظم.",
     },
     {
       number: "۰۳",
-      title: "درمان و مراقبت",
-      text: "برنامه درمانی شفاف، همراه با توضیح کامل روند و هزینه برای شما.",
-    },
-    {
-      number: "۰۴",
-      title: "پیگیری و بهبودی",
-      text: "حتی پس از درمان نیز همراه شما هستیم تا بهبودی کامل حاصل شود.",
+      title: "مراقبت ظاهری",
+      text: "شستشو و اصلاح حرفه‌ای برای راحتی و زیبایی پت، با حوصله و مهربانی.",
     },
   ],
   image: {
@@ -80,7 +86,6 @@ export const ANIMALS: {
   intro: string;
   categories: AnimalCategory[];
 } = {
-  // TODO: real data — category copy to be replaced with verified clinic info.
   eyebrow: "تجربه بیماران",
   headline: ["هر بیمار کوچک،", "دنیای خودش را دارد"],
   intro:
@@ -130,17 +135,12 @@ export const ANIMALS: {
 };
 
 export const MARQUEE = {
-  // TODO: real data — teaser tags; reconcile with the Step 7.6 services list.
   label: "خدمات کلینیک",
   items: [
-    "واکسیناسیون",
-    "جراحی تخصصی",
-    "بیماری‌های داخلی",
-    "دندانپزشکی",
-    "تصویربرداری",
-    "اورژانس ۲۴ ساعته",
-    "آزمایشگاه",
-    "تغذیه و رژیم‌درمانی",
+    "درمان",
+    "شناسنامه سلامت",
+    "شستشو و اصلاح",
+    "پت‌شاپ",
   ],
 };
 
@@ -156,6 +156,7 @@ export type Service = {
   image: string;
   alt: string;
   accent: ServiceAccent;
+  href: string;
 };
 
 export const SERVICES: {
@@ -164,102 +165,59 @@ export const SERVICES: {
   intro: string;
   items: Service[];
 } = {
-  // TODO: real data — service list reconciled with the Step 7.2 MARQUEE tags;
-  // to be confirmed against the clinic's actual service catalog. Facility
-  // images reused as placeholders (7.7 treats them cinematically full-bleed).
   eyebrow: "خدمات باران",
-  headline: ["از واکسنِ ساده تا", "جراحیِ پیچیده؛"],
+  headline: ["آنچه برای پت‌تان", "انجام می‌دهیم"],
   intro:
-    "خانواده‌ای کامل از خدمات دامپزشکی زیر یک سقف — روی هر مورد بمانید یا با جهت‌های فلش حرکت کنید تا جزئیاتش را ببینید.",
+    "ما خدمات خود را ساده، شفاف و متمرکز نگه داشته‌ایم تا شما دقیقاً بدانید برای پت‌تان چه کاری انجام می‌دهیم. هر خدمت با دقت و احترام به حیوان خانگی شما طراحی شده است.",
   items: [
-  {
-    key: "vaccination",
-    numeral: "۰۱",
-    name: "واکسیناسیون",
-    tagline: "واکسن‌های ضروری با برنامه‌ای دقیق",
-    title: "واکسیناسیون کامل",
-    text: "واکسن‌های ضروری برای هر گونه، طبق برنامه‌ی سنی، سبک زندگی و سلامت حیوان شما.",
-    image: "/images/hero-dog.jpg",
-    alt: "سگ در حال واکسیناسیون در کلینیک دامپزشکی باران",
-    accent: "yellow",
-  },
-  {
-    key: "surgery",
-    numeral: "۰۲",
-    name: "جراحی تخصصی",
-    tagline: "اتاق عمل مجهز و مراقبت کامل",
-    title: "جراحی تخصصی",
-    text: "جراحی‌های بافت نرم و تخصصی در اتاق عمل مجهز، همراه با بیهوشی ایمن و مراقبت‌های پس از عمل.",
-    image: "/images/service-surgery.jpg",
-    alt: "تیم جراحی آماده در اتاق عمل کلینیک دامپزشکی باران",
-    accent: "coral",
-  },
-  {
-    key: "medicine",
-    numeral: "۰۳",
-    name: "بیماری‌های داخلی",
-    tagline: "تشخیص دقیق بیماری‌های مزمن",
-    title: "بیماری‌های داخلی",
-    text: "تشخیص و درمان بیماری‌های داخلی با معاینه دقیق، آزمایش و روش‌های نوین تصویربرداری.",
-    image: "/images/about-vet.jpg",
-    alt: "معاینه دقیق حیوان خانگی در کلینیک دامپزشکی باران",
-    accent: "green",
-  },
-  {
-    key: "dentistry",
-    numeral: "۰۴",
-    name: "دندانپزشکی",
-    tagline: "سلامت دهان و دندان برای همه",
-    title: "دندانپزشکی حیوانات",
-    text: "جرم‌گیری، کشیدن دندان و درمان بیماری‌های دهان و دندان با آرامش کامل و بی‌حسی ایمن.",
-    image: "/images/service-dental.jpg",
-    alt: "دندانپزشکی تخصصی حیوانات در کلینیک دامپزشکی باران",
-    accent: "lavender",
-  },
-  {
-    key: "imaging",
-    numeral: "۰۵",
-    name: "تصویربرداری",
-    tagline: "دید دقیق‌تر با رادیوگرافی",
-    title: "تصویربرداری و رادیولوژی",
-    text: "رادیوگرافی و تصویربرداری دیجیتال برای تشخیص دقیق آسیب‌ها و بیماری‌های داخلی، بدون استرس برای بیمار.",
-    image: "/images/facility-xray.jpg",
-    alt: "تصویربرداری رادیولوژی حیوانات در کلینیک دامپزشکی باران",
-    accent: "yellow",
-  },
-  {
-    key: "emergency",
-    numeral: "۰۶",
-    name: "اورژانس ۲۴ ساعته",
-    tagline: "هر ساعتی که نیاز باشد",
-    title: "اورژانس ۲۴ ساعته",
-    text: "تیمی آماده در تمام ساعات شبانه‌روز برای شرایط حاد و نیاز فوری حیوان شما.",
-    image: "/images/facility-icu.jpg",
-    alt: "بخش مراقبت‌های ویژه اورژانس در کلینیک دامپزشکی باران",
-    accent: "coral",
-  },
-  {
-    key: "laboratory",
-    numeral: "۰۷",
-    name: "آزمایشگاه",
-    tagline: "جواب‌های سریع و مطمئن",
-    title: "آزمایشگاه تخصصی",
-    text: "آزمایش‌های خون، ادرار و تخصصی با دستگاه‌های مدرن و جواب‌دهی سریع.",
-    image: "/images/service-lab.jpg",
-    alt: "آزمایشگاه تخصصی کلینیک دامپزشکی باران",
-    accent: "green",
-  },
-  {
-    key: "nutrition",
-    numeral: "۰۸",
-    name: "تغذیه و رژیم‌درمانی",
-    tagline: "برنامه غذایی متناسب با بیمار",
-    title: "تغذیه و رژیم‌درمانی",
-    text: "برنامه‌ای تغذیه و رژیم‌درمانی متناسب با نژاد، سن و شرایط پزشکی حیوان شما.",
-    image: "/images/why-baran.jpg",
-    alt: "برنامه تغذیه و رژیم‌درمانی حیوانات در کلینیک دامپزشکی باران",
-    accent: "lavender",
-  },
+    {
+      key: "darman",
+      numeral: "۰۱",
+      name: "درمان",
+      tagline: "معاینه و مراقبت درمانی با دقت و آرامش",
+      title: "درمان حیوانات خانگی",
+      text: "معاینه و مراقبت درمانی برای سگ، گربه و سایر حیوانات خانگی. ما با آرامش و دقت وضعیت پت را بررسی می‌کنیم و مسیر مراقبت را مشخص می‌کنیم.",
+      image: "/images/service-darman.jpg",
+      alt: "معاینه و درمان حیوان خانگی در کلینیک باران",
+      accent: "yellow",
+      href: "/services/darman",
+    },
+    {
+      key: "shenasname",
+      numeral: "۰۲",
+      name: "شناسنامه سلامت",
+      tagline: "سوابق درمانی و واکسیناسیون در یک دفترچه منظم",
+      title: "شناسنامه سلامت پت",
+      text: "یک دفترچه منظم برای ثبت سوابق درمانی و برنامه‌های پیشگیرانه. با شناسنامه، پیگیری واکسیناسیون و چکاپ‌ها بسیار ساده‌تر می‌شود.",
+      image: "/images/service-shenasname.jpg",
+      alt: "نمونه شناسنامه سلامت حیوان در کلینیک باران",
+      accent: "coral",
+      href: "/services/shenasname",
+    },
+    {
+      key: "grooming",
+      numeral: "۰۳",
+      name: "شستشو و اصلاح",
+      tagline: "گرومینگ آرام و حرفه‌ای برای راحتی و زیبایی پت",
+      title: "شستشو و اصلاح پت",
+      text: "گرومینگ حرفه‌ای و آرام توسط همکار مجرب کلینیک. شستشو، اصلاح و مرتب‌سازی برای راحتی و ظاهر بهتر پت شما.",
+      image: "/images/service-grooming.jpg",
+      alt: "شستشو و اصلاح حرفه‌ای پت در کلینیک باران",
+      accent: "green",
+      href: "/services/grooming",
+    },
+    {
+      key: "petshop",
+      numeral: "۰۴",
+      name: "پت‌شاپ",
+      tagline: "محصولات منتخب برای نگهداری روزمره",
+      title: "پت‌شاپ کلینیک باران",
+      text: "محصولات مورد نیاز نگهداری روزمره حیوانات خانگی. برای اطلاع از موجودی کافی است تماس بگیرید یا پیام دهید.",
+      image: "/images/service-petshop.jpg",
+      alt: "محصولات پت‌شاپ کلینیک باران",
+      accent: "lavender",
+      href: "/services/petshop",
+    },
   ],
 };
 
@@ -278,43 +236,42 @@ export const FACILITIES: {
   intro: string;
   items: Facility[];
 } = {
-  // TODO: real data — facility descriptions to be confirmed with the clinic.
   eyebrow: "فضاهای کلینیک",
   headline: ["جایی که تجهیزات،", "آرامش را ملاقات می‌کند"],
   intro:
-    "هر بخش کلینیک باران برای آسایش حیوان شما طراحی شده — از اتاق عمل مجهز تا بخش مراقبت‌های ویژه.",
+    "هر بخش کلینیک باران برای آسایش حیوان شما طراحی شده — از اتاق معاینه تا بخش شستشو و اصلاح.",
   items: [
     {
-      key: "surgery",
-      name: "اتاق عمل",
-      title: "اتاق عمل مجهز",
-      text: "اتاق عمل استریل با تجهیزات مدرن جراحی، بیهوشی ایمن و مانیتورینگ لحظه‌ای.",
-      image: "/images/facility-op.jpg",
-      alt: "اتاق عمل مجهز کلینیک دامپزشکی باران",
+      key: "exam",
+      name: "اتاق معاینه",
+      title: "اتاق معاینه مجهز",
+      text: "فضای آرام و مجهز برای معاینه دقیق حیوانات خانگی.",
+      image: "/images/facility-exam.jpg",
+      alt: "اتاق معاینه کلینیک دامپزشکی باران",
     },
     {
-      key: "icu",
-      name: "مراقبت‌های ویژه",
-      title: "بخش مراقبت‌های ویژه",
-      text: "monitoring ۲۴ ساعته برای بیماران بدحال، با تیمی از دامپزشکان متخصص.",
-      image: "/images/facility-icu.jpg",
-      alt: "بخش مراقبت‌های ویژه کلینیک دامپزشکی باران",
+      key: "grooming",
+      name: "شستشو و اصلاح",
+      title: "استودیوی گرومینگ",
+      text: "محیطی تخصصی و آرام برای شستشو و اصلاح حرفه‌ای پت.",
+      image: "/images/facility-grooming.jpg",
+      alt: "استودیوی شستشو و اصلاح کلینیک باران",
     },
     {
-      key: "lab",
-      name: "آزمایشگاه",
-      title: "آزمایشگاه تخصصی",
-      text: "دستگاه‌های مدرن آزمایشگاهی برای جواب‌دهی سریع و دقیق.",
-      image: "/images/facility-lab.jpg",
-      alt: "آزمایشگاه تخصصی کلینیک دامپزشکی باران",
+      key: "petshop",
+      name: "پت‌شاپ",
+      title: "پت‌شاپ مجموعه",
+      text: "محصولات متنوع نگهداری روزمره در کنار خدمات درمانی.",
+      image: "/images/facility-petshop.jpg",
+      alt: "پت‌شاپ کلینیک دامپزشکی باران",
     },
     {
-      key: "xray",
-      name: "تصویربرداری",
-      title: "مرکز تصویربرداری",
-      text: "رادیوگرافی و سونوگرافی دیجیتال با کیفیت بالا و بدون استرس.",
-      image: "/images/facility-xray.jpg",
-      alt: "مرکز تصویربرداری کلینیک دامپزشکی باران",
+      key: "waiting",
+      name: "سالن انتظار",
+      title: "سالن انتظار آرام",
+      text: "فضای راحت برای شما و پت‌تان تا زمان مراجعه.",
+      image: "/images/facility-waiting.jpg",
+      alt: "سالن انتظار کلینیک دامپزشکی باران",
     },
   ],
 };
@@ -334,82 +291,80 @@ export const DOCTORS: {
   intro: string;
   items: Doctor[];
 } = {
-  // TODO: real data — doctor profiles to be confirmed with the clinic.
-  eyebrow: "تیم پزشکان",
-  headline: ["متخصصانی که", "به حیوان شما عشق می‌ورزند"],
+  eyebrow: "تیم پزشکان و همکاران",
+  headline: ["تیمی که", "پت شما را می‌شناسد"],
   intro:
-    "هر یک از دامپزشکان باران سال‌ها تجربه و تخصص در حوزه خاص خود دارند — از جراحی تا داخلی، از تصویربرداری تا اورژانس.",
+    "در کلینیک باران، هر عضو تیم نقشی مشخص و مهم دارد. از مدیریت تا درمان و گرومینگ، همه با یک هدف مشترک کار می‌کنند: مراقبت درست و آرام از حیوانات خانگی.",
   items: [
     {
-      key: "dr-1",
-      name: "دکتر سارا احمدی",
-      role: "جراح عمومی و ارتوپدی",
-      image: "/images/doctor-1.jpg",
-      alt: "دکتر سارا احمدی، جراح عمومی و ارتوپدی کلینیک دامپزشکی باران",
-      slug: "dr-sara-ahmadi",
+      key: "dr-tazik",
+      name: "دکتر محمد ابراهیم تازیک",
+      role: "مدیریت کلینیک",
+      image: "/images/doctor-tazik.jpg",
+      alt: "دکتر محمد ابراهیم تازیک، مدیریت کلینیک دام‌های کوچک باران",
+      slug: "dr-mohammad-ebrahim-tazik",
     },
     {
-      key: "dr-2",
-      name: "دکتر علی رضایی",
-      role: "بیماری‌های داخلی و گوارش",
-      image: "/images/doctor-2.jpg",
-      alt: "دکتر علی رضایی، متخصص بیماری‌های داخلی کلینیک دامپزشکی باران",
-      slug: "dr-ali-rezaei",
+      key: "dr-vasei",
+      name: "دکتر رضا واسعی",
+      role: "دامپزشک همکار",
+      image: "/images/doctor-vasei.jpg",
+      alt: "دکتر رضا واسعی، دامپزشک همکار کلینیک دام‌های کوچک باران",
+      slug: "dr-reza-vasei",
     },
     {
-      key: "dr-3",
-      name: "دکتر مریم کریمی",
-      role: "تصویربرداری و رادیولوژی",
-      image: "/images/doctor-3.jpg",
-      alt: "دکتر مریم کریمی، متخصص تصویربرداری کلینیک دامپزشکی باران",
-      slug: "dr-maryam-karimi",
-    },
-    {
-      key: "dr-4",
-      name: "دکتر حسین محمدی",
-      role: "اورژانس و مراقبت‌های ویژه",
-      image: "/images/doctor-4.jpg",
-      alt: "دکتر حسین محمدی، متخصص اورژانس کلینیک دامپزشکی باران",
-      slug: "dr-hossein-mohammadi",
+      key: "moghan-jahani",
+      name: "مژگان جهانی",
+      role: "گرومر",
+      image: "/images/doctor-moghan.jpg",
+      alt: "مژگان جهانی، گرومر کلینیک دام‌های کوچک باران",
+      slug: "moghan-jahani",
     },
   ],
 };
 
 export const EMERGENCY = {
-  eyebrow: "اورژانس",
-  headline: ["تیم اورژانس،", "همیشه در کنارِ شماست"],
-  intro: "برای شرایط حاد و نیاز فوری به پزشک، تیم ما در تمام ساعات شبانه‌روز در دسترس شماست.",
-  phone: "۰۲۱-۲۲۰۰۰۰۰۰",
-  hours: "هر روز، ۸ صبح تا ۱۰ شب",
-  phoneHref: "tel:+982122000000",
+  eyebrow: "تماس فوری",
+  headline: ["برای مشاوره و هماهنگی", "ما در دسترس هستیم"],
+  intro: "برای نوبت درمان، شناسنامه، گرومینگ یا سؤال ساده — ما اینجاییم. راحت‌ترین راه، تماس تلفنی یا پیام در واتساپ است.",
+  phone: "۰۵۱-۳۸۴۷-۵۳۷۷",
+  mobile1: "۰۹۱۵-۳۵۸-۸۱۶۰",
+  mobile2: "۰۹۱۵-۹۹۰-۵۹۰۰",
+  hours: [
+    { days: "شنبه تا پنج‌شنبه", time: "۱۰ صبح تا ۹:۳۰ شب" },
+    { days: "جمعه", time: "۴ عصر تا ۹ شب" },
+  ],
+  hoursNote: "لطفاً قبل از مراجعه تماس بگیرید",
+  phoneHref: "tel:+985138475377",
+  mobile1Href: "tel:+989153588160",
+  mobile1WhatsApp: "https://wa.me/989153588160",
+  mobile2Href: "tel:+989159905900",
+  mobile2WhatsApp: "https://wa.me/989159905900",
 };
 
 export const TRUST = {
-  // TODO: real data — no fabricated claims. Real client feedback will be
-  // reviewed with the clinic before publication; the placeholders below are
-  // explicit "sample" markers so nothing false ships to visitors.
   eyebrow: "اعتماد شما",
   headline: ["حرفِ خانواده‌ها،", "افتخارِ باران"],
   intro:
-    "در این بخش، بازخورد واقعیِ مراجعین باران نمایش داده می‌شود؛ از نظر نگه‌داشتن تا رضایت از درمان. متن‌های فعلی نمونه است و تا تأیید نهایی کلینیک، جایگزین می‌شود.",
+    "بازخورد واقعیِ مراجعین باران در اینجا نمایش داده می‌شود. متن‌های فعلی نمونه است و تا تأیید نهایی کلینیک، جایگزین می‌شود.",
   items: [
     {
       key: "t-1",
       quote: "نمونه: بازخورد واقعی مراجعین باران در اینجا نمایش داده می‌شود.",
       author: "نام صاحبِ حیوان خانگی",
-      context: "مثلاً: گربهٔ ۴ساله، واکسیناسیون",
+      context: "مثلاً: گربهٔ ۴ساله، درمان",
     },
     {
       key: "t-2",
       quote: "نمونه: بازخورد واقعی مراجعین باران در اینجا نمایش داده می‌شود.",
       author: "نام صاحبِ حیوان خانگی",
-      context: "مثلاً: سگ، جراحی تخصصی",
+      context: "مثلاً: سگ، شناسنامه سلامت",
     },
     {
       key: "t-3",
       quote: "نمونه: بازخورد واقعی مراجعین باران در اینجا نمایش داده می‌شود.",
       author: "نام صاحبِ حیوان خانگی",
-      context: "مثلاً: پرنده، معاینه دوره‌ای",
+      context: "مثلاً: پرنده، شستشو و اصلاح",
     },
   ],
   note: "تأییدِ نهایی: این متن‌ها نمونه است و پس از بازبینی با کلینیک، با بازخورد واقعی جایگزین می‌شود.",
@@ -432,13 +387,10 @@ export const APPOINTMENT: {
   steps: AppointmentStep[];
   timeSlots: { key: string; label: string }[];
 } = {
-  // TODO: real data — booking-flow copy to be confirmed with the clinic;
-  // time slots are samples until the real availability calendar is wired.
-  // The flow itself is booking-API-ready (see AppointmentCTA handleSubmit).
   eyebrow: "رزرو نوبت",
-  headline: ["یک نوبتِ ساده،", "برای آرامشِ شما"],
+  headline: ["یک تماس ساده،", "برای آرامشِ شما"],
   intro:
-    "در چهار گامِ کوتاه، نوبت موردنظرتان را ثبت کنید؛ همکاران ما برای تأییدِ نهایی با شما تماس می‌گیرند.",
+    "برای نوبت درمان، شناسنامه، گرومینگ یا استعلام پت‌شاپ، کافیست با ما تماس بگیرید یا در واتساپ پیام دهید. همکاران ما برای هماهنگی با شما تماس می‌گیرند.",
   note: "نوبتِ شما پس از تماسِ تأییدیِ تیمِ کلینیک، قطعی می‌شود.",
   steps: [
     {
@@ -475,19 +427,40 @@ export const APPOINTMENT: {
 };
 
 export const HERO = {
-  eyebrow: "کلینیک دامپزشکی باران",
-  // Split into display lines for the split-lines reveal (Step 7.1).
-  headline: ["سلامتِ همراهِ کوچکت،", "مأموریتِ بزرگِ ماست"],
+  eyebrow: "کلینیک دام‌های کوچک باران",
+  headline: ["سلامت و آرامش پت شما،", "کنار ما"],
   subhead:
-    "از نخستین واکسن تا جراحی‌های پیشرفته؛ تیمی از دامپزشکان متخصص و تجهیزاتی مدرن، همیشه کنار شما و حیوان عزیزتان هستند.",
+    "کلینیک دام‌های کوچک باران\nجایی که پت‌تان با دقت، مهربانی و تجربه مراقبت می‌شود",
   cta: {
-    primary: { label: "رزرو نوبت آنلاین", href: "#appointment" },
-    secondary: { label: "آشنایی با خدمات", href: "#services" },
+    primary: { label: "رزرو نوبت / تماس", href: "#appointment" },
+    secondary: { label: "مشاهده خدمات", href: "#services" },
   },
   meta: [
-    { key: "hours" as const, text: "هر روز، ۸ صبح تا ۱۰ شب" },
-    { key: "emergency" as const, text: "اورژانس ۲۴ ساعته" },
-    { key: "location" as const, text: "تهران، ولیعصر" },
+    { key: "hours" as const, text: "شنبه–پنج: ۱۰–۲۱:۳۰ | جمعه: ۱۶–۲۱" },
+    { key: "phone" as const, text: "۰۵۱-۳۸۴۷-۵۳۷۷" },
+    { key: "location" as const, text: "مشهد، احمدآباد، بلوار بعثت، پلاک ۹۴" },
   ],
   image: { dog: "/images/hero-dog.jpg", cat: "/images/hero-cat.jpg" },
+};
+
+export const CONTACT = {
+  eyebrow: "تماس با ما",
+  headline: ["بیایید با هم", "حرف بزنیم"],
+  intro: "چه برای نوبت درمان، چه شناسنامه، چه گرومینگ یا سؤال ساده — ما اینجاییم. راحت‌ترین راه، تماس تلفنی یا پیام در واتساپ است.",
+  phones: [
+    { label: "تلفن ثابت", number: "۰۵۱-۳۸۴۷-۵۳۷۷", href: "tel:+985138475377", icon: "phone" },
+    { label: "موبایل و واتساپ ۱", number: "۰۹۱۵-۳۵۸-۸۱۶۰", href: "tel:+989153588160", whatsapp: "https://wa.me/989153588160", icon: "mobile" },
+    { label: "موبایل و واتساپ ۲", number: "۰۹۱۵-۹۹۰-۵۹۰۰", href: "tel:+989159905900", whatsapp: "https://wa.me/989159905900", icon: "mobile" },
+  ],
+  socials: [
+    { label: "اینستاگرام", handle: "@baran_clinic_petshop", href: "https://www.instagram.com/baran_clinic_petshop/" },
+    { label: "ترددز", handle: "@baran_clinic_petshop", href: "https://www.threads.com/@baran_clinic_petshop/" },
+  ],
+  address: "مشهد، احمدآباد، بلوار بعثت، بین بلوار رضا و ابوذر غفاری، پلاک ۹۴",
+  hours: [
+    { days: "شنبه تا پنج‌شنبه", time: "۱۰ صبح تا ۹:۳۰ شب" },
+    { days: "جمعه", time: "۴ عصر تا ۹ شب" },
+  ],
+  hoursNote: "لطفاً قبل از مراجعه تماس بگیرید",
+  finalMessage: "پت شما منتظر مراقبت است. یک تماس کافی است تا هماهنگی را شروع کنیم.",
 };

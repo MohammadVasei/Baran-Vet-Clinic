@@ -7,12 +7,10 @@ import { MagneticButton } from "@/components/motion/MagneticButton";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
 const NAV_LINKS = [
-  { label: "خانه", href: "#top" },
-  { label: "درباره ما", href: "#about" },
-  { label: "خدمات", href: "#services" },
-  { label: "بیماران ما", href: "#patients" },
-  { label: "پزشکان", href: "#doctors" },
-  { label: "تماس", href: "#contact" },
+  { label: "خانه", href: "/" },
+  { label: "خدمات", href: "/services" },
+  { label: "پزشکان", href: "/doctors" },
+  { label: "تماس با ما", href: "/contact" },
 ];
 
 export function Header() {
@@ -21,13 +19,13 @@ export function Header() {
   return (
     <header className="sticky top-0 z-header">
       <div className="container-site flex h-16 items-center justify-between gap-6 border-b border-border bg-[var(--nav-bg)] backdrop-blur-lg rounded-app">
-        <a href="#top" className="group flex items-center gap-2.5" aria-label="کلینیک دامپزشکی باران — صفحه اصلی">
+        <a href="#top" className="group flex items-center gap-2.5" aria-label="کلینیک دام‌های کوچک باران — صفحه اصلی">
           <span className="grid size-10 place-items-center rounded-app bg-primary text-on-primary transition-transform duration-normal ease-out group-hover:-rotate-6">
             <PawIcon className="size-5" />
           </span>
           <span className="leading-tight">
             <span className="block font-display text-lg font-bold text-foreground">باران</span>
-            <span className="block font-label text-xs text-muted-foreground">کلینیک دامپزشکی</span>
+            <span className="block font-label text-xs text-muted-foreground">کلینیک دام‌های کوچک باران</span>
           </span>
         </a>
 
@@ -46,8 +44,8 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <MagneticButton href="#appointment" className="btn btn-primary hidden sm:inline-flex">
-            رزرو نوبت
+          <MagneticButton href="/contact" className="btn btn-primary hidden sm:inline-flex">
+            تماس و نوبت
           </MagneticButton>
           <button
             type="button"

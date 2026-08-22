@@ -4,12 +4,10 @@ import { useEffect, useRef } from "react";
 import { CloseIcon, PawIcon, PhoneIcon } from "@/components/icons";
 
 const NAV_LINKS = [
-  { label: "خانه", href: "#top" },
-  { label: "درباره ما", href: "#about" },
-  { label: "خدمات", href: "#services" },
-  { label: "بیماران ما", href: "#patients" },
-  { label: "پزشکان", href: "#doctors" },
-  { label: "تماس", href: "#contact" },
+  { label: "خانه", href: "/" },
+  { label: "خدمات", href: "/services" },
+  { label: "پزشکان", href: "/doctors" },
+  { label: "تماس با ما", href: "/contact" },
 ];
 
 export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -97,18 +95,26 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
         </ul>
 
         <div className="mt-auto space-y-3 border-t border-border pt-6">
-          <a href="#appointment" className="btn btn-primary w-full" onClick={onClose}>
-            رزرو نوبت
+          <a href="/contact" className="btn btn-primary w-full" onClick={onClose}>
+            تماس و نوبت
           </a>
           <a
-            href="tel:+982122000000"
+            href="tel:+985138475377"
             className="btn btn-outline w-full"
             dir="ltr"
             onClick={onClose}
           >
             <PhoneIcon className="size-4" />
-            {/* TODO: real data */}
-            ۰۲۱-۲۲۰۰۰۰۰۰
+            ۰۵۱-۳۸۴۷-۵۳۷۷
+          </a>
+          <a
+            href="https://wa.me/989153588160"
+            className="btn btn-outline w-full"
+            dir="ltr"
+            onClick={onClose}
+          >
+            <PhoneIcon className="size-4" />
+            ۰۹۱۵-۳۵۸-۸۱۶۰ (واتساپ)
           </a>
         </div>
       </nav>
