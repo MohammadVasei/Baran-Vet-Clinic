@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Vazirmatn, Estedad } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { EmergencyBar } from "@/components/layout/EmergencyBar";
 import { Header } from "@/components/layout/Header";
@@ -54,6 +55,13 @@ export default function RootLayout({
       className={`${vazirmatn.variable} ${estedad.variable} h-full`}
       suppressHydrationWarning
     >
+      <head>
+        <Script
+          src="https://cdn.spline.design/@splinetool/hana-viewer@1.2.54/hana-viewer.js"
+          type="module"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <ThemeProvider
           attribute="class"
