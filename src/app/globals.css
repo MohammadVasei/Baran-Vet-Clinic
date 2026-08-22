@@ -138,6 +138,10 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+    .marquee {
+      animation-duration: var(--marquee-duration) !important;
+      animation-iteration-count: infinite !important;
+    }
   }
 }
 

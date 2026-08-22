@@ -133,7 +133,58 @@ function ServicesDesktop() {
         </div>
 
         <div className="mt-12 grid items-start gap-10 lg:grid-cols-12 lg:gap-8">
-          {/* Media panel — large swapped image + description + accent (WOW 03) */}
+          <div
+            className="svc-list lg:col-span-5"
+            role="tablist"
+            aria-label="خدمات کلینیک"
+            aria-orientation="vertical"
+            onKeyDown={handleListKeyDown}
+          >
+            {SERVICES.items.map((s) => {
+              const isActive = active === s.key;
+              return (
+                <button
+                  key={s.key}
+                  type="button"
+                  role="tab"
+                  id={`service-tab-${s.key}`}
+                  aria-selected={isActive}
+                  aria-controls="service-panel"
+                  tabIndex={isActive ? 0 : -1}
+                  onClick={() => setActive(s.key)}
+                  onFocus={() => setActive(s.key)}
+                  onMouseEnter={() => setActive(s.key)}
+                  className={`group flex w-full items-center gap-4 border-b border-border py-5 text-start transition-colors duration-normal ${
+                    isActive
+                      ? `bg-muted/60 border-s-4 ${accent.edge}`
+                      : "border-s-4 border-transparent hover:bg-muted"
+                  }`}
+                >
+                  <span
+                    className={`font-label text-2xl font-bold transition-colors duration-normal ${
+                      isActive ? accent.fg : "text-muted-foreground"
+                    }`}
+                  >
+                    {s.numeral}
+                  </span>
+                  <span className="flex-1">
+                    <span className="block font-display text-xl font-bold text-foreground">
+                      {s.name}
+                    </span>
+                    <span className="mt-0.5 block text-sm text-muted-foreground">{s.tagline}</span>
+                  </span>
+                  <ArrowIcon
+                    className={`size-5 shrink-0 transition-all duration-normal ${
+                      isActive
+                        ? `${accent.fg} opacity-100`
+                        : "text-muted-foreground opacity-40 group-hover:opacity-100 group-hover:text-foreground"
+                    }`}
+                  />
+                </button>
+              );
+            })}
+          </div>
+          {/* Interactive service list */}
           <div className="svc-media lg:col-span-7 lg:sticky lg:self-start lg:top-[var(--services-panel-top)]">
             <div className="group relative aspect-[4/3] overflow-hidden rounded-app-lg border border-border bg-surface shadow-lg sm:aspect-[16/10] lg:aspect-auto lg:h-[min(72vh,40rem)]">
               <div
@@ -194,59 +245,6 @@ function ServicesDesktop() {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Interactive service list */}
-          <div
-            className="svc-list lg:col-span-5"
-            role="tablist"
-            aria-label="خدمات کلینیک"
-            aria-orientation="vertical"
-            onKeyDown={handleListKeyDown}
-          >
-            {SERVICES.items.map((s) => {
-              const isActive = active === s.key;
-              return (
-                <button
-                  key={s.key}
-                  type="button"
-                  role="tab"
-                  id={`service-tab-${s.key}`}
-                  aria-selected={isActive}
-                  aria-controls="service-panel"
-                  tabIndex={isActive ? 0 : -1}
-                  onClick={() => setActive(s.key)}
-                  onFocus={() => setActive(s.key)}
-                  onMouseEnter={() => setActive(s.key)}
-                  className={`group flex w-full items-center gap-4 border-b border-border py-5 text-start transition-colors duration-normal ${
-                    isActive
-                      ? `bg-muted/60 border-s-4 ${accent.edge}`
-                      : "border-s-4 border-transparent hover:bg-muted"
-                  }`}
-                >
-                  <span
-                    className={`font-label text-2xl font-bold transition-colors duration-normal ${
-                      isActive ? accent.fg : "text-muted-foreground"
-                    }`}
-                  >
-                    {s.numeral}
-                  </span>
-                  <span className="flex-1">
-                    <span className="block font-display text-xl font-bold text-foreground">
-                      {s.name}
-                    </span>
-                    <span className="mt-0.5 block text-sm text-muted-foreground">{s.tagline}</span>
-                  </span>
-                  <ArrowIcon
-                    className={`size-5 shrink-0 transition-all duration-normal ${
-                      isActive
-                        ? `${accent.fg} opacity-100`
-                        : "text-muted-foreground opacity-40 group-hover:opacity-100 group-hover:text-foreground"
-                    }`}
-                  />
-                </button>
-              );
-            })}
           </div>
         </div>
       </div>
