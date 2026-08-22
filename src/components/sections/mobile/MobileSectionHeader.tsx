@@ -23,7 +23,7 @@ export function MobileSectionHeader({ eyebrow, headline, intro }: MobileSectionH
 
   useGSAP(
     () => {
-      if (reduced || !root.current || !h.current) return;
+      if (reduced || !root.current || !h.current || headline.length === 0) return;
       const { split } = revealLines(h.current, {
         mask: true,
         stagger: 0.1,
@@ -34,7 +34,7 @@ export function MobileSectionHeader({ eyebrow, headline, intro }: MobileSectionH
       revealUp(".msh-intro", { once: true });
       return () => split.revert();
     },
-    { scope: root, dependencies: [reduced] }
+    { scope: root, dependencies: [reduced, headline.length] }
   );
 
   return (
