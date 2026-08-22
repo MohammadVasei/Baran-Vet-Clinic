@@ -155,3 +155,20 @@ export function MoonIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function MapPinIcon(props: IconProps) {
+  return (
+    <svg {...stroke} {...props}>
+      <path d="M12 21s-6.5-5.4-6.5-10A6.5 6.5 0 0 1 12 4.5 6.5 6.5 0 0 1 18.5 11c0 4.6-6.5 10-6.5 10Z" />
+      <circle cx="12" cy="11" r="2.4" />
+    </svg>
+  );
+}
+
+export function ThreadsIcon(props: IconProps) {
+  return (
+    <svg {...stroke} {...props}>
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1.5-12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm4 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z" />
+    </svg>
+  );
+}

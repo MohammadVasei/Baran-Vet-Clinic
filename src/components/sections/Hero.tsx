@@ -19,7 +19,7 @@ export function Hero() {
         className="relative flex min-h-[calc(100svh-var(--header-height))] w-full overflow-hidden bg-background"
         aria-label="باران کلینیک حیوانات، صحنه سه‌بعدی تعاملی"
       >
-        {/* @ts-ignore - hana-viewer is a custom web component */}
+        {/* @ts-expect-error - hana-viewer is a custom web component */}
         <hana-viewer
           url={MOBILE_SCENE}
           className="absolute inset-0 w-full h-full"
@@ -35,7 +35,7 @@ export function Hero() {
       className="relative flex min-h-[calc(100svh-var(--header-height))] w-full overflow-hidden bg-background"
       aria-label="باران کلینیک حیوانات، صحنه سه‌بعدی تعاملی"
     >
-      {/* @ts-ignore - hana-viewer is a custom web component */}
+      {/* @ts-expect-error - hana-viewer is a custom web component */}
       <hana-viewer
         key={currentTheme}
         url={currentTheme === "dark" ? DARK_SCENE : LIGHT_SCENE}

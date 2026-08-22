@@ -612,7 +612,14 @@ export function AppointmentCTA() {
                 <ClockIcon className="mt-0.5 size-5 shrink-0 text-primary" />
                 <div>
                   <span className="block font-semibold text-foreground">ساعت کاری</span>
-                  <span className="mt-0.5 block text-muted-foreground">{CLINIC.hours}</span>
+                  <span className="mt-0.5 block text-muted-foreground">
+                    {CLINIC.hoursNote}
+                  </span>
+                  {CLINIC.hours.map((h, i) => (
+                    <span key={i} className="block mt-1 text-muted-foreground">
+                      {h.days}: {h.time}
+                    </span>
+                  ))}
                 </div>
               </li>
               <li className="flex items-start gap-3">
