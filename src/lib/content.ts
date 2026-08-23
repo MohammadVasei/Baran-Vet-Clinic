@@ -443,6 +443,28 @@ export const HERO = {
   image: { dog: "/images/hero-dog.jpg", cat: "/images/hero-cat.jpg" },
 };
 
+export type TestimonialItem = {
+  id: number;
+  name: string;
+  pet: string;
+  content: string;
+  species: "dog" | "cat";
+};
+
+export const TESTIMONIALS = {
+  eyebrow: "تجربه‌ی شما",
+  headline: ["وقتی حالِ پت خوبه،", "حالِ ما هم خوبه"],
+  intro: "تجربه‌ی صاحبان حیواناتی که باران را برای مراقبت از عزیزترین همراهشان انتخاب کرده‌اند.",
+  items: [
+    { id: 1, name: "سارا", pet: "صاحب «لئو»", content: "بالاخره جایی پیدا کردم که واقعاً با حوصله به پت من رسیدگی می‌کنن.", species: "dog" as const },
+    { id: 2, name: "مریم", pet: "صاحب «میلو»", content: "از برخورد تیم باران خیلی راضی بودم. هم توضیحات پزشک کامل بود، هم با گربه‌مون خیلی با آرامش رفتار کردن.", species: "cat" as const },
+    { id: 3, name: "امیر", pet: "صاحب «راکی»", content: "برای اولین بار بود که پت‌مون از مراجعه به دامپزشکی نترسید. برخورد خیلی دوستانه و حرفه‌ای بود.", species: "dog" as const },
+    { id: 4, name: "نازنین", pet: "صاحب «پاپی»", content: "هم برای درمان مراجعه کردیم و هم برای شستشو و اصلاح. هر دو تجربه واقعاً خوب بود.", species: "dog" as const },
+    { id: 5, name: "الهام", pet: "صاحب «لونا»", content: "چیزی که برای من مهم بود این بود که پزشک با حوصله همه‌چیز رو توضیح داد و هیچ سؤالی بی‌جواب نموند.", species: "cat" as const },
+    { id: 6, name: "محمد", pet: "صاحب «تامی»", content: "محیط کلینیک تمیز و آرامه و مهم‌تر از همه، حس می‌کنی واقعاً سلامت پت برای تیم مهمه.", species: "dog" as const },
+  ],
+};
+
 export const CONTACT = {
   eyebrow: "تماس با ما",
   headline: ["بیایید با هم", "حرف بزنیم"],
