@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { CloseIcon, PawIcon, PhoneIcon } from "@/components/icons";
 
 const NAV_LINKS = [
@@ -14,6 +15,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
   const menuRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
 
   // Robust inert: imperative guarantee the closed menu stays out of the tab
   // order even if the declarative `inert` prop is ever dropped by the pipeline.
@@ -80,18 +82,23 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
         </div>
 
         <ul className="flex flex-col gap-1">
-          {NAV_LINKS.map((link, i) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="block rounded-app px-3 py-3 font-display text-lg font-semibold text-foreground transition-colors duration-fast hover:bg-muted"
-                aria-current={i === 0 ? "page" : undefined}
-                onClick={onClose}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+            return (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className={`block rounded-app px-3 py-3 font-display text-lg font-semibold transition-colors duration-fast hover:bg-muted ${
+                    isActive ? "text-primary bg-muted" : "text-foreground"
+                  }`}
+                  aria-current={isActive ? "page" : undefined}
+                  onClick={onClose}
+                >
+                  {link.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="mt-auto space-y-3 border-t border-border pt-6">
