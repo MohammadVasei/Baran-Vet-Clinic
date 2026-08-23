@@ -33,7 +33,7 @@ export function ContactPage() {
   return (
     <section id="contact" ref={root} className="relative overflow-hidden bg-background py-20 lg:py-32">
       <div className="container-site relative">
-        <div className="max-w-2xl text-center">
+        <div className="max-w-2xl mx-auto text-center">
           <p className="contact-eyebrow eyebrow">{CONTACT.eyebrow}</p>
           <h1
             ref={headline}
