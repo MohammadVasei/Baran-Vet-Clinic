@@ -60,7 +60,7 @@ export function ServicesPage() {
               <Link
                 key={service.key}
                 href={service.href}
-                className="group relative block overflow-hidden rounded-app-lg border border-border bg-surface transition-shadow duration-normal hover:shadow-lg"
+                className="group relative block overflow-hidden rounded-app-lg border border-border bg-surface transition-shadow duration-normal hover:shadow-xl"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
@@ -68,25 +68,38 @@ export function ServicesPage() {
                     alt={service.alt}
                     fill
                     sizes="(min-width: 768px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-slow ease-out group-hover:scale-[1.03]"
+                    className="object-cover transition-transform duration-slow ease-out group-hover:scale-[1.02]"
                   />
-                  <div className="absolute inset-x-0 top-0 z-10 h-1.5" aria-hidden style={{ backgroundColor: `var(--${accent.bar.replace("bg-", "")})` }} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+                  <div
+                    className="absolute inset-x-0 top-0 z-10 h-1.5"
+                    aria-hidden
+                    style={{ backgroundColor: `var(--${accent.bar.replace("bg-", "")})` }}
+                  />
                 </div>
 
-                <div className="absolute inset-x-0 bottom-0 z-10 p-6">
+                <div className="p-6 space-y-4">
                   <div className="flex items-center gap-2">
-                    <span className="size-2.5 rounded-full" aria-hidden style={{ backgroundColor: `var(--${accent.dot.replace("bg-", "")})` }} />
+                    <span
+                      className="size-2.5 rounded-full shrink-0"
+                      aria-hidden
+                      style={{ backgroundColor: `var(--${accent.dot.replace("bg-", "")})` }}
+                    />
                     <span className="font-label text-sm font-semibold text-primary-text">{service.name}</span>
                   </div>
-                  <h3 className="mt-2 font-display text-xl font-bold text-foreground group-hover:text-primary-text-hover transition-colors">
+                  <h3 className="font-display text-xl font-bold text-foreground group-hover:text-primary-text-hover transition-colors leading-snug">
                     {service.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-2">{service.text}</p>
-<div className="mt-4 flex items-center gap-2 text-primary-text font-semibold">
+                  <p className="text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                    {service.text}
+                  </p>
+                  <div className="pt-2 border-t border-border">
+                    <span
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-primary-text hover:text-primary-text-hover transition-colors cursor-pointer"
+                    >
                       جزئیات بیشتر
                       <ArrowIcon direction="forward" className="size-4" />
-                    </div>
+                    </span>
+                  </div>
                 </div>
               </Link>
             );
