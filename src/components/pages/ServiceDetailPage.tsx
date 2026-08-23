@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { useGSAP } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -92,6 +93,23 @@ export function ServiceDetailPage({ serviceKey }: ServiceDetailPageProps) {
   return (
     <section id="service-detail" ref={root} className="relative overflow-hidden bg-background py-20 lg:py-32">
       <div className="container-site relative">
+        {/* Hero Image */}
+        <div className="relative aspect-[16/9] max-w-5xl mx-auto mb-10 overflow-hidden rounded-app-lg">
+          <Image
+            src={service.image}
+            alt={service.alt}
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, 80vw"
+            className="object-cover"
+          />
+          <div
+            className="absolute inset-x-0 top-0 z-10 h-1.5"
+            aria-hidden
+            style={{ backgroundColor: `var(--${accent.bar.replace("bg-", "")})` }}
+          />
+        </div>
+
         {/* Hero */}
         <div className="max-w-3xl">
           <p className="svc-detail-eyebrow eyebrow text-primary-text">{SERVICES.eyebrow}</p>
