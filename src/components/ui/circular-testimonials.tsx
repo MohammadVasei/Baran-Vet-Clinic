@@ -12,12 +12,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
-interface Testimonial {
+interface ServiceItem {
   quote: string;
   name: string;
   designation: string;
   src: string;
   href?: string;
+  accent?: "purple" | "orange" | "lime" | "magenta";
 }
 
 interface Colors {
@@ -36,7 +37,7 @@ interface FontSizes {
 }
 
 interface CircularTestimonialsProps {
-  testimonials: Testimonial[];
+  testimonials: ServiceItem[];
   autoplay?: boolean;
   colors?: Colors;
   fontSizes?: FontSizes;
@@ -53,6 +54,13 @@ function calculateGap(width: number) {
   return minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth));
 }
 
+const accentColorMap: Record<string, string> = {
+  purple: "var(--accent-purple)",
+  orange: "var(--accent-orange)",
+  lime: "var(--accent-lime)",
+  magenta: "var(--accent-magenta)",
+};
+
 export const CircularTestimonials = ({
   testimonials,
   autoplay = true,
@@ -62,9 +70,7 @@ export const CircularTestimonials = ({
   const colorName = colors.name ?? "var(--foreground)";
   const colorDesignation = colors.designation ?? "var(--muted-foreground)";
   const colorTestimony = colors.testimony ?? "var(--foreground)";
-  const colorArrowBg = colors.arrowBackground ?? "var(--foreground)";
   const colorArrowFg = colors.arrowForeground ?? "var(--background)";
-  const colorArrowHoverBg = colors.arrowHoverBackground ?? "var(--primary)";
   const fontSizeName = fontSizes.name ?? "1.5rem";
   const fontSizeDesignation = fontSizes.designation ?? "0.925rem";
   const fontSizeQuote = fontSizes.quote ?? "1.125rem";
@@ -131,31 +137,43 @@ export const CircularTestimonials = ({
     const isLeft = (activeIndex - 1 + testimonialsLength) % testimonialsLength === index;
     const isRight = (activeIndex + 1) % testimonialsLength === index;
 
+    const accent = testimonials[index]?.accent ?? "purple";
+    const borderColor = accentColorMap[accent] ?? "var(--accent-purple)";
+
+    const baseStyle: React.CSSProperties = {
+      border: `4px solid ${borderColor}`,
+      borderRadius: "1.5rem",
+      boxShadow: isActive
+        ? `0 10px 30px rgba(0, 0, 0, 0.2), 0 0 0 4px ${borderColor}`
+        : `0 10px 30px rgba(0, 0, 0, 0.1)`,
+      transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
+    };
+
     if (isActive) {
       return {
+        ...baseStyle,
         zIndex: 3,
         opacity: 1,
         pointerEvents: "auto",
         transform: `translateX(0px) translateY(0px) scale(1) rotateY(0deg)`,
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
       };
     }
     if (isLeft) {
       return {
+        ...baseStyle,
         zIndex: 2,
-        opacity: 1,
+        opacity: 0.6,
         pointerEvents: "auto",
         transform: `translateX(-${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(15deg)`,
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
       };
     }
     if (isRight) {
       return {
+        ...baseStyle,
         zIndex: 2,
-        opacity: 1,
+        opacity: 0.6,
         pointerEvents: "auto",
         transform: `translateX(${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(-15deg)`,
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
       };
     }
     return {
@@ -182,22 +200,13 @@ export const CircularTestimonials = ({
         exit="exit"
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        <h3
-          className="name"
-          style={{ color: colorName, fontSize: fontSizeName }}
-        >
+        <h3 className="name font-display text-2xl font-bold mb-4" style={{ color: colorName, fontSize: fontSizeName }}>
           {activeTestimonial.name}
         </h3>
-        <p
-          className="designation"
-          style={{ color: colorDesignation, fontSize: fontSizeDesignation }}
-        >
+        <p className="designation text-lg" style={{ color: colorDesignation, fontSize: fontSizeDesignation }}>
           {activeTestimonial.designation}
         </p>
-        <motion.p
-          className="quote"
-          style={{ color: colorTestimony, fontSize: fontSizeQuote }}
-        >
+        <motion.p className="quote mt-6 leading-relaxed" style={{ color: colorTestimony, fontSize: fontSizeQuote }}>
           {activeTestimonial.quote.split(" ").map((word, i) => (
             <motion.span
               key={i}
@@ -214,6 +223,12 @@ export const CircularTestimonials = ({
     </AnimatePresence>
   );
 
+  const activeAccent = activeTestimonial?.accent ?? "purple";
+  const activeArrowBg = accentColorMap[activeAccent] ?? "var(--accent-purple)";
+  const activeArrowHover = activeAccent === "purple" ? "var(--accent-purple)" :
+    activeAccent === "orange" ? "var(--accent-orange)" :
+    activeAccent === "lime" ? "var(--accent-lime)" : "var(--accent-magenta)";
+
   return (
     <div className="relative max-w-[56rem] mx-auto px-4">
       <div className="grid gap-20 lg:grid-cols-2 lg:gap-10 items-start">
@@ -229,7 +244,7 @@ export const CircularTestimonials = ({
                 src={testimonial.src}
                 alt={testimonial.name}
                 fill
-                className="testimonial-image object-cover rounded-[1.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.2)]"
+                className="testimonial-image object-cover"
                 data-index={index}
                 style={getImageStyle(index)}
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -244,7 +259,7 @@ export const CircularTestimonials = ({
               className="arrow-button prev-button flex-shrink-0 w-[2.7rem] h-[2.7rem] rounded-full flex items-center justify-center cursor-pointer transition-colors border-none"
               onClick={handlePrev}
               style={{
-                backgroundColor: hoverPrev ? colorArrowHoverBg : colorArrowBg,
+                backgroundColor: hoverPrev ? activeArrowHover : activeArrowBg,
               }}
               onMouseEnter={() => setHoverPrev(true)}
               onMouseLeave={() => setHoverPrev(false)}
@@ -256,7 +271,7 @@ export const CircularTestimonials = ({
               className="arrow-button next-button flex-shrink-0 w-[2.7rem] h-[2.7rem] rounded-full flex items-center justify-center cursor-pointer transition-colors border-none"
               onClick={handleNext}
               style={{
-                backgroundColor: hoverNext ? colorArrowHoverBg : colorArrowBg,
+                backgroundColor: hoverNext ? activeArrowHover : activeArrowBg,
               }}
               onMouseEnter={() => setHoverNext(true)}
               onMouseLeave={() => setHoverNext(false)}
