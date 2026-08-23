@@ -9,6 +9,7 @@ type MobileSectionHeaderProps = {
   eyebrow: string;
   headline: string[];
   intro: string;
+  inverse?: boolean;
 };
 
 /**
@@ -16,7 +17,7 @@ type MobileSectionHeaderProps = {
  * split-line headline and intro so every mobile section speaks the same
  * typographic/spacing language as the desktop chapters.
  */
-export function MobileSectionHeader({ eyebrow, headline, intro }: MobileSectionHeaderProps) {
+export function MobileSectionHeader({ eyebrow, headline, intro, inverse = false }: MobileSectionHeaderProps) {
   const root = useRef<HTMLDivElement>(null);
   const h = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();
@@ -39,10 +40,10 @@ export function MobileSectionHeader({ eyebrow, headline, intro }: MobileSectionH
 
   return (
     <div ref={root} className="max-w-2xl">
-      <p className="msh-eyebrow eyebrow">{eyebrow}</p>
+      <p className={`msh-eyebrow eyebrow ${inverse ? "bg-white/10 !text-[var(--emergency-fg)]" : ""}`}>{eyebrow}</p>
       <h2
         ref={h}
-        className="mt-8 font-display text-3xl font-bold leading-[1.35] text-foreground"
+        className={`mt-8 font-display text-3xl font-bold leading-[1.35] ${inverse ? "text-[var(--emergency-fg)]" : "text-foreground"}`}
       >
         {headline.map((line, i) => (
           <Fragment key={line}>
@@ -51,7 +52,7 @@ export function MobileSectionHeader({ eyebrow, headline, intro }: MobileSectionH
           </Fragment>
         ))}
       </h2>
-      <p className="msh-intro mt-6 text-lg leading-relaxed text-muted-foreground">{intro}</p>
+      <p className={`msh-intro mt-6 text-lg leading-relaxed ${inverse ? "text-[var(--emergency-fg)] opacity-90" : "text-muted-foreground"}`}>{intro}</p>
     </div>
   );
 }

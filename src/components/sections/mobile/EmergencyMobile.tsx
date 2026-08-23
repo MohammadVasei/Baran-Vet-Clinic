@@ -12,6 +12,7 @@ export function EmergencyMobile() {
           eyebrow={EMERGENCY.eyebrow}
           headline={EMERGENCY.headline}
           intro={EMERGENCY.intro}
+          inverse
         />
 
         <div className="mt-8 text-center space-y-4">
