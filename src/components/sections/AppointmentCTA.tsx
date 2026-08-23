@@ -570,14 +570,14 @@ export function AppointmentCTA() {
 
                 <div className="mt-8 flex items-center justify-between gap-4">
                   <button type="button" onClick={goBack} disabled={step === 0} className="btn btn-outline">
-                    <ArrowIcon direction="back" className="size-5" />
+                    <ArrowIcon direction="forward" className="size-5" />
                     قبلی
                   </button>
 
                   {step < STEPS.length - 1 ? (
                     <button type="button" onClick={goNext} disabled={!stepComplete} className="btn btn-primary">
                       بعدی
-                      <ArrowIcon className="size-5" />
+                      <ArrowIcon direction="back" className="size-5" />
                     </button>
                   ) : (
                     <MagneticButton
