@@ -265,7 +265,7 @@ export const CircularTestimonials = ({
               onMouseLeave={() => setHoverPrev(false)}
               aria-label="Previous service"
             >
-              <FaArrowLeft size={28} color={colorArrowFg} />
+              <FaArrowRight size={28} color={colorArrowFg} />
             </button>
             <button
               className="arrow-button next-button flex-shrink-0 w-[2.7rem] h-[2.7rem] rounded-full flex items-center justify-center cursor-pointer transition-colors border-none"
@@ -277,7 +277,7 @@ export const CircularTestimonials = ({
               onMouseLeave={() => setHoverNext(false)}
               aria-label="Next service"
             >
-              <FaArrowRight size={28} color={colorArrowFg} />
+              <FaArrowLeft size={28} color={colorArrowFg} />
             </button>
           </div>
         </div>
