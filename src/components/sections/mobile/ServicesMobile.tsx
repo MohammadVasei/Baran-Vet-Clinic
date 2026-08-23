@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { SERVICES, type Service } from "@/lib/content";
 import { SERVICE_ACCENTS, type ServiceAccentClasses } from "@/lib/accents";
@@ -49,7 +50,9 @@ export function ServicesMobile() {
             onIndexChange={setActiveIndex}
           >
             {SERVICES.items.map((item) => (
-              <ServiceCard key={item.key} item={item} />
+              <Link key={item.key} href={item.href}>
+                <ServiceCard item={item} />
+              </Link>
             ))}
           </SnapCarousel>
 
