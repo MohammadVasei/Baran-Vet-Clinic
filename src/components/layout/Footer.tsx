@@ -38,7 +38,7 @@ const SOCIALS = [
 export function Footer() {
   return (
     <footer className="border-t border-border bg-surface">
-      <div className="container-site grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-4">
+      <div className="container-site grid gap-10 py-16 grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4">
           <a href="#top" className="flex items-center gap-2.5">
             <Logo className="transition-transform duration-normal ease-out group-hover:-rotate-6" width={48} height={48} />
