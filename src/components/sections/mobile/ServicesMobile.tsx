@@ -101,7 +101,7 @@ function ServiceCard({ item }: { item: Service }) {
             aria-hidden
             style={{ backgroundColor: `var(--${accent.dot.replace("bg-", "")})` }}
           />
-          <span className="font-label text-sm font-semibold" style={{ color: `var(--${accent.fg.replace("text-", "")})` }}>{item.name}</span>
+          <span className="font-label text-sm font-semibold text-primary-text">{item.name}</span>
         </div>
         <h3 className="mt-1.5 font-display text-xl font-bold text-foreground">{item.title}</h3>
         <p className="mt-1.5 text-sm leading-relaxed text-foreground">{item.text}</p>

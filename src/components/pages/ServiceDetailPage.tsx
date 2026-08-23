@@ -112,11 +112,10 @@ export function ServiceDetailPage({ serviceKey }: ServiceDetailPageProps) {
 
         {/* Hero */}
         <div className="max-w-3xl">
-          <p className="svc-detail-eyebrow eyebrow" style={{ color: `var(--${accent.fg.replace("text-", "")})` }}>{SERVICES.eyebrow}</p>
+          <p className="svc-detail-eyebrow eyebrow text-primary-text">{SERVICES.eyebrow}</p>
           <h1
             ref={headline}
-            className="mt-4 font-display text-3xl font-bold leading-[1.3] sm:text-4xl lg:text-[2.75rem]"
-            style={{ color: `var(--${accent.fg.replace("text-", "")})` }}
+            className="mt-4 font-display text-3xl font-bold leading-[1.3] text-foreground sm:text-4xl lg:text-[2.75rem]"
           >
             {content.heroHeadline}
           </h1>
