@@ -38,7 +38,7 @@ export const ABOUT = {
     "در محله احمدآباد مشهد، کلینیک دام‌های کوچک باران فضایی آرام و قابل اعتماد برای حیوانات خانگی فراهم کرده است. ما روی سه اصل ساده اما مهم تمرکز داریم: درمان دقیق، پیگیری منظم با شناسنامه سلامت، و مراقبت ظاهری با شستشو و اصلاح حرفه‌ای. پت‌شاپ مجموعه هم کنار شماست تا آنچه نیاز دارید را راحت تهیه کنید.",
   signature: "تیم دامپزشکان کلینیک باران",
   image: {
-    src: "/images/about-vet.jpg",
+    src: "/images/about-vet.png",
     alt: "دامپزشک در حال معاینه حیوان خانگی در کلینیک دامپزشکی باران",
   },
 };
@@ -246,7 +246,7 @@ export const FACILITIES: {
       name: "اتاق معاینه",
       title: "اتاق معاینه مجهز",
       text: "فضای آرام و مجهز برای معاینه دقیق حیوانات خانگی.",
-      image: "/images/facility-exam.jpg",
+      image: "/images/about-vet.png",
       alt: "اتاق معاینه کلینیک دامپزشکی باران",
     },
     {
@@ -254,7 +254,7 @@ export const FACILITIES: {
       name: "شستشو و اصلاح",
       title: "استودیوی گرومینگ",
       text: "محیطی تخصصی و آرام برای شستشو و اصلاح حرفه‌ای پت.",
-      image: "/images/facility-grooming.jpg",
+      image: "/images/facility-grooming.png",
       alt: "استودیوی شستشو و اصلاح کلینیک باران",
     },
     {
@@ -262,7 +262,7 @@ export const FACILITIES: {
       name: "پت‌شاپ",
       title: "پت‌شاپ مجموعه",
       text: "محصولات متنوع نگهداری روزمره در کنار خدمات درمانی.",
-      image: "/images/facility-petshop.jpg",
+      image: "/images/facility-petshop.png",
       alt: "پت‌شاپ کلینیک دامپزشکی باران",
     },
     {

@@ -1,15 +1,14 @@
 "use client";
 
 import { Fragment, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { useGSAP } from "@/lib/gsap";
 import { revealLines, revealUp } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { SERVICES, type Service } from "@/lib/content";
-import { SERVICE_ACCENTS, type ServiceAccentClasses } from "@/lib/accents";
+import { SERVICES } from "@/lib/content";
+import { SERVICE_ACCENTS as ACCENTS } from "@/lib/accents";
 import { ServicesMobile } from "@/components/sections/mobile/ServicesMobile";
+import { CircularTestimonials } from "@/components/ui/circular-testimonials";
 
 export function Services() {
   const isMobile = useIsMobile();
@@ -21,6 +20,7 @@ function ServicesDesktop() {
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();
 
+  // Section entry reveals (eyebrow, split headline, intro, list, panel).
   useGSAP(
     () => {
       if (reduced || !root.current || !headline.current) return;
@@ -36,6 +36,17 @@ function ServicesDesktop() {
     },
     { scope: root, dependencies: [reduced] }
   );
+
+  const testimonials = SERVICES.items.map((s) => ({
+    quote: s.text,
+    name: s.name,
+    designation: s.tagline,
+    src: s.image,
+    href: s.href,
+    accent: s.accent,
+  }));
+
+  const activeAccent = ACCENTS[SERVICES.items[0].accent];
 
   return (
     <section
@@ -66,64 +77,30 @@ function ServicesDesktop() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {SERVICES.items.map((item) => (
-            <Link key={item.key} href={item.href}>
-              <ServiceCard item={item} />
-            </Link>
-          ))}
+        <div className="mt-12">
+          <CircularTestimonials
+            testimonials={testimonials}
+            autoplay={true}
+            colors={{
+              name: "var(--foreground)",
+              designation: "var(--muted-foreground)",
+              testimony: "var(--foreground)",
+              arrowBackground: activeAccent.fg.replace("text-", "").replace("-fg", "") === "accent-purple" ? "var(--accent-purple)" : 
+                activeAccent.fg.replace("text-", "").replace("-fg", "") === "accent-orange" ? "var(--accent-orange)" :
+                activeAccent.fg.replace("text-", "").replace("-fg", "") === "accent-lime" ? "var(--accent-lime)" : "var(--accent-magenta)",
+              arrowForeground: "var(--background)",
+              arrowHoverBackground: activeAccent.fg.replace("text-", "").replace("-fg", "") === "accent-purple" ? "var(--accent-purple)" : 
+                activeAccent.fg.replace("text-", "").replace("-fg", "") === "accent-orange" ? "var(--accent-orange)" :
+                activeAccent.fg.replace("text-", "").replace("-fg", "") === "accent-lime" ? "var(--accent-lime)" : "var(--accent-magenta)",
+            }}
+            fontSizes={{
+              name: "2rem",
+              designation: "1.125rem",
+              quote: "1.125rem",
+            }}
+          />
         </div>
       </div>
     </section>
-  );
-}
-
-function ServiceCard({ item }: { item: Service }) {
-  const accent: ServiceAccentClasses = SERVICE_ACCENTS[item.accent];
-  const frameNum = item.numeral;
-
-  return (
-    <article className="relative flex flex-col overflow-hidden rounded-app-lg border border-border bg-surface shadow-sm hover:shadow-md transition-shadow duration-normal h-full">
-      <div className="relative aspect-[4/3] overflow-hidden">
-        <span
-          className="absolute inset-x-0 top-0 z-10 h-1.5"
-          aria-hidden
-          style={{ backgroundColor: `var(--${accent.bar.replace("bg-", "")})` }}
-        />
-        <Image
-          src={item.image}
-          alt={item.alt}
-          fill
-          sizes="(max-width: 767px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover transition-transform duration-slow ease-out hover:scale-105"
-        />
-        <span
-          className="absolute bottom-3 start-3 z-10 rounded-full bg-background/85 px-3 py-1 text-sm font-bold font-label backdrop-blur-sm"
-          style={{ color: `var(--${accent.fg.replace("text-accent-", "accent-")}-fg)` }}
-        >
-          {frameNum}
-        </span>
-      </div>
-
-      <div className="border-t border-border bg-surface p-5 flex flex-col flex-1">
-        <div className="flex items-center gap-2">
-          <span
-            className="size-2.5 rounded-full shrink-0"
-            aria-hidden
-            style={{ backgroundColor: `var(--${accent.dot.replace("bg-", "")})` }}
-          />
-          <span className="font-label text-sm font-semibold" style={{ color: `var(--${accent.fg.replace("text-", "")})` }}>{item.name}</span>
-        </div>
-        <h3 className="mt-1.5 font-display text-xl font-bold text-foreground">{item.title}</h3>
-        <p className="mt-1.5 text-sm leading-relaxed text-foreground flex-1">{item.text}</p>
-        <span className="mt-4 inline-flex items-center gap-1 font-label text-sm font-medium" style={{ color: `var(--${accent.fg.replace("text-", "")})` }}>
-          مشاهده جزئیات
-          <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-            <path d="m5 12 14 0" />
-            <path d="m12 5 7 7-7 7" />
-          </svg>
-        </span>
-      </div>
-    </article>
   );
 }
