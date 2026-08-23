@@ -181,7 +181,7 @@ export function ServiceDetailPage({ serviceKey }: ServiceDetailPageProps) {
                   href="/services"
                   className="link-reveal inline-flex items-center gap-1.5 font-label text-sm font-medium text-muted-foreground hover:text-primary-text-hover"
                 >
-                  <ArrowIcon className="size-4 rtl:rotate-180" />
+                  <ArrowIcon direction="back" className="size-4" />
                   بازگشت به خدمات
                 </Link>
               </div>

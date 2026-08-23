@@ -8,6 +8,7 @@ import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { DOCTORS } from "@/lib/content";
+import { ArrowIcon } from "@/components/icons";
 import { DoctorsMobile } from "@/components/sections/mobile/DoctorsMobile";
 
 export function Doctors() {
@@ -101,9 +102,7 @@ function DoctorsDesktop() {
                 className="absolute end-4 top-4 z-10 flex size-9 items-center justify-center rounded-full bg-background/70 text-foreground opacity-0 backdrop-blur-sm transition-all duration-normal group-hover:opacity-100"
                 aria-hidden
               >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="size-4 rtl:rotate-180">
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
+                <ArrowIcon direction="forward" className="size-4" />
               </span>
             </Link>
           ))}

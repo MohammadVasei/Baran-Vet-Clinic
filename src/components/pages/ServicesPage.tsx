@@ -83,10 +83,10 @@ export function ServicesPage() {
                     {service.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-2">{service.text}</p>
-                  <div className="mt-4 flex items-center gap-2 text-primary-text font-semibold">
-                    جزئیات بیشتر
-                    <ArrowIcon className="size-4 rtl:rotate-180" />
-                  </div>
+<div className="mt-4 flex items-center gap-2 text-primary-text font-semibold">
+                      جزئیات بیشتر
+                      <ArrowIcon direction="forward" className="size-4" />
+                    </div>
                 </div>
               </Link>
             );
