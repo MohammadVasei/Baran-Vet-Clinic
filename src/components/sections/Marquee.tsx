@@ -10,7 +10,7 @@ function MarqueeGroup() {
           <span className="whitespace-nowrap font-display text-lg font-semibold text-foreground">
             {item}
           </span>
-          <PawIcon className="size-5 shrink-0 text-primary" />
+          <PawIcon className="size-5 shrink-0 text-primary-text" />
         </Fragment>
       ))}
     </div>

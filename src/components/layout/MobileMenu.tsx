@@ -89,7 +89,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
                 <a
                   href={link.href}
                   className={`block rounded-app px-3 py-3 font-display text-lg font-semibold transition-colors duration-fast hover:bg-muted ${
-                    isActive ? "text-primary bg-muted" : "text-foreground"
+                    isActive ? "text-primary-text bg-muted" : "text-foreground"
                   }`}
                   aria-current={isActive ? "page" : undefined}
                   onClick={onClose}

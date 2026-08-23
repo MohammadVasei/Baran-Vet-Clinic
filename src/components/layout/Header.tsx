@@ -39,7 +39,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`nav-link ${isActive ? "text-primary" : ""}`}
+                className={`nav-link ${isActive ? "text-primary-text" : ""}`}
                 aria-current={isActive ? "page" : undefined}
               >
                 {link.label}

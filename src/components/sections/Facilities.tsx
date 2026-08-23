@@ -155,7 +155,7 @@ function FacilitiesDesktop() {
                   className="object-cover transition-transform duration-slow ease-out group-hover:scale-[1.03]"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 to-transparent p-6">
-                  <span className="font-label text-sm font-semibold text-primary">{item.name}</span>
+<span className="font-label text-sm font-semibold text-primary-text">{item.name}</span>
                   <h3 className="mt-1 font-display text-xl font-bold text-foreground">{item.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
                 </div>
@@ -226,7 +226,7 @@ function FacilitiesDesktop() {
             }`}
           >
             <div className="inline-block max-w-lg rounded-app-lg bg-background/80 px-8 py-6 backdrop-blur-md">
-              <span className="font-label text-sm font-semibold text-primary">{item.name}</span>
+              <span className="font-label text-sm font-semibold text-primary-text">{item.name}</span>
               <h3 className="mt-2 font-display text-2xl font-bold text-foreground sm:text-3xl">
                 {item.title}
               </h3>

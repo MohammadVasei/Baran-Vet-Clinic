@@ -94,7 +94,7 @@ export function ServiceDetailPage({ serviceKey }: ServiceDetailPageProps) {
       <div className="container-site relative">
         {/* Hero */}
         <div className="max-w-3xl">
-          <p className="svc-detail-eyebrow eyebrow text-primary">{SERVICES.eyebrow}</p>
+          <p className="svc-detail-eyebrow eyebrow text-primary-text">{SERVICES.eyebrow}</p>
           <h1
             ref={headline}
             className="mt-4 font-display text-3xl font-bold leading-[1.3] text-foreground sm:text-4xl lg:text-[2.75rem]"
@@ -151,7 +151,7 @@ export function ServiceDetailPage({ serviceKey }: ServiceDetailPageProps) {
                   href={CLINIC.mobile1WhatsApp}
                   target="_blank"
                   rel="noopener"
-                  className="flex items-center justify-center gap-2 rounded-app bg-green-500 px-6 py-3 font-bold text-white transition-opacity hover:opacity-90"
+                  className="flex items-center justify-center gap-2 rounded-app bg-accent-lime px-6 py-3 font-bold text-white transition-opacity hover:opacity-90"
                 >
                   <PhoneIcon className="size-5" />
                   {CLINIC.mobile1} (واتساپ)
@@ -160,7 +160,7 @@ export function ServiceDetailPage({ serviceKey }: ServiceDetailPageProps) {
                   href={CLINIC.mobile2WhatsApp}
                   target="_blank"
                   rel="noopener"
-                  className="flex items-center justify-center gap-2 rounded-app bg-green-500 px-6 py-3 font-bold text-white transition-opacity hover:opacity-90"
+                  className="flex items-center justify-center gap-2 rounded-app bg-accent-lime px-6 py-3 font-bold text-white transition-opacity hover:opacity-90"
                 >
                   <PhoneIcon className="size-5" />
                   {CLINIC.mobile2} (واتساپ)
@@ -168,7 +168,7 @@ export function ServiceDetailPage({ serviceKey }: ServiceDetailPageProps) {
               </div>
 
               <div className="mt-6 pt-6 border-t border-border">
-                <p className="font-label text-xs text-primary">{CLINIC.hoursNote}</p>
+                <p className="font-label text-xs text-primary-text">{CLINIC.hoursNote}</p>
                 {CLINIC.hours.map((h, i) => (
                   <p key={i} className="mt-1 text-sm text-muted-foreground">
                     {h.days}: {h.time}
@@ -179,7 +179,7 @@ export function ServiceDetailPage({ serviceKey }: ServiceDetailPageProps) {
               <div className="mt-6">
                 <Link
                   href="/services"
-                  className="link-reveal inline-flex items-center gap-1.5 font-label text-sm font-medium text-muted-foreground hover:text-primary"
+                  className="link-reveal inline-flex items-center gap-1.5 font-label text-sm font-medium text-muted-foreground hover:text-primary-text-hover"
                 >
                   <ArrowIcon className="size-4 rtl:rotate-180" />
                   بازگشت به خدمات

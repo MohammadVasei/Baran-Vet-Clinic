@@ -120,7 +120,7 @@ function WhyBaranDesktop() {
                 key={step.number}
                 className="why-step grid grid-cols-[3.5rem_1fr] gap-x-5 gap-y-1 py-6 sm:grid-cols-[5rem_1fr]"
               >
-                <span className="font-label text-2xl font-bold text-primary sm:text-3xl">
+                <span className="font-label text-2xl font-bold text-primary-text sm:text-3xl">
                   {step.number}
                 </span>
                 <div>

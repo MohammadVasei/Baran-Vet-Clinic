@@ -18,6 +18,9 @@
   --color-primary-soft: var(--primary-soft);
   --color-primary-soft-fg: var(--primary-soft-fg);
 
+  --color-primary-text: var(--primary-text);
+  --color-primary-text-hover: var(--primary-text-hover);
+
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
 
@@ -54,6 +57,22 @@
   --color-accent-lavender: var(--accent-lavender);
   --color-accent-lavender-soft: var(--accent-lavender-soft);
   --color-accent-lavender-fg: var(--accent-lavender-fg);
+
+  --color-accent-purple: var(--accent-purple);
+  --color-accent-purple-soft: var(--accent-purple-soft);
+  --color-accent-purple-fg: var(--accent-purple-fg);
+
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-orange-soft: var(--accent-orange-soft);
+  --color-accent-orange-fg: var(--accent-orange-fg);
+
+  --color-accent-lime: var(--accent-lime);
+  --color-accent-lime-soft: var(--accent-lime-soft);
+  --color-accent-lime-fg: var(--accent-lime-fg);
+
+  --color-accent-magenta: var(--accent-magenta);
+  --color-accent-magenta-soft: var(--accent-magenta-soft);
+  --color-accent-magenta-fg: var(--accent-magenta-fg);
 
   --font-sans: var(--font-body);
   --font-display: var(--font-heading);
@@ -530,3 +549,11 @@
    page, `router.push` runs fully covered, then the layers sweep off revealing
    the new page. Direction-neutral (vertical) → RTL-correct by construction.
    ========================================================================== */
+
+/* Text color utilities for readable gold on light mode */
+@utility text-primary-text {
+  color: var(--color-primary-text);
+}
+@utility text-primary-text-hover {
+  color: var(--color-primary-text-hover);
+}

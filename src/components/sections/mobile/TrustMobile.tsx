@@ -37,7 +37,7 @@ export function TrustMobile() {
         </div>
 
         <p className="mt-10 inline-flex items-center gap-2 text-sm leading-relaxed text-muted-foreground">
-          <HeartPulseIcon className="size-4 text-primary" />
+          <HeartPulseIcon className="size-4 text-primary-text" />
           {TRUST.note}
         </p>
       </div>

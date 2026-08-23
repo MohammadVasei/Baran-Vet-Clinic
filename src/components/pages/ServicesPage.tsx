@@ -77,13 +77,13 @@ export function ServicesPage() {
                 <div className="absolute inset-x-0 bottom-0 z-10 p-6">
                   <div className="flex items-center gap-2">
                     <span className="size-2.5 rounded-full" aria-hidden style={{ backgroundColor: `var(--${accent.dot.replace("bg-", "")})` }} />
-                    <span className="font-label text-sm font-semibold text-primary">{service.name}</span>
+                    <span className="font-label text-sm font-semibold text-primary-text">{service.name}</span>
                   </div>
-                  <h3 className="mt-2 font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                  <h3 className="mt-2 font-display text-xl font-bold text-foreground group-hover:text-primary-text-hover transition-colors">
                     {service.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-2">{service.text}</p>
-                  <div className="mt-4 flex items-center gap-2 text-primary font-semibold">
+                  <div className="mt-4 flex items-center gap-2 text-primary-text font-semibold">
                     جزئیات بیشتر
                     <ArrowIcon className="size-4 rtl:rotate-180" />
                   </div>
