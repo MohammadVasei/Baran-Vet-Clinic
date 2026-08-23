@@ -1,4 +1,5 @@
-import { PawIcon, PinIcon, PhoneIcon, ClockIcon, InstagramIcon, ThreadsIcon } from "@/components/icons";
+import { PinIcon, PhoneIcon, ClockIcon, InstagramIcon, ThreadsIcon } from "@/components/icons";
+import { Logo } from "@/components/ui/Logo";
 
 const QUICK_LINKS = [
   { label: "خانه", href: "#top" },
@@ -40,9 +41,7 @@ export function Footer() {
       <div className="container-site grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4">
           <a href="#top" className="flex items-center gap-2.5">
-            <span className="grid size-10 place-items-center rounded-app bg-primary text-on-primary">
-              <PawIcon className="size-5" />
-            </span>
+            <Logo className="transition-transform duration-normal ease-out group-hover:-rotate-6" width={48} height={48} />
             <span className="leading-tight">
               <span className="block font-display text-lg font-bold text-foreground">باران</span>
               <span className="block font-label text-xs text-muted-foreground">کلینیک دام‌های کوچک باران</span>
