@@ -217,7 +217,7 @@ function ServicesDesktop() {
                 role="tabpanel"
                 aria-labelledby={`service-tab-${active}`}
                 aria-live="polite"
-                className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-background/95 via-background/40 to-transparent p-6 sm:p-8"
+                className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-background via-background/90 to-transparent p-6 sm:p-8"
               >
                 <div key={active} className="svc-panel-body">
                   <div className="flex items-center gap-2">
@@ -232,7 +232,7 @@ function ServicesDesktop() {
                   <h3 className="mt-3 font-display text-2xl font-bold text-foreground sm:text-3xl">
                     {service.title}
                   </h3>
-                  <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                  <p className="mt-3 max-w-xl text-base leading-relaxed text-foreground sm:text-lg">
                     {service.text}
                   </p>
                   <a

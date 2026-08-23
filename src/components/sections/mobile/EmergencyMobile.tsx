@@ -49,12 +49,12 @@ export function EmergencyMobile() {
             dir="ltr"
             target="_blank"
             rel="noopener"
-            className="block rounded-app-lg bg-green-500/20 backdrop-blur border border-green-500/30 p-6 transition-opacity hover:opacity-90"
+            className="block rounded-app-lg bg-[var(--accent-lime)]/20 backdrop-blur border-[var(--accent-lime)]/30 p-6 transition-opacity hover:opacity-90"
           >
-            <span className="block font-label text-xs text-green-300 uppercase tracking-widest">
+            <span className="block font-label text-xs text-accent-lime uppercase tracking-widest">
               واتساپ
             </span>
-            <span className="block mt-1 text-2xl font-bold tracking-wider text-green-300 flex items-center justify-center gap-2">
+            <span className="block mt-1 text-2xl font-bold tracking-wider text-accent-lime flex items-center justify-center gap-2">
               <PhoneIcon className="size-5" />
               {EMERGENCY.mobile1} (واتساپ)
             </span>
@@ -84,7 +84,7 @@ export function EmergencyMobile() {
             href={EMERGENCY.mobile1WhatsApp}
             target="_blank"
             rel="noopener"
-            className="block w-full rounded-full bg-green-500 py-4 font-bold text-white min-h-14 flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
+            className="block w-full rounded-full bg-accent-lime py-4 font-bold text-white min-h-14 flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
             aria-label="پیام در واتساپ"
           >
             <PhoneIcon className="size-4" />

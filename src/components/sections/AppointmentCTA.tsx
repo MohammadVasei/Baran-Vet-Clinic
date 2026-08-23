@@ -609,7 +609,7 @@ export function AppointmentCTA() {
 
             <ul className="space-y-5 text-sm">
               <li className="flex items-start gap-3">
-                <ClockIcon className="mt-0.5 size-5 shrink-0 text-primary" />
+                <ClockIcon className="mt-0.5 size-5 shrink-0 text-primary-text" />
                 <div>
                   <span className="block font-semibold text-foreground">ساعت کاری</span>
                   <span className="mt-0.5 block text-muted-foreground">
@@ -623,20 +623,20 @@ export function AppointmentCTA() {
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <PhoneIcon className="mt-0.5 size-5 shrink-0 text-primary" />
+                <PhoneIcon className="mt-0.5 size-5 shrink-0 text-primary-text" />
                 <div>
                   <span className="block font-semibold text-foreground">تلفن</span>
                   <a
                     dir="ltr"
                     href={CLINIC.phoneHref}
-                    className="mt-0.5 block text-muted-foreground transition-colors duration-fast hover:text-primary"
+                    className="mt-0.5 block text-muted-foreground transition-colors duration-fast hover:text-primary-text-hover"
                   >
                     {CLINIC.phone}
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <PinIcon className="mt-0.5 size-5 shrink-0 text-primary" />
+                <PinIcon className="mt-0.5 size-5 shrink-0 text-primary-text" />
                 <div>
                   <span className="block font-semibold text-foreground">آدرس</span>
                   <span className="mt-0.5 block leading-relaxed text-muted-foreground">

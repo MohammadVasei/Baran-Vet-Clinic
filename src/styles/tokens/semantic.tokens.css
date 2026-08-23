@@ -3,69 +3,90 @@
    Purpose-based aliases over primitives. Each semantic token is
    defined for BOTH themes with identical names so components
    never switch — only the values do.
-   Theme switching: `@media (prefers-color-scheme: dark)`.
+   Theme switching: `@media (prefers-color-scheme: dark)` or .dark class.
    ============================================================ */
 
 :root {
   color-scheme: light dark;
 
-  /* ---------- Surfaces ---------- */
-  --background: #ffffff;
-  --foreground: var(--blue-950);
-  --surface: #ffffff;
-  --surface-alt: var(--blue-50);
+  /* ---------- Surfaces — No pure white ---------- */
+  --background: #E8F4FC;           /* Page background — soft blue */
+  --foreground: #1B2A4A;           /* Primary text — deep indigo */
+  --surface: #EAF7F2;              /* Cards / panels — soft mint */
+  --surface-alt: #F4EEF8;          /* Secondary sections — soft lavender */
 
-  /* ---------- Primary (warm anchor gold) ---------- */
-  --primary: var(--blue-500);
-  --primary-hover: var(--blue-400);
-  --on-primary: var(--blue-950);
-  --primary-soft: var(--blue-50);
-  --primary-soft-fg: var(--blue-950);
+  /* ---------- Primary (Main accent blue) ---------- */
+  --primary: #0091EA;
+  --primary-hover: #0073C2;
+  --on-primary: #FFFFFF;
+  --primary-soft: #D6EAF8;         /* Hover / selected state */
+  --primary-soft-fg: #1B2A4A;
+
+  /* ---------- Primary Text (Headings) ---------- */
+  --primary-text: #1B2A4A;
+  --primary-text-hover: #2C3E50;
 
   /* ---------- Secondary ---------- */
-  --secondary: var(--blue-50);
-  --secondary-foreground: var(--blue-950);
+  --secondary: #F4EEF8;
+  --secondary-foreground: #1B2A4A;
 
-  /* ---------- Accent (fresh green — controlled moment) ---------- */
-  --accent: var(--green-600);
-  --accent-hover: var(--green-700);
-  --accent-foreground: #ffffff;
-  --accent-soft: var(--green-100);
-  --accent-soft-fg: var(--green-700);
+  /* ---------- Accent (Same as primary for consistency) ---------- */
+  --accent: #0091EA;
+  --accent-hover: #0073C2;
+  --accent-foreground: #FFFFFF;
+  --accent-soft: #D6EAF8;
+  --accent-soft-fg: #1B2A4A;
 
   /* ---------- Muted ---------- */
-  --muted: var(--ink-50);
-  --muted-foreground: #5a6b7e;
+  --muted: #F4EEF8;
+  --muted-foreground: #5D6D7E;
 
   /* ---------- Borders ---------- */
-  --border: var(--ink-200);
-  --border-strong: var(--ink-300);
+  --border: #D0E3F0;
+  --border-strong: #B0C4DE;
 
   /* ---------- Focus ring ---------- */
-  --ring: var(--blue-700);
+  --ring: #0091EA;
 
-  /* ---------- Destructive ---------- */
-  --destructive: var(--red-600);
-  --destructive-foreground: #ffffff;
-  --destructive-soft: var(--red-100);
-  --destructive-soft-fg: var(--red-700);
+  /* ---------- Destructive (Magenta-based) ---------- */
+  --destructive: #D81B60;
+  --destructive-foreground: #FFFFFF;
+  --destructive-soft: #FCE4EC;
+  --destructive-soft-fg: #C2185B;
 
-  /* ---------- Category accents (animal explorer, Step 7.5) ---------- */
-  --accent-yellow: var(--yellow-500);
-  --accent-yellow-soft: var(--yellow-100);
-  --accent-yellow-fg: var(--yellow-700);
+  /* ---------- Supporting Accents (for service numbers, highlights) ---------- */
+  --accent-purple: #7E57C2;
+  --accent-purple-soft: #F3E5F5;
+  --accent-purple-fg: #584392;
 
-  --accent-coral: var(--coral-500);
-  --accent-coral-soft: var(--coral-100);
-  --accent-coral-fg: var(--coral-700);
+  --accent-orange: #FF9800;
+  --accent-orange-soft: #FFF3E0;
+  --accent-orange-fg: #CC7A00;
 
-  --accent-green: var(--green-600);
-  --accent-green-soft: var(--green-100);
-  --accent-green-fg: var(--green-700);
+  --accent-lime: #8BC34A;
+  --accent-lime-soft: #F1F8E9;
+  --accent-lime-fg: #689F38;
 
-  --accent-lavender: var(--lavender-600);
-  --accent-lavender-soft: var(--lavender-100);
-  --accent-lavender-fg: var(--lavender-700);
+  --accent-magenta: #EC407A;
+  --accent-magenta-soft: #FCE4EC;
+  --accent-magenta-fg: #C2185B;
+
+  /* ---------- Legacy Category Accents (mapped to new supporting accents) ---------- */
+  --accent-yellow: #FF9800;        /* → Orange */
+  --accent-yellow-soft: #FFF3E0;
+  --accent-yellow-fg: #CC7A00;
+
+  --accent-coral: #EC407A;         /* → Magenta */
+  --accent-coral-soft: #FCE4EC;
+  --accent-coral-fg: #C2185B;
+
+  --accent-green: #8BC34A;         /* → Lime */
+  --accent-green-soft: #F1F8E9;
+  --accent-green-fg: #689F38;
+
+  --accent-lavender: #7E57C2;      /* → Purple */
+  --accent-lavender-soft: #F3E5F5;
+  --accent-lavender-fg: #584392;
 
   /* ---------- Semantic spacing / layout ---------- */
   --spacing-gutter: var(--space-6);
@@ -76,130 +97,172 @@
 }
 
 /* ============================================================
-   DARK THEME — same semantic names, overridden values
+   DARK THEME — Same semantic names, overridden values
    Supports both class-based (.dark) and media query-based dark mode.
    ============================================================ */
 
 /* Class-based dark mode (via next-themes adding .dark to <html>) */
 .dark {
   /* ---------- Surfaces ---------- */
-  --background: #0b1626;
-  --foreground: #e9f0f7;
-  --surface: #111f33;
-  --surface-alt: #182a42;
+  --background: #0D1B2A;           /* Deep navy */
+  --foreground: #E8F4FC;           /* Light blue-white */
+  --surface: #1B2A4A;              /* Dark indigo for cards */
+  --surface-alt: #2C3E50;          /* Darker indigo for sections */
 
-  /* ---------- Primary (warm gold on dark surfaces) ---------- */
-  --primary: var(--blue-500);
-  --primary-hover: var(--blue-300);
-  --on-primary: var(--blue-950);
-  --primary-soft: #4a2c08;
-  --primary-soft-fg: #fbd995;
+  /* ---------- Primary (Lighter blue on dark) ---------- */
+  --primary: #4DA7FF;
+  --primary-hover: #7ABFFF;
+  --on-primary: #0D1B2A;
+  --primary-soft: #1A2E4A;
+  --primary-soft-fg: #A8D9FF;
+
+  /* ---------- Primary Text ---------- */
+  --primary-text: #A8D9FF;
+  --primary-text-hover: #D6EFFF;
 
   /* ---------- Secondary ---------- */
-  --secondary: #4a2c08;
-  --secondary-foreground: #ffedc2;
+  --secondary: #2C3E50;
+  --secondary-foreground: #D6EFFF;
 
   /* ---------- Accent ---------- */
-  --accent: #4fb37e;
-  --accent-hover: #61c08d;
-  --accent-foreground: #0a2417;
-  --accent-soft: #143428;
-  --accent-soft-fg: #6fcb9b;
+  --accent: #4DA7FF;
+  --accent-hover: #7ABFFF;
+  --accent-foreground: #0D1B2A;
+  --accent-soft: #1A2E4A;
+  --accent-soft-fg: #A8D9FF;
 
   /* ---------- Muted ---------- */
-  --muted: #16283f;
-  --muted-foreground: #a9bccf;
+  --muted: #2C3E50;
+  --muted-foreground: #90A8C8;
 
   /* ---------- Borders ---------- */
-  --border: #24364f;
-  --border-strong: #33475f;
+  --border: #3C4B5E;
+  --border-strong: #4A5A6E;
 
   /* ---------- Focus ring ---------- */
-  --ring: #f6c66d;
+  --ring: #4DA7FF;
 
   /* ---------- Destructive ---------- */
-  --destructive: #e05a4e;
-  --destructive-foreground: #2b0a07;
-  --destructive-soft: #3a1611;
-  --destructive-soft-fg: #f08b80;
+  --destructive: #EC407A;
+  --destructive-foreground: #0D1B2A;
+  --destructive-soft: #3A1624;
+  --destructive-soft-fg: #F8BBD0;
 
-  /* ---------- Category accents ---------- */
-  --accent-yellow: #f2be4d;
-  --accent-yellow-soft: #3a2e12;
-  --accent-yellow-fg: #f2ce7d;
+  /* ---------- Supporting Accents (lighter for dark mode) ---------- */
+  --accent-purple: #B39DDB;
+  --accent-purple-soft: #2D1B3D;
+  --accent-purple-fg: #D1C4E9;
 
-  --accent-coral: #f07862;
-  --accent-coral-soft: #3a1a14;
-  --accent-coral-fg: #f5a08f;
+  --accent-orange: #FFB74D;
+  --accent-orange-soft: #3D2A0D;
+  --accent-orange-fg: #FFE0B2;
 
-  --accent-green: #4fb37e;
-  --accent-green-soft: #143428;
-  --accent-green-fg: #6fcb9b;
+  --accent-lime: #A5D6A7;
+  --accent-lime-soft: #1B3D1B;
+  --accent-lime-fg: #C8E6C9;
 
-  --accent-lavender: #a695db;
-  --accent-lavender-soft: #241e3d;
-  --accent-lavender-fg: #beb0e8;
+  --accent-magenta: #F48FB1;
+  --accent-magenta-soft: #3D1628;
+  --accent-magenta-fg: #FCE4EC;
+
+  /* ---------- Legacy Category Accents (mapped) ---------- */
+  --accent-yellow: #FFB74D;
+  --accent-yellow-soft: #3D2A0D;
+  --accent-yellow-fg: #FFE0B2;
+
+  --accent-coral: #F48FB1;
+  --accent-coral-soft: #3D1628;
+  --accent-coral-fg: #FCE4EC;
+
+  --accent-green: #A5D6A7;
+  --accent-green-soft: #1B3D1B;
+  --accent-green-fg: #C8E6C9;
+
+  --accent-lavender: #B39DDB;
+  --accent-lavender-soft: #2D1B3D;
+  --accent-lavender-fg: #D1C4E9;
 }
 
 /* System preference dark mode (when no explicit .light/.dark class) */
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
     /* ---------- Surfaces ---------- */
-    --background: #0b1626;
-    --foreground: #e9f0f7;
-    --surface: #111f33;
-    --surface-alt: #182a42;
+    --background: #0D1B2A;
+    --foreground: #E8F4FC;
+    --surface: #1B2A4A;
+    --surface-alt: #2C3E50;
 
-    /* ---------- Primary (warm gold on dark surfaces) ---------- */
-    --primary: var(--blue-500);
-    --primary-hover: var(--blue-300);
-    --on-primary: var(--blue-950);
-    --primary-soft: #4a2c08;
-    --primary-soft-fg: #fbd995;
+    /* ---------- Primary ---------- */
+    --primary: #4DA7FF;
+    --primary-hover: #7ABFFF;
+    --on-primary: #0D1B2A;
+    --primary-soft: #1A2E4A;
+    --primary-soft-fg: #A8D9FF;
+
+    /* ---------- Primary Text ---------- */
+    --primary-text: #A8D9FF;
+    --primary-text-hover: #D6EFFF;
 
     /* ---------- Secondary ---------- */
-    --secondary: #4a2c08;
-    --secondary-foreground: #ffedc2;
+    --secondary: #2C3E50;
+    --secondary-foreground: #D6EFFF;
 
     /* ---------- Accent ---------- */
-    --accent: #4fb37e;
-    --accent-hover: #61c08d;
-    --accent-foreground: #0a2417;
-    --accent-soft: #143428;
-    --accent-soft-fg: #6fcb9b;
+    --accent: #4DA7FF;
+    --accent-hover: #7ABFFF;
+    --accent-foreground: #0D1B2A;
+    --accent-soft: #1A2E4A;
+    --accent-soft-fg: #A8D9FF;
 
     /* ---------- Muted ---------- */
-    --muted: #16283f;
-    --muted-foreground: #a9bccf;
+    --muted: #2C3E50;
+    --muted-foreground: #90A8C8;
 
     /* ---------- Borders ---------- */
-    --border: #24364f;
-    --border-strong: #33475f;
+    --border: #3C4B5E;
+    --border-strong: #4A5A6E;
 
     /* ---------- Focus ring ---------- */
-    --ring: #f6c66d;
+    --ring: #4DA7FF;
 
     /* ---------- Destructive ---------- */
-    --destructive: #e05a4e;
-    --destructive-foreground: #2b0a07;
-    --destructive-soft: #3a1611;
-    --destructive-soft-fg: #f08b80;
+    --destructive: #EC407A;
+    --destructive-foreground: #0D1B2A;
+    --destructive-soft: #3A1624;
+    --destructive-soft-fg: #F8BBD0;
 
-    /* ---------- Category accents ---------- */
-    --accent-yellow: #f2be4d;
-    --accent-yellow-soft: #3a2e12;
-    --accent-yellow-fg: #f2ce7d;
+    /* ---------- Supporting Accents ---------- */
+    --accent-purple: #B39DDB;
+    --accent-purple-soft: #2D1B3D;
+    --accent-purple-fg: #D1C4E9;
 
-    --accent-coral: #f07862;
-    --accent-coral-soft: #3a1a14;
-    --accent-coral-fg: #f5a08f;
+    --accent-orange: #FFB74D;
+    --accent-orange-soft: #3D2A0D;
+    --accent-orange-fg: #FFE0B2;
 
-    --accent-green: #4fb37e;
-    --accent-green-soft: #143428;
-    --accent-green-fg: #6fcb9b;
+    --accent-lime: #A5D6A7;
+    --accent-lime-soft: #1B3D1B;
+    --accent-lime-fg: #C8E6C9;
 
-    --accent-lavender: #a695db;
-    --accent-lavender-soft: #241e3d;
-    --accent-lavender-fg: #beb0e8;
+    --accent-magenta: #F48FB1;
+    --accent-magenta-soft: #3D1628;
+    --accent-magenta-fg: #FCE4EC;
+
+    /* ---------- Legacy Category Accents ---------- */
+    --accent-yellow: #FFB74D;
+    --accent-yellow-soft: #3D2A0D;
+    --accent-yellow-fg: #FFE0B2;
+
+    --accent-coral: #F48FB1;
+    --accent-coral-soft: #3D1628;
+    --accent-coral-fg: #FCE4EC;
+
+    --accent-green: #A5D6A7;
+    --accent-green-soft: #1B3D1B;
+    --accent-green-fg: #C8E6C9;
+
+    --accent-lavender: #B39DDB;
+    --accent-lavender-soft: #2D1B3D;
+    --accent-lavender-fg: #D1C4E9;
   }
 }

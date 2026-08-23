@@ -51,29 +51,29 @@
 
   /* ---------- Eyebrow / badge ---------- */
   --eyebrow-bg: var(--surface-alt);
-  --eyebrow-fg: var(--primary);
+  --eyebrow-fg: var(--primary-text);
   --eyebrow-radius: var(--radius-full);
 
   /* ---------- Links ---------- */
-  --link-fg: var(--primary);
-  --link-fg-hover: var(--primary-hover);
+  --link-fg: var(--primary-text);
+  --link-fg-hover: var(--primary-text-hover);
   --link-underline: var(--primary-soft-fg);
 
-  /* ---------- Header / nav (Step 5) ---------- */
+  /* ---------- Header / nav ---------- */
   --nav-bg: color-mix(in srgb, var(--background) 95%, transparent);
   --nav-border: var(--border);
   --nav-fg: var(--foreground);
   --nav-link-fg: var(--foreground);
-  --nav-link-hover-fg: var(--primary);
+  --nav-link-hover-fg: var(--primary-text);
   --nav-radius: var(--radius-app);
 
-  /* ---------- Preloader (Step 5) ---------- */
+  /* ---------- Preloader ---------- */
   --preloader-bg: var(--background);
   --preloader-fg: var(--primary);
 
-  /* ---------- Emergency bar (Step 5) ---------- */
+  /* ---------- Emergency bar ---------- */
   --emergency-bg: var(--destructive);
-  --emergency-fg: #ffffff;
+  --emergency-fg: var(--destructive-foreground);
 
   /* ---------- Focus & selection ---------- */
   --focus-ring-width: 3px;
@@ -85,15 +85,15 @@
   --scrollbar-thumb: var(--border-strong);
   --scrollbar-track: transparent;
 
-  /* ---------- Motion defaults (consumed by GSAP, Step 6) ---------- */
+  /* ---------- Motion defaults (consumed by GSAP) ---------- */
   --reveal-ease: var(--ease-out);
   --reveal-duration: var(--duration-slower);
   --stagger-step: 0.08;
   --marquee-duration: 40s;
 
-  /* ---------- Header height (so full-viewport sections fit under it) ---------- */
+  /* ---------- Header height ---------- */
   --header-height: var(--space-16);
 
-  /* ---------- Sticky Services panel offset (Step 7.6, under the header) ---------- */
+  /* ---------- Sticky Services panel offset ---------- */
   --services-panel-top: calc(var(--header-height) + var(--space-6));
 }

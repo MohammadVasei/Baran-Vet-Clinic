@@ -75,7 +75,7 @@ export function DoctorsPage() {
               </div>
 
               <div className="absolute inset-x-0 bottom-0 z-10 p-5">
-                <span className="block font-label text-xs font-semibold tracking-wide text-primary">
+                <span className="block font-label text-xs font-semibold tracking-wide text-primary-text">
                   {doc.role}
                 </span>
                 <span className="mt-1 block font-display text-lg font-bold text-foreground">

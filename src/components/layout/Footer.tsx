@@ -56,7 +56,7 @@ export function Footer() {
                 <a
                   href={href}
                   aria-label={label}
-                  className="grid size-11 place-items-center rounded-full border border-border text-muted-foreground transition-colors duration-fast hover:border-primary hover:text-primary"
+                  className="grid size-11 place-items-center rounded-full border border-border text-muted-foreground transition-colors duration-fast hover:border-primary hover:text-primary-text-hover"
                 >
                   <Icon className="size-5" />
                 </a>
@@ -72,7 +72,7 @@ export function Footer() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-fast hover:text-primary"
+                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-fast hover:text-primary-text-hover"
                 >
                   {link.label}
                 </a>
@@ -88,7 +88,7 @@ export function Footer() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-fast hover:text-primary"
+                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-fast hover:text-primary-text-hover"
                 >
                   {link.label}
                 </a>
@@ -101,26 +101,26 @@ export function Footer() {
           <h2 className="font-display text-base font-bold text-foreground">تماس با ما</h2>
           <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
             <li className="flex items-start gap-2.5">
-              <PinIcon className="mt-0.5 size-4 shrink-0 text-primary" />
+              <PinIcon className="mt-0.5 size-4 shrink-0 text-primary-text" />
               <span className="leading-relaxed">{CONTACT.address}</span>
             </li>
             {CONTACT.phones.map((phone) => (
               <li key={phone.label} className="flex items-center gap-2.5">
-                <PhoneIcon className="size-4 shrink-0 text-primary" />
-                <a href={phone.href} className="transition-colors duration-fast hover:text-primary" dir="ltr">
+                <PhoneIcon className="size-4 shrink-0 text-primary-text" />
+                <a href={phone.href} className="transition-colors duration-fast hover:text-primary-text-hover" dir="ltr">
                   {phone.number}
                 </a>
                 {phone.whatsapp && (
-                  <a href={phone.whatsapp} className="text-primary hover:underline text-xs" target="_blank" rel="noopener">
+                  <a href={phone.whatsapp} className="text-primary-text hover:underline text-xs" target="_blank" rel="noopener">
                     واتساپ
                   </a>
                 )}
               </li>
             ))}
             <li className="flex items-start gap-2.5">
-              <ClockIcon className="mt-0.5 size-4 shrink-0 text-primary" />
+              <ClockIcon className="mt-0.5 size-4 shrink-0 text-primary-text" />
               <div>
-                <p className="font-label text-xs text-primary">{CONTACT.hoursNote}</p>
+                <p className="font-label text-xs text-primary-text">{CONTACT.hoursNote}</p>
                 {CONTACT.hours.map((h, i) => (
                   <span key={i} className="block leading-relaxed">
                     {h.days}: {h.time}

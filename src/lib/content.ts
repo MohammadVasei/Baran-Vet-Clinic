@@ -144,7 +144,7 @@ export const MARQUEE = {
   ],
 };
 
-export type ServiceAccent = "yellow" | "coral" | "green" | "lavender";
+export type ServiceAccent = "purple" | "orange" | "lime" | "magenta";
 
 export type Service = {
   key: string;
@@ -179,7 +179,7 @@ export const SERVICES: {
       text: "معاینه و مراقبت درمانی برای سگ، گربه و سایر حیوانات خانگی. ما با آرامش و دقت وضعیت پت را بررسی می‌کنیم و مسیر مراقبت را مشخص می‌کنیم.",
       image: "/images/service-darman.jpg",
       alt: "معاینه و درمان حیوان خانگی در کلینیک باران",
-      accent: "yellow",
+      accent: "purple",
       href: "/services/darman",
     },
     {
@@ -191,7 +191,7 @@ export const SERVICES: {
       text: "یک دفترچه منظم برای ثبت سوابق درمانی و برنامه‌های پیشگیرانه. با شناسنامه، پیگیری واکسیناسیون و چکاپ‌ها بسیار ساده‌تر می‌شود.",
       image: "/images/service-shenasname.jpg",
       alt: "نمونه شناسنامه سلامت حیوان در کلینیک باران",
-      accent: "coral",
+      accent: "orange",
       href: "/services/shenasname",
     },
     {
@@ -203,7 +203,7 @@ export const SERVICES: {
       text: "گرومینگ حرفه‌ای و آرام توسط همکار مجرب کلینیک. شستشو، اصلاح و مرتب‌سازی برای راحتی و ظاهر بهتر پت شما.",
       image: "/images/service-grooming.jpg",
       alt: "شستشو و اصلاح حرفه‌ای پت در کلینیک باران",
-      accent: "green",
+      accent: "lime",
       href: "/services/grooming",
     },
     {
@@ -215,7 +215,7 @@ export const SERVICES: {
       text: "محصولات مورد نیاز نگهداری روزمره حیوانات خانگی. برای اطلاع از موجودی کافی است تماس بگیرید یا پیام دهید.",
       image: "/images/service-petshop.jpg",
       alt: "محصولات پت‌شاپ کلینیک باران",
-      accent: "lavender",
+      accent: "magenta",
       href: "/services/petshop",
     },
   ],

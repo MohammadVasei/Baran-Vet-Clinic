@@ -64,7 +64,7 @@ function EmergencyDesktop() {
         <div className="emergency-phones text-center space-y-4 mb-8">
           <a
             href={EMERGENCY.phoneHref}
-            className="flex items-center justify-center gap-2 text-2xl font-bold tracking-wider transition-colors hover:text-primary"
+            className="flex items-center justify-center gap-2 text-2xl font-bold tracking-wider transition-colors hover:text-primary-text-hover"
             dir="ltr"
           >
             <PhoneIcon className="size-6" />
@@ -72,7 +72,7 @@ function EmergencyDesktop() {
           </a>
           <a
             href={EMERGENCY.mobile1Href}
-            className="flex items-center justify-center gap-2 text-xl font-medium tracking-wider transition-colors hover:text-primary"
+            className="flex items-center justify-center gap-2 text-xl font-medium tracking-wider transition-colors hover:text-primary-text-hover"
             dir="ltr"
           >
             <PhoneIcon className="size-5" />
@@ -80,7 +80,7 @@ function EmergencyDesktop() {
           </a>
           <a
             href={EMERGENCY.mobile1WhatsApp}
-            className="flex items-center justify-center gap-2 text-xl font-medium tracking-wider text-green-400 transition-colors hover:opacity-90"
+            className="flex items-center justify-center gap-2 text-xl font-medium tracking-wider text-accent-lime transition-colors hover:opacity-90"
             dir="ltr"
             target="_blank"
             rel="noopener"
@@ -109,7 +109,7 @@ function EmergencyDesktop() {
           </MagneticButton>
           <a
             href={EMERGENCY.mobile1WhatsApp}
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-green-500 py-3 px-8 font-bold text-white transition-colors duration-200 hover:opacity-90 min-w-[200px]"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-lime py-3 px-8 font-bold text-white transition-colors duration-200 hover:opacity-90 min-w-[200px]"
             target="_blank"
             rel="noopener"
             aria-label="پیام در واتساپ"

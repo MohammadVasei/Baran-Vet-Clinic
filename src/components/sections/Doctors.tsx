@@ -88,7 +88,7 @@ function DoctorsDesktop() {
 
               {/* Metadata — role label always visible, name slides up on hover */}
               <div className="absolute inset-x-0 bottom-0 z-10 p-5">
-                <span className="block font-label text-xs font-semibold tracking-wide text-primary">
+                <span className="block font-label text-xs font-semibold tracking-wide text-primary-text">
                   {doc.role}
                 </span>
                 <span className="mt-1 block font-display text-lg font-bold text-foreground transition-transform duration-normal ease-out translate-y-0 sm:translate-y-1 sm:group-hover:translate-y-0">

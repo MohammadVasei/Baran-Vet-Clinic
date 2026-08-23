@@ -60,8 +60,8 @@ export function ContactPage() {
               className="relative rounded-app-lg border border-border bg-surface p-6 text-center transition-shadow duration-normal hover:shadow-lg"
             >
               <div className="flex items-center justify-center gap-2 mb-4">
-                <PhoneIcon className="size-6 text-primary" />
-                <span className="font-label text-sm text-primary uppercase tracking-widest">{phone.label}</span>
+                <PhoneIcon className="size-6 text-primary-text" />
+                <span className="font-label text-sm text-primary-text uppercase tracking-widest">{phone.label}</span>
               </div>
               <span className="block text-2xl font-bold tracking-wider" dir="ltr">{phone.number}</span>
               {phone.whatsapp && (
@@ -69,7 +69,7 @@ export function ContactPage() {
                   href={phone.whatsapp}
                   target="_blank"
                   rel="noopener"
-                  className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-green-500 px-4 py-2 text-sm font-bold text-white transition-opacity hover:opacity-90"
+                  className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-accent-lime px-4 py-2 text-sm font-bold text-white transition-opacity hover:opacity-90"
                 >
                   <PhoneIcon className="size-4" />
                   واتساپ
@@ -83,7 +83,7 @@ export function ContactPage() {
         <div className="contact-info mt-10 grid gap-6 md:grid-cols-2">
           <div className="rounded-app-lg border border-border bg-surface p-6">
             <h3 className="font-display text-lg font-bold text-foreground flex items-center gap-2">
-              <InstagramIcon className="size-5 text-primary" />
+              <InstagramIcon className="size-5 text-primary-text" />
               شبکه‌های اجتماعی
             </h3>
             <ul className="mt-4 space-y-3">
@@ -93,7 +93,7 @@ export function ContactPage() {
                     href={social.href}
                     target="_blank"
                     rel="noopener"
-                    className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-primary"
+                    className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-primary-text-hover"
                   >
                     {social.label === "اینستاگرام" && <InstagramIcon className="size-5 shrink-0" />}
                     {social.label === "ترددز" && <ThreadsIcon className="size-5 shrink-0" />}
@@ -106,7 +106,7 @@ export function ContactPage() {
 
           <div className="rounded-app-lg border border-border bg-surface p-6">
             <h3 className="font-display text-lg font-bold text-foreground flex items-center gap-2">
-              <MapPinIcon className="size-5 text-primary" />
+              <MapPinIcon className="size-5 text-primary-text" />
               آدرس
             </h3>
             <address className="mt-4 not-italic leading-relaxed text-muted-foreground">
@@ -115,7 +115,7 @@ export function ContactPage() {
                 href="https://maps.google.com/?q=مشهد،+احمدآباد،+بلور+بعثت،+پلاک+94"
                 target="_blank"
                 rel="noopener"
-                className="mt-4 inline-flex items-center gap-2 font-label text-sm font-medium text-primary hover:underline"
+                className="mt-4 inline-flex items-center gap-2 font-label text-sm font-medium text-primary-text hover:underline"
               >
                 <MapPinIcon className="size-4" />
                 مسیریابی
@@ -127,10 +127,10 @@ export function ContactPage() {
         {/* Hours */}
         <div className="mt-10 rounded-app-lg border border-border bg-surface p-6">
           <h3 className="font-display text-lg font-bold text-foreground flex items-center gap-2">
-            <ClockIcon className="size-5 text-primary" />
+            <ClockIcon className="size-5 text-primary-text" />
             ساعات کاری
           </h3>
-          <p className="mt-2 font-label text-sm text-primary">{CONTACT.hoursNote}</p>
+          <p className="mt-2 font-label text-sm text-primary-text">{CONTACT.hoursNote}</p>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">
             {CONTACT.hours.map((h, i) => (
               <li key={i} className="flex items-center gap-3 text-muted-foreground">
