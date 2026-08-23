@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { CloseIcon, PawIcon, PhoneIcon } from "@/components/icons";
+import { CloseIcon, PhoneIcon } from "@/components/icons";
+import { Logo } from "@/components/ui/Logo";
 
 const NAV_LINKS = [
   { label: "خانه", href: "/" },
@@ -65,9 +66,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
       >
         <div className="flex items-center justify-between">
           <span className="flex items-center gap-2.5">
-            <span className="grid size-10 place-items-center rounded-app bg-primary text-on-primary">
-              <PawIcon className="size-5" />
-            </span>
+            <Logo width={48} height={48} />
             <span className="font-display text-lg font-bold text-foreground">باران</span>
           </span>
           <button

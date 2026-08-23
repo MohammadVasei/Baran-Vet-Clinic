@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { PawIcon } from "@/components/icons";
+import { Logo } from "@/components/ui/Logo";
 
 // Total visibility < 0.9s (plan gate). Reduced-motion: hides instantly.
 const SHOW_MS = 420;
@@ -34,9 +34,7 @@ export function Preloader() {
       aria-hidden={hidden}
     >
       <div className="flex flex-col items-center gap-4">
-        <span className="grid size-16 place-items-center rounded-app-lg bg-primary text-on-primary">
-          <PawIcon className="size-8" />
-        </span>
+        <Logo width={120} height={120} className="drop-shadow-lg" />
         <div className="text-center">
           <p className="font-display text-2xl font-bold text-foreground">باران</p>
           <p className="font-label text-sm text-muted-foreground">کلینیک دامپزشکی</p>
