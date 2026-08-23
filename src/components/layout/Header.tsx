@@ -10,11 +10,11 @@ import { MagneticButton } from "@/components/motion/MagneticButton";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
 const NAV_LINKS = [
-  { label: "خانه", href: "/" },
-  { label: "خدمات", href: "/services" },
-  { label: "پزشکان", href: "/doctors" },
-  { label: "درباره ما", href: "/about" },
-  { label: "تماس با ما", href: "/contact" },
+  { label: "خانه", href: "/", underline: "var(--nav-underline-1)" },
+  { label: "خدمات", href: "/services", underline: "var(--nav-underline-2)" },
+  { label: "پزشکان", href: "/doctors", underline: "var(--nav-underline-3)" },
+  { label: "درباره ما", href: "/about", underline: "var(--nav-underline-4)" },
+  { label: "تماس با ما", href: "/contact", underline: "var(--nav-underline-5)" },
 ];
 
 export function Header() {
@@ -48,6 +48,7 @@ export function Header() {
                 href={link.href}
                 className={`nav-link ${isActive ? "text-primary-text" : ""}`}
                 aria-current={isActive ? "page" : undefined}
+                style={{ "--nav-link-underline": link.underline } as React.CSSProperties}
               >
                 {link.label}
               </Link>

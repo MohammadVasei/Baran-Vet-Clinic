@@ -254,7 +254,7 @@
     bottom: 0;
     height: 2px;
     border-radius: var(--radius-full);
-    background: var(--nav-link-hover-fg);
+    background: var(--nav-link-underline, var(--nav-link-hover-fg));
     transform: scaleX(0);
     transition: transform var(--duration-normal) var(--ease-out);
   }

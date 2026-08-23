@@ -67,6 +67,13 @@
   --nav-link-hover-fg: var(--primary-text);
   --nav-radius: var(--radius-app);
 
+  /* ---------- Per-link underline accents ---------- */
+  --nav-underline-1: var(--primary);
+  --nav-underline-2: var(--accent-purple);
+  --nav-underline-3: var(--accent-orange);
+  --nav-underline-4: var(--accent-lime);
+  --nav-underline-5: var(--accent-magenta);
+
   /* ---------- Preloader ---------- */
   --preloader-bg: var(--background);
   --preloader-fg: var(--primary);
