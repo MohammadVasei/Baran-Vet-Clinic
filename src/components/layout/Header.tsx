@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { label: "خانه", href: "/" },
   { label: "خدمات", href: "/services" },
   { label: "پزشکان", href: "/doctors" },
+  { label: "درباره ما", href: "/about" },
   { label: "تماس با ما", href: "/contact" },
 ];
 

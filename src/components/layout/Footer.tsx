@@ -2,9 +2,10 @@ import { PawIcon, PinIcon, PhoneIcon, ClockIcon, InstagramIcon, ThreadsIcon } fr
 
 const QUICK_LINKS = [
   { label: "خانه", href: "#top" },
-  { label: "خدمات", href: "#services" },
+  { label: "خدمات", href: "/services" },
   { label: "پزشکان", href: "#doctors" },
-  { label: "تماس با ما", href: "#contact" },
+  { label: "درباره ما", href: "/about" },
+  { label: "تماس با ما", href: "/contact" },
 ];
 
 const SERVICES = [
