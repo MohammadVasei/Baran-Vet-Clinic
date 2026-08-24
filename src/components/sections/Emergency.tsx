@@ -8,7 +8,8 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { EMERGENCY } from "@/lib/content";
 import { EmergencyMobile } from "@/components/sections/mobile/EmergencyMobile";
-import { PhoneIcon } from "@/components/icons";
+import { PhoneIcon, ArrowIcon } from "@/components/icons";
+import Link from "next/link";
 
 export function Emergency() {
   const isMobile = useIsMobile();
@@ -103,7 +104,7 @@ function EmergencyDesktop() {
           <MagneticButton
             href={EMERGENCY.phoneHref}
             className="inline-block rounded-full bg-white py-3 px-8 font-bold text-[var(--emergency-bg)] transition-colors duration-200 hover:opacity-90 min-w-[200px]"
-            aria-label="تماس با کلینیک دام‌های کوچک باران"
+            aria-label="تماس با کلینیک دام‌های küçük باران"
           >
             تماس و نوبت
           </MagneticButton>
@@ -117,6 +118,20 @@ function EmergencyDesktop() {
             <PhoneIcon className="size-4" />
             پیام در واتساپ
           </a>
+        </div>
+
+        <div className="emergency-diseases-cta text-center mt-10 pt-8 border-t border-white/20">
+          <p className="text-sm text-white/70 mb-4">
+            می‌خواهید درباره بیماری‌های رایج سگ، گربه و پرنده بدانید؟
+          </p>
+          <Link
+            href="/common-diseases"
+            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 py-3 px-8 font-bold text-white transition-colors duration-200 hover:border-white hover:bg-white/10 min-w-[240px]"
+            aria-label="مشاهده بیماری‌های شایع حیوانات خانگی"
+          >
+            <ArrowIcon direction="forward" className="size-4" />
+            مشاهده بیماری‌های شایع
+          </Link>
         </div>
       </div>
     </section>

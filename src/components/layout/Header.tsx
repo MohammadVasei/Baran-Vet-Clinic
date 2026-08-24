@@ -12,9 +12,10 @@ import { ThemeToggle } from "@/components/layout/ThemeToggle";
 const NAV_LINKS = [
   { label: "خانه", href: "/", underline: "var(--nav-underline-1)" },
   { label: "خدمات", href: "/services", underline: "var(--nav-underline-2)" },
-  { label: "پزشکان", href: "/doctors", underline: "var(--nav-underline-3)" },
-  { label: "درباره ما", href: "/about", underline: "var(--nav-underline-4)" },
-  { label: "تماس با ما", href: "/contact", underline: "var(--nav-underline-5)" },
+  { label: "بیماری‌های شایع", href: "/common-diseases", underline: "var(--nav-underline-3)" },
+  { label: "پزشکان", href: "/doctors", underline: "var(--nav-underline-4)" },
+  { label: "درباره ما", href: "/about", underline: "var(--nav-underline-5)" },
+  { label: "تماس با ما", href: "/contact", underline: "var(--nav-underline-6)" },
 ];
 
 export function Header() {
