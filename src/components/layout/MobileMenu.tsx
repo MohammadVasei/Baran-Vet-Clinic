@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { label: "خانه", href: "/" },
   { label: "خدمات", href: "/services" },
   { label: "پزشکان", href: "/doctors" },
+  { label: "بیماری‌های شایع", href: "/common-diseases" },
   { label: "تماس با ما", href: "/contact" },
 ];
 
