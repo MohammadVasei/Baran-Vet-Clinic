@@ -5,7 +5,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 const LIGHT_SCENE = "https://prod.spline.design/Whp9AlSt62gpHEcm-JDn/scene.hanacode";
 const DARK_SCENE = "https://prod.spline.design/Whp9AlSt62gpHEcm-Wal/scene.hanacode";
-const MOBILE_SCENE = "https://prod.spline.design/Whp9AlSt62gpHEcm-Y6K/scene.hanacode";
+const MOBILE_SCENE = "https://prod.spline.design/Whp9AlSt62gpHEcm-HLo/scene.hanacode";
 
 export function Hero() {
   const { resolvedTheme } = useTheme();
