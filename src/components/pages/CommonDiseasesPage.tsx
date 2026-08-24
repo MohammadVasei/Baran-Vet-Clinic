@@ -245,24 +245,26 @@ export function CommonDiseasesPage() {
               {/* Search Input */}
               <div className="relative border-t border-border pt-4">
                 <label className="block text-sm font-medium text-muted-foreground mb-2">جستجو</label>
-                <SearchIcon className="absolute right-3 top-9 -translate-y-1/2 size-4 text-muted-foreground" aria-hidden />
-                <input
-                  type="search"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="جستجوی بیماری، علائم، مراقبت..."
-                  className="w-full pl-10 pr-10 py-2 rounded-app border border-border bg-surface text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                  aria-label="جستجوی بیماری‌ها"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery("")}
-                    className="absolute left-3 top-9 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                    aria-label="پاک کردن جستجو"
-                  >
-                    <XIcon className="size-4" />
-                  </button>
-                )}
+                <div className="relative">
+                  <SearchIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" aria-hidden />
+                  <input
+                    type="search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="جستجوی بیماری، علائم، مراقبت..."
+                    className="w-full pl-10 pr-10 py-2 rounded-app border border-border bg-surface text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    aria-label="جستجوی بیماری‌ها"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery("")}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                      aria-label="پاک کردن جستجو"
+                    >
+                      <XIcon className="size-4" />
+                    </button>
+                  )}
+                </div>
               </div>
 
               {/* Results Info & Clear Filters */}
