@@ -242,7 +242,7 @@ function FacilitiesDesktop() {
           {FACILITIES.items.map((item, i) => (
             <div
               key={item.key}
-              className="fac-dot size-2.5 rounded-full bg-white/40 transition-colors"
+              className="fac-dot size-2.5 rounded-full bg-foreground/60 transition-colors dark:bg-white/40"
               data-idx={i}
             />
           ))}

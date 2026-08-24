@@ -4,9 +4,17 @@ import { Logo } from "@/components/ui/Logo";
 const QUICK_LINKS = [
   { label: "خانه", href: "#top" },
   { label: "خدمات", href: "/services" },
+  { label: "بیماری‌های شایع", href: "/common-diseases" },
   { label: "پزشکان", href: "#doctors" },
   { label: "درباره ما", href: "/about" },
   { label: "تماس با ما", href: "/contact" },
+];
+
+const HEALTH_INFO = [
+  { label: "بیماری‌های گربه", href: "/common-diseases#cat" },
+  { label: "بیماری‌های سگ", href: "/common-diseases#dog" },
+  { label: "بیماری‌های پرنده", href: "/common-diseases#bird" },
+  { label: "نکات پیشگیری", href: "/common-diseases#advice-heading" },
 ];
 
 const SERVICES = [
@@ -38,7 +46,7 @@ const SOCIALS = [
 export function Footer() {
   return (
     <footer className="border-t border-border bg-surface">
-      <div className="container-site grid gap-10 py-16 grid-cols-2 lg:grid-cols-4">
+      <div className="container-site grid gap-10 py-16 grid-cols-2 lg:grid-cols-5">
         <div className="space-y-4">
           <a href="#top" className="flex items-center gap-2.5">
             <Logo className="transition-transform duration-normal ease-out group-hover:-rotate-6" width={48} height={48} />
@@ -85,6 +93,22 @@ export function Footer() {
           <h2 className="font-display text-base font-bold text-foreground">خدمات</h2>
           <ul className="mt-4 space-y-2.5">
             {SERVICES.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-fast hover:text-primary-text-hover"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <nav aria-label="اطلاعات سلامت">
+          <h2 className="font-display text-base font-bold text-foreground">اطلاعات سلامت</h2>
+          <ul className="mt-4 space-y-2.5">
+            {HEALTH_INFO.map((link) => (
               <li key={link.label}>
                 <a
                   href={link.href}
