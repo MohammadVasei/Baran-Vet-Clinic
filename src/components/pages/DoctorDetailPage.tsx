@@ -9,7 +9,7 @@ import { DOCTORS, CLINIC } from "@/lib/content";
 import { PhoneIcon, ArrowIcon } from "@/components/icons";
 import Link from "next/link";
 
-type DoctorKey = "tazik" | "vasei";
+type DoctorKey = "tazik" | "vasei" | "moghan-jahani";
 
 interface DoctorDetailPageProps {
   doctorKey: DoctorKey;
@@ -130,7 +130,9 @@ export function DoctorDetailPage({ doctorKey }: DoctorDetailPageProps) {
               <p className="font-display text-lg font-semibold text-foreground italic">
                 {doctorKey === "tazik"
                   ? "پت شما عضو خانواده است. ما این را می‌فهمیم و با همان حس مسئولیت کنار شما هستیم."
-                  : "هر پرنده نیاز به توجه خاص خود را دارد و همین نگاه فردی، پایه کار ماست."}
+                  : doctorKey === "vasei"
+                  ? "هر پرنده نیاز به توجه خاص خود را دارد و همین نگاه فردی، پایه کار ماست."
+                  : "راحتی و خوشحالی پت شما، هدف اول و آخر ماست. با صبر و محبت، برایش بهترین تجربه را می‌سازیم."}
               </p>
             </div>
           </div>

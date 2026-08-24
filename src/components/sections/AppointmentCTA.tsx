@@ -381,7 +381,7 @@ export function AppointmentCTA() {
                         {i > 0 && (
                           <span
                             aria-hidden
-                            className={`absolute end-full top-4 h-[2px] w-full -translate-y-1/2 ${
+                            className={`absolute end-1/2 top-4 h-[2px] w-full -translate-y-1/2 ${
                               i <= step ? "bg-primary" : "bg-border"
                             }`}
                           />
