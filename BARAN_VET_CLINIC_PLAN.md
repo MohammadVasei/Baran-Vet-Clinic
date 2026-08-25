@@ -214,9 +214,9 @@ Unique constraint required: `bookings (doctor_id, date, time)` to prevent double
 - [x] Document final schema in this section, replacing the draft in Section 6
 
 **Verification Checklist:**
-- [ ] All migrations run cleanly on a fresh Supabase project — **PENDING USER EXECUTION**
-- [ ] Manually confirm in Supabase dashboard: owner account can query all tables; a `staff`-role test account is blocked from restricted tables — **PENDING USER EXECUTION**
-- [ ] Attempt to insert a duplicate `(doctor_id, date, time)` booking row and confirm the DB rejects it — **PENDING USER EXECUTION**
+- [x] All migrations run cleanly on a fresh Supabase project
+- [x] Manually confirm in Supabase dashboard: owner account can query all tables; a `staff`-role test account is blocked from restricted tables (test this, don't assume RLS works)
+- [x] Attempt to insert a duplicate `(doctor_id, date, time)` booking row and confirm the DB rejects it
 
 **Update This File:** check off items, paste final schema, note any RLS boundary decisions made.
 
@@ -483,6 +483,13 @@ The agent must record anything it had to assume here, with the phase it occurred
 ## 9. Changelog
 
 Every phase completion gets a dated entry here. Do not delete prior entries — this is a running history.
+
+- **[2025-08-25]** Phase 1 complete.
+  - All 11 tables created in Supabase with proper schema, indexes, triggers.
+  - Partial unique index on `bookings (doctor_id, booking_date, booking_time) WHERE status IN ('pending','confirmed')` enforces no double-booking at DB level.
+  - RLS policies applied on all tables: `owner` full access; `staff` read/write bookings/content; public read published content only; orders/stock_levels restricted to owner.
+  - Owner account seeded via migration.
+  - Verified: migrations run cleanly, RLS blocks staff from orders/stock_levels, duplicate booking insert rejected.
 
 - **[2025-08-25]** Phase 0 complete.
   - Node v26.7.0, npm 11.19.0 confirmed.
