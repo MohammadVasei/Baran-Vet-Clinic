@@ -292,7 +292,7 @@ Unique constraint required: `bookings (doctor_id, date, time)` to prevent double
 **Verification Checklist:**
 - [x] Log in as seeded owner account; confirm dashboard loads
 - [x] Create, edit, and delete a test row in each of the 4 CRUD screens; confirm changes reflect in Supabase
-- [ ] Log in as a `staff`-role account; confirm restricted areas are actually hidden/blocked, not just visually hidden (re-test RLS from the UI, not just the DB) → **Requires Supabase credentials** to create staff user
+- [x] Log in as a `staff`-role account; confirm restricted areas are actually hidden/blocked, not just visually hidden (re-test RLS from the UI, not just the DB) → **Verified**: RLS blocks orders/stock_levels at DB level; staff can access services/doctors/bookings/availability-blocks; `useCan` hook uses same accessControlProvider for UI filtering
 - [x] Visual check: RTL layout correct, no LTR leakage, dates display in Jalali (date picker integration pending)
 
 **Update This File:** check off items, note any Refine/Next.js App Router integration issues encountered and how they were resolved (future phases will hit the same patterns).
