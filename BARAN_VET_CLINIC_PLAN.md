@@ -286,13 +286,13 @@ Unique constraint required: `bookings (doctor_id, date, time)` to prevent double
 - [x] Build authenticated `/admin` shell (layout, nav, guard)
 - [x] Build CRUD screens for `services`, `doctors`, `diseases`, `testimonials`
 - [x] Confirm RTL + Farsi labels throughout `/admin`
-- [ ] Integrate Jalali date picker into any admin date fields
+- [ ] Integrate Jalali date picker into any admin date fields → **Phase 4 scope** (create/edit forms with date inputs)
 - [x] Apply clinic branding (logo, colors) to the admin shell
 
 **Verification Checklist:**
 - [x] Log in as seeded owner account; confirm dashboard loads
 - [x] Create, edit, and delete a test row in each of the 4 CRUD screens; confirm changes reflect in Supabase
-- [ ] Log in as a `staff`-role account; confirm restricted areas are actually hidden/blocked, not just visually hidden (re-test RLS from the UI, not just the DB)
+- [ ] Log in as a `staff`-role account; confirm restricted areas are actually hidden/blocked, not just visually hidden (re-test RLS from the UI, not just the DB) → **Requires Supabase credentials** to create staff user
 - [x] Visual check: RTL layout correct, no LTR leakage, dates display in Jalali (date picker integration pending)
 
 **Update This File:** check off items, note any Refine/Next.js App Router integration issues encountered and how they were resolved (future phases will hit the same patterns).
