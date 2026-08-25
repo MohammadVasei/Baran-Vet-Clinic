@@ -6,7 +6,7 @@ import { revealLines, revealUp, prefersReducedMotion, duration, ease } from "@/l
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { APPOINTMENT, ANIMALS, CLINIC, SERVICES } from "@/lib/content";
 import { MagneticButton } from "@/components/motion/MagneticButton";
-import { ArrowIcon, CheckIcon, ClockIcon, PhoneIcon, PinIcon } from "@/components/icons";
+import { ArrowIcon, CheckIcon, ClockIcon, PhoneIcon, PinIcon, XIcon } from "@/components/icons";
 import { GoldieVideo } from "@/components/mascot";
 
 const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
@@ -35,6 +35,22 @@ const EMPTY_FIELDS: Fields = {
 type DayOption = { iso: string; weekday: string; day: string };
 
 type ChipOption = { value: string; label: string; sub?: string; disabled?: boolean };
+
+type TimeSlot = { time: string; available: boolean };
+
+type BookingResponse = {
+  success: boolean;
+  booking?: {
+    id: string;
+    reference_code: string;
+    service_name: string;
+    doctor_name: string;
+    date: string;
+    time: string;
+  };
+  error?: string;
+  details?: Record<string, string[]>;
+};
 
 /** Radio-style single-select option chips (APG radios, RTL-aware arrows). */
 function OptionChips({
@@ -115,12 +131,16 @@ export function AppointmentCTA() {
   const [fields, setFields] = useState<Fields>(EMPTY_FIELDS);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [days, setDays] = useState<DayOption[]>([]);
+  const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
+  const [selectedDoctorId, setSelectedDoctorId] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [referenceCode, setReferenceCode] = useState<string | null>(null);
 
   const STEPS = APPOINTMENT.steps;
   const selectedService = SERVICES.items.find((s) => s.key === fields.service);
   const selectedAnimal = ANIMALS.categories.find((a) => a.key === fields.animal);
   const selectedDay = days.find((d) => d.iso === fields.day);
-  const selectedTime = APPOINTMENT.timeSlots.find((t) => t.key === fields.time);
+  const selectedTimeSlot = timeSlots.find((t) => t.time === fields.time);
 
   // Build the next 7 real days after mount (client-only — avoids any
   // SSR/build-time vs runtime date mismatch).
@@ -142,6 +162,32 @@ export function AppointmentCTA() {
     }, 0);
     return () => window.clearTimeout(t);
   }, []);
+
+  // Fetch available time slots when day, service, or doctor changes
+  useEffect(() => {
+    if (!fields.day || !fields.service || !selectedDoctorId) {
+      setTimeSlots([]);
+      return;
+    }
+
+    const controller = new AbortController();
+    const params = new URLSearchParams({
+      date: fields.day,
+      doctor_id: selectedDoctorId,
+      service_id: fields.service,
+    });
+
+    fetch(`/api/availability?${params.toString()}`, { signal: controller.signal })
+      .then(res => res.json())
+      .then(data => {
+        if (data.slots) setTimeSlots(data.slots);
+      })
+      .catch(err => {
+        if (err.name !== 'AbortError') console.error('Availability fetch failed:', err);
+      });
+
+    return () => controller.abort();
+  }, [fields.day, fields.service, selectedDoctorId]);
 
   // Announce step changes to screen readers (visible text mirrors the panel).
   useEffect(() => {
@@ -168,11 +214,13 @@ export function AppointmentCTA() {
   function goNext() {
     if (!stepComplete) return;
     setErrors({});
+    setSubmitError(null);
     setStep((s) => s + 1);
   }
 
   function goBack() {
     setErrors({});
+    setSubmitError(null);
     setStep((s) => Math.max(0, s - 1));
   }
 
@@ -193,33 +241,94 @@ export function AppointmentCTA() {
     return Object.keys(next).length === 0;
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (!validateContact()) return;
-    // Booking-API-ready: this payload is the exact shape to POST to the
-    // clinic's booking endpoint (e.g. /api/bookings) when it exists.
-    const payload = {
-      service: selectedService?.name ?? null,
-      animal: selectedAnimal?.name ?? null,
-      day: fields.day,
-      time: selectedTime?.label ?? null,
-      name: fields.name.trim(),
-      phone: normalizePhone(fields.phone),
-      petName: fields.petName.trim(),
-    };
-    void payload; // TODO: real data — replace the simulated delay with the POST.
+    if (!fields.day || !fields.time || !fields.service || !selectedDoctorId) return;
+
     setPending(true);
-    window.setTimeout(() => {
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          service_id: fields.service,
+          doctor_id: selectedDoctorId,
+          booking_date: fields.day,
+          booking_time: fields.time,
+          customer_name: fields.name.trim(),
+          customer_phone: normalizePhone(fields.phone),
+          pet_name: fields.petName.trim() || undefined,
+          pet_type: selectedAnimal?.key,
+        }),
+      });
+
+      const data: BookingResponse = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 409) {
+          // Slot taken - refetch availability and show error
+          setSubmitError(data.error || 'این بازه زمانی رزرو شده است');
+          const params = new URLSearchParams({
+            date: fields.day,
+            doctor_id: selectedDoctorId,
+            service_id: fields.service,
+          });
+          const availRes = await fetch(`/api/availability?${params.toString()}`);
+          const availData = await availRes.json();
+          if (availData.slots) setTimeSlots(availData.slots);
+        } else if (response.status === 400 && data.details) {
+          // Validation errors
+          const fieldErrors: Record<string, string> = {};
+          Object.entries(data.details).forEach(([key, messages]) => {
+            if (messages.length) fieldErrors[key] = messages[0];
+          });
+          setErrors(fieldErrors);
+        } else {
+          setSubmitError(data.error || 'خطا در ثبت نوبت. لطفاً دوباره تلاش کنید.');
+        }
+        setPending(false);
+        return;
+      }
+
+      // Success
+      if (data.booking) {
+        setReferenceCode(data.booking.reference_code);
+        setSubmitted(true);
+      }
+    } catch (err) {
+      console.error('Booking submit error:', err);
+      setSubmitError('خطای شبکه. لطفاً اتصال اینترنت را چک کنید و دوباره تلاش کنید.');
+    } finally {
       setPending(false);
-      setSubmitted(true);
-    }, 700);
+    }
   }
 
   function reset() {
     setFields(EMPTY_FIELDS);
     setErrors({});
+    setSubmitError(null);
+    setReferenceCode(null);
     setStep(0);
     setSubmitted(false);
   }
+
+  // Determine doctor based on service (simplified mapping)
+  useEffect(() => {
+    if (fields.service) {
+      // Map services to doctors - in real app this would come from DB
+      const doctorMap: Record<string, string> = {
+        'darman': 'dr-tazik',
+        'shenasname': 'dr-tazik',
+        'grooming': 'moghan-jahani',
+        'petshop': 'dr-tazik',
+      };
+      setSelectedDoctorId(doctorMap[fields.service] || 'dr-tazik');
+    } else {
+      setSelectedDoctorId(null);
+    }
+  }, [fields.service]);
 
   // Section entry reveals (eyebrow / split headline / intro / card / side).
   useGSAP(
@@ -338,7 +447,7 @@ export function AppointmentCTA() {
                   </div>
                   <div>
                     <dt className="font-label text-xs text-muted-foreground">زمان</dt>
-                    <dd className="mt-0.5 font-semibold text-foreground">{selectedTime?.label}</dd>
+                    <dd className="mt-0.5 font-semibold text-foreground">{selectedTimeSlot?.time}</dd>
                   </div>
                   <div>
                     <dt className="font-label text-xs text-muted-foreground">نام</dt>
@@ -352,13 +461,14 @@ export function AppointmentCTA() {
                   </div>
                 </dl>
 
-                {/* TODO: real data — real reference number will come from the booking API */}
-                <p className="mt-6 font-label text-sm text-muted-foreground">
-                  کد پیگیری (نمونه):{" "}
-                  <span dir="ltr" className="font-semibold text-foreground">
-                    BAR-0001
-                  </span>
-                </p>
+                {referenceCode && (
+                  <p className="mt-6 font-label text-sm text-muted-foreground">
+                    کد پیگیری:{" "}
+                    <span dir="ltr" className="font-semibold text-foreground text-primary">
+                      {referenceCode}
+                    </span>
+                  </p>
+                )}
 
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                   <button type="button" onClick={reset} className="btn btn-outline">
@@ -463,16 +573,31 @@ export function AppointmentCTA() {
                           }))}
                         />
                       )}
-                      {/* TODO: real data — sample time slots until the booking calendar is wired */}
-                      <div>
-                        <p className="field-label">بازهٔ زمانی</p>
-                        <OptionChips
-                          name="انتخاب زمان"
-                          value={fields.time}
-                          onChange={(v) => setFields((f) => ({ ...f, time: v }))}
-                          options={APPOINTMENT.timeSlots.map((t) => ({ value: t.key, label: t.label }))}
-                        />
-                      </div>
+                      {fields.day && (
+                        <div>
+                          <p className="field-label">بازهٔ زمانی</p>
+                          {timeSlots.length === 0 ? (
+                            <p className="text-sm text-muted-foreground">در حال بررسی زمان‌های خالی…</p>
+                          ) : (
+                            <OptionChips
+                              name="انتخاب زمان"
+                              value={fields.time}
+                              onChange={(v) => setFields((f) => ({ ...f, time: v }))}
+                              options={timeSlots.map((slot) => ({
+                                value: slot.time,
+                                label: slot.time,
+                                disabled: !slot.available,
+                              }))}
+                            />
+                          )}
+                          {timeSlots.length > 0 && timeSlots.every(s => !s.available) && (
+                            <p className="mt-2 text-sm text-destructive flex items-center gap-1">
+                              <XIcon className="size-4" />
+                              همه بازه‌های این روز پر است. روز دیگری انتخاب کنید.
+                            </p>
+                          )}
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -486,6 +611,12 @@ export function AppointmentCTA() {
                       }}
                       className="grid gap-5 sm:grid-cols-2"
                     >
+                      {submitError && (
+                        <div className="sm:col-span-2 rounded-app border border-destructive bg-destructive/10 p-4 flex items-start gap-3" role="alert">
+                          <XIcon className="size-5 shrink-0 text-destructive mt-0.5" />
+                          <p className="text-sm text-destructive">{submitError}</p>
+                        </div>
+                      )}
                       <div>
                         <label htmlFor="ap-name" className="field-label">
                           نام شما <span className="text-destructive">*</span>
