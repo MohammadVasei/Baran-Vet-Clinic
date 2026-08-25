@@ -188,7 +188,7 @@ Unique constraint required: `bookings (doctor_id, date, time)` to prevent double
 ---
 
 ### Phase 1 — Database & Auth Foundation
-**Status:** ✅ Migrations created — awaiting Supabase execution
+**Status:** ✅ Complete
 
 **Goal:** All Supabase tables from Section 6 exist with correct relationships and RLS policies; staff can authenticate with roles.
 
