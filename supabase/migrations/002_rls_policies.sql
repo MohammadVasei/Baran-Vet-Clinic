@@ -212,7 +212,7 @@ CREATE POLICY "Public can create bookings"
 CREATE POLICY "Public can view own bookings by phone"
     ON public.bookings
     FOR SELECT
-    USING (customer_phone = (SELECT raw_phone FROM auth.users WHERE id = auth.uid()) OR customer_phone = (SELECT phone FROM auth.users WHERE id = auth.uid()));
+    USING (customer_phone = (SELECT phone FROM auth.users WHERE id = auth.uid()));
 
 -- Staff can view ALL bookings
 CREATE POLICY "Staff can view all bookings"
@@ -293,7 +293,7 @@ CREATE POLICY "Public can create orders"
 CREATE POLICY "Public can view own orders by phone"
     ON public.orders
     FOR SELECT
-    USING (customer_phone = (SELECT raw_phone FROM auth.users WHERE id = auth.uid()) OR customer_phone = (SELECT phone FROM auth.users WHERE id = auth.uid()));
+    USING (customer_phone = (SELECT phone FROM auth.users WHERE id = auth.uid()));
 
 -- Staff can view all orders
 CREATE POLICY "Staff can view all orders"
@@ -328,7 +328,7 @@ CREATE POLICY "Public can view own order items"
         EXISTS (
             SELECT 1 FROM public.orders o
             WHERE o.id = order_items.order_id
-            AND o.customer_phone = (SELECT raw_phone FROM auth.users WHERE id = auth.uid())
+            AND o.customer_phone = (SELECT phone FROM auth.users WHERE id = auth.uid())
         )
     );
 
