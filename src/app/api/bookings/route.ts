@@ -4,8 +4,8 @@ import { z } from 'zod';
 import { sendBookingSMS } from '@/lib/sms';
 
 const BookingSchema = z.object({
-  service_id: z.string().uuid('شناسه خدمت نامعتبر'),
-  doctor_id: z.string().uuid('شناسه پزشک نامعتبر'),
+  service_id: z.string('شناسه hizmet نامعتبر'),
+  doctor_id: z.string('شناسه physician نامعتبر'),
   booking_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'فرمت تاریخ نامعتبر (YYYY-MM-DD)'),
   booking_time: z.string().regex(/^\d{2}:\d{2}$/, 'فرمت ساعت نامعتبر (HH:MM)'),
   customer_name: z.string().min(2, 'نام باید حداقل ۲ کاراکتر باشد').max(100),
@@ -41,11 +41,41 @@ export async function POST(request: NextRequest) {
     const data = parsed.data;
     const phone = normalizePhone(data.customer_phone);
 
-    // Check if slot is still available (race condition protection)
+    // Verify doctor exists and is active (lookup by key)
+    const { data: doctor, error: doctorError } = await supabaseAdmin
+      .from('doctors')
+      .select('id, name')
+      .eq('key', data.doctor_id)
+      .eq('is_active', true)
+      .single();
+
+    if (doctorError || !doctor) {
+      return NextResponse.json(
+        { error: 'پزشک یافت نشد یا غیرفعال است' },
+        { status: 404 }
+      );
+    }
+
+    // Verify service exists (lookup by key)
+    const { data: service, error: serviceError } = await supabaseAdmin
+      .from('services')
+      .select('id, name, duration_minutes')
+      .eq('key', data.service_id)
+      .eq('is_active', true)
+      .single();
+
+    if (serviceError || !service) {
+      return NextResponse.json(
+        { error: 'خدمت یافت نشد یا غیرفعال است' },
+        { status: 404 }
+      );
+    }
+
+    // Check if slot is still available (race condition protection) - use doctor UUID
     const { data: existing, error: checkError } = await supabaseAdmin
       .from('bookings')
       .select('id')
-      .eq('doctor_id', data.doctor_id)
+      .eq('doctor_id', doctor.id)
       .eq('booking_date', data.booking_date)
       .eq('booking_time', data.booking_time)
       .in('status', ['pending', 'confirmed'])
@@ -59,44 +89,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify doctor exists and is active
-    const { data: doctor, error: doctorError } = await supabaseAdmin
-      .from('doctors')
-      .select('id, name')
-      .eq('id', data.doctor_id)
-      .eq('is_active', true)
-      .single();
-
-    if (doctorError || !doctor) {
-      return NextResponse.json(
-        { error: 'پزشک یافت نشد یا غیرفعال است' },
-        { status: 404 }
-      );
-    }
-
-    // Verify service exists
-    const { data: service, error: serviceError } = await supabaseAdmin
-      .from('services')
-      .select('id, name')
-      .eq('id', data.service_id)
-      .eq('is_active', true)
-      .single();
-
-    if (serviceError || !service) {
-      return NextResponse.json(
-        { error: 'خدمت یافت نشد یا غیرفعال است' },
-        { status: 404 }
-      );
-    }
-
-    // Check availability blocks
+    // Check availability blocks (use doctor UUID)
     const startAt = new Date(`${data.booking_date}T${data.booking_time}:00.000Z`);
-    const endAt = new Date(startAt.getTime() + 30 * 60 * 1000); // 30 min default
+    const endAt = new Date(startAt.getTime() + (service.duration_minutes || 30) * 60 * 1000);
 
     const { data: blocks, error: blocksError } = await supabaseAdmin
       .from('availability_blocks')
       .select('id')
-      .eq('doctor_id', data.doctor_id)
+      .eq('doctor_id', doctor.id)
       .lte('start_at', endAt.toISOString())
       .gte('end_at', startAt.toISOString())
       .maybeSingle();
@@ -114,8 +114,8 @@ export async function POST(request: NextRequest) {
     const { data: booking, error: insertError } = await supabaseAdmin
       .from('bookings')
       .insert({
-        service_id: data.service_id,
-        doctor_id: data.doctor_id,
+        service_id: service.id,
+        doctor_id: doctor.id,
         booking_date: data.booking_date,
         booking_time: data.booking_time,
         customer_name: data.customer_name.trim(),

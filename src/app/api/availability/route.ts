@@ -26,36 +26,51 @@ export async function GET(request: NextRequest) {
 
     const { date, doctor_id, service_id } = parsed.data;
 
-    // Get service duration (default 30 min)
-    let _durationMinutes = 30;
-    if (service_id) {
-      const { data: service, error: serviceError } = await supabaseAdmin
-        .from('services')
-        .select('duration_minutes')
-        .eq('id', service_id)
-        .single();
-      if (serviceError) console.error('Service query error:', serviceError);
-      _durationMinutes = service?.duration_minutes ?? 30;
+    // Look up doctor by key
+    const { data: doctor, error: doctorError } = await supabaseAdmin
+      .from('doctors')
+      .select('id')
+      .eq('key', doctor_id)
+      .eq('is_active', true)
+      .single();
+
+    if (doctorError || !doctor) {
+      return NextResponse.json(
+        { error: 'پزشک یافت نشد یا غیرفعال است' },
+        { status: 404 }
+      );
     }
 
-    // Get doctor's availability blocks for the date
+    const doctorId = doctor.id;
+
+    // Get service duration (default 30 min) - lookup by key (for future variable slot intervals)
+    if (service_id) {
+      const { error: serviceError } = await supabaseAdmin
+        .from('services')
+        .select('duration_minutes')
+        .eq('key', service_id)
+        .single();
+      if (serviceError) console.error('Service query error:', serviceError);
+    }
+
+    // Get doctor's availability blocks for the date (use doctor UUID)
     const startOfDay = new Date(`${date}T00:00:00.000Z`);
     const endOfDay = new Date(`${date}T23:59:59.999Z`);
 
     const { data: blocks, error: blocksError } = await supabaseAdmin
       .from('availability_blocks')
       .select('start_at, end_at')
-      .eq('doctor_id', doctor_id)
+      .eq('doctor_id', doctorId)
       .lte('start_at', endOfDay.toISOString())
       .gte('end_at', startOfDay.toISOString());
 
     if (blocksError) console.error('Blocks query error:', blocksError);
 
-    // Get existing bookings for the date
+    // Get existing bookings for the date (use doctor UUID)
     const { data: bookings, error: bookingsError } = await supabaseAdmin
       .from('bookings')
       .select('booking_time, booking_date')
-      .eq('doctor_id', doctor_id)
+      .eq('doctor_id', doctorId)
       .eq('booking_date', date)
       .in('status', ['pending', 'confirmed']);
 

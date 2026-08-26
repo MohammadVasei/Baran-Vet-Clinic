@@ -37,20 +37,20 @@ END $$;
 -- ============================================================
 
 /*
--- Sample doctors
-INSERT INTO public.doctors (name, bio, specialties, display_order) VALUES
-('دکتر محمد تقی مقدم', 'متخصص جراحی و تشخیص تصویر، بیش از ۱۵ سال تجربه', ARRAY['جراحی', 'تشخیص تصویر', 'دارو درمانی'], 1),
-('دکتر فاطمه واعظی', 'متخصص بیماری‌های داخلی و پیشگیری، titulaire دیپلم کالج اروپایی', ARRAY['بیماری‌های داخلی', 'واکسن‌سازی', 'پارازیتی‌ها'], 2),
-('دکتر علی رضایی', 'متخصص پوست و حساسیت‌های حیوانات خانگی', ARRAY['پوست', 'حساسیت', 'عفونت‌های قارچی'], 3);
+-- Sample doctors (with keys for frontend lookup)
+INSERT INTO public.doctors (name, bio, specialties, display_order, key) VALUES
+('دکتر محمد تقی مقدم', 'متخصص جراحی و تشخیص تصویر، بیش از ۱۵ سال تجربه', ARRAY['جراحی', 'تشخیص تصویر', 'دارو درمانی'], 1, 'dr-tazik'),
+('دکتر فاطمه واعظی', 'متخصص بیماری‌های داخلی و پیشگیری، titulaire دیپلم کالج اروپایی', ARRAY['بیماری‌های داخلی', 'واکسن‌سازی', 'پارازیتی‌ها'], 2, 'dr-vasei'),
+('دکتر علی رضایی', 'متخصص پوست و حساسیت‌های حیوانات خانگی', ARRAY['پوست', 'حساسیت', 'عفونت‌های قارچی'], 3, 'moghan-jahani');
 
--- Sample services
-INSERT INTO public.services (name, description, duration_minutes, price_rial, category, display_order) VALUES
-('ویزیت عمومی', 'بررسی کامل سلامت و مشاوره', 30, 500000, 'darman', 1),
-('واکسن‌سازی', 'واکسن‌های اساسی و обязаتی', 20, 300000, 'darman', 2),
-('جراحی نرم', 'جراحی‌های بینی، گلو، و सदری', 60, 2000000, 'darman', 3),
-('شناسنامه سلامت', 'صحت‌نامه کامل با تست‌های آزمایشگاهی', 45, 800000, 'shenasname', 1),
-('شستشو و اصلاح کامل', 'حمام، برش ناخن، تمیز کردن گوش و چشم', 60, 600000, 'grooming', 1),
-('تریم ناخن و تمیز کردن گوش', 'مراقبت‌های سریع', 20, 150000, 'grooming', 2);
+-- Sample services (with keys for frontend lookup)
+INSERT INTO public.services (name, description, duration_minutes, price_rial, category, display_order, key) VALUES
+('ویزیت عمومی', 'بررسی کامل سلامت و مشاوره', 30, 500000, 'darman', 1, 'darman'),
+('واکسن‌سازی', 'واکسن‌های اساسی و обязаتی', 20, 300000, 'darman', 2, 'darman-vaccination'),
+('جراحی نرم', 'جراحی‌های بینی، گلو، و سینی', 60, 2000000, 'darman', 3, 'darman-surgery'),
+('شناسنامه سلامت', 'صحت‌نامه کامل با تست‌های آزمایشگاهی', 45, 800000, 'shenasname', 1, 'shenasname'),
+('شستشو و اصلاح کامل', 'حمام، برش ناخن، تمیز کردن گوش و چشم', 60, 600000, 'grooming', 1, 'grooming'),
+('تریم ناخن و تمیز کردن گوش', 'مراقبت‌های سریع', 20, 150000, 'grooming', 2, 'grooming-quick');
 
 -- Sample diseases (dog)
 INSERT INTO public.diseases (animal_type, category, name, symptoms, care, display_order) VALUES
