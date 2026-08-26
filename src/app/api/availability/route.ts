@@ -26,51 +26,36 @@ export async function GET(request: NextRequest) {
 
     const { date, doctor_id, service_id } = parsed.data;
 
-    // Look up doctor by key
-    const { data: doctor, error: doctorError } = await supabaseAdmin
-      .from('doctors')
-      .select('id')
-      .eq('key', doctor_id)
-      .eq('is_active', true)
-      .single();
-
-    if (doctorError || !doctor) {
-      return NextResponse.json(
-        { error: 'پزشک یافت نشد یا غیرفعال است' },
-        { status: 404 }
-      );
-    }
-
-    const doctorId = doctor.id;
-
-    // Get service duration (default 30 min) - lookup by key (for future variable slot intervals)
+    // Get service duration (default 30 min)
+    let _durationMinutes = 30;
     if (service_id) {
-      const { error: serviceError } = await supabaseAdmin
+      const { data: service, error: serviceError } = await supabaseAdmin
         .from('services')
         .select('duration_minutes')
-        .eq('key', service_id)
+        .eq('id', service_id)
         .single();
       if (serviceError) console.error('Service query error:', serviceError);
+      _durationMinutes = service?.duration_minutes ?? 30;
     }
 
-    // Get doctor's availability blocks for the date (use doctor UUID)
+    // Get doctor's availability blocks for the date
     const startOfDay = new Date(`${date}T00:00:00.000Z`);
     const endOfDay = new Date(`${date}T23:59:59.999Z`);
 
     const { data: blocks, error: blocksError } = await supabaseAdmin
       .from('availability_blocks')
       .select('start_at, end_at')
-      .eq('doctor_id', doctorId)
+      .eq('doctor_id', doctor_id)
       .lte('start_at', endOfDay.toISOString())
       .gte('end_at', startOfDay.toISOString());
 
     if (blocksError) console.error('Blocks query error:', blocksError);
 
-    // Get existing bookings for the date (use doctor UUID)
+    // Get existing bookings for the date
     const { data: bookings, error: bookingsError } = await supabaseAdmin
       .from('bookings')
       .select('booking_time, booking_date')
-      .eq('doctor_id', doctorId)
+      .eq('doctor_id', doctor_id)
       .eq('booking_date', date)
       .in('status', ['pending', 'confirmed']);
 

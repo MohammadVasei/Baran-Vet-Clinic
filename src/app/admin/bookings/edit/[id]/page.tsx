@@ -2,7 +2,7 @@
 
 import { useShow, useUpdate, useNavigation } from '@refinedev/core';
 import { useState } from 'react';
-import { useGSAP } from '@/lib/gsap';
+import { gsap, useGSAP } from '@/lib/gsap';
 import { prefersReducedMotion, duration, ease } from '@/lib/motion';
 import { ArrowIcon, CalendarIcon, ClockIcon, PhoneIcon, UserIcon, PawIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
@@ -35,7 +35,7 @@ export function BookingEdit() {
   const { result, query } = useShow({
     resource: 'bookings',
     meta: {
-      select: 'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,reference_code,created_at,service_name,doctor_name',
+      select: 'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,reference_code,created_at',
     },
   });
   const { mutate: updateBooking, mutation } = useUpdate();

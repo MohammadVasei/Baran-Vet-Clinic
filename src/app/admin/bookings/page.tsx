@@ -3,7 +3,7 @@
 import { useList, useUpdate, useNavigation, useCan } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { JalaliCalendar } from '@/components/admin/JalaliCalendar';
-import { EyeIcon, CalendarIcon, XIcon } from '@/components/icons';
+import { CalendarIcon, EyeIcon, XIcon } from '@/components/icons';
 import { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -55,7 +55,7 @@ export function BookingsList() {
       { field: 'booking_time', order: 'asc' },
     ],
     meta: {
-      select: 'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,reference_code,created_at,service_name,doctor_name',
+      select: 'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,reference_code,created_at',
     },
   });
   const navigation = useNavigation();
@@ -258,18 +258,6 @@ export function BookingsList() {
       <div className="rounded-app-lg border border-border bg-surface p-4 space-y-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-3">
-            <div className="relative">
-              <CalendarIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-              <JalaliCalendar
-                selectedDate={filterDate}
-                onDateSelect={handleCalendarDateSelect}
-                bookedDates={calendarBookedDates}
-                blockedDates={calendarBlockedDates}
-                today={today}
-                className="w-64"
-              />
-            </div>
-            
             <Select value={filterStatus} onValueChange={setFilterStatus}>
               <SelectTrigger className="w-40">
                 <SelectValue placeholder="وضعیت" />
@@ -314,13 +302,14 @@ export function BookingsList() {
         </div>
 
         {showCalendar && (
-          <div className="mt-4 rounded-app border border-border bg-surface/50 p-4">
+          <div className="mt-4 flex justify-center rounded-app border border-border bg-surface/50 p-4">
             <JalaliCalendar
               selectedDate={selectedCalendarDate}
               onDateSelect={handleCalendarDateSelect}
               bookedDates={calendarBookedDates}
               blockedDates={calendarBlockedDates}
               today={today}
+              className="w-full max-w-sm"
             />
           </div>
         )}

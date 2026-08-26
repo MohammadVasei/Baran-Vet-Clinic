@@ -5,7 +5,7 @@ import { useCan } from '@refinedev/core';
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useGSAP } from '@/lib/gsap';
+import { gsap, useGSAP } from '@/lib/gsap';
 import { prefersReducedMotion, duration, ease } from '@/lib/motion';
 import { ArrowIcon, MenuIcon, XIcon, LogOutIcon } from '@/components/icons';
 

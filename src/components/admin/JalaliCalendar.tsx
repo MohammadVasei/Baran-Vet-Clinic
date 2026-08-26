@@ -1,10 +1,9 @@
 "use client";
 
-import { useRef, useState, useMemo } from 'react';
-import { useGSAP } from '@/lib/gsap';
+import { useRef, useMemo } from 'react';
+import { gsap, useGSAP } from '@/lib/gsap';
 import { prefersReducedMotion, duration, ease } from '@/lib/motion';
-import { ChevronLeftIcon, ChevronRightIcon } from '@/components/icons';
-import DatePicker, { DateObject } from 'react-multi-date-picker';
+import { Calendar, DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 
@@ -26,7 +25,6 @@ export function JalaliCalendar({
   className = '',
 }: JalaliCalendarProps) {
   const calendarRef = useRef<HTMLDivElement>(null);
-  const [viewDate, setViewDate] = useState<string>(today || new Date().toISOString().slice(0, 10));
 
   useGSAP(
     () => {
@@ -43,24 +41,13 @@ export function JalaliCalendar({
         }
       );
     },
-    { dependencies: [viewDate] }
+    {}
   );
 
   const handleDateChange = (date: DateObject | null) => {
     if (!date) return;
     const iso = date.toDate().toISOString().slice(0, 10);
     onDateSelect(iso);
-    setViewDate(iso);
-  };
-
-  const navigateMonth = (direction: 'prev' | 'next') => {
-    const current = new Date(viewDate);
-    if (direction === 'prev') {
-      current.setMonth(current.getMonth() - 1);
-    } else {
-      current.setMonth(current.getMonth() + 1);
-    }
-    setViewDate(current.toISOString().slice(0, 10));
   };
 
   const isBooked = useMemo(() => new Set(bookedDates), [bookedDates]);
@@ -70,39 +57,44 @@ export function JalaliCalendar({
   const isBlockedDate = (date: string) => isBlocked.has(date);
   const isTodayDate = (date: string) => date === today;
   const isSelectedDate = (date: string) => date === selectedDate;
+  const minimumDate = today
+    ? new DateObject({
+        date: new Date(`${today}T12:00:00.000Z`),
+        calendar: persian,
+        locale: persian_fa,
+      })
+    : undefined;
+  const initialMonth = today
+    ? new DateObject({
+        date: new Date(`${today}T12:00:00.000Z`),
+        calendar: persian,
+        locale: persian_fa,
+      })
+    : undefined;
+
+  const handleTodayClick = () => {
+    if (!today) return;
+    onDateSelect(today);
+  };
 
   return (
     <div ref={calendarRef} className={`rounded-app-lg border border-border bg-surface p-4 ${className}`} dir="rtl">
-      {/* Header with month navigation */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex justify-end mb-2">
         <button
           type="button"
-          onClick={() => navigateMonth('prev')}
-          className="p-2 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-          aria-label="ماه قبل"
+          onClick={handleTodayClick}
+          className="rounded-app px-2 py-1 text-xs font-medium text-primary hover:bg-muted transition-colors"
         >
-          <ChevronRightIcon className="size-5" />
-        </button>
-
-        <div className="flex-1 text-center font-semibold text-foreground">
-          {new DateObject({ date: viewDate, calendar: persian, locale: persian_fa }).format('YYYY MMMM')}
-        </div>
-
-        <button
-          type="button"
-          onClick={() => navigateMonth('next')}
-          className="p-2 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-          aria-label="ماه بعد"
-        >
-          <ChevronLeftIcon className="size-5" />
+          امروز
         </button>
       </div>
 
       {/* Calendar Grid */}
-      <DatePicker
-        value={selectedDate}
+      <Calendar
+        value={selectedDate ? new Date(`${selectedDate}T12:00:00.000Z`) : undefined}
         onChange={handleDateChange}
-        minDate={today}
+        minDate={minimumDate}
+        currentDate={initialMonth}
         calendar={persian}
         locale={persian_fa}
         format="YYYY/MM/DD"
