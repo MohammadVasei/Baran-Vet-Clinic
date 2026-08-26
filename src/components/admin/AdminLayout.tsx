@@ -6,7 +6,7 @@ import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useGSAP } from '@/lib/gsap';
-import { revealUp, prefersReducedMotion, duration, ease } from '@/lib/motion';
+import { prefersReducedMotion, duration, ease } from '@/lib/motion';
 import { ArrowIcon, MenuIcon, XIcon, LogOutIcon } from '@/components/icons';
 
 const NAV_ITEMS = [

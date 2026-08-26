@@ -4,7 +4,7 @@ import { useForm } from '@refinedev/react-hook-form';
 import { useLogin } from '@refinedev/core';
 import { useState, useRef } from 'react';
 import { useGSAP } from '@/lib/gsap';
-import { revealLines, revealUp, prefersReducedMotion, duration, ease } from '@/lib/motion';
+import { revealLines, revealUp, prefersReducedMotion } from '@/lib/motion';
 import { LockIcon, MailIcon, EyeIcon, EyeOffIcon } from '@/components/icons';
 
 export function AdminLoginPage() {
@@ -16,8 +16,6 @@ export function AdminLoginPage() {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
-    setValue,
   } = useForm({
     defaultValues: {
       email: '',
@@ -25,8 +23,6 @@ export function AdminLoginPage() {
       remember: false,
     },
   });
-
-  const email = watch('email');
 
   const submit = handleSubmit(async (values) => {
     try {

@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState, useMemo } from "react";
 import { useGSAP, gsap } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion, duration, ease } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -132,9 +132,19 @@ export function AppointmentCTA() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [days, setDays] = useState<DayOption[]>([]);
   const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
-  const [selectedDoctorId, setSelectedDoctorId] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [referenceCode, setReferenceCode] = useState<string | null>(null);
+
+  const selectedDoctorId = useMemo(() => {
+    if (!fields.service) return null;
+    const doctorMap: Record<string, string> = {
+      'darman': 'dr-tazik',
+      'shenasname': 'dr-tazik',
+      'grooming': 'moghan-jahani',
+      'petshop': 'dr-tazik',
+    };
+    return doctorMap[fields.service] || 'dr-tazik';
+  }, [fields.service]);
 
   const STEPS = APPOINTMENT.steps;
   const selectedService = SERVICES.items.find((s) => s.key === fields.service);
@@ -166,7 +176,6 @@ export function AppointmentCTA() {
   // Fetch available time slots when day, service, or doctor changes
   useEffect(() => {
     if (!fields.day || !fields.service || !selectedDoctorId) {
-      setTimeSlots([]);
       return;
     }
 
@@ -313,22 +322,6 @@ export function AppointmentCTA() {
     setStep(0);
     setSubmitted(false);
   }
-
-  // Determine doctor based on service (simplified mapping)
-  useEffect(() => {
-    if (fields.service) {
-      // Map services to doctors - in real app this would come from DB
-      const doctorMap: Record<string, string> = {
-        'darman': 'dr-tazik',
-        'shenasname': 'dr-tazik',
-        'grooming': 'moghan-jahani',
-        'petshop': 'dr-tazik',
-      };
-      setSelectedDoctorId(doctorMap[fields.service] || 'dr-tazik');
-    } else {
-      setSelectedDoctorId(null);
-    }
-  }, [fields.service]);
 
   // Section entry reveals (eyebrow / split headline / intro / card / side).
   useGSAP(
@@ -573,7 +566,7 @@ export function AppointmentCTA() {
                           }))}
                         />
                       )}
-                      {fields.day && (
+                      {fields.day && fields.service && selectedDoctorId && (
                         <div>
                           <p className="field-label">بازهٔ زمانی</p>
                           {timeSlots.length === 0 ? (

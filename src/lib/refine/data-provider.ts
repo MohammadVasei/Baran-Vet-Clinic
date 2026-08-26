@@ -1,4 +1,4 @@
 import { dataProvider as supabaseDataProvider } from '@refinedev/supabase';
-import { supabaseAdmin } from '@/lib/supabase-admin';
+import { supabaseClient } from '@/lib/supabase-client';
 
-export const dataProvider = supabaseDataProvider(supabaseAdmin);
+export const dataProvider = supabaseDataProvider(supabaseClient);

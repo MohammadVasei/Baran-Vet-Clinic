@@ -56,13 +56,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+      </head>
+      <body className="min-h-full flex flex-col">
         <Script
           src="https://cdn.spline.design/@splinetool/hana-viewer@1.2.54/hana-viewer.js"
           type="module"
           strategy="beforeInteractive"
         />
-      </head>
-      <body className="min-h-full flex flex-col">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

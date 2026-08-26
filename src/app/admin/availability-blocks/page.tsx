@@ -3,98 +3,133 @@ export const dynamic = 'force-dynamic';
 
 import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, TrashIcon, EyeIcon } from '@/components/icons';
+import { EditIcon, TrashIcon } from '@/components/icons';
 
-export function ServicesList() {
+const reasonLabels: Record<string, string> = {
+  holiday: 'تعطیلی',
+  absence: 'مرخصی/غیبت',
+  maintenance: 'تعمیرات',
+  other: 'سایر',
+};
+
+const reasonColors: Record<string, string> = {
+  holiday: 'bg-blue-100 text-blue-700',
+  absence: 'bg-yellow-100 text-yellow-700',
+  maintenance: 'bg-gray-100 text-gray-700',
+  other: 'bg-purple-100 text-purple-700',
+};
+
+export function AvailabilityBlocksList() {
   const listResult = useList({
-    resource: 'services',
-    sorters: [{ field: 'display_order', order: 'asc' }],
+    resource: 'availability-blocks',
+    sorters: [{ field: 'start_at', order: 'desc' }],
     meta: {
-      select: 'id,name,description,duration_minutes,price_rial,category,display_order,is_active,created_at',
+      select: 'id,doctor_id,start_at,end_at,reason,description,created_at',
     },
   });
   const { result, query } = listResult;
   const navigation = useNavigation();
   const { mutate: deleteItem } = useDelete();
 
-  const canEdit = useCan({ resource: 'services', action: 'edit' });
-  const canDelete = useCan({ resource: 'services', action: 'delete' });
+  const canEdit = useCan({ resource: 'availability-blocks', action: 'edit' });
+  const canDelete = useCan({ resource: 'availability-blocks', action: 'delete' });
 
-  const handleEdit = (id: string) => navigation.edit('services', id);
-  const handleShow = (id: string) => navigation.show('services', id);
+  const handleEdit = (id: string) => navigation.edit('availability-blocks', id);
   const handleDelete = (id: string) => {
-    if (confirm('آیا از حذف این خدمت اطمینان دارید؟')) {
-      deleteItem({ id, resource: 'services' });
+    if (confirm('آیا از حذف این بازه غیرفعال اطمینان دارید؟')) {
+      deleteItem({ id, resource: 'availability-blocks' });
     }
   };
-  const handleCreate = () => navigation.create('services');
+  const handleCreate = () => navigation.create('availability-blocks');
 
-  interface ServiceRow {
+  interface AvailabilityBlockRow {
     id: string;
-    name: string;
-    category: string;
-    duration_minutes: number;
-    price_rial: number | null;
-    display_order: number;
-    is_active: boolean;
+    doctor_id: string;
+    start_at: string;
+    end_at: string;
+    reason: string;
+    description: string | null;
+    created_at: string;
   }
 
   const columns = [
     {
-      accessorKey: 'name' as keyof ServiceRow,
-      header: 'نام',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => <span className="font-medium">{getValue('name') as string}</span>,
+      accessorKey: 'doctor_id' as keyof AvailabilityBlockRow,
+      header: 'پزشک',
+      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => (
+        <span className="font-medium text-muted-foreground">{getValue('doctor_id') as string}</span>
+      ),
     },
     {
-      accessorKey: 'category' as keyof ServiceRow,
-      header: 'دسته‌بندی',
+      accessorKey: 'start_at' as keyof AvailabilityBlockRow,
+      header: 'از تاریخ/ساعت',
       cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
-        const cat = getValue('category') as string;
-        const labels: Record<string, string> = {
-          darman: 'درمان',
-          shenasname: 'شناسنامه',
-          grooming: 'شستشو و اصلاح',
-          petshop: 'پت‌شاپ',
-        };
-        return <span className="px-2 py-1 text-xs rounded-full bg-muted">{labels[cat] || cat}</span>;
-      },
-    },
-    {
-      accessorKey: 'duration_minutes' as keyof ServiceRow,
-      header: 'مدت (دقیقه)',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => <span>{getValue('duration_minutes') as number} دقیقه</span>,
-    },
-    {
-      accessorKey: 'price_rial' as keyof ServiceRow,
-      header: 'قیمت (ریال)',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
-        const price = getValue('price_rial') as number | null;
-        return price ? new Intl.NumberFormat('fa-IR').format(price) : '—';
-      },
-    },
-    {
-      accessorKey: 'display_order' as keyof ServiceRow,
-      header: 'ترتیب',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => <span>{getValue('display_order') as number}</span>,
-    },
-    {
-      accessorKey: 'is_active' as keyof ServiceRow,
-      header: 'وضعیت',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
-        const active = getValue('is_active') as boolean;
+        const date = getValue('start_at') as string;
+        const d = new Date(date);
         return (
-          <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full ${active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-            {active ? 'فعال' : 'غیرفعال'}
+          <div className="flex flex-col gap-0.5">
+            <span className="font-mono text-sm">
+              {d.toLocaleDateString('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </span>
+            <span className="font-mono text-xs text-muted-foreground">
+              {d.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit', hour12: false })}
+            </span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'end_at' as keyof AvailabilityBlockRow,
+      header: 'تا تاریخ/ساعت',
+      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
+        const date = getValue('end_at') as string;
+        const d = new Date(date);
+        return (
+          <div className="flex flex-col gap-0.5">
+            <span className="font-mono text-sm">
+              {d.toLocaleDateString('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </span>
+            <span className="font-mono text-xs text-muted-foreground">
+              {d.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit', hour12: false })}
+            </span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'reason' as keyof AvailabilityBlockRow,
+      header: 'دلیل',
+      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
+        const reason = getValue('reason') as string;
+        return (
+          <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full ${reasonColors[reason] || 'bg-gray-100 text-gray-700'}`}>
+            {reasonLabels[reason] || reason}
           </span>
         );
       },
     },
     {
+      accessorKey: 'description' as keyof AvailabilityBlockRow,
+      header: 'توضیحات',
+      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
+        const desc = getValue('description') as string | null;
+        if (!desc) return <span className="text-muted-foreground">—</span>;
+        return <span className="max-w-xs truncate block">{desc}</span>;
+      },
+    },
+    {
+      accessorKey: 'created_at' as keyof AvailabilityBlockRow,
+      header: 'ایجاد شده',
+      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
+        const date = getValue('created_at') as string;
+        return new Date(date).toLocaleDateString('fa-IR', { year: 'numeric', month: 'short', day: 'numeric' });
+      },
+    },
+    {
       id: 'actions',
       header: 'عملیات',
-      cellWithMeta: ({ original }: { original: ServiceRow }) => (
+      cellWithMeta: ({ original }: { original: AvailabilityBlockRow }) => (
         <div className="flex items-center gap-2">
-          <button onClick={() => handleShow(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="مشاهده"><EyeIcon className="size-4" /></button>
           {canEdit.data && <button onClick={() => handleEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش"><EditIcon className="size-4" /></button>}
           {canDelete.data && <button onClick={() => handleDelete(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-destructive transition-colors" aria-label="حذف"><TrashIcon className="size-4" /></button>}
         </div>
@@ -106,26 +141,26 @@ export function ServicesList() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">مدیریت خدمات</h1>
-          <p className="text-muted-foreground mt-1">لیست تمام خدمات کلینیک</p>
+          <h1 className="font-display text-2xl font-bold text-foreground">مدیریت بازه‌های غیرفعال</h1>
+          <p className="text-muted-foreground mt-1">لیست تمام بازه‌های زمانی مسدود شده برای پزشکان</p>
         </div>
       </div>
 
       <AdminTable
         columns={columns}
-        data={(result?.data as ServiceRow[]) || []}
+        data={(result?.data as AvailabilityBlockRow[]) || []}
         isLoading={query.isLoading}
         onCreate={handleCreate}
-        createLabel="افزودن خدمت"
+        createLabel="افزودن بازه غیرفعال"
       />
 
       {query.isError && (
         <div className="rounded-app border border-destructive bg-destructive/10 p-4 text-center text-destructive">
-          خطا در بارگذاری خدمات
+          خطا در بارگذاری بازه‌های غیرفعال
         </div>
       )}
     </div>
   );
 }
 
-export default ServicesList;
+export default AvailabilityBlocksList;

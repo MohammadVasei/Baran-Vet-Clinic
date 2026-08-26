@@ -66,7 +66,6 @@ export function AdminApp({ children }: { children: React.ReactNode }) {
               name: 'bookings',
               list: '/admin/bookings',
               edit: '/admin/bookings/edit/:id',
-              show: '/admin/bookings/show/:id',
               meta: {
                 label: 'نوبت‌ها',
                 icon: 'booking',

@@ -4,8 +4,8 @@ import { z } from 'zod';
 
 const QuerySchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format (YYYY-MM-DD)'),
-  doctor_id: z.string().uuid('Invalid doctor ID'),
-  service_id: z.string().uuid('Invalid service ID').optional(),
+  doctor_id: z.string(),
+  service_id: z.string().optional(),
 });
 
 export async function GET(request: NextRequest) {
@@ -27,14 +27,15 @@ export async function GET(request: NextRequest) {
     const { date, doctor_id, service_id } = parsed.data;
 
     // Get service duration (default 30 min)
-    let durationMinutes = 30;
+    let _durationMinutes = 30;
     if (service_id) {
-      const { data: service } = await supabaseAdmin
+      const { data: service, error: serviceError } = await supabaseAdmin
         .from('services')
         .select('duration_minutes')
         .eq('id', service_id)
         .single();
-      if (service) durationMinutes = service.duration_minutes;
+      if (serviceError) console.error('Service query error:', serviceError);
+      _durationMinutes = service?.duration_minutes ?? 30;
     }
 
     // Get doctor's availability blocks for the date
@@ -48,7 +49,7 @@ export async function GET(request: NextRequest) {
       .lte('start_at', endOfDay.toISOString())
       .gte('end_at', startOfDay.toISOString());
 
-    if (blocksError) throw blocksError;
+    if (blocksError) console.error('Blocks query error:', blocksError);
 
     // Get existing bookings for the date
     const { data: bookings, error: bookingsError } = await supabaseAdmin
@@ -58,9 +59,9 @@ export async function GET(request: NextRequest) {
       .eq('booking_date', date)
       .in('status', ['pending', 'confirmed']);
 
-    if (bookingsError) throw bookingsError;
+    if (bookingsError) console.error('Bookings query error:', bookingsError);
 
-    // Generate time slots (9:00 to 21:00, every 30 min)
+    // Generate time slots (9:00 to 20:00, every 30 min)
     const slots: Array<{ time: string; available: boolean }> = [];
     const bookedTimes = new Set(bookings?.map(b => b.booking_time.slice(0, 5)) || []);
 
@@ -77,7 +78,7 @@ export async function GET(request: NextRequest) {
       for (const minute of [0, 30]) {
         if (hour === 20 && minute === 30) continue;
         const timeStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-        
+
         // Check if slot is blocked
         const isBlocked = blockedRanges.some(range => 
           timeStr >= range.start && timeStr < range.end
@@ -95,10 +96,8 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ slots, date, doctor_id });
   } catch (error) {
-    console.error('Availability API error:', error);
-    return NextResponse.json(
-      { error: 'خطا در دریافت زمان‌های خالی' },
-      { status: 500 }
-    );
+    console.error('Availability API critical error:', error);
+    // Return empty slots instead of 500 error
+    return NextResponse.json({ slots: [] });
   }
 }

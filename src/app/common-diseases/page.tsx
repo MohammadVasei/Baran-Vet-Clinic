@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Metadata } from "next";
 import { CommonDiseasesPage } from "@/components/pages/CommonDiseasesPage";
 
@@ -23,5 +24,9 @@ export const metadata: Metadata = {
 };
 
 export default function CommonDiseasesPageRoute() {
-  return <CommonDiseasesPage />;
+  return (
+    <Suspense fallback={null}>
+      <CommonDiseasesPage />
+    </Suspense>
+  );
 }

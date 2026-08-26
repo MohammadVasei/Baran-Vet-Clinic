@@ -1,8 +1,24 @@
+import { supabaseClient } from '@/lib/supabase-client';
 import { AccessControlProvider } from '@refinedev/core';
 
 export const accessControlProvider: AccessControlProvider = {
   can: async ({ resource, action, params }) => {
-    const role = String(params?.role || 'public');
+    let role = String(params?.role || '');
+
+    if (!role) {
+      const { data: { user } } = await supabaseClient.auth.getUser();
+      if (user) {
+        const { data: staff } = await supabaseClient
+          .from('staff_users')
+          .select('role')
+          .eq('id', user.id)
+          .single();
+        role = staff?.role || 'public';
+      } else {
+        role = 'public';
+      }
+    }
+
     const resourceStr = String(resource || '');
 
     // Owner has access to everything
