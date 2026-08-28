@@ -3,7 +3,7 @@
 import { useForm } from '@refinedev/react-hook-form';
 import { useShow, useUpdate, useNavigation, useSelect } from '@refinedev/core';
 import { useMemo } from 'react';
-import { useGSAP } from '@/lib/gsap';
+import { gsap, useGSAP } from '@/lib/gsap';
 import { prefersReducedMotion, duration, ease } from '@/lib/motion';
 import { ArrowIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { JalaliDateInput } from '@/components/admin/JalaliDateInput';
 
 interface FormValues {
   doctor_id: string;
@@ -20,7 +20,6 @@ interface FormValues {
   start_time: string;
   end_time: string;
   reason: string;
-  description: string;
 }
 
 interface BlockData {
@@ -29,7 +28,6 @@ interface BlockData {
   start_at: string;
   end_at: string;
   reason: string;
-  description: string | null;
   created_at: string;
 }
 
@@ -42,13 +40,13 @@ const reasonOptions = [
 
 export function AvailabilityBlockEdit() {
   const { result, query } = useShow<BlockData>({
-    resource: 'availability-blocks',
+    resource: 'availability_blocks',
     meta: {
-      select: 'id,doctor_id,start_at,end_at,reason,description,created_at',
+      select: 'id,doctor_id,start_at,end_at,reason,created_at',
     },
   });
 
-  const { mutate: updateBlock } = useUpdate();
+  const { mutateAsync: updateBlock } = useUpdate();
   const navigate = useNavigation();
 
   const { options: doctorOptions } = useSelect({
@@ -72,7 +70,6 @@ export function AvailabilityBlockEdit() {
         start_time: '09:00',
         end_time: '17:00',
         reason: 'absence',
-        description: '',
       };
     }
     const start = new Date(block.start_at);
@@ -84,13 +81,14 @@ export function AvailabilityBlockEdit() {
       start_time: start.toTimeString().slice(0, 5),
       end_time: end.toTimeString().slice(0, 5),
       reason: block.reason,
-      description: block.description || '',
     };
   }, [block]);
 
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues,
@@ -104,13 +102,12 @@ export function AvailabilityBlockEdit() {
       await updateBlock(
         {
           id: block!.id,
-          resource: 'availability-blocks',
+          resource: 'availability_blocks',
           values: {
             doctor_id: values.doctor_id || block!.doctor_id,
             start_at: startDateTime,
             end_at: endDateTime,
             reason: values.reason,
-            description: values.description,
           },
         },
       );
@@ -231,9 +228,15 @@ export function AvailabilityBlockEdit() {
                   تاریخ شروع <span className="text-destructive">*</span>
                 </Label>
                 <Input
+                  type="hidden"
                   {...register('start_date', { required: 'تاریخ شروع الزامی است' })}
-                  type="date"
-                  className="w-full"
+                  value={watch('start_date')}
+                  readOnly
+                />
+                <JalaliDateInput
+                  value={watch('start_date')}
+                  onChange={(value) => setValue('start_date', value, { shouldValidate: true })}
+                  id="start_date"
                 />
                 {errors.start_date && (
                   <p className="mt-1.5 text-sm text-destructive" role="alert">{String(errors.start_date.message)}</p>
@@ -245,9 +248,15 @@ export function AvailabilityBlockEdit() {
                   تاریخ پایان <span className="text-destructive">*</span>
                 </Label>
                 <Input
+                  type="hidden"
                   {...register('end_date', { required: 'تاریخ پایان الزامی است' })}
-                  type="date"
-                  className="w-full"
+                  value={watch('end_date')}
+                  readOnly
+                />
+                <JalaliDateInput
+                  value={watch('end_date')}
+                  onChange={(value) => setValue('end_date', value, { shouldValidate: true })}
+                  id="end_date"
                 />
                 {errors.end_date && (
                   <p className="mt-1.5 text-sm text-destructive" role="alert">{String(errors.end_date.message)}</p>
@@ -285,17 +294,6 @@ export function AvailabilityBlockEdit() {
               </div>
             </div>
 
-            <div>
-              <Label htmlFor="description" className="block text-sm font-medium text-muted-foreground mb-2">
-                توضیحات
-              </Label>
-              <Textarea
-                {...register('description')}
-                placeholder="توضیحات اضافه (اختیاری)"
-                rows={3}
-                className="w-full"
-              />
-            </div>
 
             <div className="pt-4 border-t border-border flex gap-3">
               <Button type="submit" className="flex-1">

@@ -1,131 +1,80 @@
 "use client";
-export const dynamic = 'force-dynamic';
 
-import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
-import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, TrashIcon, EyeIcon } from '@/components/icons';
+import Link from 'next/link';
+import { useList } from '@refinedev/core';
+import { CalendarIcon, EditIcon } from '@/components/icons';
 
-export function ServicesList() {
-  const listResult = useList({
-    resource: 'services',
+interface Doctor {
+  id: string;
+  name: string;
+  key: string | null;
+  bio: string | null;
+  is_active: boolean;
+}
+
+interface Service {
+  id: string;
+  name: string;
+  doctor_id: string | null;
+  is_active: boolean;
+}
+
+export default function DoctorsList() {
+  const { result: doctorResult, query: doctorQuery } = useList<Doctor>({
+    resource: 'doctors',
     sorters: [{ field: 'display_order', order: 'asc' }],
-    meta: {
-      select: 'id,name,description,duration_minutes,price_rial,category,display_order,is_active,created_at',
-    },
+    meta: { select: 'id,name,key,bio,is_active' },
+    pagination: { mode: 'off' },
   });
-  const { result, query } = listResult;
-  const navigation = useNavigation();
-  const { mutate: deleteItem } = useDelete();
+  const { result: serviceResult } = useList<Service>({
+    resource: 'services',
+    meta: { select: 'id,name,doctor_id,is_active' },
+    pagination: { mode: 'off' },
+  });
+  const doctors = doctorResult?.data || [];
+  const services = serviceResult?.data || [];
 
-  const canEdit = useCan({ resource: 'services', action: 'edit' });
-  const canDelete = useCan({ resource: 'services', action: 'delete' });
-
-  const handleEdit = (id: string) => navigation.edit('services', id);
-  const handleShow = (id: string) => navigation.show('services', id);
-  const handleDelete = (id: string) => {
-    if (confirm('آیا از حذف این خدمت اطمینان دارید؟')) {
-      deleteItem({ id, resource: 'services' });
-    }
-  };
-  const handleCreate = () => navigation.create('services');
-
-  interface ServiceRow {
-    id: string;
-    name: string;
-    category: string;
-    duration_minutes: number;
-    price_rial: number | null;
-    display_order: number;
-    is_active: boolean;
-  }
-
-  const columns = [
-    {
-      accessorKey: 'name' as keyof ServiceRow,
-      header: 'نام',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => <span className="font-medium">{getValue('name') as string}</span>,
-    },
-    {
-      accessorKey: 'category' as keyof ServiceRow,
-      header: 'دسته‌بندی',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
-        const cat = getValue('category') as string;
-        const labels: Record<string, string> = {
-          darman: 'درمان',
-          shenasname: 'شناسنامه',
-          grooming: 'شستشو و اصلاح',
-          petshop: 'پت‌شاپ',
-        };
-        return <span className="px-2 py-1 text-xs rounded-full bg-muted">{labels[cat] || cat}</span>;
-      },
-    },
-    {
-      accessorKey: 'duration_minutes' as keyof ServiceRow,
-      header: 'مدت (دقیقه)',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => <span>{getValue('duration_minutes') as number} دقیقه</span>,
-    },
-    {
-      accessorKey: 'price_rial' as keyof ServiceRow,
-      header: 'قیمت (ریال)',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
-        const price = getValue('price_rial') as number | null;
-        return price ? new Intl.NumberFormat('fa-IR').format(price) : '—';
-      },
-    },
-    {
-      accessorKey: 'display_order' as keyof ServiceRow,
-      header: 'ترتیب',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => <span>{getValue('display_order') as number}</span>,
-    },
-    {
-      accessorKey: 'is_active' as keyof ServiceRow,
-      header: 'وضعیت',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
-        const active = getValue('is_active') as boolean;
-        return (
-          <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full ${active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-            {active ? 'فعال' : 'غیرفعال'}
-          </span>
-        );
-      },
-    },
-    {
-      id: 'actions',
-      header: 'عملیات',
-      cellWithMeta: ({ original }: { original: ServiceRow }) => (
-        <div className="flex items-center gap-2">
-          <button onClick={() => handleShow(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="مشاهده"><EyeIcon className="size-4" /></button>
-          {canEdit.data && <button onClick={() => handleEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش"><EditIcon className="size-4" /></button>}
-          {canDelete.data && <button onClick={() => handleDelete(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-destructive transition-colors" aria-label="حذف"><TrashIcon className="size-4" /></button>}
-        </div>
-      ),
-    },
-  ];
+  if (doctorQuery.isLoading) return <div className="p-8 text-center">در حال بارگذاری پزشکان...</div>;
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">مدیریت خدمات</h1>
-          <p className="text-muted-foreground mt-1">لیست تمام خدمات کلینیک</p>
-        </div>
+      <div>
+        <h1 className="font-display text-2xl font-bold text-foreground">مدیریت پزشکان</h1>
+        <p className="mt-1 text-muted-foreground">پزشکان، خدمات مسئول و زمان‌های غیرفعال را مدیریت کنید.</p>
       </div>
-
-      <AdminTable
-        columns={columns}
-        data={(result?.data as ServiceRow[]) || []}
-        isLoading={query.isLoading}
-        onCreate={handleCreate}
-        createLabel="افزودن خدمت"
-      />
-
-      {query.isError && (
-        <div className="rounded-app border border-destructive bg-destructive/10 p-4 text-center text-destructive">
-          خطا در بارگذاری خدمات
-        </div>
-      )}
+      <div className="grid gap-4 md:grid-cols-2">
+        {doctors.map((doctor) => {
+          const assignedServices = services.filter((service) => service.doctor_id === doctor.id);
+          return (
+            <article key={doctor.id} className="rounded-app-lg border border-border bg-surface p-5">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h2 className="font-display text-xl font-bold text-foreground">{doctor.name}</h2>
+                  <p className="mt-1 font-mono text-xs text-muted-foreground">{doctor.key || doctor.id}</p>
+                </div>
+                <span className={`rounded-full px-2 py-1 text-xs ${doctor.is_active ? 'bg-accent-green-soft text-accent-green-fg' : 'bg-muted text-muted-foreground'}`}>
+                  {doctor.is_active ? 'فعال' : 'غیرفعال'}
+                </span>
+              </div>
+              {doctor.bio && <p className="mt-4 text-sm text-muted-foreground">{doctor.bio}</p>}
+              <div className="mt-4 border-t border-border pt-4">
+                <p className="text-sm font-medium text-foreground">خدمات مسئول</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {assignedServices.length > 0 ? assignedServices.map((service) => (
+                    <Link key={service.id} href={`/admin/services/show/${service.id}`} className="rounded-full bg-primary-soft px-2.5 py-1 text-xs text-primary-text hover:underline">
+                      {service.name}
+                    </Link>
+                  )) : <span className="text-xs text-muted-foreground">خدمتی تعیین نشده است.</span>}
+                </div>
+              </div>
+              <div className="mt-5 flex gap-2">
+                <Link href="/admin/availability-blocks" className="btn btn-outline text-sm"><CalendarIcon className="size-4" /> زمان‌های غیرفعال</Link>
+                <Link href={`/admin/doctors/edit/${doctor.id}`} className="btn btn-outline text-sm"><EditIcon className="size-4" /> ویرایش پزشک</Link>
+              </div>
+            </article>
+          );
+        })}
+      </div>
     </div>
   );
 }
-
-export default ServicesList;

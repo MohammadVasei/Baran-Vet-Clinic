@@ -104,3 +104,29 @@ CREATE POLICY "Public can view own bookings by phone"
 	ON public.bookings
 	FOR SELECT
 	USING (customer_phone = public.current_user_phone());
+
+-- ============================================================
+-- 10. Allow staff to manage availability blocks
+-- ============================================================
+CREATE POLICY "Staff can manage availability blocks"
+	ON public.availability_blocks
+	FOR ALL
+	USING (public.is_staff())
+	WITH CHECK (public.is_staff());
+
+-- ============================================================
+-- 11. Associate services with responsible doctors
+-- ============================================================
+ALTER TABLE public.services
+		ADD COLUMN IF NOT EXISTS doctor_id uuid REFERENCES public.doctors(id) ON DELETE SET NULL;
+
+CREATE INDEX IF NOT EXISTS idx_services_doctor_id ON public.services (doctor_id);
+
+UPDATE public.services AS services
+SET doctor_id = doctors.id
+FROM public.doctors AS doctors
+WHERE services.doctor_id IS NULL
+	AND doctors.key = CASE
+		WHEN services.category = 'grooming' THEN 'moghan-jahani'
+		ELSE 'dr-tazik'
+	END;

@@ -307,3 +307,100 @@ export function EditIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function ImageIcon(props: IconProps) {
+  return (
+    <svg {...stroke} {...props}>
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+      <circle cx="8.5" cy="8.5" r="1.5" />
+      <path d="M21 15l-5-5L5 21" />
+    </svg>
+  );
+}
+
+export function UploadIcon(props: IconProps) {
+  return (
+    <svg {...stroke} {...props}>
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="17 8 12 3 7 8" />
+      <line x1="12" x2="12" y1="3" y2="15" />
+    </svg>
+  );
+}
+
+export function ShoppingCartIcon(props: IconProps) {
+  return (
+    <svg {...stroke} {...props}>
+      <circle cx="9" cy="21" r="1" />
+      <circle cx="20" cy="21" r="1" />
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+    </svg>
+  );
+}
+
+export function AlertCircleIcon(props: IconProps) {
+  return (
+    <svg {...stroke} {...props}>
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" x2="12" y1="8" y2="12" />
+      <line x1="12" x2="12.01" y1="16" y2="16" />
+    </svg>
+  );
+}
+
+export function CheckCircleIcon(props: IconProps) {
+  return (
+    <svg {...stroke} {...props}>
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
+    </svg>
+  );
+}
+
+export function XCircleIcon(props: IconProps) {
+  return (
+    <svg {...stroke} {...props}>
+      <circle cx="12" cy="12" r="10" />
+      <line x1="15" x2="9" y1="9" y2="15" />
+      <line x1="9" x2="15" y1="9" y2="15" />
+    </svg>
+  );
+}
+
+export function TagIcon(props: IconProps) {
+  return (
+    <svg {...stroke} {...props}>
+      <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+      <line x1="7" x2="7.01" y1="7" y2="7" />
+    </svg>
+  );
+}
+
+export function ShieldIcon(props: IconProps) {
+  return (
+    <svg {...stroke} {...props}>
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  );
+}
+
+export function TruckIcon(props: IconProps) {
+  return (
+    <svg {...stroke} {...props}>
+      <rect x="1" y="3" width="15" height="13" rx="2" ry="2" />
+      <path d="M16 3v13" />
+      <path d="M1 17h22" />
+      <circle cx="5.5" cy="17.5" r="1.5" />
+      <circle cx="18.5" cy="17.5" r="1.5" />
+    </svg>
+  );
+}
+
+export function RotateCcwIcon(props: IconProps) {
+  return (
+    <svg {...stroke} {...props}>
+      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+      <path d="M3 3v5h5" />
+    </svg>
+  );
+}

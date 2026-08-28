@@ -71,17 +71,36 @@ export function AdminApp({ children }: { children: React.ReactNode }) {
                 icon: 'booking',
               },
             },
-            {
-              name: 'availability-blocks',
-              list: '/admin/availability-blocks',
-              create: '/admin/availability-blocks/create',
-              edit: '/admin/availability-blocks/edit/:id',
-              meta: {
-                label: 'بازه‌های غیرفعال',
-                icon: 'block',
-              },
+{
+            name: 'availability-blocks',
+            list: '/admin/availability-blocks',
+            create: '/admin/availability-blocks/create',
+            edit: '/admin/availability-blocks/edit/:id',
+            meta: {
+              label: 'بازه‌های غیرفعال',
+              icon: 'block',
             },
-          ]}
+          },
+          {
+            name: 'products',
+            list: '/admin/products',
+            create: '/admin/products/create',
+            edit: '/admin/products/edit/:id',
+            meta: {
+              label: 'محصولات',
+              icon: 'product',
+            },
+          },
+          {
+            name: 'stock_levels',
+            list: '/admin/stock-levels',
+            edit: '/admin/stock-levels/edit/:id',
+            meta: {
+              label: 'موجودی انبار',
+              icon: 'stock',
+            },
+          },
+        ]}
           options={{
             syncWithLocation: true,
             warnWhenUnsavedChanges: true,

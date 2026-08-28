@@ -10,7 +10,7 @@ export function ServicesList() {
     resource: 'services',
     sorters: [{ field: 'display_order', order: 'asc' }],
     meta: {
-      select: 'id,name,description,duration_minutes,price_rial,category,display_order,is_active,created_at',
+      select: 'id,name,description,duration_minutes,price_rial,category,display_order,is_active,created_at,doctor_id,doctor:doctors(name)',
     },
   });
   const { result, query } = listResult;
@@ -37,6 +37,8 @@ export function ServicesList() {
     price_rial: number | null;
     display_order: number;
     is_active: boolean;
+    doctor_id: string | null;
+    doctor?: { name: string } | null;
   }
 
   const columns = [
@@ -71,6 +73,13 @@ export function ServicesList() {
         const price = getValue('price_rial') as number | null;
         return price ? new Intl.NumberFormat('fa-IR').format(price) : '—';
       },
+    },
+    {
+      accessorKey: 'doctor_id' as keyof ServiceRow,
+      header: 'پزشک مسئول',
+      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => (
+        <span>{(getValue('doctor') as { name?: string } | null)?.name || 'تعیین نشده'}</span>
+      ),
     },
     {
       accessorKey: 'display_order' as keyof ServiceRow,

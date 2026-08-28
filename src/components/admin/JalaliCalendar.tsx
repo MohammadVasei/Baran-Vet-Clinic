@@ -12,6 +12,12 @@ interface JalaliCalendarProps {
   onDateSelect: (date: string) => void;
   bookedDates?: string[];
   blockedDates?: string[];
+  appointments?: Array<{
+    booking_date: string;
+    booking_time: string;
+    status?: string;
+    reference_code?: string;
+  }>;
   today?: string;
   className?: string;
 }
@@ -21,6 +27,7 @@ export function JalaliCalendar({
   onDateSelect,
   bookedDates = [],
   blockedDates = [],
+  appointments = [],
   today,
   className = '',
 }: JalaliCalendarProps) {
@@ -52,6 +59,14 @@ export function JalaliCalendar({
 
   const isBooked = useMemo(() => new Set(bookedDates), [bookedDates]);
   const isBlocked = useMemo(() => new Set(blockedDates), [blockedDates]);
+  const appointmentsByDate = useMemo(() => {
+    const grouped = new Map<string, typeof appointments>();
+    appointments.forEach((appointment) => {
+      const existing = grouped.get(appointment.booking_date) || [];
+      grouped.set(appointment.booking_date, [...existing, appointment]);
+    });
+    return grouped;
+  }, [appointments]);
 
   const isBookedDate = (date: string) => isBooked.has(date);
   const isBlockedDate = (date: string) => isBlocked.has(date);
@@ -76,6 +91,8 @@ export function JalaliCalendar({
     if (!today) return;
     onDateSelect(today);
   };
+
+  const selectedAppointments = selectedDate ? appointmentsByDate.get(selectedDate) || [] : [];
 
   return (
     <div ref={calendarRef} className={`rounded-app-lg border border-border bg-surface p-4 ${className}`} dir="rtl">
@@ -102,20 +119,43 @@ export function JalaliCalendar({
           const dayDate = date.toDate().toISOString().slice(0, 10);
           const booked = isBookedDate(dayDate);
           const blocked = isBlockedDate(dayDate);
+          const dayAppointments = appointmentsByDate.get(dayDate) || [];
+          const appointmentCount = dayAppointments.length;
           const todayMatch = isTodayDate(dayDate);
           const selectedMatch = sel != null && isSelectedDate(dayDate);
-          const disabled = booked || blocked || dayDate < (today || '');
+          const disabled = blocked || dayDate < (today || '');
 
           const classes: string[] = ['relative flex items-center justify-center h-10 w-full rounded-lg text-sm font-medium transition-all'];
+          if (appointmentCount > 0) classes.push('calendar-day-with-appointments');
           if (disabled) classes.push('opacity-40 cursor-not-allowed');
           if (selectedMatch) classes.push('!bg-primary !text-primary-foreground');
-          else if (booked) classes.push('bg-yellow-100 text-yellow-800');
+          else if (booked || appointmentCount > 0) classes.push('bg-yellow-100 text-yellow-800');
           else if (blocked) classes.push('bg-red-100 text-red-800');
           else if (todayMatch) classes.push('ring-2 ring-primary');
 
-          return { disabled, className: classes.join(' ') };
+          return {
+            disabled,
+            className: classes.join(' '),
+            title: appointmentCount > 0
+              ? `${appointmentCount} نوبت: ${dayAppointments.map((appointment) => appointment.booking_time.slice(0, 5)).join('، ')}`
+              : undefined,
+            'data-appointment-count': appointmentCount > 0 ? String(appointmentCount) : undefined,
+          };
         }}
       />
+
+      {selectedAppointments.length > 0 && (
+        <div className="mt-4 rounded-app border border-border bg-background/60 p-3">
+          <div className="mb-2 text-xs font-semibold text-foreground">نوبت‌های این روز</div>
+          <div className="flex flex-wrap gap-2">
+            {selectedAppointments.map((appointment) => (
+              <span key={`${appointment.reference_code || appointment.booking_time}-${appointment.booking_time}`} className="rounded-full bg-primary-soft px-2.5 py-1 text-xs font-medium text-primary-text">
+                {appointment.booking_time.slice(0, 5)}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Legend */}
       <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">

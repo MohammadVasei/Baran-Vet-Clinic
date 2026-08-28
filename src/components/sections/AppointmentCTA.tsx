@@ -8,6 +8,7 @@ import { APPOINTMENT, ANIMALS, CLINIC, SERVICES } from "@/lib/content";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { ArrowIcon, CheckIcon, ClockIcon, PhoneIcon, PinIcon, XIcon } from "@/components/icons";
 import { GoldieVideo } from "@/components/mascot";
+import { supabaseClient } from "@/lib/supabase-client";
 
 const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
 const toFa = (n: number) => String(n).replace(/\d/g, (d) => FA_DIGITS[+d]);
@@ -134,6 +135,7 @@ export function AppointmentCTA() {
   const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [referenceCode, setReferenceCode] = useState<string | null>(null);
+  const [configuredDoctorId, setConfiguredDoctorId] = useState<string | null>(null);
 
   const selectedDoctorId = useMemo(() => {
     if (!fields.service) return null;
@@ -143,7 +145,24 @@ export function AppointmentCTA() {
       'grooming': 'moghan-jahani',
       'petshop': 'dr-tazik',
     };
-    return doctorMap[fields.service] || 'dr-tazik';
+    return configuredDoctorId || doctorMap[fields.service] || 'dr-tazik';
+  }, [configuredDoctorId, fields.service]);
+
+  useEffect(() => {
+    setConfiguredDoctorId(null);
+    if (!fields.service) return;
+    let active = true;
+    supabaseClient
+      .from('services')
+      .select('doctor_id')
+      .eq('key', fields.service)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (active && data?.doctor_id) setConfiguredDoctorId(data.doctor_id);
+      });
+    return () => {
+      active = false;
+    };
   }, [fields.service]);
 
   const STEPS = APPOINTMENT.steps;

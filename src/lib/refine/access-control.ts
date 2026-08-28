@@ -35,6 +35,8 @@ export const accessControlProvider: AccessControlProvider = {
         'testimonials',
         'bookings',
         'availability-blocks',
+        'products',
+        'stock_levels',
       ];
 
       if (allowedResources.includes(resourceStr)) {
@@ -43,10 +45,14 @@ export const accessControlProvider: AccessControlProvider = {
           return { can: true };
         }
         // Staff can create/edit content resources
-        if (['services', 'doctors', 'diseases', 'testimonials'].includes(resourceStr)) {
+        if (['services', 'doctors', 'diseases', 'testimonials', 'products'].includes(resourceStr)) {
           if (action === 'create' || action === 'edit') {
             return { can: true };
           }
+        }
+        // Staff can manage stock levels
+        if (resourceStr === 'stock_levels' && action === 'edit') {
+          return { can: true };
         }
         // Staff can update bookings (confirm, cancel, complete)
         if (resourceStr === 'bookings' && action === 'edit') {
@@ -62,8 +68,12 @@ export const accessControlProvider: AccessControlProvider = {
 
     // Public can only list published content
     if (role === 'public') {
-      const publicResources = ['services', 'doctors', 'diseases', 'testimonials'];
+      const publicResources = ['services', 'doctors', 'diseases', 'testimonials', 'products'];
       if (publicResources.includes(resourceStr) && (action === 'list' || action === 'show')) {
+        return { can: true };
+      }
+      // Public can view stock levels (for availability display)
+      if (resourceStr === 'stock_levels' && action === 'list') {
         return { can: true };
       }
       // Public can create bookings

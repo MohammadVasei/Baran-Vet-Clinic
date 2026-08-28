@@ -199,7 +199,7 @@ Unique constraint required: `bookings (doctor_id, date, time)` to prevent double
 **In Scope:**
 - Write and run SQL migrations for every table in Section 6.
 - Set up Supabase Auth; add `staff_users` role table/column.
-- Write RLS policies: `owner` sees/edits everything; `staff` sees/edits only bookings + content, not financial/order data (confirm exact boundary with user if unclear).
+- Write RLS policies: `owner` sees/edits everything; `staff` manages bookings, content, **products and stock**; staff are blocked from `orders`/`order_items` (financial data).
 - Seed at least one owner account for testing.
 
 **Out of Scope:**
@@ -342,7 +342,7 @@ Unique constraint required: `bookings (doctor_id, date, time)` to prevent double
 ---
 
 ### Phase 5 — Product Catalog & Inventory
-**Status:** ☐ Not started
+**Status:** ✅ Complete
 
 **Goal:** Staff can manage a pet-shop product catalog and stock levels through the admin panel; products are visible on the public site.
 
@@ -360,17 +360,17 @@ Unique constraint required: `bookings (doctor_id, date, time)` to prevent double
 - Cart and checkout (Phase 6) — this phase is catalog/inventory only, no purchasing yet.
 
 **To-Do:**
-- [ ] Build admin product + stock CRUD screens (with image upload)
-- [ ] Build public product listing page
-- [ ] Build public product detail page
-- [ ] Reflect stock status (in stock / low / out of stock) on public pages
+- [x] Build admin product + stock CRUD screens (with image upload) — image upload via **Supabase Storage** bucket `product-images` (confirmed approach). Defects found & fixed this session: `stock_levels` edit/update did not pass `idColumnName: 'product_id'` (provider defaults to `id`); product-create auto stock row inserted via unsafe re-query by name.
+- [x] Build public product listing page — at `/services/petshop` (was previously absent; service card + footer already linked there). Category filter buttons were inert — made functional.
+- [x] Build public product detail page — at `/services/petshop/products/[id]`.
+- [x] Reflect stock status (in stock / low / out of stock) on public pages — badge + disabled purchase when out of stock.
 
 **Verification Checklist:**
-- [ ] Add a product in admin, confirm it appears correctly on the public site
-- [ ] Set stock to 0, confirm public page shows out-of-stock state and purchase is disabled
-- [ ] Visual/RTL check on new public pages
+- [x] Add a product in admin, confirm it appears correctly on the public site — **verified** (incl. image upload via Supabase Storage; product appears on listing + detail)
+- [x] Set stock to 0, confirm public page shows out-of-stock state and purchase is disabled — **verified live** (see changelog 2026-08-28)
+- [x] Visual/RTL check on new public pages — **verified in browser** by user
 
-**Update This File:** check off items, confirm image upload storage approach actually used (Supabase Storage, expected).
+**Update This File:** check off items, confirm image upload storage approach actually used (**done:** Supabase Storage bucket `product-images`, owner/staff upload).
 
 ---
 
@@ -492,6 +492,14 @@ The agent must record anything it had to assume here, with the phase it occurred
 ## 9. Changelog
 
 Every phase completion gets a dated entry here. Do not delete prior entries — this is a running history.
+
+- **[2026-08-28]** Phase 5 complete.
+  - Phase 5 code was found already in the working tree (untracked, unverified): admin product CRUD, admin stock screens, public listing + detail pages, stock-status badges, Supabase Storage bucket `product-images`.
+  - **RLS boundary decision (user-confirmed):** staff MAY manage products, stock levels, and product image uploads. Update applied to migrations `002` (products + stock_levels policies) and `009` (storage object policies) → staff via `is_staff()`, orders/order_items remain owner-only. NOTE: live DDL still needs applying (pg-meta disabled on this project) — run `supabase/migrations/010_allow_staff_manage_products_stock_images.sql` in the dashboard SQL editor or via `supabase db push`.
+  - Fixed: `stock_levels` edit page missing `idColumnName: 'product_id'` (fetch+save would fail); missing placeholder-image asset on public pages (shared `getProductImages()` helper now treats it as "no image"; graceful fallback block on detail page; seeded rows cleaned to `[]` images); `next.config.ts` had no `images.remotePatterns` for Supabase storage (uploaded images would throw); inert category filter on listing page → extracted client `ProductCatalogClient` with working filter; product-create auto stock row now uses the id returned by `useCreate` and surfaces insert errors; removed dead "View" action on products list (no show route existed); removed dead/unused imports; `/services/petshop` set to `force-dynamic` so admin product/stock changes appear without rebuild.
+  - **Verified:** `tsc --noEmit` clean; `npm run build` succeeds (all routes present, incl. previously-blocking `/common-diseases`); live out-of-stock flow — set stock to 0 → detail + listing both show ناموجود and purchase disabled (then restored); **user-confirmed in browser**: admin add-product with image upload appears correctly on public listing + detail ✅, visual/RTL pass on new public pages ✅, out-of-stock disabled-purchase ✅.
+  - Lint has 8 **pre-existing** errors (`react-hooks/set-state-in-effect` across Phase 2–4 files, `require()` in `run-migrations.js`) — not introduced here.
+  - **Remaining actions (not blocking phase completion):** apply migration `010` to live DB so staff saves/uploads work; commit the Phase 5 work (currently untracked).
 
 - **[2025-08-25]** Phase 3 complete.
   - Installed Refine core (`@refinedev/core`, `@refinedev/supabase`, `@refinedev/react-hook-form`, `@refinedev/kbar`, `@refinedev/nextjs-router`) and dependencies (`@tanstack/react-table`, `clsx`, `tailwind-merge`, `class-variance-authority`, `@radix-ui/react-slot`, `react-i18next`, `i18next`).

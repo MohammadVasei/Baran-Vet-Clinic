@@ -249,12 +249,12 @@ CREATE POLICY "Staff can view all products"
     FOR SELECT
     USING (public.is_staff());
 
--- Owners can manage products
-CREATE POLICY "Owners can manage products"
+-- Staff can manage products (owner included via is_staff); orders/order_items remain owner-only
+CREATE POLICY "Staff can manage products"
     ON public.products
     FOR ALL
-    USING (public.is_owner())
-    WITH CHECK (public.is_owner());
+    USING (public.is_staff())
+    WITH CHECK (public.is_staff());
 
 -- ============================================================
 -- STOCK_LEVELS POLICIES
@@ -272,12 +272,12 @@ CREATE POLICY "Staff can view all stock levels"
     FOR SELECT
     USING (public.is_staff());
 
--- Owners can manage stock levels
-CREATE POLICY "Owners can manage stock levels"
+-- Staff can manage stock levels (owner included via is_staff)
+CREATE POLICY "Staff can manage stock levels"
     ON public.stock_levels
     FOR ALL
-    USING (public.is_owner())
-    WITH CHECK (public.is_owner());
+    USING (public.is_staff())
+    WITH CHECK (public.is_staff());
 
 -- ============================================================
 -- ORDERS POLICIES

@@ -121,7 +121,6 @@ export function BookingsList() {
   const handleCalendarDateSelect = (date: string) => {
     setFilterDate(date);
     setSelectedCalendarDate(date);
-    setShowCalendar(false);
   };
 
   const handleClearFilters = () => {
@@ -308,6 +307,12 @@ export function BookingsList() {
               onDateSelect={handleCalendarDateSelect}
               bookedDates={calendarBookedDates}
               blockedDates={calendarBlockedDates}
+              appointments={(result?.data || []).map((booking) => ({
+                booking_date: booking.booking_date,
+                booking_time: booking.booking_time,
+                status: booking.status,
+                reference_code: booking.reference_code,
+              }))}
               today={today}
               className="w-full max-w-sm"
             />

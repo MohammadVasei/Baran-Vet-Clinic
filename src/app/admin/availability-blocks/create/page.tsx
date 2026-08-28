@@ -3,7 +3,7 @@
 import { useForm } from '@refinedev/react-hook-form';
 import { useCreate, useNavigation, useSelect } from '@refinedev/core';
 import { useRef } from 'react';
-import { useGSAP } from '@/lib/gsap';
+import { gsap, useGSAP } from '@/lib/gsap';
 import { prefersReducedMotion, duration, ease } from '@/lib/motion';
 import { ArrowIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { JalaliDateInput } from '@/components/admin/JalaliDateInput';
 
 interface FormValues {
   doctor_id: string;
@@ -20,7 +20,6 @@ interface FormValues {
   start_time: string;
   end_time: string;
   reason: string;
-  description: string;
 }
 
 const reasonOptions = [
@@ -31,7 +30,7 @@ const reasonOptions = [
 ];
 
 export function AvailabilityBlockCreate() {
-  const { mutate: createBlock } = useCreate<FormValues>();
+  const { mutateAsync: createBlock } = useCreate<FormValues>();
   const navigate = useNavigation();
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -59,7 +58,6 @@ export function AvailabilityBlockCreate() {
       start_time: '09:00',
       end_time: '17:00',
       reason: 'absence',
-      description: '',
     },
   });
 
@@ -70,13 +68,12 @@ export function AvailabilityBlockCreate() {
 
       await createBlock(
         {
-          resource: 'availability-blocks',
+            resource: 'availability_blocks',
           values: {
             doctor_id: values.doctor_id,
             start_at: startDateTime,
             end_at: endDateTime,
             reason: values.reason,
-            description: values.description,
           },
         },
       );
@@ -183,9 +180,15 @@ export function AvailabilityBlockCreate() {
                   تاریخ شروع <span className="text-destructive">*</span>
                 </Label>
                 <Input
+                  type="hidden"
                   {...register('start_date', { required: 'تاریخ شروع الزامی است' })}
-                  type="date"
-                  className="w-full"
+                  value={watch('start_date')}
+                  readOnly
+                />
+                <JalaliDateInput
+                  value={watch('start_date')}
+                  onChange={(value) => setValue('start_date', value, { shouldValidate: true })}
+                  id="start_date"
                 />
                 {errors.start_date && (
                   <p className="mt-1.5 text-sm text-destructive" role="alert">{String(errors.start_date.message)}</p>
@@ -197,9 +200,15 @@ export function AvailabilityBlockCreate() {
                   تاریخ پایان <span className="text-destructive">*</span>
                 </Label>
                 <Input
+                  type="hidden"
                   {...register('end_date', { required: 'تاریخ پایان الزامی است' })}
-                  type="date"
-                  className="w-full"
+                  value={watch('end_date')}
+                  readOnly
+                />
+                <JalaliDateInput
+                  value={watch('end_date')}
+                  onChange={(value) => setValue('end_date', value, { shouldValidate: true })}
+                  id="end_date"
                 />
                 {errors.end_date && (
                   <p className="mt-1.5 text-sm text-destructive" role="alert">{String(errors.end_date.message)}</p>
@@ -237,17 +246,6 @@ export function AvailabilityBlockCreate() {
               </div>
             </div>
 
-            <div>
-              <Label htmlFor="description" className="block text-sm font-medium text-muted-foreground mb-2">
-                توضیحات
-              </Label>
-              <Textarea
-                {...register('description')}
-                placeholder="توضیحات اضافه (اختیاری)"
-                rows={3}
-                className="w-full"
-              />
-            </div>
           </CardContent>
         </Card>
 

@@ -16,6 +16,8 @@ const NAV_ITEMS = [
   { name: 'testimonials', label: 'نظرات', href: '/admin/testimonials' },
   { name: 'bookings', label: 'نوبت‌ها', href: '/admin/bookings' },
   { name: 'availability-blocks', label: 'بازه‌های غیرفعال', href: '/admin/availability-blocks' },
+  { name: 'products', label: 'محصولات', href: '/admin/products' },
+  { name: 'stock_levels', label: 'موجودی انبار', href: '/admin/stock-levels' },
 ] as const;
 
 type NavItemName = typeof NAV_ITEMS[number]['name'];
@@ -33,6 +35,8 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
   const testimonialCanList = useCan({ resource: 'testimonials', action: 'list' });
   const bookingCanList = useCan({ resource: 'bookings', action: 'list' });
   const availabilityBlockCanList = useCan({ resource: 'availability-blocks', action: 'list' });
+  const productCanList = useCan({ resource: 'products', action: 'list' });
+  const stockLevelCanList = useCan({ resource: 'stock_levels', action: 'list' });
 
   const canMap: Record<NavItemName, boolean> = {
     services: !!serviceCanList.data,
@@ -41,6 +45,8 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
     testimonials: !!testimonialCanList.data,
     bookings: !!bookingCanList.data,
     'availability-blocks': !!availabilityBlockCanList.data,
+    products: !!productCanList.data,
+    stock_levels: !!stockLevelCanList.data,
   };
 
   const allowedNavItems = NAV_ITEMS.filter((item) => canMap[item.name]);

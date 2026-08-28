@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     const { data: doctor, error: doctorError } = await supabaseAdmin
       .from('doctors')
       .select('id, name')
-      .eq('key', data.doctor_id)
+      .or(`key.eq.${data.doctor_id},id.eq.${data.doctor_id}`)
       .eq('is_active', true)
       .single();
 
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
     // Verify service exists (lookup by key)
     const { data: service, error: serviceError } = await supabaseAdmin
       .from('services')
-      .select('id, name, duration_minutes')
+      .select('id, name, duration_minutes, doctor_id')
       .eq('key', data.service_id)
       .eq('is_active', true)
       .single();
@@ -71,11 +71,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const bookingDoctorId = service.doctor_id || doctor.id;
+    const bookingDoctor = service.doctor_id && service.doctor_id !== doctor.id
+      ? await supabaseAdmin.from('doctors').select('id, name').eq('id', service.doctor_id).single()
+      : { data: doctor, error: null };
+    if (bookingDoctor.error || !bookingDoctor.data) {
+      return NextResponse.json({ error: 'پزشک مسئول خدمت یافت نشد' }, { status: 404 });
+    }
+
     // Check if slot is still available (race condition protection) - use doctor UUID
     const { data: existing, error: checkError } = await supabaseAdmin
       .from('bookings')
       .select('id')
-      .eq('doctor_id', doctor.id)
+      .eq('doctor_id', bookingDoctorId)
       .eq('booking_date', data.booking_date)
       .eq('booking_time', data.booking_time)
       .in('status', ['pending', 'confirmed'])
@@ -96,7 +104,7 @@ export async function POST(request: NextRequest) {
     const { data: blocks, error: blocksError } = await supabaseAdmin
       .from('availability_blocks')
       .select('id')
-      .eq('doctor_id', doctor.id)
+      .eq('doctor_id', bookingDoctorId)
       .lte('start_at', endAt.toISOString())
       .gte('end_at', startAt.toISOString())
       .maybeSingle();
@@ -115,7 +123,7 @@ export async function POST(request: NextRequest) {
       .from('bookings')
       .insert({
         service_id: service.id,
-        doctor_id: doctor.id,
+        doctor_id: bookingDoctorId,
         booking_date: data.booking_date,
         booking_time: data.booking_time,
         customer_name: data.customer_name.trim(),
@@ -144,7 +152,7 @@ export async function POST(request: NextRequest) {
       phone,
       referenceCode,
       serviceName: service.name,
-      doctorName: doctor.name,
+      doctorName: bookingDoctor.data.name,
       date: data.booking_date,
       time: data.booking_time,
       customerName: data.customer_name,
@@ -156,7 +164,7 @@ export async function POST(request: NextRequest) {
         id: booking.id,
         reference_code: booking.reference_code,
         service_name: service.name,
-        doctor_name: doctor.name,
+        doctor_name: bookingDoctor.data.name,
         date: booking.booking_date,
         time: booking.booking_time,
       },

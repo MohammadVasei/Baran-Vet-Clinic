@@ -8,6 +8,15 @@ const QuerySchema = z.object({
   service_id: z.string().optional(),
 });
 
+function getClinicTime(value: string): string {
+  return new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Tehran',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }).format(new Date(value));
+}
+
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
@@ -26,14 +35,22 @@ export async function GET(request: NextRequest) {
 
     const { date, doctor_id, service_id } = parsed.data;
 
+    const { data: doctor, error: doctorError } = await supabaseAdmin
+      .from('doctors')
+      .select('id')
+      .eq('key', doctor_id)
+      .maybeSingle();
+    const doctorUuid = doctor?.id || doctor_id;
+    if (doctorError) console.error('Doctor query error:', doctorError);
+
     // Get service duration (default 30 min)
     let _durationMinutes = 30;
     if (service_id) {
       const { data: service, error: serviceError } = await supabaseAdmin
         .from('services')
         .select('duration_minutes')
-        .eq('id', service_id)
-        .single();
+        .eq('key', service_id)
+        .maybeSingle();
       if (serviceError) console.error('Service query error:', serviceError);
       _durationMinutes = service?.duration_minutes ?? 30;
     }
@@ -45,7 +62,7 @@ export async function GET(request: NextRequest) {
     const { data: blocks, error: blocksError } = await supabaseAdmin
       .from('availability_blocks')
       .select('start_at, end_at')
-      .eq('doctor_id', doctor_id)
+      .eq('doctor_id', doctorUuid)
       .lte('start_at', endOfDay.toISOString())
       .gte('end_at', startOfDay.toISOString());
 
@@ -55,7 +72,7 @@ export async function GET(request: NextRequest) {
     const { data: bookings, error: bookingsError } = await supabaseAdmin
       .from('bookings')
       .select('booking_time, booking_date')
-      .eq('doctor_id', doctor_id)
+      .eq('doctor_id', doctorUuid)
       .eq('booking_date', date)
       .in('status', ['pending', 'confirmed']);
 
@@ -68,8 +85,8 @@ export async function GET(request: NextRequest) {
     // Parse blocked time ranges
     const blockedRanges: Array<{ start: string; end: string }> = [];
     blocks?.forEach(block => {
-      const start = new Date(block.start_at).toISOString().slice(11, 16);
-      const end = new Date(block.end_at).toISOString().slice(11, 16);
+      const start = getClinicTime(block.start_at);
+      const end = getClinicTime(block.end_at);
       blockedRanges.push({ start, end });
     });
 
