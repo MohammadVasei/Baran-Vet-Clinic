@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { z } from "zod";
 import { createPaymentRequest } from "@/lib/zarinpal";
+import { createSupabaseServerClient } from "@/lib/supabase-server";
 
 const CheckoutSchema = z.object({
   items: z.array(
@@ -44,6 +45,10 @@ export async function POST(request: NextRequest) {
     // Canonical international-digits form: 98912xxxxxxx (matches link-orders API and auth.users.phone)
     const phone = digits.startsWith("98") ? digits : "98" + digits.replace(/^0/, "");
     const callbackUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/checkout/callback`;
+
+    // Get the authenticated user (if any) to link the order to their account
+    const serverClient = await createSupabaseServerClient();
+    const { data: { user } } = await serverClient.auth.getUser();
 
     // Fetch products and validate stock
     const productIds = data.items.map((i) => i.productId);
@@ -110,6 +115,7 @@ export async function POST(request: NextRequest) {
         status: "pending",
         zarinpal_authority: "", // will be filled after payment request
         total_rial: total,
+        user_id: user?.id ?? null,
       })
       .select()
       .single();
@@ -131,30 +137,51 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "خطا در ثبت اقلام سفارش" }, { status: 500 });
     }
 
-    // Request payment from ZarinPal
-    const paymentResult = await createPaymentRequest(
-      total,
-      `سفارش پت‌شاپ باران - ${referenceCode}`,
-      callbackUrl,
-      { order_id: order.id, reference_code: referenceCode }
-    );
-
-    // Update order with authority
-    const { error: updateError } = await supabaseAdmin
-      .from("orders")
-      .update({ zarinpal_authority: paymentResult.authority })
-      .eq("id", order.id);
-
-    if (updateError) {
-      console.error("Order authority update error:", updateError);
+    // Request payment from ZarinPal — if it fails, we still return the created order
+    // so the frontend can show "order placed, complete payment manually"
+    let paymentResult: { authority: string; redirectUrl: string } | null = null;
+    try {
+      paymentResult = await createPaymentRequest(
+        total,
+        `سفارش پت‌شاپ باران - ${referenceCode}`,
+        callbackUrl,
+        { order_id: order.id, reference_code: referenceCode }
+      );
+    } catch (paymentError) {
+      console.error("ZarinPal payment request failed:", paymentError);
+      // Don't fail the request — order is already created
     }
 
+    if (paymentResult) {
+      // Update order with authority
+      const { error: updateError } = await supabaseAdmin
+        .from("orders")
+        .update({ zarinpal_authority: paymentResult.authority })
+        .eq("id", order.id);
+
+      if (updateError) {
+        console.error("Order authority update error:", updateError);
+      }
+
+      return NextResponse.json({
+        success: true,
+        authority: paymentResult.authority,
+        redirectUrl: paymentResult.redirectUrl,
+        orderId: order.id,
+        referenceCode,
+      });
+    }
+
+    // Payment gateway unavailable (e.g., missing ZARINPAL_MERCHANT_ID)
+    // Order exists; frontend should show order details and allow manual payment
     return NextResponse.json({
       success: true,
-      authority: paymentResult.authority,
-      redirectUrl: paymentResult.redirectUrl,
+      authority: null,
+      redirectUrl: null,
       orderId: order.id,
       referenceCode,
+      requiresManualPayment: true,
+      message: "سفارش ثبت شد اما درگاه پرداخت در دسترس نیست. لطفاً از صفحه سفارشات پرداخت را تکمیل کنید.",
     });
   } catch (error) {
     console.error("Checkout API error:", error);

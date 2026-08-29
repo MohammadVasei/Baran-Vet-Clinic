@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { supabaseServer } from "@/lib/supabase-server";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 import { CheckoutSuccessClient } from "./CheckoutSuccessClient";
 
 interface CheckoutSuccessPageProps {
@@ -22,7 +22,7 @@ export default async function CheckoutSuccessPage({ searchParams }: CheckoutSucc
     notFound();
   }
 
-  const { data: order, error } = await supabaseServer
+  const { data: order, error } = await supabaseAdmin
     .from("orders")
     .select("id, customer_name, customer_phone, total_rial, zarinpal_ref_id, status, created_at, order_items(quantity,unit_price_rial,product_id,products(name,images,category))")
     .eq("id", order_id)

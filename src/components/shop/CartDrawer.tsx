@@ -9,6 +9,7 @@ import { revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 export function CartDrawer() {
@@ -22,9 +23,21 @@ export function CartDrawer() {
     getItemCount,
   } = useCart();
   const { items, isOpen } = state;
+  const router = useRouter();
   const drawerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
+
+  // Close on Escape. Sticky header (z-header) previously trapped the pointer
+  // over the whole top strip, so the drawer could not be closed on desktop.
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeCart();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isOpen, closeCart]);
 
   useGSAP(
     () => {
@@ -55,13 +68,13 @@ export function CartDrawer() {
   return (
     <>
       <div
-        className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm lg:hidden"
+        className="fixed inset-0 z-overlay bg-black/40 backdrop-blur-sm"
         onClick={closeCart}
         aria-hidden="true"
       />
       <div
         ref={drawerRef}
-        className="fixed right-0 top-0 z-50 h-full w-full max-w-sm lg:max-w-md bg-background shadow-2xl flex flex-col"
+        className="fixed right-0 top-0 z-overlay h-full w-full max-w-sm lg:max-w-md bg-background shadow-2xl flex flex-col"
         role="dialog"
         aria-modal="true"
         aria-label="سبد خرید"
@@ -154,7 +167,7 @@ export function CartDrawer() {
                   className="w-full py-3 text-lg"
                   onClick={() => {
                     closeCart();
-                    window.location.href = "/checkout";
+                    router.push("/checkout");
                   }}
                 >
                   ادامه به تسویه‌حساب

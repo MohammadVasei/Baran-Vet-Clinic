@@ -6,7 +6,7 @@ import { ProductCard as ProductCardData } from "@/lib/products";
 export function PetshopBanner({ products }: { products: ProductCardData[] }) {
   return (
     <section
-      className="py-16 lg:py-24 bg-[var(--accent-yellow-soft)] border-t border-accent-yellow/30"
+      className="py-16 lg:py-24 bg-[#FFD700] border-t border-accent-yellow/30"
       aria-label="محصولات ویژه پت‌شاپ باران"
     >
       <div className="container-site">

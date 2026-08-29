@@ -14,6 +14,10 @@ export interface CartItem {
 type CartState = {
   items: CartItem[];
   isOpen: boolean;
+  // True once stored cart has been hydrated (or a user action changed items).
+  // Guards the persist effect from overwriting sessionStorage with the empty
+  // initial state before hydration completes on mount.
+  hydrated: boolean;
 };
 
 type CartAction =
@@ -42,14 +46,14 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       } else {
         newItems = [...state.items, action.payload];
       }
-      return { ...state, items: newItems, isOpen: true };
+      return { ...state, items: newItems, isOpen: true, hydrated: true };
     }
     case "REMOVE_ITEM": {
-      return { ...state, items: state.items.filter((i) => i.productId !== action.payload) };
+      return { ...state, items: state.items.filter((i) => i.productId !== action.payload), hydrated: true };
     }
     case "UPDATE_QUANTITY": {
       if (action.payload.quantity <= 0) {
-        return { ...state, items: state.items.filter((i) => i.productId !== action.payload.productId) };
+        return { ...state, items: state.items.filter((i) => i.productId !== action.payload.productId), hydrated: true };
       }
       return {
         ...state,
@@ -58,10 +62,11 @@ function cartReducer(state: CartState, action: CartAction): CartState {
             ? { ...item, quantity: action.payload.quantity }
             : item
         ),
+        hydrated: true,
       };
     }
     case "CLEAR_CART":
-      return { ...state, items: [] };
+      return { ...state, items: [], hydrated: true };
     case "TOGGLE_CART":
       return { ...state, isOpen: !state.isOpen };
     case "OPEN_CART":
@@ -69,7 +74,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     case "CLOSE_CART":
       return { ...state, isOpen: false };
     case "HYDRATE":
-      return { ...state, items: action.payload };
+      return { ...state, items: action.payload, hydrated: true };
     default:
       return state;
   }
@@ -92,6 +97,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, {
     items: [],
     isOpen: false,
+    hydrated: false,
   });
 
   useEffect(() => {
@@ -106,8 +112,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    // Never write the pristine (pre-hydration) empty state over stored cart —
+    // that was the bug where the cart lost its memory on every page load.
+    if (!state.hydrated) return;
     sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(state.items));
-  }, [state.items]);
+  }, [state.items, state.hydrated]);
 
   const addItem = (item: CartItem) => dispatch({ type: "ADD_ITEM", payload: item });
   const removeItem = (productId: string) => dispatch({ type: "REMOVE_ITEM", payload: productId });
