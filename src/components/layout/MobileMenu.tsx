@@ -89,8 +89,8 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className={`block rounded-app px-3 py-3 font-display text-lg font-semibold transition-colors duration-fast hover:bg-muted ${
-                    isActive ? "text-primary-text bg-muted" : "text-foreground"
+                  className={`block rounded-app px-4 py-2 font-display text-base font-medium transition-colors duration-fast hover:bg-muted ${
+                    isActive ? "text-primary-text bg-muted" : "text-foreground truncate"
                   }`}
                   aria-current={isActive ? "page" : undefined}
                   onClick={onClose}
@@ -113,7 +113,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
             onClick={onClose}
           >
             <PhoneIcon className="size-4" />
-            ۰۵۱-۳۸۴۷-۵۳۷۷
+            <span className="truncate ml-2">۰۵۱-۳۸۴۷-۵۳۷۷</span>
           </a>
           <a
             href="https://wa.me/989153588160"
@@ -122,7 +122,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
             onClick={onClose}
           >
             <PhoneIcon className="size-4" />
-            ۰۹۱۵-۳۵۸-۸۱۶۰ (واتساپ)
+            <span className="truncate ml-2">۰۹۱۵-۳۵۸-۸۱۶۰ (واتساپ)</span>
           </a>
         </div>
       </nav>

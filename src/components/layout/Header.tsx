@@ -27,6 +27,10 @@ export function Header() {
   const { user } = useAuth();
   const router = useRouter();
 
+  const dashboardPath = user?.role === "owner" || user?.role === "staff"
+    ? "/admin"
+    : "/account";
+
   return (
     <header className="sticky top-0 z-header">
       <div className="container-site flex h-16 items-center justify-between gap-6 border-b border-border bg-[var(--nav-bg)] backdrop-blur-lg rounded-app">
@@ -65,18 +69,14 @@ export function Header() {
         <div className="flex items-center gap-3">
           <ThemeToggle />
           <CartIcon />
-          {user ? (
+{user ? (
             <div className="flex items-center gap-2">
-              <span className="text-sm text-foreground truncate">
-                {user.user_metadata?.full_name || user.email?.split("@")[0] || "کاربر"}
-              </span>
-              <button
-                onClick={() => router.push("/auth/login")}
-                className="px-2 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="ورود به حساب"
+              <Link
+                href={dashboardPath}
+                className="text-sm text-foreground truncate hover:underline"
               >
-                ورود
-              </button>
+                {user.user_metadata?.full_name || user.email?.split("@")[0] || "کاربر"}
+              </Link>
             </div>
           ) : (
             <MagneticButton
