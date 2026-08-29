@@ -116,6 +116,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(session?.user ?? null);
   };
 
+  useEffect(() => {
+    // Link any guest orders placed with this phone to the signed-in account
+    if (!user) return;
+    const phone = user.phone ?? (user.user_metadata?.phone as string | undefined) ?? null;
+    if (!phone) return;
+
+    try {
+      const key = `baran_order_link_${user.id}`;
+      if (sessionStorage.getItem(key)) return;
+      const digits = phone.replace(/[^\d]/g, "");
+      if (!digits) return;
+      fetch("/api/auth/link-orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: user.id, phone: digits }),
+      })
+        .then((res) => {
+          if (res.ok) sessionStorage.setItem(key, "1");
+        })
+        .catch(() => {});
+    } catch {
+      // sessionStorage unavailable — skip linking
+    }
+  }, [user]);
+
   return (
     <AuthContext.Provider
       value={{

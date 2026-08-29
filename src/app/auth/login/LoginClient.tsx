@@ -9,6 +9,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
 import { EyeIcon, EyeOffIcon, MailIcon, LockIcon, PhoneIcon, ArrowIcon, AlertCircleIcon, CheckCircleIcon } from "@/components/icons";
 import { useAuth } from "@/context/AuthContext";
+import { safeCallbackUrl } from "@/lib/callback-url";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -26,6 +27,7 @@ type LoginForm = z.infer<typeof LoginSchema>;
 export function LoginClient({ callbackUrl = "/account" }: { callbackUrl?: string }) {
   const router = useRouter();
   const { signIn, signInWithPhone, verifyOtp } = useAuth();
+  const targetUrl = safeCallbackUrl(callbackUrl);
 
   const [activeTab, setActiveTab] = useState<"email" | "phone">("email");
   const [showPassword, setShowPassword] = useState(false);
@@ -69,7 +71,7 @@ export function LoginClient({ callbackUrl = "/account" }: { callbackUrl?: string
     if (error) {
       setError(error.message);
     } else {
-      router.push(callbackUrl);
+      router.push(targetUrl);
       router.refresh();
     }
   };
@@ -96,7 +98,7 @@ export function LoginClient({ callbackUrl = "/account" }: { callbackUrl?: string
     if (error) {
       setError(error.message);
     } else {
-      router.push(callbackUrl);
+      router.push(targetUrl);
       router.refresh();
     }
   };
@@ -299,7 +301,7 @@ export function LoginClient({ callbackUrl = "/account" }: { callbackUrl?: string
           <div className="pt-4 border-t border-border text-center">
             <p className="text-muted-foreground">
               حساب کاربری ندارید؟{" "}
-              <Link href={`/auth/register?callbackUrl=${callbackUrl}`} className="text-primary-text hover:underline font-medium">
+              <Link href={`/auth/register?callbackUrl=${encodeURIComponent(targetUrl)}`} className="text-primary-text hover:underline font-medium">
                 ثبت‌نام
               </Link>
             </p>

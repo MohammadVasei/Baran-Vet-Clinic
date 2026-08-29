@@ -22,7 +22,7 @@ async function createStaffUser() {
     email,
     password,
     email_confirm: true,
-    user_metadata: { full_name: fullName }
+    user_metadata: { full_name: fullName, role: 'staff' }
   });
 
   if (authError) {

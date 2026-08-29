@@ -151,7 +151,7 @@ export function AdminLoginPage() {
                 <span className="text-sm text-muted-foreground">مرا به خاطر بسپار</span>
               </label>
               <a
-                href="/admin/forgot-password"
+                href="/auth/reset-password"
                 className="text-sm text-primary hover:underline"
               >
                 فراموشی رمز عبور؟

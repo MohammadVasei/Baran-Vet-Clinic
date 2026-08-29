@@ -12,8 +12,7 @@ import { ArrowIcon, MenuIcon, XIcon, LogOutIcon } from '@/components/icons';
 const NAV_ITEMS = [
   { name: 'services', label: 'خدمات', href: '/admin/services' },
   { name: 'doctors', label: 'پزشکان', href: '/admin/doctors' },
-  { name: 'diseases', label: 'بیماری‌ها', href: '/admin/diseases' },
-  { name: 'testimonials', label: 'نظرات', href: '/admin/testimonials' },
+  { name: 'orders', label: 'سفارشات', href: '/admin/orders' },
   { name: 'bookings', label: 'نوبت‌ها', href: '/admin/bookings' },
   { name: 'availability-blocks', label: 'بازه‌های غیرفعال', href: '/admin/availability-blocks' },
   { name: 'products', label: 'محصولات', href: '/admin/products' },
@@ -31,8 +30,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
   // Check permissions for each nav item using useCan
   const serviceCanList = useCan({ resource: 'services', action: 'list' });
   const doctorCanList = useCan({ resource: 'doctors', action: 'list' });
-  const diseaseCanList = useCan({ resource: 'diseases', action: 'list' });
-  const testimonialCanList = useCan({ resource: 'testimonials', action: 'list' });
+  const orderCanList = useCan({ resource: 'orders', action: 'list' });
   const bookingCanList = useCan({ resource: 'bookings', action: 'list' });
   const availabilityBlockCanList = useCan({ resource: 'availability-blocks', action: 'list' });
   const productCanList = useCan({ resource: 'products', action: 'list' });
@@ -41,8 +39,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
   const canMap: Record<NavItemName, boolean> = {
     services: !!serviceCanList.data,
     doctors: !!doctorCanList.data,
-    diseases: !!diseaseCanList.data,
-    testimonials: !!testimonialCanList.data,
+    orders: !!orderCanList.data,
     bookings: !!bookingCanList.data,
     'availability-blocks': !!availabilityBlockCanList.data,
     products: !!productCanList.data,
@@ -79,6 +76,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
   const handleLogout = async () => {
     const { authProvider } = await import('@/lib/refine/auth-provider');
     await authProvider.logout({});
+    router.push('/admin/login');
   };
 
   const handleNavClick = (href: string) => {

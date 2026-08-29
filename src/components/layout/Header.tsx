@@ -27,7 +27,7 @@ export function Header() {
   const { user } = useAuth();
   const router = useRouter();
 
-  const dashboardPath = user?.role === "owner" || user?.role === "staff"
+  const dashboardPath = user?.user_metadata?.role === "owner" || user?.user_metadata?.role === "staff"
     ? "/admin"
     : "/account";
 

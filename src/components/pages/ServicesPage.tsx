@@ -112,9 +112,9 @@ export function ServicesPage() {
           </p>
           <p className="text-muted-foreground mb-4">با ما در ارتباط باشید.</p>
           <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a href="#contact" className="btn btn-primary">
+            <Link href="/contact" className="btn btn-primary">
               تماس با کلینیک
-            </a>
+            </Link>
             <a href="https://wa.me/989153588160" target="_blank" rel="noopener" className="btn btn-outline">
               پیام در واتساپ
             </a>

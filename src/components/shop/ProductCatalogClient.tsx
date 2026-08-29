@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 import {
   TagIcon,
   SearchIcon,
@@ -18,8 +20,19 @@ interface ProductCatalogClientProps {
 }
 
 export function ProductCatalogClient({ products, isLoading = false }: ProductCatalogClientProps) {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedSearch, setSelectedSearch] = useState<string>("");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(searchParams.get("category"));
+  const [selectedSearch, setSelectedSearch] = useState<string>(searchParams.get("q") || "");
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (selectedCategory && selectedCategory !== "all") params.set("category", selectedCategory);
+    if (selectedSearch) params.set("q", selectedSearch);
+    const qs = params.toString();
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+  }, [selectedCategory, selectedSearch, pathname, router]);
 
   const categories = ["all", ...Object.keys(CATEGORY_LABELS)] as const;
   const searchLower = selectedSearch.toLowerCase();
@@ -123,28 +136,31 @@ export function ProductCatalogClient({ products, isLoading = false }: ProductCat
                 <h2 className="font-display text-2xl font-bold text-foreground">محصولی یافت نشد</h2>
                 <p className="mt-2 text-muted-foreground">هنوز محصولی به پت‌شاپ اضافه نشده است.</p>
                 <div className="mt-4">
-                  <a
-                    href="/services/petshop"
+                  <Link
+                    href="/"
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-app bg-primary text-on-primary font-sm font-medium hover:opacity-90 transition-opacity"
                   >
                     <ArrowIcon direction="forward" className="size-4" />
-                    ثبت اولین محصول
-                  </a>
+                    رفتن به صفحه اصلی
+                  </Link>
                 </div>
               </div>
             ) : filteredProducts.length === 0 ? (
               <div className="text-center py-20">
                 <TagIcon className="size-16 text-muted-foreground mx-auto mb-4" />
                 <h2 className="font-display text-2xl font-bold text-foreground">محصولی در این دسته وجود ندارد</h2>
-                <p className="mt-2 text-muted-foreground">دسته دیگری را انتخاب کنید.</p>
+                <p className="mt-2 text-muted-foreground">دسته یا عبارت دیگری را انتخاب کنید.</p>
                 <div className="mt-4">
-                  <a
-                    href="/services/petshop"
+                  <button
+                    onClick={() => {
+                      setSelectedCategory(null);
+                      setSelectedSearch("");
+                    }}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-app bg-surface text-foreground hover:bg-muted transition-colors"
                   >
                     <ArrowIcon direction="forward" className="size-4" />
-                    مرور全部商品
-                  </a>
+                    مشاهده همه محصولات
+                  </button>
                 </div>
               </div>
             ) : (

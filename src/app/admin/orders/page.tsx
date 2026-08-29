@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 
 import { useList, useNavigation, useCan } from "@refinedev/core";
 import { AdminTable } from "@/components/admin/AdminTable";
-import { EditIcon, EyeIcon, TruckIcon, CheckCircleIcon, XCircleIcon, ClockIcon, CreditCardIcon } from "@/components/icons";
+import { EyeIcon, TruckIcon, CheckCircleIcon, XCircleIcon, ClockIcon, CreditCardIcon } from "@/components/icons";
 import { formatPrice } from "@/lib/products";
 import { useState } from "react";
 
@@ -26,17 +26,15 @@ export function OrdersList() {
   const { result, query } = listResult;
   const navigation = useNavigation();
   const canShow = useCan({ resource: "orders", action: "show" });
-  const canEdit = useCan({ resource: "orders", action: "edit" });
 
   const handleShow = (id: string) => navigation.show("orders", id);
-  const handleEdit = (id: string) => navigation.edit("orders", id);
 
   interface OrderRow {
     id: string;
     customer_name: string;
     customer_phone: string;
     customer_address: string | null;
-    status: "pending" | "paid" | "failed" | "fulfilled" | "cancelled";
+    status: "pending" | "paid" | "failed" | "shipped" | "delivered" | "fulfilled" | "cancelled";
     zarinpal_authority: string | null;
     zarinpal_ref_id: string | null;
     total_rial: number;
@@ -54,7 +52,9 @@ export function OrdersList() {
       pending: { label: "در انتظار پرداخت", className: "bg-yellow-100 text-yellow-700", icon: <ClockIcon className="size-3" /> },
       paid: { label: "پرداخت شده", className: "bg-green-100 text-green-700", icon: <CheckCircleIcon className="size-3" /> },
       failed: { label: "پرداخت ناموفق", className: "bg-red-100 text-red-700", icon: <XCircleIcon className="size-3" /> },
-      fulfilled: { label: "تحویل داده شده", className: "bg-blue-100 text-blue-700", icon: <TruckIcon className="size-3" /> },
+      shipped: { label: "ارسال شده", className: "bg-blue-100 text-blue-700", icon: <TruckIcon className="size-3" /> },
+      delivered: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <CheckCircleIcon className="size-3" /> },
+      fulfilled: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <CheckCircleIcon className="size-3" /> },
       cancelled: { label: "لغو شده", className: "bg-gray-100 text-gray-700", icon: <XCircleIcon className="size-3" /> },
     };
     const c = config[status];
@@ -151,15 +151,6 @@ export function OrdersList() {
               <EyeIcon className="size-4" />
             </button>
           )}
-          {canEdit.data && original.status === "pending" && (
-            <button
-              onClick={() => handleEdit(original.id)}
-              className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="ویرایش"
-            >
-              <EditIcon className="size-4" />
-            </button>
-          )}
         </div>
       ),
     },
@@ -186,6 +177,8 @@ export function OrdersList() {
             <option value="pending">در انتظار پرداخت</option>
             <option value="paid">پرداخت شده</option>
             <option value="failed">ناموفق</option>
+            <option value="shipped">ارسال شده</option>
+            <option value="delivered">تحویل داده شده</option>
             <option value="fulfilled">تحویل داده شده</option>
             <option value="cancelled">لغو شده</option>
           </select>

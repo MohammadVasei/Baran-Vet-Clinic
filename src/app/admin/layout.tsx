@@ -17,16 +17,25 @@ export default function AdminRootLayout({
   const pathname = usePathname();
   const router = useRouter();
   const isLoginPage = pathname === '/admin/login';
-  const [authChecked, setAuthChecked] = useState(isLoginPage);
+  const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
+    let active = true;
+
     if (isLoginPage) {
-      setAuthChecked(true);
-      return;
+      authProvider.check().then(({ authenticated }) => {
+        if (!active) return;
+        if (authenticated) {
+          router.replace('/admin');
+          return;
+        }
+        setAuthChecked(true);
+      });
+      return () => {
+        active = false;
+      };
     }
 
-    let active = true;
-    setAuthChecked(false);
     authProvider.check().then(({ authenticated }) => {
       if (!active) return;
       if (!authenticated) {

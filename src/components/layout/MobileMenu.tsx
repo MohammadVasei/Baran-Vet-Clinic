@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { CloseIcon, PhoneIcon } from "@/components/icons";
 import { Logo } from "@/components/ui/Logo";
+import { useAuth } from "@/context/AuthContext";
 
 const NAV_LINKS = [
   { label: "خانه", href: "/" },
@@ -11,6 +12,7 @@ const NAV_LINKS = [
   { label: "پت‌شاپ", href: "/services/petshop" },
   { label: "پزشکان", href: "/doctors" },
   { label: "بیماری‌های شایع", href: "/common-diseases" },
+  { label: "درباره ما", href: "/about" },
   { label: "تماس با ما", href: "/contact" },
 ];
 
@@ -19,6 +21,12 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
   const panelRef = useRef<HTMLElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
+  const { user } = useAuth();
+
+  const dashboardPath =
+    user?.user_metadata?.role === "owner" || user?.user_metadata?.role === "staff"
+      ? "/admin"
+      : "/account";
 
   // Robust inert: imperative guarantee the closed menu stays out of the tab
   // order even if the declarative `inert` prop is ever dropped by the pipeline.
@@ -101,6 +109,23 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
             );
           })}
         </ul>
+
+        <div className="space-y-2">
+          {user ? (
+            <a href={dashboardPath} className="btn btn-primary w-full" onClick={onClose}>
+              حساب کاربری
+            </a>
+          ) : (
+            <>
+              <a href="/auth/login" className="btn btn-primary w-full" onClick={onClose}>
+                ورود
+              </a>
+              <a href="/auth/register" className="btn btn-outline w-full" onClick={onClose}>
+                عضویت
+              </a>
+            </>
+          )}
+        </div>
 
         <div className="mt-auto space-y-3 border-t border-border pt-6">
           <a href="/contact" className="btn btn-primary w-full" onClick={onClose}>

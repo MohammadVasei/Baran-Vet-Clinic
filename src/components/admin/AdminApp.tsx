@@ -41,28 +41,6 @@ export function AdminApp({ children }: { children: React.ReactNode }) {
               },
             },
             {
-              name: 'diseases',
-              list: '/admin/diseases',
-              create: '/admin/diseases/create',
-              edit: '/admin/diseases/edit/:id',
-              show: '/admin/diseases/show/:id',
-              meta: {
-                label: 'بیماری‌ها',
-                icon: 'disease',
-              },
-            },
-            {
-              name: 'testimonials',
-              list: '/admin/testimonials',
-              create: '/admin/testimonials/create',
-              edit: '/admin/testimonials/edit/:id',
-              show: '/admin/testimonials/show/:id',
-              meta: {
-                label: 'نظرات',
-                icon: 'testimonial',
-              },
-            },
-            {
               name: 'bookings',
               list: '/admin/bookings',
               edit: '/admin/bookings/edit/:id',

@@ -8,6 +8,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
 import { CheckCircleIcon, AlertCircleIcon, LoaderIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
+import { safeCallbackUrl } from "@/lib/callback-url";
 
 interface AuthCallbackClientProps {
   initialParams: {
@@ -26,6 +27,7 @@ export function AuthCallbackClient({ initialParams }: AuthCallbackClientProps) {
 
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
   const [message, setMessage] = useState("");
+  const redirectUrl = useRef<string>(safeCallbackUrl(initialParams.callbackUrl || "/account"));
 
   useGSAP(
     () => {
@@ -40,9 +42,11 @@ export function AuthCallbackClient({ initialParams }: AuthCallbackClientProps) {
   );
 
   useEffect(() => {
-    const callbackUrl = searchParams.get("callbackUrl") || initialParams.callbackUrl || "/account";
+    const callbackUrl = safeCallbackUrl(searchParams.get("callbackUrl") || initialParams.callbackUrl || "/account");
     const error = searchParams.get("error") || initialParams.error;
     const errorDescription = searchParams.get("error_description") || initialParams.error_description;
+
+    redirectUrl.current = callbackUrl;
 
     const handleAuth = async () => {
       try {
@@ -92,7 +96,7 @@ export function AuthCallbackClient({ initialParams }: AuthCallbackClientProps) {
                 موفقیت‌آمیز
               </h1>
               <p className="text-green-700 mb-6">{message}</p>
-              <Button onClick={() => router.push("/account")}>
+              <Button onClick={() => router.push(redirectUrl.current)}>
                 ادامه به داشبورد
               </Button>
             </>

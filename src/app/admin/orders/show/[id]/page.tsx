@@ -1,11 +1,16 @@
 "use client";
 export const dynamic = "force-dynamic";
 
-import { useShow, useNavigation, useCan } from "@refinedev/core";
-import { EditIcon, ArrowIcon, UserIcon, MapPinIcon, PhoneIcon, CreditCardIcon, PackageIcon, ClockIcon, CheckCircleIcon, XCircleIcon, TruckIcon } from "@/components/icons";
+import { useShow, useNavigation } from "@refinedev/core";
+import { supabaseClient } from "@/lib/supabase-client";
+import { sendShippingSMS } from "@/lib/sms";
+import { ArrowIcon, UserIcon, MapPinIcon, PhoneIcon, CreditCardIcon, PackageIcon, ClockIcon, CheckCircleIcon, XCircleIcon, TruckIcon } from "@/components/icons";
 import Image from "next/image";
 import { formatPrice } from "@/lib/products";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useState } from "react";
 
 interface OrderItem {
   quantity: number;
@@ -19,28 +24,44 @@ interface OrderItem {
   } | null;
 }
 
+type OrderStatus =
+  | "pending"
+  | "paid"
+  | "failed"
+  | "shipped"
+  | "delivered"
+  | "fulfilled"
+  | "cancelled";
+
 interface Order {
   id: string;
   customer_name: string;
   customer_phone: string;
   customer_address: string | null;
-  status: "pending" | "paid" | "failed" | "fulfilled" | "cancelled";
+  status: OrderStatus;
+  shipping_method: "flat_rate" | "free_over_threshold" | "pickup_at_clinic";
+  tracking_number: string | null;
+  courier: string | null;
   zarinpal_authority: string | null;
   zarinpal_ref_id: string | null;
   total_rial: number;
   created_at: string;
   updated_at: string;
+  shipped_at: string | null;
+  delivered_at: string | null;
   order_items: OrderItem[];
 }
 
 export function OrderShow() {
   const navigation = useNavigation();
-  const canEdit = useCan({ resource: "orders", action: "edit" });
+  const [courier, setCourier] = useState("");
+  const [trackingNumber, setTrackingNumber] = useState("");
+  const [prevOrderId, setPrevOrderId] = useState<string | undefined>(undefined);
 
   const { query, result: order } = useShow<Order>({
     resource: "orders",
     meta: {
-      select: "id,customer_name,customer_phone,customer_address,status,zarinpal_authority,zarinpal_ref_id,total_rial,created_at,updated_at,order_items(quantity,unit_price_rial,product_id,products(name,price_rial,category,images))",
+      select: "id,customer_name,customer_phone,customer_address,status,shipping_method,tracking_number,courier,shipped_at,delivered_at,zarinpal_authority,zarinpal_ref_id,total_rial,created_at,updated_at,order_items(quantity,unit_price_rial,product_id,products(name,price_rial,category,images))",
     },
   });
   const isLoading = query.isLoading;
@@ -62,15 +83,87 @@ export function OrderShow() {
     );
   }
 
+  // Sync inputs when the order loads/refreshes (avoids an effect-triggered set).
+  if (order.id !== prevOrderId) {
+    setPrevOrderId(order.id);
+    setCourier(order.courier ?? "");
+    setTrackingNumber(order.tracking_number ?? "");
+  }
+
   const handleBack = () => navigation.list("orders");
-  const handleEdit = () => navigation.edit("orders", order.id);
+
+  const refreshOrder = async () => {
+    const { data: refreshed, error: refreshError } = await supabaseClient
+      .from("orders")
+      .select("id,customer_name,customer_phone,customer_address,status,shipping_method,tracking_number,courier,shipped_at,delivered_at,zarinpal_authority,zarinpal_ref_id,total_rial,created_at,updated_at,order_items(quantity,unit_price_rial,product_id,products(name,price_rial,category,images))")
+      .eq("id", order.id)
+      .single();
+
+    if (!refreshError && refreshed) {
+      if (process.env.NEXT_PUBLIC_SMS_NOTIFICATIONS !== "false" && refreshed.customer_phone) {
+        await sendShippingSMS({
+          phone: refreshed.customer_phone,
+          orderId: refreshed.id,
+          status: refreshed.status,
+          trackingNumber: refreshed.tracking_number,
+          courier: refreshed.courier,
+        });
+      }
+    }
+
+    navigation.show("orders", order.id);
+  };
+
+  const handleShip = async () => {
+    if (order.status !== "paid") return;
+    try {
+      const { error } = await supabaseClient
+        .from("orders")
+        .update({
+          courier: courier.trim() ? courier.trim() : null,
+          tracking_number: trackingNumber.trim() ? trackingNumber.trim() : null,
+          status: "shipped",
+          shipped_at: new Date().toISOString(),
+        })
+        .eq("id", order.id);
+
+      if (error) throw error;
+      await refreshOrder();
+    } catch (err) {
+      console.error("Failed to ship order:", err);
+    }
+  };
+
+  const handleUpdateStatus = async (newStatus: Extract<OrderStatus, "delivered">) => {
+    if (order.status === newStatus) return;
+
+    let updateData: Partial<Order> = { status: newStatus };
+
+    if (newStatus === "delivered") {
+      updateData = { ...updateData, delivered_at: new Date().toISOString() };
+    }
+
+    try {
+      const { error } = await supabaseClient
+        .from("orders")
+        .update(updateData)
+        .eq("id", order.id);
+
+      if (error) throw error;
+      await refreshOrder();
+    } catch (err) {
+      console.error("Failed to update order status:", err);
+    }
+  };
 
   const getStatusConfig = (status: Order["status"]) => {
-    const configs: Record<Order["status"], { label: string; className: string; icon: React.ReactNode }> = {
+    const configs: Record<OrderStatus, { label: string; className: string; icon: React.ReactNode }> = {
       pending: { label: "در انتظار پرداخت", className: "bg-yellow-100 text-yellow-700", icon: <ClockIcon className="size-4" /> },
       paid: { label: "پرداخت شده", className: "bg-green-100 text-green-700", icon: <CheckCircleIcon className="size-4" /> },
       failed: { label: "پرداخت ناموفق", className: "bg-red-100 text-red-700", icon: <XCircleIcon className="size-4" /> },
-      fulfilled: { label: "تحویل داده شده", className: "bg-blue-100 text-blue-700", icon: <TruckIcon className="size-4" /> },
+      shipped: { label: "ارسال شده", className: "bg-blue-100 text-blue-700", icon: <TruckIcon className="size-4" /> },
+      delivered: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <TruckIcon className="size-4" /> },
+      fulfilled: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <TruckIcon className="size-4" /> },
       cancelled: { label: "لغو شده", className: "bg-gray-100 text-gray-700", icon: <XCircleIcon className="size-4" /> },
     };
     return configs[status];
@@ -87,6 +180,9 @@ export function OrderShow() {
       minute: "2-digit",
     });
   };
+
+  // Determine if status can be updated
+  const canUpdate = order.status !== "delivered" && order.status !== "fulfilled" && order.status !== "cancelled";
 
   return (
     <div className="space-y-6">
@@ -109,14 +205,58 @@ export function OrderShow() {
           <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${statusConfig.className}`}>
             {statusConfig.icon} {statusConfig.label}
           </span>
-          {canEdit.data && (
-            <Button variant="outline" onClick={handleEdit} className="hidden sm:inline-flex">
-              <EditIcon className="size-4 mr-1" />
-              ویرایش
+          {order.status === "shipped" && canUpdate && (
+            <Button
+              variant="outline"
+              onClick={() => handleUpdateStatus("delivered")}
+              className="hidden sm:inline-flex"
+            >
+              <TruckIcon className="size-4" />
+              تحویل داده شد
             </Button>
           )}
         </div>
       </div>
+
+      {order.status === "paid" && (
+        <div className="rounded-app-lg border border-border bg-surface p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <TruckIcon className="size-5 text-primary-text" />
+            <h2 className="font-display text-lg font-bold text-foreground">ثبت ارسال سفارش</h2>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <Label htmlFor="courier">پیک / شرکت ارسال</Label>
+              <Input
+                id="courier"
+                value={courier}
+                onChange={(e) => setCourier(e.target.value)}
+                placeholder="مثلاً پیک موتوری، تیپاکس"
+                className="mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="tracking-number">شماره پیگیری</Label>
+              <Input
+                id="tracking-number"
+                value={trackingNumber}
+                onChange={(e) => setTrackingNumber(e.target.value)}
+                placeholder="کد رهگیری پستی یا پیک"
+                className="mt-1"
+              />
+            </div>
+          </div>
+          <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+            <Button onClick={handleShip}>
+              <TruckIcon className="size-4" />
+              ثبت ارسال
+            </Button>
+            <p className="text-sm text-muted-foreground">
+              با ثبت ارسال، وضعیت سفارش به «ارسال شده» تغییر می‌کند و پیامک حاوی شماره پیگیری برای مشتری ارسال می‌شود.
+            </p>
+          </div>
+        </div>
+      )}
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Order Info + Items */}
@@ -146,6 +286,28 @@ export function OrderShow() {
                   <span className="whitespace-pre-wrap">{order.customer_address || "ثبت نشده"}</span>
                 </dd>
               </div>
+              {order.shipped_at && (
+                <div className="sm:col-span-2">
+                  <dt className="text-sm text-muted-foreground">روش ارسال</dt>
+                  <dd className="font-medium mt-1">
+<span className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs ${order.shipping_method === 'flat_rate' ? 'bg-yellow-100 text-yellow-700' : order.shipping_method === 'pickup_at_clinic' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'}`}>
+  {order.shipping_method === 'flat_rate' ? 'ارسال با پیک' : order.shipping_method === 'pickup_at_clinic' ? 'تحویل در کلینیک' : 'ارسال رایگان'}
+</span>
+                  </dd>
+                </div>
+              )}
+              {order.tracking_number && (
+                <div className="sm:col-span-2">
+                  <dt className="text-sm text-muted-foreground">شماره پیگیری</dt>
+                  <dd className="font-medium mt-1">
+                    <span className="whitespace-pre-wrap">{order.tracking_number}</span>
+                  </dd>
+                  <dt className="text-sm text-muted-foreground"> kurir</dt>
+                  <dd className="font-medium mt-1">
+                    <span className="whitespace-pre-wrap">{order.courier || "—"}</span>
+                  </dd>
+                </div>
+              )}
             </dl>
           </div>
 
@@ -260,7 +422,29 @@ export function OrderShow() {
                   </div>
                 </div>
               )}
-              {["fulfilled", "cancelled"].includes(order.status) && (
+              {order.shipped_at && (
+                <div className="flex items-start gap-3 relative before:content-[''] before:absolute before:left-[9px] before:top-0 before:h-full before:w-0.5 before:bg-border last:before:hidden">
+                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500 border-2 border-background flex items-center justify-center">
+                    <TruckIcon className="size-3 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground">ارسال شده</p>
+                    <p className="text-sm text-muted-foreground">{formatDate(order.shipped_at)}</p>
+                  </div>
+                </div>
+              )}
+              {order.delivered_at && (
+                <div className="flex items-start gap-3 relative before:content-[''] before:absolute before:left-[9px] before:top-0 before:h-full before:w-0.5 before:bg-border last:before:hidden">
+                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-lime-500 border-2 border-background flex items-center justify-center">
+                    <TruckIcon className="size-3 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground">تحویل داده شده</p>
+                    <p className="text-sm text-muted-foreground">{formatDate(order.delivered_at)}</p>
+                  </div>
+                </div>
+              )}
+              {!order.delivered_at && ["fulfilled", "cancelled"].includes(order.status) && (
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 w-5 h-5 rounded-full border-2 border-background flex items-center justify-center"
                     style={{ backgroundColor: order.status === "fulfilled" ? "#3b82f6" : "#ef4444" }}>

@@ -2,10 +2,10 @@ import { PinIcon, PhoneIcon, ClockIcon, InstagramIcon, ThreadsIcon } from "@/com
 import { Logo } from "@/components/ui/Logo";
 
 const QUICK_LINKS = [
-  { label: "خانه", href: "#top" },
+  { label: "خانه", href: "/" },
   { label: "خدمات", href: "/services" },
   { label: "بیماری‌های شایع", href: "/common-diseases" },
-  { label: "پزشکان", href: "#doctors" },
+  { label: "پزشکان", href: "/doctors" },
   { label: "درباره ما", href: "/about" },
   { label: "تماس با ما", href: "/contact" },
 ];

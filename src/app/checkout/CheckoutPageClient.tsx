@@ -22,6 +22,7 @@ import {
   ContactCTA,
   BackToShopLink,
 } from "./components";
+import { ResumePaymentState, ResumeOrder } from "./components/ResumePaymentState";
 
 const checkoutSchema = z.object({
   customerName: z.string().min(2, "نام باید حداقل ۲ کاراکتر باشد").max(100),
@@ -43,7 +44,11 @@ interface SavedAddress {
   is_default: boolean;
 }
 
-export function CheckoutPageClient() {
+interface CheckoutPageClientProps {
+  resumeOrder?: ResumeOrder | null;
+}
+
+export function CheckoutPageClient({ resumeOrder = null }: CheckoutPageClientProps) {
   const router = useRouter();
   const {
     state,
@@ -58,6 +63,34 @@ export function CheckoutPageClient() {
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();
+
+  const [resuming, setResuming] = useState(false);
+  const [resumeError, setResumeError] = useState<string | null>(null);
+
+  const handleResumePayment = async () => {
+    if (!resumeOrder) return;
+    setResuming(true);
+    setResumeError(null);
+    try {
+      const response = await fetch("/api/checkout/resume", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ orderId: resumeOrder.id }),
+      });
+      const result = await response.json();
+      if (result.success && result.alreadyPaid) {
+        router.push(`/checkout/success?order_id=${resumeOrder.id}`);
+      } else if (result.success && result.redirectUrl) {
+        router.push(result.redirectUrl);
+      } else {
+        setResumeError(result.error || "خطا در اتصال به درگاه پرداخت");
+      }
+    } catch {
+      setResumeError("خطا در اتصال به درگاه پرداخت");
+    } finally {
+      setResuming(false);
+    }
+  };
 
   const [savedAddresses, setSavedAddresses] = useState<SavedAddress[]>([]);
   const [loadingAddresses, setLoadingAddresses] = useState(false);
@@ -188,6 +221,16 @@ export function CheckoutPageClient() {
   const shipping = 0;
 
   if (items.length === 0) {
+    if (resumeOrder) {
+      return (
+        <ResumePaymentState
+          order={resumeOrder}
+          onResume={handleResumePayment}
+          resuming={resuming}
+          error={resumeError}
+        />
+      );
+    }
     return <CheckoutEmptyState />;
   }
 

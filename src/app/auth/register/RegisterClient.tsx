@@ -9,6 +9,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
 import { MailIcon, LockIcon, UserIcon, EyeIcon, EyeOffIcon, AlertCircleIcon, CheckCircleIcon, ArrowIcon } from "@/components/icons";
 import { useAuth } from "@/context/AuthContext";
+import { safeCallbackUrl } from "@/lib/callback-url";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -31,6 +32,7 @@ type RegisterForm = z.infer<typeof RegisterSchema>;
 export function RegisterClient({ callbackUrl = "/account" }: { callbackUrl?: string }) {
   const router = useRouter();
   const { signUp } = useAuth();
+  const targetUrl = safeCallbackUrl(callbackUrl);
 
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -69,7 +71,7 @@ export function RegisterClient({ callbackUrl = "/account" }: { callbackUrl?: str
       setError(error.message);
     } else {
       setSuccess("حساب کاربری با موفقیت ایجاد شد. لطفاً ایمیل خود را تایید کنید.");
-      setTimeout(() => router.push(`/auth/login?callbackUrl=${callbackUrl}`), 2000);
+      setTimeout(() => router.push(`/auth/login?callbackUrl=${encodeURIComponent(targetUrl)}`), 2000);
     }
   };
 
@@ -192,7 +194,7 @@ export function RegisterClient({ callbackUrl = "/account" }: { callbackUrl?: str
           <div className="pt-4 border-t border-border text-center">
             <p className="text-muted-foreground">
               قبلاً ثبت‌نام کرده‌اید؟{" "}
-              <Link href={`/auth/login?callbackUrl=${callbackUrl}`} className="text-primary-text hover:underline font-medium">
+              <Link href={`/auth/login?callbackUrl=${encodeURIComponent(targetUrl)}`} className="text-primary-text hover:underline font-medium">
                 ورود
               </Link>
             </p>

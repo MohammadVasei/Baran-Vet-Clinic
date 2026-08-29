@@ -79,17 +79,21 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: `محصول ${product.name} فعال نیست` }, { status: 400 });
       }
 
-      const stockLevels = product.stock_levels as
-        | { quantity_on_hand?: number }
-        | { quantity_on_hand?: number }[]
-        | null
-        | undefined;
-      const stock = stockLevels
-        ? Array.isArray(stockLevels)
-          ? stockLevels[0]?.quantity_on_hand || 0
-          : stockLevels.quantity_on_hand || 0
-        : 0;
-      if (stock < item.quantity) {
+const stockLevels = product.stock_levels as
+  | { quantity_on_hand?: number }
+  | { quantity_on_hand?: number }[]
+  | null
+  | undefined;
+const stock = stockLevels
+  ? Array.isArray(stockLevels)
+    ? stockLevels[0]?.quantity_on_hand !== undefined
+      ? stockLevels[0].quantity_on_hand
+      : 0
+    : stockLevels.quantity_on_hand !== undefined
+      ? stockLevels.quantity_on_hand
+      : 0
+  : null; // null means no stock tracking — allow any quantity
+      if (stock !== null && stock < item.quantity) {
         return NextResponse.json(
           { error: `موجودی محصول ${product.name} کافی نیست (موجود: ${stock})` },
           { status: 409 }

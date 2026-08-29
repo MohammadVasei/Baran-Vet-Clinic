@@ -121,7 +121,7 @@ export const authProvider: AuthProvider = {
 
   forgotPassword: async (params: { email: string }) => {
     const { error } = await supabaseClient.auth.resetPasswordForEmail(params.email, {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/admin/reset-password`,
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/reset-password`,
     });
     if (error) {
       return {

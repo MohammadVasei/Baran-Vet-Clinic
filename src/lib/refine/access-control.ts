@@ -31,12 +31,11 @@ export const accessControlProvider: AccessControlProvider = {
       const allowedResources = [
         'services',
         'doctors',
-        'diseases',
-        'testimonials',
         'bookings',
         'availability-blocks',
         'products',
         'stock_levels',
+        'orders',
       ];
 
       if (allowedResources.includes(resourceStr)) {
@@ -45,7 +44,7 @@ export const accessControlProvider: AccessControlProvider = {
           return { can: true };
         }
         // Staff can create/edit content resources
-        if (['services', 'doctors', 'diseases', 'testimonials', 'products'].includes(resourceStr)) {
+        if (['services', 'doctors', 'products'].includes(resourceStr)) {
           if (action === 'create' || action === 'edit') {
             return { can: true };
           }
@@ -68,7 +67,7 @@ export const accessControlProvider: AccessControlProvider = {
 
     // Public can only list published content
     if (role === 'public') {
-      const publicResources = ['services', 'doctors', 'diseases', 'testimonials', 'products'];
+      const publicResources = ['services', 'doctors', 'products'];
       if (publicResources.includes(resourceStr) && (action === 'list' || action === 'show')) {
         return { can: true };
       }

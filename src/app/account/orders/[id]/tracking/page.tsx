@@ -7,7 +7,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { PackageIcon, ClockIcon, CheckCircleIcon, XCircleIcon, TruckIcon, MapPinIcon, PhoneIcon, UserIcon, CreditCardIcon, ArrowIcon } from "@/components/icons";
+import { PackageIcon, ClockIcon, CheckCircleIcon, XCircleIcon, TruckIcon, MapPinIcon, PhoneIcon, UserIcon, ArrowIcon } from "@/components/icons";
 import { formatPrice, CATEGORY_LABELS } from "@/lib/products";
 import { supabaseClient } from "@/lib/supabase-client";
 import { useEffect, useState } from "react";
@@ -38,7 +38,7 @@ interface Order {
   order_items: OrderItem[];
 }
 
-function OrderShowClient({ order }: { order: Order }) {
+function OrderTrackingShowClient({ order }: { order: Order }) {
   const root = useRef<HTMLDivElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();
@@ -96,20 +96,9 @@ function OrderShowClient({ order }: { order: Order }) {
             <p className="text-muted-foreground">تاریخ ثبت: {formatDate(order.created_at)}</p>
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
-          <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${getStatusConfig(order.status).className}`}>
-            {getStatusConfig(order.status).icon} {getStatusConfig(order.status).label}
-          </span>
-          {["shipped", "delivered", "fulfilled"].includes(order.status) && (
-            <Link
-              href={`/account/orders/${order.id}/tracking`}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-app bg-primary text-on-primary text-sm font-bold hover:opacity-90 transition-opacity"
-            >
-              <TruckIcon className="size-4" />
-              رهگیری سفارش
-            </Link>
-          )}
-        </div>
+        <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${getStatusConfig(order.status).className}`}>
+          {getStatusConfig(order.status).icon} {getStatusConfig(order.status).label}
+        </span>
       </div>
 
       <div className="order-grid grid gap-6 lg:grid-cols-3">
@@ -133,49 +122,13 @@ function OrderShowClient({ order }: { order: Order }) {
                   {order.customer_phone}
                 </dd>
               </div>
-<div className="sm:col-span-2">
+              <div className="sm:col-span-2">
                 <dt className="text-sm text-muted-foreground">آدرس تحویل</dt>
                 <dd className="font-medium mt-1 flex items-start gap-1">
                   <MapPinIcon className="size-4 text-muted-foreground mt-0.5" />
-                  <span className="whitespace-pre-wrap">{order.customer_address || " ثبت نشده"}</span>
+                  <span className="whitespace-pre-wrap">{order.customer_address || "ثبت نشده"}</span>
                 </dd>
               </div>
-              {order.tracking_number && (
-                <div className="sm:col-span-2">
-                  <dt className="text-sm text-muted-foreground">شماره پیگیری</dt>
-                  <dd className="font-medium mt-1">
-                    <span className="whitespace-pre-wrap">{order.tracking_number}</span>
-                  </dd>
-                  <dt className="text-sm text-muted-foreground">پیک / شرکت ارسال</dt>
-                  <dd className="font-medium mt-1">
-                    <span className="whitespace-pre-wrap">{order.courier || "—"}</span>
-                  </dd>
-                </div>
-              )}
-              {order.shipping_method && (
-                <div className="sm:col-span-2">
-                  <dt className="text-sm text-muted-foreground">روش ارسال</dt>
-                  <dd className="font-medium mt-1">
-                    {order.shipping_method === 'flat_rate'
-                      ? 'ارسال با پیک'
-                      : order.shipping_method === 'pickup_at_clinic'
-                        ? 'تحویل در کلینیک'
-                        : 'ارسال رایگان'}
-                  </dd>
-                </div>
-              )}
-              {order.shipped_at && (
-                <div className="sm:col-span-2">
-                  <dt className="text-sm text-muted-foreground">تاریخ ارسال</dt>
-                  <dd className="font-medium mt-1">{formatDate(order.shipped_at)}</dd>
-                </div>
-              )}
-              {order.delivered_at && (
-                <div className="sm:col-span-2">
-                  <dt className="text-sm text-muted-foreground">تاریخ تحویل</dt>
-                  <dd className="font-medium mt-1">{formatDate(order.delivered_at)}</dd>
-                </div>
-              )}
             </dl>
           </div>
 
@@ -188,15 +141,12 @@ function OrderShowClient({ order }: { order: Order }) {
             <div className="space-y-3">
               {order.order_items?.map((item, idx) => {
                 const product = item.products;
-                const productName = product?.name || "محصول نامشخص";
-                const productImage = product?.images?.[0];
-                const productCategory = product?.category;
                 const lineTotal = item.unit_price_rial * item.quantity;
                 return (
                   <div key={idx} className="flex gap-4 p-4 rounded-app border border-border bg-background">
                     <div className="relative w-16 h-16 flex-shrink-0 rounded-app overflow-hidden bg-muted">
-                      {productImage ? (
-                        <img src={productImage} alt={productName} className="w-full h-full object-cover" />
+                      {product?.images?.[0] ? (
+                        <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
                           <PackageIcon className="size-8 text-muted-foreground" />
@@ -204,9 +154,9 @@ function OrderShowClient({ order }: { order: Order }) {
                       )}
                     </div>
                     <div className="flex-1 min-w-0 space-y-1">
-                      <h4 className="font-medium text-foreground truncate">{productName}</h4>
+                      <h4 className="font-medium text-foreground truncate">{product?.name || "محصول نامشخص"}</h4>
                       <p className="text-sm text-muted-foreground">
-                        {productCategory ? CATEGORY_LABELS[productCategory] || productCategory : "—"}
+                        {product?.category ? CATEGORY_LABELS[product.category] || product.category : "—"}
                       </p>
                       <div className="flex items-center gap-4 text-sm">
                         <span className="text-muted-foreground">تعداد: {item.quantity}</span>
@@ -222,42 +172,58 @@ function OrderShowClient({ order }: { order: Order }) {
           </div>
         </div>
 
-        {/* Payment & Totals Sidebar */}
+        {/* Shipping & Tracking Sidebar */}
         <div className="space-y-6">
-          {/* Payment Info */}
+          {/* Shipping Info */}
           <div className="rounded-app-lg border border-border bg-surface p-6 sticky top-24">
             <h2 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-              <CreditCardIcon className="size-5 text-primary-text" />
-              اطلاعات پرداخت
+              <TruckIcon className="size-5 text-primary-text" />
+              جزئیات ارسال
             </h2>
-            <dl className="space-y-4 text-sm">
-              <div className="flex justify-between">
-                <dt className="text-muted-foreground">مبلغ کل</dt>
-                <dd className="font-display font-bold text-foreground">{formatPrice(order.total_rial)} <span className="font-body text-xs">ریال</span></dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-muted-foreground">مرجع زرین‌پال</dt>
-                <dd className="font-mono text-xs text-muted-foreground">{order.zarinpal_ref_id || "—"}</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-muted-foreground">Authority</dt>
-                <dd className="font-mono text-xs text-muted-foreground truncate max-w-[150px]">{order.zarinpal_authority || "—"}</dd>
-              </div>
-              <div className="pt-4 border-t border-border flex justify-between">
-                <dt className="text-muted-foreground">وضعیت پرداخت</dt>
-                <dd className="font-medium">
-                  {order.zarinpal_ref_id ? (
-                    <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">
-                      <CheckCircleIcon className="size-3" /> تایید شده
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">
-                      <ClockIcon className="size-3" /> در انتظار
-                    </span>
-                  )}
-                </dd>
-              </div>
-            </dl>
+            {order.shipping_method || order.tracking_number ? (
+              <dl className="grid gap-4 text-sm">
+                {order.shipping_method && (
+                  <div>
+                    <dt className="text-muted-foreground">روش ارسال</dt>
+                    <dd className="font-medium">
+                      {order.shipping_method === 'flat_rate'
+                      ? 'ارسال با پیک'
+                      : order.shipping_method === 'pickup_at_clinic'
+                        ? 'تحویل در کلینیک'
+                        : 'ارسال رایگان'}
+                    </dd>
+                  </div>
+                )}
+                {order.tracking_number && (
+                  <div>
+                    <dt className="text-muted-foreground">شماره پیگیری</dt>
+                    <dd className="font-medium text-primary-text whitespace-pre-wrap">{order.tracking_number}</dd>
+                  </div>
+                )}
+                {order.courier && (
+                  <div>
+                    <dt className="text-muted-foreground">kurir</dt>
+                    <dd className="font-medium">{order.courier}</dd>
+                  </div>
+                )}
+                {order.shipped_at && (
+                  <div>
+                    <dt className="text-muted-foreground">تاریخ ارسال</dt>
+                    <dd className="font-medium">{formatDate(order.shipped_at)}</dd>
+                  </div>
+                )}
+                {order.delivered_at && (
+                  <div>
+                    <dt className="text-muted-foreground">تاریخ تحویل</dt>
+                    <dd className="font-medium">{formatDate(order.delivered_at)}</dd>
+                  </div>
+                )}
+              </dl>
+            ) : (
+              <p className="text-muted-foreground text-sm">
+                اطلاعات ارسال هنوز ثبت نشده است
+              </p>
+            )}
           </div>
 
           {/* Timeline */}
@@ -287,7 +253,7 @@ function OrderShowClient({ order }: { order: Order }) {
                   </div>
                 </div>
               )}
-              {order.status === "shipped" && (
+              {(order.shipped_at || order.status === "shipped" || order.status === "delivered" || order.status === "fulfilled") && (
                 <div className="flex items-start gap-3 relative before:content-[''] before:absolute before:left-[9px] before:top-0 before:h-full before:w-0.5 before:bg-border last:before:hidden">
                   <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500 border-2 border-background flex items-center justify-center">
                     <TruckIcon className="size-3 text-white" />
@@ -295,10 +261,15 @@ function OrderShowClient({ order }: { order: Order }) {
                   <div>
                     <p className="font-medium text-foreground">ارسال شده</p>
                     <p className="text-sm text-muted-foreground">{formatDate(order.shipped_at || order.updated_at)}</p>
+                    {order.tracking_number && (
+                      <p className="text-sm text-muted-foreground">
+                        شماره پیگیری: <span className="font-medium text-foreground">{order.tracking_number}</span>
+                      </p>
+                    )}
                   </div>
                 </div>
               )}
-              {(order.status === "delivered" || order.status === "fulfilled") && (
+              {(order.delivered_at || order.status === "delivered" || order.status === "fulfilled") && (
                 <div className="flex items-start gap-3 relative before:content-[''] before:absolute before:left-[9px] before:top-0 before:h-full before:w-0.5 before:bg-border last:before:hidden">
                   <div className="flex-shrink-0 w-5 h-5 rounded-full bg-lime-500 border-2 border-background flex items-center justify-center">
                     <TruckIcon className="size-3 text-white" />
@@ -311,8 +282,7 @@ function OrderShowClient({ order }: { order: Order }) {
               )}
               {order.status === "cancelled" && (
                 <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full border-2 border-background flex items-center justify-center"
-                    style={{ backgroundColor: "#ef4444" }}>
+                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-red-500 border-2 border-background flex items-center justify-center">
                     <XCircleIcon className="size-3 text-white" />
                   </div>
                   <div>
@@ -329,7 +299,7 @@ function OrderShowClient({ order }: { order: Order }) {
   );
 }
 
-export default function AccountOrderShowPage() {
+export default function AccountOrderTrackingPage() {
   const params = useParams<{ id: string }>();
   const id = params.id;
   const { user } = useAuth();
@@ -364,6 +334,7 @@ export default function AccountOrderShowPage() {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+        <p className="text-muted-foreground ml-2">در حال بارگذاری...</p>
       </div>
     );
   }
@@ -380,5 +351,5 @@ export default function AccountOrderShowPage() {
     );
   }
 
-  return <OrderShowClient order={order} />;
+  return <OrderTrackingShowClient order={order} />;
 }
