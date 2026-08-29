@@ -54,16 +54,24 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
   useGSAP(
     () => {
       if (prefersReducedMotion() || !sidebarRef.current) return;
-      gsap.fromTo(
-        sidebarRef.current,
-        { x: sidebarOpen ? 0 : '100%' },
-        {
-          x: sidebarOpen ? 0 : '100%',
-          duration: duration('--duration-normal'),
-          ease: ease(),
-          overwrite: 'auto',
-        }
-      );
+      const mm = gsap.matchMedia();
+
+      mm.add('(max-width: 1023.98px)', () => {
+        gsap.fromTo(
+          sidebarRef.current!,
+          { x: sidebarOpen ? 0 : '100%' },
+          {
+            x: sidebarOpen ? 0 : '100%',
+            duration: duration('--duration-normal'),
+            ease: ease(),
+            overwrite: 'auto',
+          }
+        );
+      });
+
+      mm.add('(min-width: 1024px)', () => {
+        gsap.set(sidebarRef.current!, { clearProps: 'transform' });
+      });
     },
     { dependencies: [sidebarOpen] }
   );

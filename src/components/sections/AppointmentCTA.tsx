@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useRef, useState, useMemo } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useGSAP, gsap } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion, duration, ease } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -51,6 +51,12 @@ type BookingResponse = {
   };
   error?: string;
   details?: Record<string, string[]>;
+};
+
+type DoctorResolution = {
+  service: string;
+  doctorId: string | null;
+  name: string | null;
 };
 
 /** Radio-style single-select option chips (APG radios, RTL-aware arrows). */
@@ -135,35 +141,49 @@ export function AppointmentCTA() {
   const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [referenceCode, setReferenceCode] = useState<string | null>(null);
-  const [configuredDoctorId, setConfiguredDoctorId] = useState<string | null>(null);
+  const [doctorResolution, setDoctorResolution] = useState<DoctorResolution | null>(null);
 
-  const selectedDoctorId = useMemo(() => {
-    if (!fields.service) return null;
-    const doctorMap: Record<string, string> = {
-      'darman': 'dr-tazik',
-      'shenasname': 'dr-tazik',
-      'grooming': 'moghan-jahani',
-      'petshop': 'dr-tazik',
-    };
-    return configuredDoctorId || doctorMap[fields.service] || 'dr-tazik';
-  }, [configuredDoctorId, fields.service]);
-
+  // Resolve the assigned doctor from the DB (services.doctor_id) + its display name.
+  // Kept in one state keyed by the service so a stale doctor is never used while the
+  // next service's assignment is still loading.
   useEffect(() => {
-    setConfiguredDoctorId(null);
     if (!fields.service) return;
     let active = true;
-    supabaseClient
-      .from('services')
-      .select('doctor_id')
-      .eq('key', fields.service)
-      .maybeSingle()
-      .then(({ data }) => {
-        if (active && data?.doctor_id) setConfiguredDoctorId(data.doctor_id);
-      });
+    const serviceKey = fields.service;
+    (async () => {
+      try {
+        const { data } = await supabaseClient
+          .from('services')
+          .select('doctor_id')
+          .eq('key', serviceKey)
+          .maybeSingle();
+        if (!active) return;
+        const doctorId: string | null = data?.doctor_id ?? null;
+        let name: string | null = null;
+        if (doctorId) {
+          const { data: doctor } = await supabaseClient
+            .from('doctors')
+            .select('name')
+            .eq('id', doctorId)
+            .maybeSingle();
+          name = doctor?.name ?? null;
+        }
+        if (!active) return;
+        setDoctorResolution({ service: serviceKey, doctorId, name });
+      } catch {
+        if (!active) return;
+        setDoctorResolution({ service: serviceKey, doctorId: null, name: null });
+      }
+    })();
     return () => {
       active = false;
     };
   }, [fields.service]);
+
+  const doctorForService = doctorResolution?.service === fields.service ? doctorResolution : null;
+  const selectedDoctorId = doctorForService?.doctorId ?? null;
+  const doctorName = doctorForService?.name ?? null;
+  const doctorLoading = !!fields.service && doctorForService === null;
 
   const STEPS = APPOINTMENT.steps;
   const selectedService = SERVICES.items.find((s) => s.key === fields.service);
@@ -450,6 +470,10 @@ export function AppointmentCTA() {
                     <dd className="mt-0.5 font-semibold text-foreground">{selectedService?.name}</dd>
                   </div>
                   <div>
+                    <dt className="font-label text-xs text-muted-foreground">پزشک</dt>
+                    <dd className="mt-0.5 font-semibold text-foreground">{doctorName || '—'}</dd>
+                  </div>
+                  <div>
                     <dt className="font-label text-xs text-muted-foreground">حیوان</dt>
                     <dd className="mt-0.5 font-semibold text-foreground">{selectedAnimal?.name}</dd>
                   </div>
@@ -585,6 +609,20 @@ export function AppointmentCTA() {
                           }))}
                         />
                       )}
+                      {fields.service && (
+                        <div className="flex items-center gap-2 rounded-app border border-border bg-surface-alt px-4 py-3 text-sm">
+                          <span className="shrink-0 text-muted-foreground">پزشک:</span>
+                          {doctorLoading ? (
+                            <span className="text-muted-foreground">در حال تعیین پزشک…</span>
+                          ) : doctorName ? (
+                            <span className="font-semibold text-foreground">{doctorName}</span>
+                          ) : (
+                            <span className="text-destructive">
+                              هنوز پزشکی برای این خدمت تعیین نشده است — خدمت دیگری انتخاب کنید یا با کلینیک تماس بگیرید.
+                            </span>
+                          )}
+                        </div>
+                      )}
                       {fields.day && fields.service && selectedDoctorId && (
                         <div>
                           <p className="field-label">بازهٔ زمانی</p>
@@ -614,8 +652,27 @@ export function AppointmentCTA() {
                   )}
 
                   {step === 3 && (
-                    <form
-                      id="ap-form"
+                    <>
+                      <div className="grid gap-3 sm:grid-cols-2 rounded-app border border-border bg-surface-alt p-4 text-sm">
+                        <div className="flex items-center gap-2">
+                          <span className="text-muted-foreground">خدمت:</span>
+                          <span className="font-semibold text-foreground">{selectedService?.name}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-muted-foreground">پزشک:</span>
+                          <span className="font-semibold text-foreground">{doctorName || '—'}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-muted-foreground">تاریخ:</span>
+                          <span className="font-semibold text-foreground">{dayLabel}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-muted-foreground">زمان:</span>
+                          <span className="font-semibold text-foreground">{selectedTimeSlot?.time}</span>
+                        </div>
+                      </div>
+                      <form
+                        id="ap-form"
                       noValidate
                       onSubmit={(e) => {
                         e.preventDefault();
@@ -708,6 +765,7 @@ export function AppointmentCTA() {
                         />
                       </div>
                     </form>
+                    </>
                   )}
                 </div>
 
