@@ -1,15 +1,16 @@
 "use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState, useRef } from 'react';
-import { useGSAP } from '@/lib/gsap';
-import { revealUp, prefersReducedMotion } from '@/lib/motion';
-import { useReducedMotion } from '@/hooks/useReducedMotion';
-import { PhoneIcon, ArrowIcon, TagIcon, ShieldIcon, TruckIcon, RotateCcwIcon, ShoppingCartIcon, CheckCircleIcon, AlertCircleIcon, XCircleIcon, ChevronLeftIcon, ChevronRightIcon } from '@/components/icons';
-import { CLINIC } from '@/lib/content';
-import type { Product } from '@/lib/products';
-import { getStockLabel, getStockColor, formatPrice, CATEGORY_LABELS, getProductImages } from '@/lib/products';
+import Image from "next/image";
+import Link from "next/link";
+import { useState, useRef } from "react";
+import { useGSAP } from "@/lib/gsap";
+import { revealUp, prefersReducedMotion } from "@/lib/motion";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { PhoneIcon, ArrowIcon, TagIcon, ShieldIcon, TruckIcon, RotateCcwIcon, ShoppingCartIcon, CheckCircleIcon, AlertCircleIcon, XCircleIcon, ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
+import { CLINIC } from "@/lib/content";
+import type { Product } from "@/lib/products";
+import { getStockLabel, getStockColor, formatPrice, CATEGORY_LABELS, getProductImages } from "@/lib/products";
+import { useCart } from "@/context/CartContext";
 
 interface ProductDetailClientProps {
   product: Product;
@@ -28,6 +29,7 @@ export function ProductDetailClient({
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();
   const images = getProductImages(product);
+  const { addItem, openCart } = useCart();
 
   useGSAP(
     () => {
@@ -48,8 +50,15 @@ export function ProductDetailClient({
 
   const handleAddToCart = () => {
     if (isOutOfStock) return;
-    // TODO: Implement cart logic in Phase 6
-    alert(`افزودن ${quantity} عدد ${product.name} به سبد خرید (فاز 6)`);
+    addItem({
+      productId: product.id,
+      name: product.name,
+      price_rial: product.price_rial,
+      quantity,
+      image: images[0],
+      category: product.category || undefined,
+    });
+    openCart();
   };
 
   const handleIncreaseQty = () => {

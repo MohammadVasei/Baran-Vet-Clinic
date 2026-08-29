@@ -32,6 +32,7 @@ export default function ProductCreatePage() {
   const [category, setCategory] = useState('');
   const [displayOrder, setDisplayOrder] = useState('0');
   const [isActive, setIsActive] = useState(true);
+  const [isFeatured, setIsFeatured] = useState(false);
   const [images, setImages] = useState<PreviewImage[]>([]);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -106,6 +107,7 @@ export default function ProductCreatePage() {
           images: imageUrls,
           display_order: Number(displayOrder) || 0,
           is_active: isActive,
+          is_featured: isFeatured,
         },
       });
 
@@ -174,6 +176,10 @@ export default function ProductCreatePage() {
             <label className="flex items-center gap-2 mt-2">
               <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />
               <span>این محصول در سایت نمایش داده شود</span>
+            </label>
+            <label className="flex items-center gap-2 mt-2">
+              <input type="checkbox" checked={isFeatured} onChange={(e) => setIsFeatured(e.target.checked)} />
+              <span>نمایش در بخش محصولات ویژه (صفحه اصلی)</span>
             </label>
           </div>
         </div>

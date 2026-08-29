@@ -100,6 +100,15 @@ export function AdminApp({ children }: { children: React.ReactNode }) {
               icon: 'stock',
             },
           },
+          {
+            name: 'orders',
+            list: '/admin/orders',
+            show: '/admin/orders/show/:id',
+            meta: {
+              label: 'سفارشات',
+              icon: 'order',
+            },
+          },
         ]}
           options={{
             syncWithLocation: true,

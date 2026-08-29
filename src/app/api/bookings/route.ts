@@ -41,15 +41,24 @@ export async function POST(request: NextRequest) {
     const data = parsed.data;
     const phone = normalizePhone(data.customer_phone);
 
-    // Verify doctor exists and is active (lookup by key)
-    const { data: doctor, error: doctorError } = await supabaseAdmin
+    // Verify doctor exists and is active (lookup by key slug first, then by UUID)
+    const { data: doctorByKey } = await supabaseAdmin
       .from('doctors')
       .select('id, name')
-      .or(`key.eq.${data.doctor_id},id.eq.${data.doctor_id}`)
+      .eq('key', data.doctor_id)
       .eq('is_active', true)
-      .single();
+      .maybeSingle();
 
-    if (doctorError || !doctor) {
+    const doctor = doctorByKey
+      ? doctorByKey
+      : (await supabaseAdmin
+          .from('doctors')
+          .select('id, name')
+          .eq('id', data.doctor_id)
+          .eq('is_active', true)
+          .maybeSingle()).data;
+
+    if (!doctor) {
       return NextResponse.json(
         { error: 'پزشک یافت نشد یا غیرفعال است' },
         { status: 404 }

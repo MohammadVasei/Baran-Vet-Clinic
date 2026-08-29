@@ -8,6 +8,7 @@ import { Logo } from "@/components/ui/Logo";
 const NAV_LINKS = [
   { label: "خانه", href: "/" },
   { label: "خدمات", href: "/services" },
+  { label: "پت‌شاپ", href: "/services/petshop" },
   { label: "پزشکان", href: "/doctors" },
   { label: "بیماری‌های شایع", href: "/common-diseases" },
   { label: "تماس با ما", href: "/contact" },

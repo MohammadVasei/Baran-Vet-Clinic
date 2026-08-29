@@ -33,12 +33,13 @@ interface ProductData {
   images: string[] | null;
   display_order: number;
   is_active: boolean;
+  is_featured: boolean;
 }
 
 export default function ProductEditPage() {
   const { result, query } = useShow<ProductData>({
     resource: 'products',
-    meta: { select: 'id,name,description,price_rial,category,images,display_order,is_active' },
+    meta: { select: 'id,name,description,price_rial,category,images,display_order,is_active,is_featured' },
   });
   const { mutateAsync: updateProduct, mutation } = useUpdate();
   const navigation = useNavigation();
@@ -49,6 +50,7 @@ export default function ProductEditPage() {
   const [category, setCategory] = useState('');
   const [displayOrder, setDisplayOrder] = useState('0');
   const [isActive, setIsActive] = useState(true);
+  const [isFeatured, setIsFeatured] = useState(false);
   const [images, setImages] = useState<PreviewImage[]>([]);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -62,6 +64,7 @@ export default function ProductEditPage() {
     setCategory(result.category || '');
     setDisplayOrder(String(result.display_order || 0));
     setIsActive(result.is_active);
+    setIsFeatured(result.is_featured ?? false);
 
     // Convert existing images to preview format
     if (result.images && result.images.length > 0) {
@@ -165,6 +168,7 @@ export default function ProductEditPage() {
           images: allImageUrls,
           display_order: Number(displayOrder) || 0,
           is_active: isActive,
+          is_featured: isFeatured,
         },
       });
 
@@ -223,6 +227,10 @@ export default function ProductEditPage() {
             <label className="flex items-center gap-2 mt-2">
               <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />
               <span>این محصول در سایت نمایش داده شود</span>
+            </label>
+            <label className="flex items-center gap-2 mt-2">
+              <input type="checkbox" checked={isFeatured} onChange={(e) => setIsFeatured(e.target.checked)} />
+              <span>نمایش در بخش محصولات ویژه (صفحه اصلی)</span>
             </label>
           </div>
         </div>

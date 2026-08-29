@@ -7,8 +7,17 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Supabase public environment variables are missing.');
 }
 
+// Shared by server fetchers AND client helpers (formatPrice, getStockStatus…).
+// Distinct storageKey so this anon client never collides with the AuthContext
+// browser client, avoiding GoTrueClient "multiple instances / same storage key"
+// warnings in the browser.
 export const supabaseServer = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: { autoRefreshToken: false, persistSession: false },
+  auth: {
+    autoRefreshToken: false,
+    persistSession: false,
+    storageKey: "sb-anon-public-reader",
+    detectSessionInUrl: false,
+  },
 });
 
 export interface Product {

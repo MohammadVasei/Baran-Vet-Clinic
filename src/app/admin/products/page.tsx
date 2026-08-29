@@ -10,7 +10,7 @@ export function ProductsList() {
     resource: 'products',
     sorters: [{ field: 'display_order', order: 'asc' }],
     meta: {
-      select: 'id,name,description,price_rial,category,images,display_order,is_active,created_at,stock_levels(quantity_on_hand,low_stock_threshold)',
+      select: 'id,name,description,price_rial,category,images,display_order,is_active,is_featured,created_at,stock_levels(quantity_on_hand,low_stock_threshold)',
     },
   });
   const { result, query } = listResult;
@@ -37,6 +37,7 @@ export function ProductsList() {
     images: string[] | null;
     display_order: number;
     is_active: boolean;
+    is_featured: boolean;
     stock_levels?: { quantity_on_hand: number; low_stock_threshold: number } | null;
   }
 
@@ -110,6 +111,18 @@ export function ProductsList() {
           <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full ${active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
             {active ? 'فعال' : 'غیرفعال'}
           </span>
+        );
+      },
+    },
+    {
+      accessorKey: 'is_featured' as keyof ProductRow,
+      header: 'ویژه',
+      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
+        const featured = getValue('is_featured') as boolean;
+        return featured ? (
+          <span className="inline-flex items-center px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">ویژه</span>
+        ) : (
+          <span className="text-muted-foreground">—</span>
         );
       },
     },

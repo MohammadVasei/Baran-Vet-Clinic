@@ -9,6 +9,9 @@ import { Preloader } from "@/components/layout/Preloader";
 import { ThemeColorSync } from "@/components/layout/ThemeColorSync";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { ThemeProvider } from "@/components/theme-provider";
+import { CartProvider } from "@/context/CartContext";
+import { AuthProvider } from "@/context/AuthContext";
+import { CartDrawer } from "@/components/shop/CartDrawer";
 
 // Self-hosted via next/font/google (variable, arabic subset for Persian).
 // CSS variables feed the token system (--font-body/--font-heading/--font-numeral).
@@ -58,6 +61,14 @@ export default function RootLayout({
       <head>
       </head>
       <body className="min-h-full flex flex-col">
+        {/* Skip link for keyboard navigation */}
+        <a
+          href="#main"
+          className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 focus-visible:bg-primary focus-visible:text-on-primary focus-visible:z-10 focus-visible:py-2 focus-visible:px-4"
+        >
+          به محتوای اصلی برو
+        </a>
+
         <Script
           src="https://cdn.spline.design/@splinetool/hana-viewer@1.2.54/hana-viewer.js"
           type="module"
@@ -69,15 +80,20 @@ export default function RootLayout({
           enableSystem
           storageKey="baran-theme"
         >
-          <ThemeColorSync />
-          <PageTransition />
-          <Preloader />
-          <EmergencyBar />
-          <Header />
-          <main id="main" className="flex-1">
-            {children}
-          </main>
-          <Footer />
+          <AuthProvider>
+            <CartProvider>
+              <ThemeColorSync />
+              <PageTransition />
+              <Preloader />
+              <EmergencyBar />
+              <Header />
+              <main id="main" className="flex-1">
+                {children}
+              </main>
+              <Footer />
+              <CartDrawer />
+            </CartProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

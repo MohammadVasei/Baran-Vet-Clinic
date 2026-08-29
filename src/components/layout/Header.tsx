@@ -1,26 +1,31 @@
 "use client";
 
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { MenuIcon, CloseIcon } from "@/components/icons";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import { CartIcon } from "@/components/layout/CartIcon";
+import { useAuth } from "@/context/AuthContext";
 
 const NAV_LINKS = [
   { label: "خانه", href: "/", underline: "var(--nav-underline-1)" },
   { label: "خدمات", href: "/services", underline: "var(--nav-underline-2)" },
-  { label: "بیماری‌های شایع", href: "/common-diseases", underline: "var(--nav-underline-3)" },
-  { label: "پزشکان", href: "/doctors", underline: "var(--nav-underline-4)" },
-  { label: "درباره ما", href: "/about", underline: "var(--nav-underline-5)" },
-  { label: "تماس با ما", href: "/contact", underline: "var(--nav-underline-6)" },
+  { label: "پت‌شاپ", href: "/services/petshop", underline: "var(--nav-underline-3)" },
+  { label: "بیماری‌های شایع", href: "/common-diseases", underline: "var(--nav-underline-4)" },
+  { label: "پزشکان", href: "/doctors", underline: "var(--nav-underline-5)" },
+  { label: "درباره ما", href: "/about", underline: "var(--nav-underline-6)" },
+  { label: "تماس با ما", href: "/contact", underline: "var(--nav-underline-7)" },
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const { user } = useAuth();
+  const router = useRouter();
 
   return (
     <header className="sticky top-0 z-header">
@@ -59,6 +64,28 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <ThemeToggle />
+          <CartIcon />
+          {user ? (
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-foreground truncate">
+                {user.user_metadata?.full_name || user.email?.split("@")[0] || "کاربر"}
+              </span>
+              <button
+                onClick={() => router.push("/auth/login")}
+                className="px-2 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="ورود به حساب"
+              >
+                ورود
+              </button>
+            </div>
+          ) : (
+            <MagneticButton
+              href="/auth/register"
+              className="btn btn-primary"
+            >
+              عضویت
+            </MagneticButton>
+          )}
           <MagneticButton href="/contact" className="btn btn-primary hidden sm:inline-flex">
             تماس و نوبت
           </MagneticButton>
