@@ -135,11 +135,17 @@ export function CartDrawer() {
                         <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
                         <button
                           onClick={() => updateQuantity(item.productId, item.quantity + 1)}
-                          className="p-1.5 rounded border border-border hover:bg-muted"
+                          disabled={item.stock != null && item.quantity >= item.stock}
+                          className="p-1.5 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed"
                           aria-label="افزایش تعداد"
                         >
                           <PlusIcon className="size-4" />
                         </button>
+                        {item.stock != null && (
+                          <span className="text-[11px] text-muted-foreground">
+                            موجودی: {item.stock}
+                          </span>
+                        )}
                         <button
                           onClick={() => removeItem(item.productId)}
                           className="ml-auto p-1.5 rounded hover:bg-red-50 hover:text-red-600 transition-colors"

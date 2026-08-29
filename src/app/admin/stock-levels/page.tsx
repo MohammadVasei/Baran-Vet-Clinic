@@ -1,11 +1,27 @@
 "use client";
 export const dynamic = 'force-dynamic';
 
-import { useList, useNavigation, useCan } from '@refinedev/core';
+import { useState } from 'react';
+import { useList, useNavigation, useCan, useUpdate } from '@refinedev/core';
+import Link from 'next/link';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, AlertCircleIcon, CheckCircleIcon } from '@/components/icons';
+import { StockQtyCell } from '@/components/admin/StockQtyCell';
+import { EditIcon, SettingsIcon, PackageIcon, EyeIcon, EyeOffIcon, CheckCircleIcon, AlertCircleIcon } from '@/components/icons';
+
+type StockStatus = 'all' | 'out_of_stock' | 'low_stock' | 'in_stock';
+
+interface StockLevelRow {
+  id: string;
+  product_id: string;
+  quantity_on_hand: number;
+  low_stock_threshold: number;
+  updated_at: string;
+  products: { name: string; price_rial: number; category: string | null; is_active: boolean } | null;
+}
 
 export function StockLevelsList() {
+  const [statusFilter, setStatusFilter] = useState<StockStatus>('all');
+
   const listResult = useList({
     resource: 'stock_levels',
     sorters: [{ field: 'quantity_on_hand', order: 'asc' }],
@@ -16,29 +32,72 @@ export function StockLevelsList() {
   const { result, query } = listResult;
   const navigation = useNavigation();
   const canEdit = useCan({ resource: 'stock_levels', action: 'edit' });
+  const canEditProduct = useCan({ resource: 'products', action: 'edit' });
+  const { mutateAsync: updateProductActive } = useUpdate();
+  const { mutateAsync: saveStockQty } = useUpdate();
 
-  const handleEdit = (productId: string) => navigation.edit('stock_levels', productId);
+  const rows: StockLevelRow[] = ((result?.data as StockLevelRow[]) || []).map((row) => ({
+    ...row,
+    id: row.product_id,
+  }));
+
+  const getStatus = (row: StockLevelRow): Exclude<StockStatus, 'all'> => {
+    const { quantity_on_hand, low_stock_threshold } = row;
+    if (quantity_on_hand === 0) return 'out_of_stock';
+    if (quantity_on_hand <= low_stock_threshold) return 'low_stock';
+    return 'in_stock';
+  };
+
+  const filteredRows = statusFilter === 'all' ? rows : rows.filter((row) => getStatus(row) === statusFilter);
+
+  const countByStatus = (status: Exclude<StockStatus, 'all'>) =>
+    rows.filter((row) => getStatus(row) === status).length;
+
+  const handleEditStock = (productId: string) => navigation.edit('stock_levels', productId);
+  const handleEditProduct = (productId: string) => navigation.edit('products', productId);
   const handleCreate = () => navigation.create('products');
 
-  interface StockLevelRow {
-    id: string;
-    product_id: string;
-    quantity_on_hand: number;
-    low_stock_threshold: number;
-    updated_at: string;
-    products: { name: string; price_rial: number; category: string | null; is_active: boolean } | null;
-  }
+  const handleToggleActive = async (productId: string, currentActive: boolean) => {
+    await updateProductActive({
+      resource: 'products',
+      id: productId,
+      values: { is_active: !currentActive },
+    });
+    query.refetch();
+  };
+
+  const handleSaveStock = async (productId: string, quantity: number) => {
+    await saveStockQty({
+      resource: 'stock_levels',
+      id: productId,
+      meta: { idColumnName: 'product_id' },
+      values: { quantity_on_hand: quantity },
+    });
+    query.refetch();
+  };
+
+  const statusFilters: { value: StockStatus; label: string }[] = [
+    { value: 'all', label: `همه (${rows.length})` },
+    { value: 'out_of_stock', label: `ناموجود (${countByStatus('out_of_stock')})` },
+    { value: 'low_stock', label: `کم (${countByStatus('low_stock')})` },
+    { value: 'in_stock', label: `موجود (${countByStatus('in_stock')})` },
+  ];
 
   const columns = [
     {
       accessorKey: 'products' as keyof StockLevelRow,
       header: 'محصول',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
+      cellWithMeta: ({ getValue, original }: { getValue: (key: string) => unknown; original: StockLevelRow }) => {
         const product = getValue('products') as { name: string; is_active: boolean; price_rial: number } | null;
         if (!product) return <span className="text-muted-foreground">—</span>;
         return (
           <div>
-            <span className="font-medium">{product.name}</span>
+            <Link
+              href={`/admin/products/edit/${original.product_id}`}
+              className="font-medium text-foreground hover:text-primary hover:underline transition-colors"
+            >
+              {product.name}
+            </Link>
             {!product.is_active && <span className="ml-2 text-xs text-destructive">(غیرفعال)</span>}
           </div>
         );
@@ -62,9 +121,16 @@ export function StockLevelsList() {
     {
       accessorKey: 'quantity_on_hand' as keyof StockLevelRow,
       header: 'موجودی انبار',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
+      cellWithMeta: ({ getValue, original }: { getValue: (key: string) => unknown; original: StockLevelRow }) => {
         const qty = getValue('quantity_on_hand') as number;
-        return <span className="font-mono font-medium">{qty}</span>;
+        if (!canEdit.data) return <span className="font-mono font-medium">{qty}</span>;
+        return (
+          <StockQtyCell
+            productId={original.product_id}
+            quantity={qty}
+            onSave={handleSaveStock}
+          />
+        );
       },
     },
     {
@@ -79,24 +145,50 @@ export function StockLevelsList() {
       accessorKey: 'quantity_on_hand' as keyof StockLevelRow,
       header: 'وضعیت',
       cellWithMeta: ({ original }: { original: StockLevelRow }) => {
-        const { quantity_on_hand, low_stock_threshold } = original;
-        if (quantity_on_hand === 0) {
+        const status = getStatus(original);
+        if (status === 'out_of_stock') {
           return (
             <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-red-100 text-red-700">
               <AlertCircleIcon className="size-3" /> ناموجود
             </span>
           );
         }
-        if (quantity_on_hand <= low_stock_threshold) {
+        if (status === 'low_stock') {
           return (
             <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">
-              <AlertCircleIcon className="size-3" /> کم ({quantity_on_hand})
+              <AlertCircleIcon className="size-3" /> کم ({original.quantity_on_hand})
             </span>
           );
         }
         return (
           <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">
-            <CheckCircleIcon className="size-3" /> موجود ({quantity_on_hand})
+            <CheckCircleIcon className="size-3" /> موجود ({original.quantity_on_hand})
+          </span>
+        );
+      },
+    },
+    {
+      accessorKey: 'products' as keyof StockLevelRow,
+      header: 'نمایش در سایت',
+      cellWithMeta: ({ getValue, original }: { getValue: (key: string) => unknown; original: StockLevelRow }) => {
+        const active = (getValue('products') as { is_active: boolean } | null)?.is_active ?? false;
+        if (canEditProduct.data) {
+          return (
+            <button
+              onClick={() => handleToggleActive(original.product_id, active)}
+              className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full transition-colors ${active ? 'bg-green-100 text-green-700 hover:bg-green-200' : 'bg-muted text-muted-foreground hover:bg-red-100 hover:text-red-700'}`}
+              aria-label={active ? 'پنهان کردن از سایت' : 'نمایش در سایت'}
+              title={active ? 'پنهان کردن از سایت' : 'نمایش در سایت'}
+            >
+              {active ? <EyeIcon className="size-3" /> : <EyeOffIcon className="size-3" />}
+              {active ? 'فعال' : 'غیرفعال'}
+            </button>
+          );
+        }
+        return (
+          <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full ${active ? 'bg-green-100 text-green-700' : 'bg-muted text-muted-foreground'}`}>
+            {active ? <EyeIcon className="size-3" /> : <EyeOffIcon className="size-3" />}
+            {active ? 'فعال' : 'غیرفعال'}
           </span>
         );
       },
@@ -122,9 +214,18 @@ export function StockLevelsList() {
         <div className="flex items-center gap-2">
           {canEdit.data && (
             <button
-              onClick={() => handleEdit(original.product_id)}
+              onClick={() => handleEditStock(original.product_id)}
               className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="ویرایش موجودی"
+              aria-label="ویرایش موجودی و حد کمبود"
+            >
+              <SettingsIcon className="size-4" />
+            </button>
+          )}
+          {canEditProduct.data && (
+            <button
+              onClick={() => handleEditProduct(original.product_id)}
+              className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="ویرایش محصول"
             >
               <EditIcon className="size-4" />
             </button>
@@ -139,22 +240,45 @@ export function StockLevelsList() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-display text-2xl font-bold text-foreground">موجودی انبار</h1>
-          <p className="text-muted-foreground mt-1">مدیریت موجودی محصولات پت‌شاپ</p>
+          <p className="text-muted-foreground mt-1">مدیریت موجودی و نمایش محصولات در پت‌شاپ</p>
         </div>
-        <div className="w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <Link
+            href="/admin/products"
+            className="inline-flex items-center justify-center gap-2 rounded-app border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-muted transition-colors"
+          >
+            <PackageIcon className="size-4" />
+            مدیریت محصولات
+          </Link>
           <button
             onClick={handleCreate}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-app bg-primary px-4 py-2 font-bold text-on-primary transition-opacity hover:opacity-90"
+            className="inline-flex items-center justify-center gap-2 rounded-app bg-primary px-4 py-2 font-bold text-on-primary transition-opacity hover:opacity-90"
           >
             <span className="text-lg">+</span>
-            افزودن محصول جدید
+            افزودن محصول
           </button>
         </div>
       </div>
 
+      <div className="flex flex-wrap gap-2">
+        {statusFilters.map((filter) => (
+          <button
+            key={filter.value}
+            onClick={() => setStatusFilter(filter.value)}
+            className={`px-3 py-1.5 text-sm rounded-full transition-colors ${
+              statusFilter === filter.value
+                ? 'bg-primary text-on-primary'
+                : 'bg-muted text-muted-foreground hover:bg-muted/70 hover:text-foreground'
+            }`}
+          >
+            {filter.label}
+          </button>
+        ))}
+      </div>
+
       <AdminTable
         columns={columns}
-        data={((result?.data as StockLevelRow[]) || []).map((row) => ({ ...row, id: row.product_id }))}
+        data={filteredRows}
         isLoading={query.isLoading}
         onCreate={handleCreate}
         createLabel="افزودن محصول"

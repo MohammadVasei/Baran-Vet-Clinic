@@ -29,7 +29,9 @@ export function ProductDetailClient({
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();
   const images = getProductImages(product);
-  const { addItem, openCart } = useCart();
+  const { addItem, openCart, state } = useCart();
+  const inCart = state.items.find((i) => i.productId === product.id)?.quantity ?? 0;
+  const available = Math.max(0, product.quantity_on_hand - inCart);
 
   useGSAP(
     () => {
@@ -49,12 +51,13 @@ export function ProductDetailClient({
   );
 
   const handleAddToCart = () => {
-    if (isOutOfStock) return;
+    if (isOutOfStock || available <= 0) return;
     addItem({
       productId: product.id,
       name: product.name,
       price_rial: product.price_rial,
       quantity,
+      stock: product.quantity_on_hand,
       image: images[0],
       category: product.category || undefined,
     });
@@ -62,7 +65,7 @@ export function ProductDetailClient({
   };
 
   const handleIncreaseQty = () => {
-    if (quantity < product.quantity_on_hand) setQuantity((q) => q + 1);
+    if (quantity < available) setQuantity((q) => q + 1);
   };
 
   const handleDecreaseQty = () => {
@@ -220,19 +223,19 @@ export function ProductDetailClient({
                         id="quantity"
                         value={quantity}
                         onChange={(e) => {
-                          const val = Math.max(1, Math.min(product.quantity_on_hand, Number(e.target.value) || 1));
+                          const val = Math.max(1, Math.min(Math.max(available, 1), Number(e.target.value) || 1));
                           setQuantity(val);
                         }}
                         min={1}
-                        max={product.quantity_on_hand}
+                        max={Math.max(available, 1)}
                         className="w-16 text-center border-x border-border bg-transparent focus:outline-none"
                         aria-label="تعداد"
-                        disabled={isOutOfStock}
+                        disabled={isOutOfStock || available <= 0}
                       />
                       <button
                         type="button"
                         onClick={handleIncreaseQty}
-                        disabled={quantity >= product.quantity_on_hand || isOutOfStock}
+                        disabled={isOutOfStock || available <= 0 || quantity >= available}
                         className="p-3 hover:bg-muted transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         aria-label="افزایش تعداد"
                       >
@@ -242,21 +245,25 @@ export function ProductDetailClient({
                         </svg>
                       </button>
                     </div>
-                    <span className="text-sm text-muted-foreground">موجود در انبار: {product.quantity_on_hand}</span>
+                    <span className="text-sm text-muted-foreground">{available <= 0 ? 'موجودی کامل در سبد خرید است' : `باقی‌مانده: ${available} عدد`}</span>
                   </div>
                 </div>
 
                 <button
                   onClick={handleAddToCart}
-                  disabled={isOutOfStock}
+                  disabled={isOutOfStock || available <= 0}
                   className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-app text-lg font-bold transition-all ${
-                    isOutOfStock
+                    isOutOfStock || available <= 0
                       ? 'bg-muted text-muted-foreground cursor-not-allowed'
                       : 'bg-primary text-on-primary hover:opacity-90'
                   }`}
                 >
                   <ShoppingCartIcon className="size-5" />
-                  {isOutOfStock ? 'ناموجود - قابل سفارش نیست' : 'افزودن به سبد خرید'}
+                  {isOutOfStock
+                    ? 'ناموجود - قابل سفارش نیست'
+                    : available <= 0
+                      ? 'حداکثر موجودی در سبد است'
+                      : 'افزودن به سبد خرید'}
                 </button>
 
                 <p className="text-xs text-center text-muted-foreground">

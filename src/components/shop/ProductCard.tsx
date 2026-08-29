@@ -37,11 +37,15 @@ export function ProductCard({ product }: { product: ProductCardType }) {
       name: product.name,
       price_rial: product.price_rial,
       quantity,
+      stock: product.quantity_on_hand,
       image: getProductImages(product)[0],
       category: product.category || undefined,
     });
     openCart();
   };
+
+  // Never allow selecting more than what's in stock (capped at MAX_QTY).
+  const maxQty = Math.min(MAX_QTY, Math.max(1, product.quantity_on_hand));
 
   return (
     <article
@@ -122,8 +126,8 @@ export function ProductCard({ product }: { product: ProductCardType }) {
               </span>
               <button
                 type="button"
-                onClick={() => setQuantity((q) => Math.min(MAX_QTY, q + 1))}
-                disabled={isOutOfStock || quantity >= MAX_QTY}
+                onClick={() => setQuantity((q) => Math.min(maxQty, q + 1))}
+                disabled={isOutOfStock || quantity >= maxQty}
                 className="w-6 h-7 flex items-center justify-center text-muted-foreground hover:bg-muted disabled:opacity-40 text-sm font-semibold sm:w-9 sm:h-10"
                 aria-label="افزایش تعداد"
               >

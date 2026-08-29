@@ -2,8 +2,9 @@
 export const dynamic = 'force-dynamic';
 
 import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
+import Link from 'next/link';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, TrashIcon } from '@/components/icons';
+import { EditIcon, TrashIcon, SettingsIcon, PackageIcon } from '@/components/icons';
 
 export function ProductsList() {
   const listResult = useList({
@@ -19,8 +20,10 @@ export function ProductsList() {
 
   const canEdit = useCan({ resource: 'products', action: 'edit' });
   const canDelete = useCan({ resource: 'products', action: 'delete' });
+  const canEditStock = useCan({ resource: 'stock_levels', action: 'edit' });
 
   const handleEdit = (id: string) => navigation.edit('products', id);
+  const handleStockEdit = (id: string) => navigation.edit('stock_levels', id);
   const handleDelete = (id: string) => {
     if (confirm('آیا از حذف این محصول اطمینان دارید؟')) {
       deleteItem({ id, resource: 'products' });
@@ -40,6 +43,17 @@ export function ProductsList() {
     is_featured: boolean;
     stock_levels?: { quantity_on_hand: number; low_stock_threshold: number } | null;
   }
+
+  const stockBadge = (stock: { quantity_on_hand: number; low_stock_threshold: number }) => {
+    const { quantity_on_hand, low_stock_threshold } = stock;
+    if (quantity_on_hand === 0) {
+      return <span className="px-2 py-1 text-xs rounded-full bg-red-100 text-red-700">ناموجود</span>;
+    }
+    if (quantity_on_hand <= low_stock_threshold) {
+      return <span className="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">کم ({quantity_on_hand})</span>;
+    }
+    return <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">موجود ({quantity_on_hand})</span>;
+  };
 
   const columns = [
     {
@@ -87,14 +101,7 @@ export function ProductsList() {
       cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
         const stock = getValue('stock_levels') as { quantity_on_hand: number; low_stock_threshold: number } | null;
         if (!stock) return <span className="text-muted-foreground">—</span>;
-        const { quantity_on_hand, low_stock_threshold } = stock;
-        if (quantity_on_hand === 0) {
-          return <span className="px-2 py-1 text-xs rounded-full bg-red-100 text-red-700">ناموجود</span>;
-        }
-        if (quantity_on_hand <= low_stock_threshold) {
-          return <span className="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">کم ({quantity_on_hand})</span>;
-        }
-        return <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">موجود ({quantity_on_hand})</span>;
+        return stockBadge(stock);
       },
     },
     {
@@ -132,6 +139,7 @@ export function ProductsList() {
       cellWithMeta: ({ original }: { original: ProductRow }) => (
         <div className="flex items-center gap-2">
           {canEdit.data && <button onClick={() => handleEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش"><EditIcon className="size-4" /></button>}
+          {canEditStock.data && <button onClick={() => handleStockEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش موجودی و حد کمبود"><SettingsIcon className="size-4" /></button>}
           {canDelete.data && <button onClick={() => handleDelete(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-destructive transition-colors" aria-label="حذف"><TrashIcon className="size-4" /></button>}
         </div>
       ),
@@ -143,8 +151,15 @@ export function ProductsList() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-display text-2xl font-bold text-foreground">مدیریت محصولات</h1>
-          <p className="text-muted-foreground mt-1">لیست تمام محصولات پت‌شاپ</p>
+          <p className="text-muted-foreground mt-1">لیست تمام محصولات پت‌شاپ — مدیریت موجودی از پنل موجودی انبار</p>
         </div>
+        <Link
+          href="/admin/stock-levels"
+          className="inline-flex items-center gap-2 rounded-app border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-muted transition-colors"
+        >
+          <PackageIcon className="size-4" />
+          پنل موجودی انبار
+        </Link>
       </div>
 
       <AdminTable

@@ -12,6 +12,7 @@ interface OrderItemsListProps {
     price_rial: number;
     quantity: number;
     image?: string;
+    stock?: number;
   }[];
   onUpdateQuantity: (productId: string, quantity: number) => void;
   onRemove: (productId: string) => void;

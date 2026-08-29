@@ -7,8 +7,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import Link from 'next/link';
 import { supabaseClient } from '@/lib/supabase-client';
-import { TrashIcon, UploadIcon } from '@/components/icons';
+import { TrashIcon, UploadIcon, SettingsIcon } from '@/components/icons';
 
 const CATEGORIES = [
   { value: 'food', label: 'غذا' },
@@ -34,12 +35,13 @@ interface ProductData {
   display_order: number;
   is_active: boolean;
   is_featured: boolean;
+  stock_levels?: { quantity_on_hand: number; low_stock_threshold: number } | null;
 }
 
 export default function ProductEditPage() {
   const { result, query } = useShow<ProductData>({
     resource: 'products',
-    meta: { select: 'id,name,description,price_rial,category,images,display_order,is_active,is_featured' },
+    meta: { select: 'id,name,description,price_rial,category,images,display_order,is_active,is_featured,stock_levels(quantity_on_hand,low_stock_threshold)' },
   });
   const { mutateAsync: updateProduct, mutation } = useUpdate();
   const navigation = useNavigation();
@@ -189,6 +191,37 @@ export default function ProductEditPage() {
         <h1 className="font-display text-2xl font-bold">ویرایش محصول</h1>
         <p className="mt-1 text-muted-foreground">اطلاعات محصول را به‌روزرسانی کنید</p>
       </div>
+
+      {result.stock_levels && (
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-app-lg border border-border bg-surface p-5">
+          <div className="flex items-center gap-3">
+            <SettingsIcon className="size-5 text-muted-foreground" />
+            <div>
+              <p className="text-sm text-muted-foreground">موجودی انبار</p>
+              <p className="mt-1 flex items-center gap-2">
+                {(() => {
+                  const { quantity_on_hand, low_stock_threshold } = result.stock_levels!;
+                  if (quantity_on_hand === 0) {
+                    return <span className="px-2 py-1 text-xs rounded-full bg-red-100 text-red-700">ناموجود</span>;
+                  }
+                  if (quantity_on_hand <= low_stock_threshold) {
+                    return <span className="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">کم ({quantity_on_hand})</span>;
+                  }
+                  return <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">موجود ({quantity_on_hand})</span>;
+                })()}
+                <span className="text-sm text-muted-foreground">حد کمبود: {result.stock_levels.low_stock_threshold}</span>
+              </p>
+            </div>
+          </div>
+          <Link
+            href={`/admin/stock-levels/edit/${result.id}`}
+            className="inline-flex items-center gap-2 rounded-app border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-muted transition-colors"
+          >
+            <SettingsIcon className="size-4" />
+            ویرایش موجودی
+          </Link>
+        </div>
+      )}
 
       <div className="space-y-5 rounded-app-lg border border-border bg-surface p-6">
         <div>

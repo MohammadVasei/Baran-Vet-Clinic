@@ -11,6 +11,7 @@ interface OrderItemProps {
     price_rial: number;
     quantity: number;
     image?: string;
+    stock?: number;
   };
   onUpdateQuantity: (productId: string, quantity: number) => void;
   onRemove: (productId: string) => void;
@@ -49,12 +50,16 @@ export function OrderItem({ item, onUpdateQuantity, onRemove }: OrderItemProps) 
           >
             <MinusIcon className="size-4" />
           </button>
-          <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
-          <button
-            onClick={() => onUpdateQuantity(item.productId, item.quantity + 1)}
-            className="p-1.5 rounded border border-border hover:bg-muted"
-            aria-label="افزایش تعداد"
-          >
+<span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
+                {item.stock != null && item.quantity >= item.stock && (
+                  <span className="text-[11px] text-muted-foreground">بیشترین موجودی</span>
+                )}
+                <button
+                  onClick={() => onUpdateQuantity(item.productId, item.quantity + 1)}
+                  disabled={item.stock != null && item.quantity >= item.stock}
+                  className="p-1.5 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed"
+                  aria-label="افزایش تعداد"
+                >
             <PlusIcon className="size-4" />
           </button>
           <button
