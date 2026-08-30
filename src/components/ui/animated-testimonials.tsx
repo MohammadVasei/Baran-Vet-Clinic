@@ -10,7 +10,8 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { MobileSectionHeader } from "@/components/sections/mobile/MobileSectionHeader";
 import { SnapCarousel } from "@/components/sections/mobile/SnapCarousel";
 import { gsap } from "gsap";
-import { TESTIMONIALS, type TestimonialItem } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
+import type { TestimonialItem } from "@/lib/content-types";
 
 interface AnimatedTestimonialsProps {
   testimonials: TestimonialItem[];
@@ -33,6 +34,7 @@ function AnimatedTestimonialsDesktop({
   autoplay = true,
   autoplayInterval = 5000,
 }: AnimatedTestimonialsProps) {
+  const TESTIMONIALS = useCms().testimonials;
   const rootRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();
@@ -239,6 +241,7 @@ function AnimatedTestimonialsDesktop({
 function AnimatedTestimonialsMobile({
   testimonials,
 }: AnimatedTestimonialsProps) {
+  const TESTIMONIALS = useCms().testimonials;
   return (
     <section id="testimonials" className="relative overflow-hidden bg-background py-20" dir="rtl" aria-labelledby="testimonials-heading">
       <div className="pointer-events-none absolute inset-0" aria-hidden>

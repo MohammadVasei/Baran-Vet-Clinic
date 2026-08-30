@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { FACILITIES, type Facility } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
+import type { Facility } from "@/lib/content-types";
 import { MobileSectionHeader } from "@/components/sections/mobile/MobileSectionHeader";
 import { SnapCarousel } from "@/components/sections/mobile/SnapCarousel";
 import { FACILITY_ACCENTS, type FacilityAccentKey } from "@/lib/accents";
@@ -17,6 +18,7 @@ function toPersianNum(n: number) {
 }
 
 export function FacilitiesMobile() {
+  const FACILITIES = useCms().facilities;
   const prefersReducedMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);

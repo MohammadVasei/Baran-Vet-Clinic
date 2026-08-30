@@ -7,7 +7,8 @@ import { duration, ease, revealLines, revealUp } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { moveTabFocus } from "@/lib/tabs";
-import { ANIMALS, type AnimalCategory } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
+import type { AnimalCategory } from "@/lib/content-types";
 import { ANIMAL_ACCENTS as ACCENTS } from "@/lib/accents";
 import { AnimalExperienceMobile } from "@/components/sections/mobile/AnimalExperienceMobile";
 
@@ -19,6 +20,7 @@ export function AnimalExperience() {
 const AUTO_ADVANCE_MS = 5000;
 
 export function AnimalExperienceDesktop() {
+  const ANIMALS = useCms().animals;
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

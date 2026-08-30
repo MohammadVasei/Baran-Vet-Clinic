@@ -6,7 +6,7 @@ import { useGSAP, gsap } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { FACILITIES } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { FacilitiesMobile } from "@/components/sections/mobile/FacilitiesMobile";
 
 export function Facilities() {
@@ -14,9 +14,9 @@ export function Facilities() {
   return isMobile ? <FacilitiesMobile /> : <FacilitiesDesktop />;
 }
 
-const IMG_COUNT = FACILITIES.items.length;
-
 function FacilitiesDesktop() {
+  const FACILITIES = useCms().facilities;
+  const IMG_COUNT = FACILITIES.items.length;
   const root = useRef<HTMLElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);

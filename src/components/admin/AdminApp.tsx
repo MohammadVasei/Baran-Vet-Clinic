@@ -87,6 +87,35 @@ export function AdminApp({ children }: { children: React.ReactNode }) {
               icon: 'order',
             },
           },
+          {
+            name: 'diseases',
+            list: '/admin/diseases',
+            create: '/admin/diseases/create',
+            edit: '/admin/diseases/edit/:id',
+            meta: {
+              label: 'بیماری‌ها',
+              icon: 'disease',
+            },
+          },
+          {
+            name: 'testimonials',
+            list: '/admin/testimonials',
+            create: '/admin/testimonials/create',
+            edit: '/admin/testimonials/edit/:id',
+            meta: {
+              label: 'بازخوردها',
+              icon: 'testimonial',
+            },
+          },
+          {
+            name: 'site_content',
+            list: '/admin/site-content',
+            edit: '/admin/site-content/edit/:key',
+            meta: {
+              label: 'محتوا و اطلاعات کلینیک',
+              icon: 'content',
+            },
+          },
         ]}
           options={{
             syncWithLocation: true,

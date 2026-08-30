@@ -10,7 +10,17 @@ import { Textarea } from '@/components/ui/textarea';
 interface DoctorData {
   id: string;
   name: string;
+  key: string | null;
+  role: string | null;
   bio: string | null;
+  experience: string | null;
+  clinic_role: string | null;
+  image: string | null;
+  alt: string | null;
+  slug: string | null;
+  education: string[] | null;
+  focus_areas: string[] | null;
+  display_order: number;
   is_active: boolean;
 }
 
@@ -22,7 +32,10 @@ interface ServiceOption {
 }
 
 export default function DoctorEditPage() {
-  const { result, query } = useShow<DoctorData>({ resource: 'doctors', meta: { select: 'id,name,bio,is_active' } });
+  const { result, query } = useShow<DoctorData>({
+    resource: 'doctors',
+    meta: { select: 'id,name,key,role,bio,experience,clinic_role,image,alt,slug,education,focus_areas,display_order,is_active' },
+  });
   const { mutateAsync: updateDoctor } = useUpdate();
   const { mutateAsync: updateService } = useUpdate();
   const navigation = useNavigation();
@@ -32,7 +45,17 @@ export default function DoctorEditPage() {
     pagination: { mode: 'off' },
   });
   const [name, setName] = useState('');
+  const [key, setKey] = useState('');
+  const [role, setRole] = useState('');
   const [bio, setBio] = useState('');
+  const [experience, setExperience] = useState('');
+  const [clinicRole, setClinicRole] = useState('');
+  const [image, setImage] = useState('');
+  const [alt, setAlt] = useState('');
+  const [slug, setSlug] = useState('');
+  const [education, setEducation] = useState('');
+  const [focusAreas, setFocusAreas] = useState('');
+  const [displayOrder, setDisplayOrder] = useState('0');
   const [isActive, setIsActive] = useState(true);
   const [toggledServices, setToggledServices] = useState<Record<string, boolean>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -43,7 +66,17 @@ export default function DoctorEditPage() {
   useEffect(() => {
     if (!result) return;
     setName(result.name);
+    setKey(result.key || '');
+    setRole(result.role || '');
     setBio(result.bio || '');
+    setExperience(result.experience || '');
+    setClinicRole(result.clinic_role || '');
+    setImage(result.image || '');
+    setAlt(result.alt || '');
+    setSlug(result.slug || '');
+    setEducation((result.education || []).join('\n'));
+    setFocusAreas((result.focus_areas || []).join('\n'));
+    setDisplayOrder(String(result.display_order ?? 0));
     setIsActive(result.is_active);
   }, [result]);
 
@@ -70,7 +103,21 @@ export default function DoctorEditPage() {
       await updateDoctor({
         resource: 'doctors',
         id: result.id,
-        values: { name: name.trim(), bio: bio.trim() || null, is_active: isActive },
+        values: {
+          name: name.trim(),
+          key: key.trim() || null,
+          role: role.trim() || null,
+          bio: bio.trim() || null,
+          experience: experience.trim() || null,
+          clinic_role: clinicRole.trim() || null,
+          image: image.trim() || null,
+          alt: alt.trim() || null,
+          slug: slug.trim() || null,
+          education: education ? education.split('\n').map((s) => s.trim()).filter(Boolean) : null,
+          focus_areas: focusAreas ? focusAreas.split('\n').map((s) => s.trim()).filter(Boolean) : null,
+          display_order: Number(displayOrder) || 0,
+          is_active: isActive,
+        },
       });
 
       const currentAssignments = new Map<string, string | null>(services.map((s) => [s.id, s.doctor_id]));
@@ -103,7 +150,7 @@ export default function DoctorEditPage() {
     <form onSubmit={submit} className="mx-auto max-w-2xl space-y-6">
       <div>
         <h1 className="font-display text-2xl font-bold">ویرایش پزشک</h1>
-        <p className="mt-1 text-muted-foreground">اطلاعات پزشک، وضعیت نمایش و خدمات مسئول را تنظیم کنید.</p>
+        <p className="mt-1 text-muted-foreground">اطلاعات پزشک، اطلاعات نمایش در سایت و خدمات مسئول را تنظیم کنید.</p>
       </div>
 
       {submitError && (
@@ -113,9 +160,24 @@ export default function DoctorEditPage() {
       )}
 
       <div className="space-y-5 rounded-app-lg border border-border bg-surface p-6">
+        <p className="font-medium text-foreground">مشخصات پایه</p>
         <div><Label htmlFor="doctor-name">نام پزشک</Label><Input id="doctor-name" value={name} onChange={(event) => setName(event.target.value)} required className="mt-2" /></div>
-        <div><Label htmlFor="doctor-bio">معرفی</Label><Textarea id="doctor-bio" value={bio} onChange={(event) => setBio(event.target.value)} rows={4} className="mt-2" /></div>
+        <div><Label htmlFor="doctor-key">کلید یکتا</Label><Input id="doctor-key" value={key} onChange={(event) => setKey(event.target.value)} className="mt-2" dir="ltr" /></div>
+        <div><Label htmlFor="doctor-slug">اسلاگ صفحه</Label><Input id="doctor-slug" value={slug} onChange={(event) => setSlug(event.target.value)} className="mt-2" dir="ltr" /></div>
         <label className="flex items-center gap-2"><input type="checkbox" checked={isActive} onChange={(event) => setIsActive(event.target.checked)} /> <span>پزشک فعال باشد</span></label>
+      </div>
+
+      <div className="space-y-5 rounded-app-lg border border-border bg-surface p-6">
+        <p className="font-medium text-foreground">نمایش در سایت</p>
+        <div><Label htmlFor="doctor-role">نقش</Label><Input id="doctor-role" value={role} onChange={(event) => setRole(event.target.value)} className="mt-2" /></div>
+        <div><Label htmlFor="doctor-clinic-role">جایگاه در کلینیک</Label><Input id="doctor-clinic-role" value={clinicRole} onChange={(event) => setClinicRole(event.target.value)} className="mt-2" /></div>
+        <div><Label htmlFor="doctor-bio">معرفی</Label><Textarea id="doctor-bio" value={bio} onChange={(event) => setBio(event.target.value)} rows={4} className="mt-2" /></div>
+        <div><Label htmlFor="doctor-experience">سوابق</Label><Textarea id="doctor-experience" value={experience} onChange={(event) => setExperience(event.target.value)} rows={3} className="mt-2" /></div>
+        <div><Label htmlFor="doctor-education">تحصیلات (هر مورد در یک خط)</Label><Textarea id="doctor-education" value={education} onChange={(event) => setEducation(event.target.value)} rows={3} className="mt-2" /></div>
+        <div><Label htmlFor="doctor-focus">حیطه‌های تخصصی (هر مورد در یک خط)</Label><Textarea id="doctor-focus" value={focusAreas} onChange={(event) => setFocusAreas(event.target.value)} rows={3} className="mt-2" /></div>
+        <div><Label htmlFor="doctor-image">آدرس تصویر</Label><Input id="doctor-image" value={image} onChange={(event) => setImage(event.target.value)} className="mt-2" dir="ltr" /></div>
+        <div><Label htmlFor="doctor-alt">متن جایگزین تصویر</Label><Input id="doctor-alt" value={alt} onChange={(event) => setAlt(event.target.value)} className="mt-2" /></div>
+        <div><Label htmlFor="doctor-order">ترتیب نمایش</Label><Input id="doctor-order" type="number" min="0" value={displayOrder} onChange={(event) => setDisplayOrder(event.target.value)} className="mt-2" /></div>
       </div>
 
       <div className="space-y-4 rounded-app-lg border border-border bg-surface p-6">

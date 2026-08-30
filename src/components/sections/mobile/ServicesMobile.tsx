@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
-import { SERVICES, type Service } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
+import type { Service } from "@/lib/content-types";
 import { SERVICE_ACCENTS, type ServiceAccentClasses } from "@/lib/accents";
 import { MobileSectionHeader } from "@/components/sections/mobile/MobileSectionHeader";
 import { SnapCarousel } from "@/components/sections/mobile/SnapCarousel";
@@ -12,6 +13,7 @@ import { gsap } from "gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export function ServicesMobile() {
+  const SERVICES = useCms().services;
   const prefersReducedMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,6 +59,7 @@ export function ServicesMobile() {
           </SnapCarousel>
 
           <ServiceProgressIndicator
+            items={SERVICES.items}
             count={SERVICES.items.length}
             active={activeIndex}
             accent={SERVICES.items[activeIndex].accent}
@@ -111,17 +114,19 @@ function ServiceCard({ item }: { item: Service }) {
 }
 
 function ServiceProgressIndicator({
+  items,
   count,
   active,
   accent,
 }: {
+  items: Service[];
   count: number;
   active: number;
   accent: Service["accent"];
 }) {
   const accentClasses: ServiceAccentClasses = SERVICE_ACCENTS[accent];
-  const current = SERVICES.items[active].numeral;
-  const total = SERVICES.items[count - 1].numeral;
+  const current = items[active].numeral;
+  const total = items[count - 1].numeral;
   const progress = ((active + 1) / count) * 100;
 
   return (

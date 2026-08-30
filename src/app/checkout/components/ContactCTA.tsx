@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { CreditCardIcon, ArrowIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
-import { CLINIC } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 
 export function ContactCTA() {
+  const CLINIC = useCms().clinic;
   return (
     <div className="mt-6 pt-6 border-t border-border space-y-4 order-4 lg:order-1">
       <p className="font-label text-sm text-primary-text">نیاز به کمک دارید؟</p>

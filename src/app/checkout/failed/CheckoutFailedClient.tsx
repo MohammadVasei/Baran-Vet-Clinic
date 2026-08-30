@@ -7,7 +7,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { XCircleIcon, AlertCircleIcon, PackageIcon, ArrowIcon, RotateCcwIcon, PhoneIcon, ShieldIcon, TruckIcon, RotateCcwIcon as RotateCcwIcon2 } from "@/components/icons";
 import { formatPrice, CATEGORY_LABELS } from "@/lib/products";
-import { CLINIC } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 
 type Order = {
   id: string;
@@ -35,6 +35,7 @@ interface CheckoutFailedClientProps {
 }
 
 export function CheckoutFailedClient({ order, cancelled, error }: CheckoutFailedClientProps) {
+  const CLINIC = useCms().clinic;
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

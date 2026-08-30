@@ -3,7 +3,7 @@
 import { Fragment, useRef } from "react";
 import { useGSAP } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { ABOUT } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { MobileSectionHeader } from "@/components/sections/mobile/MobileSectionHeader";
 import { revealLines, revealUp } from "@/lib/motion";
 
@@ -14,6 +14,7 @@ const STATEMENT_COLORS = [
 ] as const;
 
 export function AboutMobile() {
+  const ABOUT = useCms().about;
   const root = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

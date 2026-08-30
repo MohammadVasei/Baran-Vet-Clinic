@@ -5,7 +5,7 @@ import { useGSAP } from "@/lib/gsap";
 import { revealLines, revealUp } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { SERVICES } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { SERVICE_ACCENTS as ACCENTS } from "@/lib/accents";
 import { ServicesMobile } from "@/components/sections/mobile/ServicesMobile";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
@@ -16,6 +16,7 @@ export function Services() {
 }
 
 function ServicesDesktop() {
+  const SERVICES = useCms().services;
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

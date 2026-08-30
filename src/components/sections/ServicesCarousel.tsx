@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment } from "react";
-import { SERVICES } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
 
 const placeholderImages: Record<string, string> = {
@@ -11,15 +11,16 @@ const placeholderImages: Record<string, string> = {
   petshop: "/images/service-petshop.jpg",
 };
 
-const carouselItems = SERVICES.items.map((s) => ({
-  src: placeholderImages[s.key] ?? "/images/service-petshop.jpg",
-  name: `${s.numeral} ${s.name}`,
-  designation: s.tagline,
-  quote: s.title,
-  href: s.href,
-}));
-
 export function ServicesCarousel() {
+  const SERVICES = useCms().services;
+  const carouselItems = SERVICES.items.map((s) => ({
+    src: placeholderImages[s.key] ?? "/images/service-petshop.jpg",
+    name: `${s.numeral} ${s.name}`,
+    designation: s.tagline,
+    quote: s.title,
+    href: s.href,
+  }));
+
   return (
     <section
       id="services"

@@ -1,7 +1,10 @@
 import { PhoneIcon } from "@/components/icons";
-import { EMERGENCY } from "@/lib/content";
+import { getCmsData } from "@/lib/cms";
+import type { EmergencySection } from "@/lib/content-types";
 
-export function EmergencyBar() {
+export async function EmergencyBar() {
+  const emergency: EmergencySection = (await getCmsData()).emergency;
+
   return (
     <div className="bg-[var(--emergency-bg)] text-[var(--emergency-fg)]">
       <div className="container-site flex items-center justify-between gap-6 py-2 text-sm">
@@ -9,11 +12,11 @@ export function EmergencyBar() {
           <PhoneIcon className="size-4 shrink-0" />
           <span>اورژانس دامپزشکی (۹ صبح تا ۱۰ شب):</span>
           <a
-            href={EMERGENCY.phoneHref}
+            href={emergency.phoneHref}
             className="font-bold underline-offset-4 transition-colors hover:underline"
             dir="ltr"
           >
-            {EMERGENCY.phone}
+            {emergency.phone}
           </a>
         </p>
       </div>

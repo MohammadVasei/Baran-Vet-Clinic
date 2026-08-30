@@ -6,7 +6,7 @@ import { useGSAP, gsap } from "@/lib/gsap";
 import { fadeMask, revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { ABOUT } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { AboutMobile } from "@/components/sections/mobile/AboutMobile";
 
 export function About() {
@@ -15,6 +15,7 @@ export function About() {
 }
 
 function AboutDesktop() {
+  const ABOUT = useCms().about;
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

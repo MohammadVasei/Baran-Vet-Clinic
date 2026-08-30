@@ -4,7 +4,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { useGSAP, gsap } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion, duration, ease } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { APPOINTMENT, ANIMALS, CLINIC, SERVICES } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { ArrowIcon, CheckIcon, ClockIcon, PhoneIcon, PinIcon, XIcon } from "@/components/icons";
 import { GoldieVideo } from "@/components/mascot";
@@ -125,6 +125,7 @@ function OptionChips({
 }
 
 export function AppointmentCTA() {
+  const { appointment: APPOINTMENT, animals: ANIMALS, clinic: CLINIC, services: SERVICES } = useCms();
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const panel = useRef<HTMLDivElement>(null);

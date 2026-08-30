@@ -416,7 +416,7 @@ Unique constraint required: `bookings (doctor_id, date, time)` to prevent double
 ---
 
 ### Phase 7 — Content Migration (Static → CMS)
-**Status:** ☐ Not started
+**Status:** ✅ Done
 
 **Goal:** Move `lib/content.ts`, `lib/accents.ts`, `lib/diseases-content.ts` hardcoded data into the database, editable through the Phase 3 admin screens, without breaking the existing public pages.
 
@@ -432,17 +432,44 @@ Unique constraint required: `bookings (doctor_id, date, time)` to prevent double
 - Any redesign of how content is displayed — this is a data-source swap only.
 
 **To-Do:**
-- [ ] Write and run one-time migration script for existing content
-- [ ] Update each public component to read from Supabase instead of static files
-- [ ] Remove (or clearly deprecate) the now-unused static content files, only after confirming migration success
-- [ ] Confirm caching/revalidation strategy (ISR interval or on-demand revalidation triggered from admin saves)
+- [x] Write and run one-time migration script for existing content
+- [x] Update each public component to read from Supabase instead of static files
+- [x] Remove (or clearly deprecate) the now-unused static content files, only after confirming migration success
+- [x] Confirm caching/revalidation strategy (ISR interval or on-demand revalidation triggered from admin saves)
+
+**Revalidation strategy actually implemented:**
+- Public snapshot: `getCmsData()` in `src/lib/cms.ts` → `unstable_cache(loadContent, ["cms-snapshot"], { revalidate: 300, tags: ALL_CMS_TAGS })` (Next.js 16 "previous model" — no `cacheComponents`).
+- On-demand invalidation: `POST /api/revalidate` (staff-guarded, validates tags against `ALL_CMS_TAGS`, calls `revalidateTag(tag, { expire: 0 })` — note the 2-arg Next 16 signature; optional `full` → `revalidatePath("/", "layout")`).
+- Admin mutations fire it through the wrapped Refine data provider (`src/lib/refine/data-provider.ts`): every create/update/delete on `site_content/services/doctors/diseases/testimonials` sends a fire-and-forget `POST /api/revalidate` with the matching tag. Request uses `keepalive: true` so it survives the post-save navigation.
+- `accents.ts` stays static (literal Tailwind classes) but now imports its types from `content-types.ts`.
+
+**Schema (migrations 016/017/018, applied manually):**
+- 016/017: orders/shipping columns.
+- 018: CMS columns on `services` (`tagline,title,image,alt,accent,numeral,href`), `doctors` (`role,image,alt,slug,education,experience,focus_areas,clinic_role`), `testimonials` (`pet_note`), `diseases` (`is_published`), new `site_content(key text PK, data jsonb)` (via `data:jsonb`), UNIQUE index on `services(key)` and `doctors(key)` (after deduping), UNIQUE `diseases(animal_type,name)`.
+
+**Migration script:** `scripts/migrate-content.ts` — idempotent (`node scripts/migrate-content.ts`, requires `.env.local` + migration 018 applied; Node ≥ 22 runs TS natively). Seeds 15 site_content keys, 3 doctors, 4 services, 55 diseases, 6 testimonials; upserts by unique key.
+
+**Admin completion (included per approved design):**
+- Diseases: list/create/edit/delete (`admin/diseases/*`).
+- Testimonials: list/create/edit/delete (`admin/testimonials/*`).
+- Site content: list + `edit/[key]` — structured Farsi "اطلاعات کلینیک" form for `clinic`, generic JSON editor for the rest.
+- Services/doctors forms extended with the new presentation fields; `admin/doctors/create` added.
+- `access-control.ts` grants `staff` edit/delete on the new resources; `AdminLayout` nav + `AdminApp` resources wired.
+
+**Bugs found & fixed during the smoke pass:**
+- `dataProvider.notifyRevalidate` fired `fetch('/api/revalidate')` without `keepalive` — the immediate post-save navigation could abort the request before the server invalidated the tag (observed: create revalidated but delete didn't). Fixed with `keepalive: true` on the request.
+- **Data-corruption bug:** the site-content edit page passed its row filter inside `meta.filters` (`useList`), which the Refine Supabase data provider silently ignores — it loaded ALL rows, treated `data[0]` as the row, and every save overwrote a random `site_content` row (observed: `about`/`clinic`/`why`/`animals` clobbered with the clinic-shaped payload, breaking `why.headline` and 500-ing the home page). Fixed: top-level `filters` + pick `row.key === contentKey` + guard in `submit`. Callers were re-seeded via `migrate-content.ts`.
+- Same `meta.filters` misuse in `services/create` + `services/edit` `useSelect` (inactive doctors were listed) — moved the `is_active` filter to the top level.
+- Pre-existing (not fixed): admin login submit button stays `visibility:hidden` (GSAP `revealUp` on `.login-submit` never fires) — login still works via Enter key; noted for Phase 8 QA.
 
 **Verification Checklist:**
-- [ ] Side-by-side compare every public page before/after migration — content must match exactly
-- [ ] Edit a piece of content in admin, confirm it updates on the public site within the expected revalidation window
-- [ ] Full site build + smoke test of all major pages
+- [x] Side-by-side compare every public page before/after migration — content must match exactly
+- [x] Edit a piece of content in admin, confirm it updates on the public site within the expected revalidation window
+- [x] Full site build + smoke test of all major pages
 
-**Update This File:** check off items, note the revalidation strategy actually implemented.
+**Smoke status:** `smoke-tests/cms-admin.spec.ts` added and passing (4/4): public CMS rendering (home/services/doctors/common-diseases/contact), diseases create→public→delete→public, testimonials create/delete, site-content clinic edit→public revalidation→restore. `npx tsc --noEmit` clean. All content now served from the DB; `src/lib/content.ts` + `src/lib/diseases-content.ts` deleted.
+
+**Production build verified:** `npx next build` succeeds; `/` is fully static. Fixed the loopback self-fetch that forced `/` dynamic and made dev fragile: the home page used `fetch(NEXT_PUBLIC_SITE_URL/api/petshop/featured, { cache: "no-store" })` on every render (crashed the dev server under smoke-suite load and tripped a `dynamic-server-error` at build). Moved the query into `src/lib/featured-products.ts` (`getFeaturedProducts()`) and imported it directly in `src/app/page.tsx`; deleted the now-unused `api/petshop/featured` route. Only remaining build warning is the cosmetic Estedad font fallback.
 
 ---
 

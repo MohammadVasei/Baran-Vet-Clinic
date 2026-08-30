@@ -36,6 +36,9 @@ export const accessControlProvider: AccessControlProvider = {
         'products',
         'stock_levels',
         'orders',
+        'diseases',
+        'testimonials',
+        'site_content',
       ];
 
       if (allowedResources.includes(resourceStr)) {
@@ -44,7 +47,7 @@ export const accessControlProvider: AccessControlProvider = {
           return { can: true };
         }
         // Staff can create/edit content resources
-        if (['services', 'doctors', 'products'].includes(resourceStr)) {
+        if (['services', 'doctors', 'products', 'diseases', 'testimonials', 'site_content'].includes(resourceStr)) {
           if (action === 'create' || action === 'edit') {
             return { can: true };
           }

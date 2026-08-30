@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { ANIMALS, type AnimalCategory } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
+import type { AnimalCategory } from "@/lib/content-types";
 import { ANIMAL_ACCENTS, type AccentClasses } from "@/lib/accents";
 import { MobileSectionHeader } from "@/components/sections/mobile/MobileSectionHeader";
 import { SnapCarousel } from "@/components/sections/mobile/SnapCarousel";
@@ -17,6 +18,7 @@ function toPersianNum(n: number) {
 }
 
 export function AnimalExperienceMobile() {
+  const ANIMALS = useCms().animals;
   const prefersReducedMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);

@@ -7,12 +7,16 @@ import { useGSAP } from "@/lib/gsap";
 import { revealUp, prefersReducedMotion, revealLines } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { CLINIC } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { ANIMAL_ACCENTS } from "@/lib/accents";
 import { PhoneIcon, ChevronDownIcon, SearchIcon, XIcon, FilterIcon } from "@/components/icons";
-import { DISEASES_DATA, GENERAL_ADVICE, DISCLAIMER } from "@/lib/diseases-content";
 
 export function CommonDiseasesPage() {
+  const cms = useCms();
+  const CLINIC = cms.clinic;
+  const DISEASES_DATA = cms.diseases.groups;
+  const GENERAL_ADVICE = cms.diseases.generalAdvice;
+  const DISCLAIMER = cms.diseases.disclaimer;
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

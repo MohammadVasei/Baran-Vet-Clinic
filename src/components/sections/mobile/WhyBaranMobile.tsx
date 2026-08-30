@@ -4,7 +4,8 @@ import { useRef, useState, forwardRef } from "react";
 import { useGSAP } from "@/lib/gsap";
 import { gsap } from "gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { WHY } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
+import type { WhyStep } from "@/lib/content-types";
 import { MobileSectionHeader } from "@/components/sections/mobile/MobileSectionHeader";
 import { SnapCarousel } from "@/components/sections/mobile/SnapCarousel";
 import { WHY_STEP_ACCENTS, type AccentClasses } from "@/lib/accents";
@@ -55,6 +56,7 @@ const WhyProgressIndicator = forwardRef<HTMLDivElement, { count: number; active:
 WhyProgressIndicator.displayName = "WhyProgressIndicator";
 
 export function WhyBaranMobile() {
+  const WHY = useCms().why;
   const prefersReducedMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -138,7 +140,7 @@ export function WhyBaranMobile() {
   );
 }
 
-function WhyStepCard({ step, index }: { step: typeof WHY.steps[0]; index: number }) {
+function WhyStepCard({ step, index }: { step: WhyStep; index: number }) {
   const accent: AccentClasses = WHY_STEP_ACCENTS[index];
   const stepNumber = toPersianNum(index + 1).padStart(2, "۰");
 

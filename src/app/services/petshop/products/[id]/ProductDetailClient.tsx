@@ -7,7 +7,7 @@ import { useGSAP } from "@/lib/gsap";
 import { revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { PhoneIcon, ArrowIcon, TagIcon, ShieldIcon, TruckIcon, RotateCcwIcon, ShoppingCartIcon, CheckCircleIcon, AlertCircleIcon, XCircleIcon, ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
-import { CLINIC } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import type { Product } from "@/lib/products";
 import { getStockLabel, getStockColor, formatPrice, CATEGORY_LABELS, getProductImages } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
@@ -23,6 +23,7 @@ export function ProductDetailClient({
   stockStatus,
   isOutOfStock,
 }: ProductDetailClientProps) {
+  const CLINIC = useCms().clinic;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const root = useRef<HTMLElement>(null);

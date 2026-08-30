@@ -17,6 +17,9 @@ const NAV_ITEMS = [
   { name: 'availability-blocks', label: 'بازه‌های غیرفعال', href: '/admin/availability-blocks' },
   { name: 'products', label: 'محصولات', href: '/admin/products' },
   { name: 'stock_levels', label: 'موجودی انبار', href: '/admin/stock-levels' },
+  { name: 'diseases', label: 'بیماری‌ها', href: '/admin/diseases' },
+  { name: 'testimonials', label: 'بازخوردها', href: '/admin/testimonials' },
+  { name: 'site_content', label: 'اطلاعات کلینیک', href: '/admin/site-content' },
 ] as const;
 
 type NavItemName = typeof NAV_ITEMS[number]['name'];
@@ -35,6 +38,9 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
   const availabilityBlockCanList = useCan({ resource: 'availability-blocks', action: 'list' });
   const productCanList = useCan({ resource: 'products', action: 'list' });
   const stockLevelCanList = useCan({ resource: 'stock_levels', action: 'list' });
+  const diseaseCanList = useCan({ resource: 'diseases', action: 'list' });
+  const testimonialCanList = useCan({ resource: 'testimonials', action: 'list' });
+  const siteContentCanList = useCan({ resource: 'site_content', action: 'list' });
 
   const canMap: Record<NavItemName, boolean> = {
     services: !!serviceCanList.data,
@@ -44,6 +50,9 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
     'availability-blocks': !!availabilityBlockCanList.data,
     products: !!productCanList.data,
     stock_levels: !!stockLevelCanList.data,
+    diseases: !!diseaseCanList.data,
+    testimonials: !!testimonialCanList.data,
+    site_content: !!siteContentCanList.data,
   };
 
   const allowedNavItems = NAV_ITEMS.filter((item) => canMap[item.name]);

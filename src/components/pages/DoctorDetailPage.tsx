@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useGSAP } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { DOCTORS, CLINIC } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { PhoneIcon, ArrowIcon } from "@/components/icons";
 import Link from "next/link";
 
@@ -16,6 +16,7 @@ interface DoctorDetailPageProps {
 }
 
 export function DoctorDetailPage({ doctorKey }: DoctorDetailPageProps) {
+  const { doctors: DOCTORS, clinic: CLINIC } = useCms();
   const doctor = DOCTORS.items.find((d) => d.slug === doctorKey) ?? DOCTORS.items[0];
 
   const root = useRef<HTMLElement>(null);

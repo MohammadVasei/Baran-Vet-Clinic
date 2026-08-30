@@ -6,7 +6,7 @@ import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { MagneticButton } from "@/components/motion/MagneticButton";
-import { EMERGENCY } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { EmergencyMobile } from "@/components/sections/mobile/EmergencyMobile";
 import { PhoneIcon, ArrowIcon } from "@/components/icons";
 import Link from "next/link";
@@ -17,6 +17,7 @@ export function Emergency() {
 }
 
 function EmergencyDesktop() {
+  const EMERGENCY = useCms().emergency;
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

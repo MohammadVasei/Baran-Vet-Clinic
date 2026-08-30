@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { DOCTORS } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
+import type { Doctor } from "@/lib/content-types";
 import { MobileSectionHeader } from "@/components/sections/mobile/MobileSectionHeader";
 import { SnapCarousel } from "@/components/sections/mobile/SnapCarousel";
 
@@ -12,6 +13,7 @@ import { SnapCarousel } from "@/components/sections/mobile/SnapCarousel";
  * Links to `/doctors/[slug]` preserved.
  */
 export function DoctorsMobile() {
+  const DOCTORS = useCms().doctors;
   return (
     <section id="doctors" className="relative overflow-hidden bg-surface-alt py-20">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
@@ -41,7 +43,7 @@ export function DoctorsMobile() {
   );
 }
 
-function DoctorCard({ doc }: { doc: typeof DOCTORS.items[0] }) {
+function DoctorCard({ doc }: { doc: Doctor }) {
   return (
     <Link
       href={`/doctors/${doc.slug}`}

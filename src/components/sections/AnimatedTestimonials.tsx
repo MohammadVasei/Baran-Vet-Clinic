@@ -1,9 +1,10 @@
 "use client";
 
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
-import { TESTIMONIALS } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 
 export function TestimonialsSection() {
+  const TESTIMONIALS = useCms().testimonials;
   return (
     <AnimatedTestimonials testimonials={TESTIMONIALS.items} autoplay={true} autoplayInterval={5000} />
   );

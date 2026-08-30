@@ -7,7 +7,7 @@ import { useGSAP } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { DOCTORS } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { ArrowIcon } from "@/components/icons";
 import { DoctorsMobile } from "@/components/sections/mobile/DoctorsMobile";
 
@@ -17,6 +17,7 @@ export function Doctors() {
 }
 
 function DoctorsDesktop() {
+  const DOCTORS = useCms().doctors;
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

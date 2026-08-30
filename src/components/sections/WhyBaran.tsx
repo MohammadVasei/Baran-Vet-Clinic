@@ -6,7 +6,7 @@ import { useGSAP, gsap } from "@/lib/gsap";
 import { duration, ease, fadeMask, revealLines, revealUp } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { WHY } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { WhyBaranMobile } from "@/components/sections/mobile/WhyBaranMobile";
 
 export function WhyBaran() {
@@ -15,6 +15,7 @@ export function WhyBaran() {
 }
 
 function WhyBaranDesktop() {
+  const WHY = useCms().why;
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

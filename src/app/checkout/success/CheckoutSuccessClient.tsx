@@ -7,7 +7,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { CheckCircleIcon, PackageIcon, MapPinIcon, PhoneIcon, CreditCardIcon, ArrowIcon, ClockIcon, RotateCcwIcon, ShieldIcon, TruckIcon, UserIcon } from "@/components/icons";
 import { formatPrice, CATEGORY_LABELS } from "@/lib/products";
-import { CLINIC } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 
 interface Order {
   id: string;
@@ -34,6 +34,7 @@ interface CheckoutSuccessClientProps {
 }
 
 export function CheckoutSuccessClient({ order }: CheckoutSuccessClientProps) {
+  const CLINIC = useCms().clinic;
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

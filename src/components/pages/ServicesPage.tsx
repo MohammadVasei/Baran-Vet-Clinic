@@ -6,11 +6,12 @@ import Image from "next/image";
 import { useGSAP } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { SERVICES } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { SERVICE_ACCENTS } from "@/lib/accents";
 import { ArrowIcon } from "@/components/icons";
 
 export function ServicesPage() {
+  const SERVICES = useCms().services;
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

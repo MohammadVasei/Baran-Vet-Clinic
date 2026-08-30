@@ -1,8 +1,9 @@
 "use client";
 
 import Link from 'next/link';
-import { useList } from '@refinedev/core';
-import { CalendarIcon, EditIcon } from '@/components/icons';
+import { useList, useNavigation, useCan } from '@refinedev/core';
+import { CalendarIcon, EditIcon, PlusIcon } from '@/components/icons';
+import { Button } from '@/components/ui/button';
 
 interface Doctor {
   id: string;
@@ -33,14 +34,24 @@ export default function DoctorsList() {
   });
   const doctors = doctorResult?.data || [];
   const services = serviceResult?.data || [];
+  const navigation = useNavigation();
+  const canCreate = useCan({ resource: 'doctors', action: 'create' });
 
   if (doctorQuery.isLoading) return <div className="p-8 text-center">در حال بارگذاری پزشکان...</div>;
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="font-display text-2xl font-bold text-foreground">مدیریت پزشکان</h1>
-        <p className="mt-1 text-muted-foreground">پزشکان، خدمات مسئول و زمان‌های غیرفعال را مدیریت کنید.</p>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="font-display text-2xl font-bold text-foreground">مدیریت پزشکان</h1>
+          <p className="mt-1 text-muted-foreground">پزشکان، خدمات مسئول و زمان‌های غیرفعال را مدیریت کنید.</p>
+        </div>
+        {canCreate.data && (
+          <Button onClick={() => navigation.create('doctors')} className="whitespace-nowrap">
+            <PlusIcon className="size-4" />
+            افزودن پزشک
+          </Button>
+        )}
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         {doctors.map((doctor) => {

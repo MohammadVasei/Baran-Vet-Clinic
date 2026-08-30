@@ -1,11 +1,12 @@
 import { Fragment } from "react";
 import { PawIcon } from "@/components/icons";
-import { MARQUEE } from "@/lib/content";
+import { getCmsData } from "@/lib/cms";
 
-function MarqueeGroup() {
+async function MarqueeGroup() {
+  const marquee = (await getCmsData()).marquee;
   return (
     <div className="marquee-group">
-      {MARQUEE.items.map((item) => (
+      {marquee.items.map((item) => (
         <Fragment key={item}>
           <span className="whitespace-nowrap font-display text-lg font-semibold text-foreground">
             {item}
@@ -17,9 +18,10 @@ function MarqueeGroup() {
   );
 }
 
-export function Marquee() {
+export async function Marquee() {
+  const marquee = (await getCmsData()).marquee;
   return (
-    <div role="region" aria-label={MARQUEE.label} className="marquee">
+    <div role="region" aria-label={marquee.label} className="marquee">
       <div className="marquee-track">
         <MarqueeGroup />
         <MarqueeGroup />

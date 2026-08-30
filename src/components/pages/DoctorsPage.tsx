@@ -6,10 +6,11 @@ import Image from "next/image";
 import { useGSAP } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { DOCTORS, CLINIC } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { PhoneIcon } from "@/components/icons";
 
 export function DoctorsPage() {
+  const { doctors: DOCTORS, clinic: CLINIC } = useCms();
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useGSAP } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { SERVICES, CLINIC } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { SERVICE_ACCENTS } from "@/lib/accents";
 import { PhoneIcon, ArrowIcon } from "@/components/icons";
 import Link from "next/link";
@@ -17,6 +17,7 @@ interface ServiceDetailPageProps {
 }
 
 export function ServiceDetailPage({ serviceKey }: ServiceDetailPageProps) {
+  const { services: SERVICES, clinic: CLINIC } = useCms();
   const service = SERVICES.items.find((s) => s.key === serviceKey) ?? SERVICES.items[0];
   const accent = SERVICE_ACCENTS[service.accent];
 

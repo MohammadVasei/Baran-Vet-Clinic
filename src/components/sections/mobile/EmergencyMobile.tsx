@@ -1,10 +1,11 @@
 "use client";
 
 import { PhoneIcon, ClockIcon } from "@/components/icons";
-import { EMERGENCY } from "@/lib/content";
+import { useCms } from "@/context/CmsContext";
 import { MobileSectionHeader } from "@/components/sections/mobile/MobileSectionHeader";
 
 export function EmergencyMobile() {
+  const EMERGENCY = useCms().emergency;
   return (
     <section id="emergency" className="relative overflow-hidden bg-[var(--emergency-bg)] text-[var(--emergency-fg)] py-20">
       <div className="container-site">

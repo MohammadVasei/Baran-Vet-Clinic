@@ -1,5 +1,4 @@
-import type { AnimalCategory } from "@/lib/content";
-import type { Service } from "@/lib/content";
+import type { AnimalCategory, Service } from "@/lib/content-types";
 
 /**
  * Per-category / per-service accent classes (home.md §7.5 / §7.6).
