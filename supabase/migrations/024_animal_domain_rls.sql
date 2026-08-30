@@ -38,7 +38,7 @@ ALTER TABLE public.audit_logs ENABLE ROW LEVEL SECURITY;
 
 -- Normalized-phone ownership check: matches when the authenticated user owns
 -- the animal by auth account or by phone (digit-only), mirroring 013.
-CREATE OR REPLACE FUNCTION public.user_owns_animal(a animal)
+CREATE OR REPLACE FUNCTION public.user_owns_animal(a public.animals)
 RETURNS boolean
 LANGUAGE sql
 STABLE
