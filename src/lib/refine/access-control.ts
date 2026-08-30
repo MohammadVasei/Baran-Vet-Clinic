@@ -39,6 +39,12 @@ export const accessControlProvider: AccessControlProvider = {
         'diseases',
         'testimonials',
         'site_content',
+        // Animal medical log
+        'species',
+        'breeds',
+        'vaccines',
+        'treatment_types',
+        'animals',
       ];
 
       if (allowedResources.includes(resourceStr)) {
@@ -47,7 +53,7 @@ export const accessControlProvider: AccessControlProvider = {
           return { can: true };
         }
         // Staff can create/edit content resources
-        if (['services', 'doctors', 'products', 'diseases', 'testimonials', 'site_content'].includes(resourceStr)) {
+        if (['services', 'doctors', 'products', 'diseases', 'testimonials', 'site_content', 'species', 'breeds', 'vaccines', 'treatment_types', 'animals'].includes(resourceStr)) {
           if (action === 'create' || action === 'edit') {
             return { can: true };
           }
@@ -70,7 +76,7 @@ export const accessControlProvider: AccessControlProvider = {
 
     // Public can only list published content
     if (role === 'public') {
-      const publicResources = ['services', 'doctors', 'products'];
+      const publicResources = ['services', 'doctors', 'products', 'species', 'breeds', 'vaccines', 'treatment_types'];
       if (publicResources.includes(resourceStr) && (action === 'list' || action === 'show')) {
         return { can: true };
       }

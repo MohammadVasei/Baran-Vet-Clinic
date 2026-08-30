@@ -116,6 +116,56 @@ export function AdminApp({ children }: { children: React.ReactNode }) {
               icon: 'content',
             },
           },
+          {
+            name: 'animals',
+            list: '/admin/animals',
+            create: '/admin/animals/create',
+            edit: '/admin/animals/edit/:id',
+            meta: {
+              label: 'حیوانات',
+              icon: 'animal',
+            },
+          },
+          {
+            name: 'species',
+            list: '/admin/species',
+            create: '/admin/species/create',
+            edit: '/admin/species/edit/:id',
+            meta: {
+              label: 'گونه‌ها',
+              icon: 'species',
+            },
+          },
+          {
+            name: 'breeds',
+            list: '/admin/breeds',
+            create: '/admin/breeds/create',
+            edit: '/admin/breeds/edit/:id',
+            meta: {
+              label: 'نژادها',
+              icon: 'breed',
+            },
+          },
+          {
+            name: 'vaccines',
+            list: '/admin/vaccines',
+            create: '/admin/vaccines/create',
+            edit: '/admin/vaccines/edit/:id',
+            meta: {
+              label: 'واکسن‌ها',
+              icon: 'vaccine',
+            },
+          },
+          {
+            name: 'treatment_types',
+            list: '/admin/treatments',
+            create: '/admin/treatments/create',
+            edit: '/admin/treatments/edit/:id',
+            meta: {
+              label: 'انواع درمان',
+              icon: 'treatment',
+            },
+          },
         ]}
           options={{
             syncWithLocation: true,
