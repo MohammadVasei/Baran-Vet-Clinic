@@ -23,8 +23,8 @@ const NAV_ITEMS = [
   { name: 'animals', label: 'حیوانات', href: '/admin/animals' },
   { name: 'species', label: 'گونه‌ها', href: '/admin/species' },
   { name: 'breeds', label: 'نژادها', href: '/admin/breeds' },
-  { name: 'vaccines', label: 'واکسن‌ها', href: '/admin/vaccines' },
-  { name: 'treatment_types', label: 'انواع درمان', href: '/admin/treatments' },
+  { name: 'medical_items', label: 'واکسن‌ها و درمان‌ها', href: '/admin/medical-items' },
+  { name: 'reminders', label: 'یادآوری‌ها', href: '/admin/reminders' },
 ] as const;
 
 type NavItemName = typeof NAV_ITEMS[number]['name'];
@@ -35,40 +35,41 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
-  // Check permissions for each nav item using useCan
-  const serviceCanList = useCan({ resource: 'services', action: 'list' });
-  const doctorCanList = useCan({ resource: 'doctors', action: 'list' });
-  const orderCanList = useCan({ resource: 'orders', action: 'list' });
-  const bookingCanList = useCan({ resource: 'bookings', action: 'list' });
-  const availabilityBlockCanList = useCan({ resource: 'availability-blocks', action: 'list' });
-  const productCanList = useCan({ resource: 'products', action: 'list' });
-  const stockLevelCanList = useCan({ resource: 'stock_levels', action: 'list' });
-  const diseaseCanList = useCan({ resource: 'diseases', action: 'list' });
-  const testimonialCanList = useCan({ resource: 'testimonials', action: 'list' });
-  const siteContentCanList = useCan({ resource: 'site_content', action: 'list' });
-  const animalCanList = useCan({ resource: 'animals', action: 'list' });
-  const speciesCanList = useCan({ resource: 'species', action: 'list' });
-  const breedCanList = useCan({ resource: 'breeds', action: 'list' });
-  const vaccineCanList = useCan({ resource: 'vaccines', action: 'list' });
-  const treatmentCanList = useCan({ resource: 'treatment_types', action: 'list' });
+// Check permissions for each nav item using useCan
+   const serviceCanList = useCan({ resource: 'services', action: 'list' });
+   const doctorCanList = useCan({ resource: 'doctors', action: 'list' });
+   const orderCanList = useCan({ resource: 'orders', action: 'list' });
+   const bookingCanList = useCan({ resource: 'bookings', action: 'list' });
+   const availabilityBlockCanList = useCan({ resource: 'availability-blocks', action: 'list' });
+   const productCanList = useCan({ resource: 'products', action: 'list' });
+   const stockLevelCanList = useCan({ resource: 'stock_levels', action: 'list' });
+   const diseaseCanList = useCan({ resource: 'diseases', action: 'list' });
+   const testimonialCanList = useCan({ resource: 'testimonials', action: 'list' });
+   const siteContentCanList = useCan({ resource: 'site_content', action: 'list' });
+   const animalCanList = useCan({ resource: 'animals', action: 'list' });
+   const speciesCanList = useCan({ resource: 'species', action: 'list' });
+   const breedCanList = useCan({ resource: 'breeds', action: 'list' });
+   const vaccineCanList = useCan({ resource: 'vaccines', action: 'list' });
+   const treatmentCanList = useCan({ resource: 'treatment_types', action: 'list' });
+   const reminderCanList = useCan({ resource: 'reminders', action: 'list' });
 
-  const canMap: Record<NavItemName, boolean> = {
-    services: !!serviceCanList.data,
-    doctors: !!doctorCanList.data,
-    orders: !!orderCanList.data,
-    bookings: !!bookingCanList.data,
-    'availability-blocks': !!availabilityBlockCanList.data,
-    products: !!productCanList.data,
-    stock_levels: !!stockLevelCanList.data,
-    diseases: !!diseaseCanList.data,
-    testimonials: !!testimonialCanList.data,
-    site_content: !!siteContentCanList.data,
-    animals: !!animalCanList.data,
-    species: !!speciesCanList.data,
-    breeds: !!breedCanList.data,
-    vaccines: !!vaccineCanList.data,
-    treatment_types: !!treatmentCanList.data,
-  };
+const canMap: Record<NavItemName, boolean> = {
+  services: !!serviceCanList.data,
+  doctors: !!doctorCanList.data,
+  orders: !!orderCanList.data,
+  bookings: !!bookingCanList.data,
+  'availability-blocks': !!availabilityBlockCanList.data,
+  products: !!productCanList.data,
+  stock_levels: !!stockLevelCanList.data,
+  diseases: !!diseaseCanList.data,
+  testimonials: !!testimonialCanList.data,
+  site_content: !!siteContentCanList.data,
+  animals: !!animalCanList.data,
+  species: !!speciesCanList.data,
+  breeds: !!breedCanList.data,
+  medical_items: !!(vaccineCanList.data || treatmentCanList.data),
+  reminders: !!reminderCanList.data,
+};
 
   const allowedNavItems = NAV_ITEMS.filter((item) => canMap[item.name]);
 
