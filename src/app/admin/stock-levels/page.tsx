@@ -6,7 +6,8 @@ import { useList, useNavigation, useCan, useUpdate } from '@refinedev/core';
 import Link from 'next/link';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { StockQtyCell } from '@/components/admin/StockQtyCell';
-import { EditIcon, SettingsIcon, PackageIcon, EyeIcon, EyeOffIcon, CheckCircleIcon, AlertCircleIcon } from '@/components/icons';
+import { Button } from '@/components/ui/button';
+import { EditIcon, SettingsIcon, PackageIcon, EyeIcon, EyeOffIcon, CheckCircleIcon, AlertCircleIcon, DownloadIcon, LoaderIcon } from '@/components/icons';
 
 type StockStatus = 'all' | 'out_of_stock' | 'low_stock' | 'in_stock';
 
@@ -21,6 +22,7 @@ interface StockLevelRow {
 
 export function StockLevelsList() {
   const [statusFilter, setStatusFilter] = useState<StockStatus>('all');
+  const [exporting, setExporting] = useState(false);
 
   const listResult = useList({
     resource: 'stock_levels',
@@ -74,6 +76,19 @@ export function StockLevelsList() {
       values: { quantity_on_hand: quantity },
     });
     query.refetch();
+  };
+
+  const handleExportExcel = async () => {
+    if (exporting || rows.length === 0) return;
+    setExporting(true);
+    try {
+      const { exportInventoryToExcel } = await import('@/lib/export/inventory-excel');
+      await exportInventoryToExcel(filteredRows, rows);
+    } catch (error) {
+      console.error('Export failed:', error);
+    } finally {
+      setExporting(false);
+    }
   };
 
   const statusFilters: { value: StockStatus; label: string }[] = [
@@ -243,6 +258,15 @@ export function StockLevelsList() {
           <p className="text-muted-foreground mt-1">مدیریت موجودی و نمایش محصولات در پت‌شاپ</p>
         </div>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <Button
+            variant="outline"
+            onClick={handleExportExcel}
+            disabled={exporting || rows.length === 0}
+            aria-label="خروجی اکسل"
+          >
+            {exporting ? <LoaderIcon className="size-4" /> : <DownloadIcon className="size-4" />}
+            {exporting ? 'در حال ساخت…' : 'خروجی اکسل'}
+          </Button>
           <Link
             href="/admin/products"
             className="inline-flex items-center justify-center gap-2 rounded-app border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-muted transition-colors"
