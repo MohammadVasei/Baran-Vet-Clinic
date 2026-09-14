@@ -1,9 +1,9 @@
 "use client";
 export const dynamic = 'force-dynamic';
 
-import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
+import { useList, useDelete, useNavigation, useCan, useUpdate } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, TrashIcon, EyeIcon } from '@/components/icons';
+import { EditIcon, TrashIcon, EyeIcon, CheckIcon, XIcon } from '@/components/icons';
 
 export function ServicesList() {
   const listResult = useList({
@@ -16,6 +16,7 @@ export function ServicesList() {
   const { result, query } = listResult;
   const navigation = useNavigation();
   const { mutate: deleteItem } = useDelete();
+  const { mutate: updateService, mutation: updateMutation } = useUpdate();
 
   const canEdit = useCan({ resource: 'services', action: 'edit' });
   const canDelete = useCan({ resource: 'services', action: 'delete' });
@@ -26,6 +27,13 @@ export function ServicesList() {
     if (confirm('آیا از حذف این خدمت اطمینان دارید؟')) {
       deleteItem({ id, resource: 'services' });
     }
+  };
+  const handleToggleActive = (id: string, currentActive: boolean) => {
+    updateService({
+      resource: 'services',
+      id,
+      values: { is_active: !currentActive },
+    });
   };
   const handleCreate = () => navigation.create('services');
 
@@ -106,6 +114,14 @@ export function ServicesList() {
           <button onClick={() => handleShow(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="مشاهده"><EyeIcon className="size-4" /></button>
           {canEdit.data && <button onClick={() => handleEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش"><EditIcon className="size-4" /></button>}
           {canDelete.data && <button onClick={() => handleDelete(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-destructive transition-colors" aria-label="حذف"><TrashIcon className="size-4" /></button>}
+          <button
+            onClick={() => handleToggleActive(original.id, original.is_active)}
+            disabled={updateMutation.isPending}
+            className={`p-1.5 rounded hover:bg-muted transition-colors ${original.is_active ? 'text-green-600 hover:text-green-700' : 'text-gray-400 hover:text-gray-600'}`}
+            aria-label={original.is_active ? 'غیرفعال کردن' : 'فعال کردن'}
+          >
+            {original.is_active ? <CheckIcon className="size-4" /> : <XIcon className="size-4" />}
+          </button>
         </div>
       ),
     },

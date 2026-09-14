@@ -147,13 +147,15 @@ function FacilitiesDesktop() {
                 key={item.key}
                 className="card-hover group relative aspect-[16/10] overflow-hidden rounded-app-lg border border-border bg-surface"
               >
-                <Image
-                  src={item.image}
-                  alt={item.alt}
-                  fill
-                  sizes="(min-width: 1024px) 450px, 800px"
-                  className="object-cover transition-transform duration-slow ease-out group-hover:scale-[1.03]"
-                />
+                {item.image ? (
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    fill
+                    sizes="(min-width: 1024px) 450px, 800px"
+                    className="object-cover transition-transform duration-slow ease-out group-hover:scale-[1.03]"
+                  />
+                ) : null}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 to-transparent p-6">
 <span className="font-label text-sm font-semibold text-primary-text">{item.name}</span>
                   <h3 className="mt-1 font-display text-xl font-bold text-foreground">{item.title}</h3>
@@ -204,13 +206,15 @@ function FacilitiesDesktop() {
             className={`fac-img absolute inset-0 ${i === 0 ? "" : "clip-hidden"}`}
             style={i === 0 ? { clipPath: "inset(0% 0% 0% 0%)" } : undefined}
           >
-            <Image
-              src={item.image}
-              alt={item.alt}
-              fill
-              sizes="100vw"
-              className="object-cover"
-            />
+            {item.image ? (
+              <Image
+                src={item.image}
+                alt={item.alt}
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
+            ) : null}
             {/* Dark overlay for text legibility */}
             <div className="absolute inset-0 bg-background/30" aria-hidden />
           </div>

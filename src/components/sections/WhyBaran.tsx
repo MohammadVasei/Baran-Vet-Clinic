@@ -105,13 +105,15 @@ function WhyBaranDesktop() {
                 Token-validator exception: `sizes` media queries require literal
                 px breakpoints — CSS var() is invalid inside the `sizes` attribute.
               */}
-              <Image
-                src={WHY.image.src}
-                alt={WHY.image.alt}
-                fill
-                sizes="(min-width: 1024px) 420px, 800px"
-                className="object-cover"
-              />
+              {WHY.image.src ? (
+                <Image
+                  src={WHY.image.src}
+                  alt={WHY.image.alt}
+                  fill
+                  sizes="(min-width: 1024px) 420px, 800px"
+                  className="object-cover"
+                />
+              ) : null}
             </div>
           </div>
 

@@ -19,6 +19,7 @@ export default function TreatmentsList() {
   const { result, query } = useList({
     resource: 'treatment_types',
     sorters: [{ field: 'name', order: 'asc' }],
+    pagination: { pageSize: 200 },
     meta: { select: 'id,name,species_id,category,species:species(name),active' },
   });
   const navigation = useNavigation();

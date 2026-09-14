@@ -76,6 +76,7 @@ export default async function RootLayout({
         <Script
           src="https://cdn.spline.design/@splinetool/hana-viewer@1.2.54/hana-viewer.js"
           type="module"
+          crossOrigin="anonymous"
           strategy="beforeInteractive"
         />
         <CmsProvider data={cms}>

@@ -17,6 +17,7 @@ export default function SpeciesList() {
   const { result, query } = useList({
     resource: 'species',
     sorters: [{ field: 'name', order: 'asc' }],
+    pagination: { pageSize: 100 },
     meta: { select: 'id,name,code,description,active' },
   });
   const navigation = useNavigation();

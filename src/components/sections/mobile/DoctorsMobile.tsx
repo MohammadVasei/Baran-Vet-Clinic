@@ -50,13 +50,15 @@ function DoctorCard({ doc }: { doc: Doctor }) {
       className="group relative block overflow-hidden rounded-app-lg border border-border bg-surface transition-shadow duration-normal hover:shadow-lg"
     >
       <div className="relative aspect-[3/4] overflow-hidden">
-        <Image
-          src={doc.image}
-          alt={doc.alt}
-          fill
-          sizes="(max-width: 767px) 100vw, 0px"
-          className="object-cover transition-transform duration-slow ease-out group-hover:scale-105"
-        />
+        {doc.image ? (
+          <Image
+            src={doc.image}
+            alt={doc.alt}
+            fill
+            sizes="(max-width: 767px) 100vw, 0px"
+            className="object-cover transition-transform duration-slow ease-out group-hover:scale-105"
+          />
+        ) : null}
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
       </div>
 

@@ -17,6 +17,7 @@ export default function BreedsList() {
   const { result, query } = useList({
     resource: 'breeds',
     sorters: [{ field: 'name', order: 'asc' }],
+    pagination: { pageSize: 100 },
     meta: { select: 'id,name,species_id,species:species(name),active' },
   });
   const navigation = useNavigation();

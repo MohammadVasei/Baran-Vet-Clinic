@@ -149,4 +149,4 @@ CREATE POLICY "Staff can manage testimonials"
 SELECT tablename, policyname, cmd FROM pg_policies
 WHERE schemaname = 'public'
   AND tablename IN ('site_content', 'services', 'doctors', 'diseases', 'testimonials')
-ORDER BY tablename, policyname;
+ORDER BY tablename, policyname; 

@@ -18,6 +18,7 @@ export default function VaccinesList() {
   const { result, query } = useList({
     resource: 'vaccines',
     sorters: [{ field: 'name', order: 'asc' }],
+    pagination: { pageSize: 200 },
     meta: { select: 'id,name,species_id,manufacturer,species:species(name),active' },
   });
   const navigation = useNavigation();

@@ -158,13 +158,15 @@ export function AnimalExperienceDesktop() {
                     Token-validator exception: `sizes` media queries require
                     literal px breakpoints — CSS var() is invalid there.
                   */}
-                  <Image
-                    src={c.image}
-                    alt={c.alt}
-                    fill
-                    sizes="(min-width: 1024px) 580px, 800px"
-                    className="object-cover"
-                  />
+                  {c.image ? (
+                    <Image
+                      src={c.image}
+                      alt={c.alt}
+                      fill
+                      sizes="(min-width: 1024px) 580px, 800px"
+                      className="object-cover"
+                    />
+                  ) : null}
                 </div>
               ))}
 

@@ -5,7 +5,23 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "@/components/icons";
 import { cn } from "@/lib/utils";
 
-const Select = SelectPrimitive.Root;
+const Select = ({ value, onValueChange, ...props }: React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root>) => (
+  <SelectPrimitive.Root
+    {...props}
+    value={value}
+    onValueChange={(next) => {
+      // Radix Select fires a spurious deselect (value "") right after a
+      // controlled value is set, before its hidden native <select> mirror has
+      // synced. No form here offers a "clear selection" action, so a
+      // transition to "" is always that sync quirk — ignore it, otherwise
+      // asynchronously hydrated values (e.g. animal edit species/breed) get
+      // wiped and saved as empty UUIDs.
+      if (next === "" && value !== "" && value !== undefined) return;
+      onValueChange?.(next);
+    }}
+  />
+);
+
 const SelectGroup = SelectPrimitive.Group;
 const SelectValue = SelectPrimitive.Value;
 

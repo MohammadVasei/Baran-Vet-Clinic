@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { MenuIcon, CloseIcon } from "@/components/icons";
@@ -10,6 +10,7 @@ import { MagneticButton } from "@/components/motion/MagneticButton";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { CartIcon } from "@/components/layout/CartIcon";
 import { useAuth } from "@/context/AuthContext";
+import { useDashboardPath } from "@/hooks/useDashboardPath";
 
 const NAV_LINKS = [
   { label: "خانه", href: "/", underline: "var(--nav-underline-1)" },
@@ -25,11 +26,8 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const { user } = useAuth();
-  const router = useRouter();
 
-  const dashboardPath = user?.user_metadata?.role === "owner" || user?.user_metadata?.role === "staff"
-    ? "/admin"
-    : "/account";
+  const dashboardPath = useDashboardPath();
 
   return (
     <header className="sticky top-0 z-header">

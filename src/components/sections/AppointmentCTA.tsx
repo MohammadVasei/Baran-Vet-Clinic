@@ -13,6 +13,11 @@ import { supabaseClient } from "@/lib/supabase-client";
 const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
 const toFa = (n: number) => String(n).replace(/\d/g, (d) => FA_DIGITS[+d]);
 
+const formatRial = (value: number | null | undefined): string | null => {
+  if (!value) return null;
+  return `${new Intl.NumberFormat("fa-IR").format(value)} ریال`;
+};
+
 type Fields = {
   service: string | null;
   animal: string | null;
@@ -125,7 +130,7 @@ function OptionChips({
 }
 
 export function AppointmentCTA() {
-  const { appointment: APPOINTMENT, animals: ANIMALS, clinic: CLINIC, services: SERVICES } = useCms();
+  const { appointment: APPOINTMENT, animals: ANIMALS, clinic: CLINIC } = useCms();
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const panel = useRef<HTMLDivElement>(null);
@@ -187,7 +192,7 @@ export function AppointmentCTA() {
   const doctorLoading = !!fields.service && doctorForService === null;
 
   const STEPS = APPOINTMENT.steps;
-  const selectedService = SERVICES.items.find((s) => s.key === fields.service);
+  const selectedService = APPOINTMENT.services.find((s) => s.key === fields.service);
   const selectedAnimal = ANIMALS.categories.find((a) => a.key === fields.animal);
   const selectedDay = days.find((d) => d.iso === fields.day);
   const selectedTimeSlot = timeSlots.find((t) => t.time === fields.time);
@@ -471,6 +476,10 @@ export function AppointmentCTA() {
                     <dd className="mt-0.5 font-semibold text-foreground">{selectedService?.name}</dd>
                   </div>
                   <div>
+                    <dt className="font-label text-xs text-muted-foreground">مبلغ</dt>
+                    <dd className="mt-0.5 font-semibold text-foreground">{selectedService ? formatRial(selectedService.price_rial) ?? '—' : '—'}</dd>
+                  </div>
+                  <div>
                     <dt className="font-label text-xs text-muted-foreground">پزشک</dt>
                     <dd className="mt-0.5 font-semibold text-foreground">{doctorName || '—'}</dd>
                   </div>
@@ -577,12 +586,24 @@ export function AppointmentCTA() {
 
                 <div className="mt-6">
                   {step === 0 && (
-                    <OptionChips
-                      name="انتخاب خدمت"
-                      value={fields.service}
-                      onChange={(v) => setFields((f) => ({ ...f, service: v }))}
-                      options={SERVICES.items.map((s) => ({ value: s.key, label: s.name }))}
-                    />
+                    <>
+                      {APPOINTMENT.services.length === 0 ? (
+                        <p className="text-sm text-muted-foreground text-center py-4">
+                          در حال حاضر خدمتی برای رزرو فعال نیست. لطفاً بعداً مراجعه کنید یا با کلینیک تماس بگیرید.
+                        </p>
+                      ) : (
+                        <OptionChips
+                          name="انتخاب خدمت"
+                          value={fields.service}
+                          onChange={(v) => setFields((f) => ({ ...f, service: v }))}
+                          options={APPOINTMENT.services.map((s) => ({
+                            value: s.key,
+                            label: s.name,
+                            sub: formatRial(s.price_rial) ?? undefined,
+                          }))}
+                        />
+                      )}
+                    </>
                   )}
 
                   {step === 1 && (
@@ -658,6 +679,10 @@ export function AppointmentCTA() {
                         <div className="flex items-center gap-2">
                           <span className="text-muted-foreground">خدمت:</span>
                           <span className="font-semibold text-foreground">{selectedService?.name}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-muted-foreground">مبلغ:</span>
+                          <span className="font-semibold text-foreground">{selectedService ? formatRial(selectedService.price_rial) ?? '—' : '—'}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="text-muted-foreground">پزشک:</span>

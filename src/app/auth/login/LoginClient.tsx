@@ -10,6 +10,7 @@ import { useRef } from "react";
 import { EyeIcon, EyeOffIcon, MailIcon, LockIcon, PhoneIcon, ArrowIcon, AlertCircleIcon, CheckCircleIcon } from "@/components/icons";
 import { useAuth } from "@/context/AuthContext";
 import { safeCallbackUrl } from "@/lib/callback-url";
+import { resolvePostLoginUrl } from "@/lib/dashboard-path";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -66,12 +67,12 @@ export function LoginClient({ callbackUrl = "/account" }: { callbackUrl?: string
   const handleEmailSubmit = async (data: LoginForm) => {
     setError(null);
     setLoading(true);
-    const { error } = await signIn(data.email, data.password);
+    const { error, user } = await signIn(data.email, data.password);
     setLoading(false);
     if (error) {
       setError(error.message);
     } else {
-      router.push(targetUrl);
+      router.push(await resolvePostLoginUrl(user?.id, targetUrl));
       router.refresh();
     }
   };
@@ -93,12 +94,12 @@ export function LoginClient({ callbackUrl = "/account" }: { callbackUrl?: string
   const handlePhoneVerify = async (data: { phone: string; otp: string }) => {
     setError(null);
     setLoading(true);
-    const { error } = await verifyOtp(sentPhone, data.otp, "sms");
+    const { error, user } = await verifyOtp(sentPhone, data.otp, "sms");
     setLoading(false);
     if (error) {
       setError(error.message);
     } else {
-      router.push(targetUrl);
+      router.push(await resolvePostLoginUrl(user?.id, targetUrl));
       router.refresh();
     }
   };

@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
     // Verify service exists (lookup by key)
     const { data: service, error: serviceError } = await supabaseAdmin
       .from('services')
-      .select('id, name, duration_minutes, doctor_id')
+      .select('id, name, duration_minutes, doctor_id, price_rial')
       .eq('key', data.service_id)
       .eq('is_active', true)
       .single();
@@ -140,6 +140,8 @@ export async function POST(request: NextRequest) {
         pet_name: data.pet_name?.trim() || null,
         pet_type: data.pet_type || null,
         status: 'pending',
+        payment_status: 'unpaid',
+        amount_rial: service.price_rial ?? null,
         reference_code: referenceCode,
       })
       .select()

@@ -31,25 +31,50 @@ const petTypeLabels: Record<string, string> = {
   other: 'سایر',
 };
 
+const paymentLabels: Record<string, { label: string; class: string }> = {
+  unpaid: { label: 'پرداخت نشده', class: 'bg-yellow-100 text-yellow-700' },
+  paid: { label: 'پرداخت شده', class: 'bg-green-100 text-green-700' },
+  failed: { label: 'ناموفق', class: 'bg-red-100 text-red-700' },
+  refunded: { label: 'مسترد شده', class: 'bg-gray-100 text-gray-700' },
+};
+
+const paymentOptions = [
+  { value: 'unpaid', label: 'پرداخت نشده' },
+  { value: 'paid', label: 'پرداخت شده' },
+  { value: 'failed', label: 'ناموفق' },
+  { value: 'refunded', label: 'مسترد شده' },
+];
+
+const formatRial = (value: number | null | undefined): string =>
+  value == null ? '—' : `${new Intl.NumberFormat('fa-IR').format(value)} ریال`;
+
 export function BookingEdit() {
   const { result, query } = useShow({
     resource: 'bookings',
     meta: {
-      select: 'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,reference_code,created_at',
+      select: 'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,payment_status,amount_rial,reference_code,created_at',
     },
   });
   const { mutate: updateBooking, mutation } = useUpdate();
   const isPending = mutation.isPending;
   const { list } = useNavigation();
   const booking = result;
-  const [status, setStatus] = useState(() => booking?.status || '');
+  const [status, setStatus] = useState('');
+  const [paymentStatus, setPaymentStatus] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!booking) return;
 
     updateBooking(
-      { resource: 'bookings', id: booking.id, values: { status } },
+      {
+        resource: 'bookings',
+        id: booking.id,
+        values: {
+          status: status || booking.status,
+          payment_status: paymentStatus || booking.payment_status || 'unpaid',
+        },
+      },
       {
         onSuccess: () => {
           list('/admin/bookings');
@@ -163,6 +188,19 @@ export function BookingEdit() {
                   <span>{booking.doctor_name || '—'}</span>
                 </div>
               </div>
+              <div>
+                <label className="block text-sm font-medium text-muted-foreground mb-1">مبلغ</label>
+                <div className="text-foreground font-medium">{formatRial(booking.amount_rial)}</div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-muted-foreground mb-1">وضعیت پرداخت</label>
+                {(() => {
+                  const pConfig = paymentLabels[booking.payment_status] || { label: booking.payment_status, class: 'bg-gray-100 text-gray-700' };
+                  return (
+                    <span className={`inline-flex items-center gap-1 px-2 py-1 text-sm rounded-full ${pConfig.class}`}>{pConfig.label}</span>
+                  );
+                })()}
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -244,8 +282,33 @@ export function BookingEdit() {
               </Select>
             </div>
 
+            <div>
+              <label className="block text-sm font-medium text-muted-foreground mb-2">وضعیت پرداخت</label>
+              <Select value={paymentStatus || booking.payment_status || 'unpaid'} onValueChange={setPaymentStatus} disabled={isPending}>
+                <SelectTrigger className="w-full sm:w-48">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {paymentOptions.map(opt => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      <span className="flex items-center gap-2">
+                        <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full ${
+                          opt.value === 'unpaid' ? 'bg-yellow-100 text-yellow-700' :
+                          opt.value === 'paid' ? 'bg-green-100 text-green-700' :
+                          opt.value === 'failed' ? 'bg-red-100 text-red-700' :
+                          'bg-gray-100 text-gray-700'
+                        }`}>
+                          {opt.label}
+                        </span>
+                      </span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
             <div className="pt-4 border-t border-border flex gap-3">
-              <Button type="submit" disabled={isPending || status === booking.status} className="flex-1">
+              <Button type="submit" disabled={isPending} className="flex-1">
                 {isPending ? 'در حال ذخیره...' : 'ذخیره تغییرات'}
               </Button>
               <Button type="button" variant="outline" onClick={handleCancel} className="flex-1">

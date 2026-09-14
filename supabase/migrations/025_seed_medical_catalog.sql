@@ -56,7 +56,10 @@ JOIN (VALUES
     ('cat', 'FVRCP', 'ویروس هرپس، کلسی، پنلوکوپنی'),
     ('cat', 'FeLV', 'واکسن لوسمی گربه'),
     ('cat', 'کلامیدیا', 'واکسن کلامیدیا')
-) AS v(code, name, description) ON s.code = v.code;
+) AS v(code, name, description) ON s.code = v.code
+WHERE NOT EXISTS (
+    SELECT 1 FROM public.vaccines e WHERE e.name = v.name AND e.species_id = s.id
+);
 
 -- ============================================================
 -- TREATMENT TYPES (per species + category)
@@ -73,7 +76,10 @@ JOIN (VALUES
     ('cat', 'ضد انگل خارجی', 'preventive', 'کنترل کک، کنه و ...'),
     ('cat', 'ضد انگل داخلی', 'deworming', 'قرص یا شربت ضد کرم'),
     ('cat', 'درمان پوست', 'dermatology', 'درمان عفونت‌ها و حساسیت‌های پوستی')
-) AS t(code, name, category, description) ON s.code = t.code;
+) AS t(code, name, category, description) ON s.code = t.code
+WHERE NOT EXISTS (
+    SELECT 1 FROM public.treatment_types e WHERE e.name = t.name AND e.species_id = s.id
+);
 
 -- ============================================================
 -- MEDICAL PROTOCOLS (clinic-configured care rules)
@@ -83,11 +89,14 @@ INSERT INTO public.medical_protocols
 SELECT p.name, s.id, p.category, p.description, p.age_min_months, p.age_max_months, p.recommended_interval_days, true
 FROM public.species s
 JOIN (VALUES
-    ('dog', 'هاری — سالانه', 'vaccination', 'واکسن هاری از ۳ ماهگی، سالانه تکرار شود', 3, NULL, 365),
-    ('dog', 'DHP — سالانه', 'vaccination', 'واکسن ترکیبی به‌صورت سالانه', 2, NULL, 365),
-    ('dog', 'ضد انگل داخلی', 'deworming', 'ضد انگل هر ۳ ماه توصیه می‌شود', 1, NULL, 90),
-    ('cat', 'هاری — سالانه', 'vaccination', 'واکسن هاری از ۳ ماهگی، سالانه تکرار شود', 3, NULL, 365),
-    ('cat', 'FVRCP — سالانه', 'vaccination', 'واکسن ترکیبی به‌صورت سالانه', 2, NULL, 365),
-    ('cat', 'ضد انگل داخلی', 'deworming', 'ضد انگل هر ۳ ماه توصیه می‌شود', 1, NULL, 90)
+    ('dog', 'هاری — سالانه', 'vaccination', 'واکسن هاری از ۳ ماهگی، سالانه تکرار شود', 3, NULL::integer, 365),
+    ('dog', 'DHP — سالانه', 'vaccination', 'واکسن ترکیبی به‌صورت سالانه', 2, NULL::integer, 365),
+    ('dog', 'ضد انگل داخلی', 'deworming', 'ضد انگل هر ۳ ماه توصیه می‌شود', 1, NULL::integer, 90),
+    ('cat', 'هاری — سالانه', 'vaccination', 'واکسن هاری از ۳ ماهگی، سالانه تکرار شود', 3, NULL::integer, 365),
+    ('cat', 'FVRCP — سالانه', 'vaccination', 'واکسن ترکیبی به‌صورت سالانه', 2, NULL::integer, 365),
+    ('cat', 'ضد انگل داخلی', 'deworming', 'ضد انگل هر ۳ ماه توصیه می‌شود', 1, NULL::integer, 90)
 ) AS p(code, name, category, description, age_min_months, age_max_months, recommended_interval_days)
-ON s.code = p.code;
+ON s.code = p.code
+WHERE NOT EXISTS (
+    SELECT 1 FROM public.medical_protocols e WHERE e.name = p.name AND e.species_id = s.id AND e.category = p.category
+);

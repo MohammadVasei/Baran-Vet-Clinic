@@ -110,6 +110,8 @@ export type AppointmentStep = {
 
 export type TimeSlot = { key: string; label: string };
 
+export type BookingService = { key: string; name: string; price_rial: number | null };
+
 export type AppointmentSection = {
   eyebrow: string;
   headline: string[];
@@ -117,6 +119,7 @@ export type AppointmentSection = {
   note: string;
   steps: AppointmentStep[];
   timeSlots: TimeSlot[];
+  services: BookingService[];
 };
 
 export type OpenHours = { days: string; time: string };

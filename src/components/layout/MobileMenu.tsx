@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { CloseIcon, PhoneIcon } from "@/components/icons";
 import { Logo } from "@/components/ui/Logo";
 import { useAuth } from "@/context/AuthContext";
+import { useDashboardPath } from "@/hooks/useDashboardPath";
 
 const NAV_LINKS = [
   { label: "خانه", href: "/" },
@@ -23,10 +24,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
   const pathname = usePathname();
   const { user } = useAuth();
 
-  const dashboardPath =
-    user?.user_metadata?.role === "owner" || user?.user_metadata?.role === "staff"
-      ? "/admin"
-      : "/account";
+  const dashboardPath = useDashboardPath();
 
   // Robust inert: imperative guarantee the closed menu stays out of the tab
   // order even if the declarative `inert` prop is ever dropped by the pipeline.

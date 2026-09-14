@@ -18,6 +18,8 @@ interface BookingRow {
   pet_name: string | null;
   pet_type: string | null;
   status: string;
+  payment_status: string;
+  amount_rial: number | null;
   service_id: string;
   doctor_id: string;
   service_name?: string;
@@ -39,6 +41,23 @@ const statusOptions = [
   { value: 'cancelled', label: 'لغو شده' },
 ];
 
+const paymentLabels: Record<string, { label: string; class: string }> = {
+  unpaid: { label: 'پرداخت نشده', class: 'bg-yellow-100 text-yellow-700' },
+  paid: { label: 'پرداخت شده', class: 'bg-green-100 text-green-700' },
+  failed: { label: 'ناموفق', class: 'bg-red-100 text-red-700' },
+  refunded: { label: 'مسترد شده', class: 'bg-gray-100 text-gray-700' },
+};
+
+const paymentOptions = [
+  { value: 'unpaid', label: 'پرداخت نشده' },
+  { value: 'paid', label: 'پرداخت شده' },
+  { value: 'failed', label: 'ناموفق' },
+  { value: 'refunded', label: 'مسترد شده' },
+];
+
+const formatRial = (value: number | null | undefined): string =>
+  value == null ? '—' : `${new Intl.NumberFormat('fa-IR').format(value)} ریال`;
+
 const petTypeLabels: Record<string, string> = {
   dog: 'سگ',
   cat: 'گربه',
@@ -55,7 +74,7 @@ export function BookingsList() {
       { field: 'booking_time', order: 'asc' },
     ],
     meta: {
-      select: 'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,reference_code,created_at',
+      select: 'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,payment_status,amount_rial,reference_code,created_at',
     },
   });
   const navigation = useNavigation();
@@ -121,6 +140,17 @@ export function BookingsList() {
   const handleCalendarDateSelect = (date: string) => {
     setFilterDate(date);
     setSelectedCalendarDate(date);
+  };
+
+  const handlePaymentStatusChange = (id: string, newStatus: string) => {
+    updateBooking(
+      { resource: 'bookings', id, values: { payment_status: newStatus } },
+      {
+        onSuccess: () => refetch(),
+        onError: (error) => {
+          alert('خطا در به‌روزرسانی پرداخت: ' + (error instanceof Error ? error.message : String(error)));
+        },
+      });
   };
 
   const handleClearFilters = () => {
@@ -208,6 +238,40 @@ export function BookingsList() {
         
         return (
           <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full ${config.class}`}>{config.label}</span>
+        );
+      },
+    },
+    {
+      accessorKey: 'amount_rial' as keyof BookingRow,
+      header: 'مبلغ',
+      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => (
+        <span className="text-sm whitespace-nowrap">{formatRial(getValue('amount_rial') as number | null)}</span>
+      ),
+    },
+    {
+      accessorKey: 'payment_status' as keyof BookingRow,
+      header: 'وضعیت پرداخت',
+      cellWithMeta: ({ getValue, original }: { getValue: (key: string) => unknown; original: BookingRow }) => {
+        const payment = getValue('payment_status') as string;
+        const config = paymentLabels[payment] || { label: payment, class: 'bg-gray-100 text-gray-700' };
+
+        if (!can) {
+          return (
+            <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full ${config.class}`}>{config.label}</span>
+          );
+        }
+
+        return (
+          <Select value={payment} onValueChange={(v) => handlePaymentStatusChange(original.id, v)}>
+            <SelectTrigger className="w-36">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {paymentOptions.map(opt => (
+                <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         );
       },
     },

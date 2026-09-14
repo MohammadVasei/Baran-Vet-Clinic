@@ -112,13 +112,15 @@ function AboutDesktop() {
                 Token-validator exception: `sizes` media queries require literal
                 px breakpoints — CSS var() is invalid inside the `sizes` attribute.
               */}
-              <Image
-                src={ABOUT.image.src}
-                alt={ABOUT.image.alt}
-                fill
-                sizes="(min-width: 1024px) 500px, 800px"
-                className="scale-[1.2] object-cover transition-transform duration-slow ease-out group-hover:scale-[1.26]"
-              />
+              {ABOUT.image.src ? (
+                <Image
+                  src={ABOUT.image.src}
+                  alt={ABOUT.image.alt}
+                  fill
+                  sizes="(min-width: 1024px) 500px, 800px"
+                  className="scale-[1.2] object-cover transition-transform duration-slow ease-out group-hover:scale-[1.26]"
+                />
+              ) : null}
             </div>
           </div>
         </div>

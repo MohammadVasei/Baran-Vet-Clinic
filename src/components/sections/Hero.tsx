@@ -34,6 +34,7 @@ export function Hero() {
       id="top"
       className="relative flex min-h-[calc(100svh-var(--header-height))] w-full overflow-hidden bg-background"
       aria-label="باران کلینیک حیوانات، صحنه سه‌بعدی تعاملی"
+      suppressHydrationWarning
     >
       {/* @ts-expect-error - hana-viewer is a custom web component */}
       <hana-viewer

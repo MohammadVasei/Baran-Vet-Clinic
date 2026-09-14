@@ -84,13 +84,15 @@ function AnimalCard({ item, index }: { item: AnimalCategory; index: number }) {
           aria-hidden
           style={{ backgroundColor: `var(--${accent.bar.replace("bg-", "")})` }}
         />
-        <Image
-          src={item.image}
-          alt={item.alt}
-          fill
-          sizes="(max-width: 767px) 82vw, 0px"
-          className="object-cover transition-transform duration-slow ease-out"
-        />
+        {item.image ? (
+          <Image
+            src={item.image}
+            alt={item.alt}
+            fill
+            sizes="(max-width: 767px) 82vw, 0px"
+            className="object-cover transition-transform duration-slow ease-out"
+          />
+        ) : null}
         <span
           className="absolute bottom-3 start-3 z-10 rounded-full bg-background/85 px-3 py-1 text-sm font-bold font-label backdrop-blur-sm"
           style={{ color: `var(--${accent.fg.replace("text-accent-", "accent-")}-fg)` }}

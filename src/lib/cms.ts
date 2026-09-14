@@ -32,6 +32,7 @@ import type {
   AnimalDiseases,
   DiseaseCategory,
   Disease,
+  BookingService,
 } from "@/lib/content-types";
 
 export const CMS_TAGS = {
@@ -58,6 +59,23 @@ const emptyMin = (): Min => ({ eyebrow: "", headline: [], intro: "" });
 
 const fallbackClinic = () => ({ name: "", brand: "باران", tagline: "", phone: "", phoneHref: "", mobile1: "", mobile1Href: "", mobile1WhatsApp: "", mobile2: "", mobile2Href: "", mobile2WhatsApp: "", email: "", address: "", addressShort: "", hours: [], hoursNote: "", instagram: "", instagramUrl: "", threads: "", threadsUrl: "" });
 
+// Original static copy (pre-CMS, src/lib/content.ts) — used when the
+// site_content row is missing/unreachable so the wizard never renders
+// `undefined` steps (AppointmentCTA indexes STEPS[step]).
+const fallbackAppointmentSteps = () => [
+  { key: "service" as const, label: "خدمت", title: "کدام خدمت را نیاز دارید؟", hint: "یکی از خدماتِ کلینیک را انتخاب کنید." },
+  { key: "animal" as const, label: "حیوان", title: "بیمارِ ما کیست؟", hint: "نوعِ حیوانِ خانگی را انتخاب کنید." },
+  { key: "date" as const, label: "تاریخ", title: "چه روز و ساعتی مناسب شماست؟", hint: "یک روز و یک بازهٔ زمانی را انتخاب کنید." },
+  { key: "contact" as const, label: "تماس", title: "راهِ ارتباطی را ثبت کنید", hint: "برای هماهنگیِ نهایی با شما تماس می‌گیریم." },
+];
+
+const fallbackTimeSlots = () => [
+  { key: "morning", label: "۹:۰۰ صبح" },
+  { key: "midday", label: "۱۳:۰۰" },
+  { key: "evening", label: "۱۷:۰۰" },
+  { key: "night", label: "۲۰:۰۰" },
+];
+
 function sectionMin(row: unknown, min: Min = emptyMin()): Min {
   if (!row || typeof row !== "object") return min;
   const r = row as Record<string, unknown>;
@@ -76,6 +94,7 @@ type DbService = {
   key: string | null;
   name: string | null;
   description: string | null;
+  price_rial: number | null;
   tagline: string | null;
   title: string | null;
   image: string | null;
@@ -220,6 +239,12 @@ function toTestimonials(rows: DbTestimonial[], sectionRow: unknown): CmsContent[
   return { ...sectionMin(sectionRow), items };
 }
 
+function toBookingServices(rows: DbService[]): BookingService[] {
+  return (rows ?? [])
+    .filter((r) => r.key && r.name)
+    .map((r) => ({ key: r.key!, name: r.name!, price_rial: r.price_rial ?? null }));
+}
+
 async function loadContent(): Promise<CmsContent> {
   const [siteRes, servicesRes, doctorsRes, diseasesRes, testimonialsRes] =
     await Promise.all([
@@ -227,7 +252,7 @@ async function loadContent(): Promise<CmsContent> {
       supabaseAdmin
         .from("services")
         .select(
-          "key,name,description,tagline,title,image,alt,accent,numeral,href,display_order"
+          "key,name,description,price_rial,tagline,title,image,alt,accent,numeral,href,display_order"
         )
         .eq("is_active", true)
         .order("display_order", { ascending: true }),
@@ -291,9 +316,9 @@ async function loadContent(): Promise<CmsContent> {
     items: Array.isArray(facilitiesRow?.items) ? (facilitiesRow.items as CmsContent["facilities"]["items"]) : [],
   };
 
-  const emergency = emergencyRow
+  const emergency = (emergencyRow
   ? { ...emergencyRow }
-  : ({
+  : {
       eyebrow: "",
       headline: [],
       intro: "",
@@ -307,18 +332,17 @@ async function loadContent(): Promise<CmsContent> {
       mobile1WhatsApp: "",
       mobile2Href: "",
       mobile2WhatsApp: "",
-    } as CmsContent["emergency"]);
+    }) as CmsContent["emergency"];
 
-  const appointment = {
-    ...sectionMin(appointmentRow),
-    note: typeof appointmentRow?.note === "string" ? appointmentRow.note : "",
-    steps: Array.isArray(appointmentRow?.steps) ? appointmentRow.steps : [],
-    timeSlots: Array.isArray(appointmentRow?.timeSlots) ? appointmentRow.timeSlots : [],
-  } as CmsContent["appointment"];
+// Handle errors for other queries
+  const servicesData = servicesRes.error ? [] : (servicesRes.data ?? []);
+  const doctorsData = doctorsRes.error ? [] : (doctorsRes.data ?? []);
+  const diseasesData = diseasesRes.error ? [] : (diseasesRes.data ?? []);
+  const testimonialsData = testimonialsRes.error ? [] : (testimonialsRes.data ?? []);
 
-  const contact = contactRow
+  const contact = (contactRow
   ? { ...contactRow }
-  : ({
+  : {
       eyebrow: "",
       headline: [],
       intro: "",
@@ -328,13 +352,21 @@ async function loadContent(): Promise<CmsContent> {
       hours: [],
       hoursNote: "",
       finalMessage: "",
-    } as CmsContent["contact"]);
+    }) as CmsContent["contact"];
 
-  // Handle errors for other queries
-  const servicesData = servicesRes.error ? [] : (servicesRes.data ?? []);
-  const doctorsData = doctorsRes.error ? [] : (doctorsRes.data ?? []);
-  const diseasesData = diseasesRes.error ? [] : (diseasesRes.data ?? []);
-  const testimonialsData = testimonialsRes.error ? [] : (testimonialsRes.data ?? []);
+  const appointment = {
+    ...sectionMin(appointmentRow),
+    note: typeof appointmentRow?.note === "string" ? appointmentRow.note : "",
+    steps:
+      Array.isArray(appointmentRow?.steps) && appointmentRow.steps.length > 0
+        ? appointmentRow.steps
+        : fallbackAppointmentSteps(),
+    timeSlots:
+      Array.isArray(appointmentRow?.timeSlots) && appointmentRow.timeSlots.length > 0
+        ? appointmentRow.timeSlots
+        : fallbackTimeSlots(),
+    services: toBookingServices(servicesData as unknown as DbService[]),
+  } as CmsContent["appointment"];
 
 let services = toServices(
      servicesData as unknown as DbService[],
@@ -352,62 +384,62 @@ let services = toServices(
      pick(rows, "disclaimer")
    );
 
-   // Provide fallback items if arrays are empty to prevent UI errors
-   if (services.items.length === 0) {
-     services = {
-       ...services,
-       items: [
-         {
-           key: "fallback-service",
-           numeral: "01",
-           name: "Fallback Service",
-           tagline: "Professional veterinary care",
-           title: "Fallback Service",
-           text: "We provide comprehensive veterinary services for your pets.",
-           image: "/fallback-service.jpg",
-           alt: "Fallback service",
-           accent: "purple" as ServiceAccent,
-           href: "/services",
-         },
-       ],
-     };
-   }
+  // Provide fallback items if arrays are empty to prevent UI errors
+  if (services.items.length === 0) {
+    services = {
+      ...services,
+      items: [
+        {
+          key: "fallback-service",
+          numeral: "01",
+          name: "Fallback Service",
+          tagline: "Professional veterinary care",
+          title: "Fallback Service",
+          text: "We provide comprehensive veterinary services for your pets.",
+          image: "/fallback-service.jpg",
+          alt: "Fallback service",
+          accent: "purple" as ServiceAccent,
+          href: "/services",
+        },
+      ],
+    };
+  }
 
-   if (doctors.items.length === 0) {
-     doctors = {
-       ...doctors,
-       items: [
-         {
-           key: "fallback-doctor",
-           name: "Dr. Fallback",
-           role: "Veterinarian",
-           image: "/fallback-doctor.jpg",
-           alt: "Fallback doctor",
-           slug: "fallback-doctor",
-           education: ["DVM"],
-           experience: "10 years",
-           bio: "Experienced veterinarian passionate about animal care.",
-           focusAreas: ["Surgery", "Medicine"],
-           clinicRole: "Owner",
-         },
-       ],
-     };
-   }
+  if (doctors.items.length === 0) {
+    doctors = {
+      ...doctors,
+      items: [
+        {
+          key: "fallback-doctor",
+          name: "Dr. Fallback",
+          role: "Veterinarian",
+          image: "/fallback-doctor.jpg",
+          alt: "Fallback doctor",
+          slug: "fallback-doctor",
+          education: ["DVM"],
+          experience: "10 years",
+          bio: "Experienced veterinarian passionate about animal care.",
+          focusAreas: ["Surgery", "Medicine"],
+          clinicRole: "Owner",
+        },
+      ],
+    };
+  }
 
-   if (testimonials.items.length === 0) {
-     testimonials = {
-       ...testimonials,
-       items: [
-         {
-           id: 1,
-           name: "Happy Client",
-           pet: "Golden Retriever",
-           content: "Excellent service and caring staff!",
-           species: "dog",
-         },
-       ],
-     };
-   }
+  if (testimonials.items.length === 0) {
+    testimonials = {
+      ...testimonials,
+      items: [
+        {
+          id: 1,
+          name: "Happy Client",
+          pet: "Golden Retriever",
+          content: "Excellent service and caring staff!",
+          species: "dog",
+        },
+      ],
+    };
+  }
 
   return {
     clinic,
@@ -420,10 +452,10 @@ let services = toServices(
     doctors,
     emergency,
     testimonials,
-appointment,
-     contact,
-     diseases,
-   };
+    appointment,
+    contact,
+    diseases,
+  };
  }
 // Trigger rebuild after fix
 
