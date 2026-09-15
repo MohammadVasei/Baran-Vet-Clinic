@@ -1,4 +1,5 @@
 import { toJalaali } from 'jalaali-js';
+import { addDays, addMonths, addWeeks, addYears } from 'date-fns';
 
 /**
  * Animal medical log — domain helpers shared by the admin and user panels.
@@ -141,3 +142,68 @@ export const REMINDER_PRIORITY_LABELS: Record<string, string> = {
   important: 'مهم',
   urgent: 'فوری',
 };
+
+export const REMINDER_INTERVAL_UNITS = ['days', 'weeks', 'months', 'years'] as const;
+export type ReminderIntervalUnit = (typeof REMINDER_INTERVAL_UNITS)[number];
+
+export const REMINDER_INTERVAL_UNIT_LABELS: Record<ReminderIntervalUnit, string> = {
+  days: 'روز',
+  weeks: 'هفته',
+  months: 'ماه',
+  years: 'سال',
+};
+
+/** Quick-pick presets for the config form. */
+export const REMINDER_INTERVAL_PRESETS: { value: number; unit: ReminderIntervalUnit; label: string }[] = [
+  { value: 1, unit: 'months', label: '۱ ماه' },
+  { value: 3, unit: 'months', label: '۳ ماه' },
+  { value: 6, unit: 'months', label: '۶ ماه' },
+  { value: 12, unit: 'months', label: '۱۲ ماه' },
+  { value: 21, unit: 'days', label: '۲۱ روز' },
+  { value: 1, unit: 'years', label: '۱ سال' },
+  { value: 2, unit: 'years', label: '۲ سال' },
+];
+
+/** Human-readable interval, e.g. { value: 3, unit: 'months' } → «۳ ماه». */
+export function formatReminderInterval(
+  value: number | null | undefined,
+  unit: ReminderIntervalUnit | string | null | undefined
+): string {
+  if (value == null || value <= 0) return '—';
+  const unitLabel = REMINDER_INTERVAL_UNIT_LABELS[unit as ReminderIntervalUnit] || String(unit);
+  return `${new Intl.NumberFormat('fa-IR').format(value)} ${unitLabel}`;
+}
+
+/**
+ * Calculate the next reminder/due date for a periodic treatment.
+ *
+ * Uses the actual administration date and the configured interval, applying
+ * proper calendar arithmetic so month/year arithmetic keeps "same day" instead
+ * of fixed day-counts. Month-end edge cases (Jan 31 + 1 month → Feb 28/29),
+ * leap years and year boundaries are handled by date-fns.
+ *
+ * Returns a Date (midnight UTC) or null when the interval is invalid.
+ */
+export function calculateNextReminderDate(
+  administeredDate: Date | string,
+  intervalValue: number | null | undefined,
+  intervalUnit: ReminderIntervalUnit | string | null | undefined
+): Date | null {
+  const base =
+    typeof administeredDate === 'string' ? new Date(`${administeredDate}T00:00:00.000Z`) : administeredDate;
+  if (Number.isNaN(base.getTime())) return null;
+  if (intervalValue == null || intervalValue <= 0) return null;
+
+  switch (intervalUnit) {
+    case 'days':
+      return addDays(base, intervalValue);
+    case 'weeks':
+      return addWeeks(base, intervalValue);
+    case 'months':
+      return addMonths(base, intervalValue);
+    case 'years':
+      return addYears(base, intervalValue);
+    default:
+      return null;
+  }
+}

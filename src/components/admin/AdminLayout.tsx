@@ -7,33 +7,61 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { gsap, useGSAP } from '@/lib/gsap';
 import { prefersReducedMotion, duration, ease } from '@/lib/motion';
-import { ArrowIcon, MenuIcon, XIcon, LogOutIcon } from '@/components/icons';
+import { ArrowIcon, MenuIcon, XIcon, LogOutIcon, ChevronDownIcon } from '@/components/icons';
 
-const NAV_ITEMS = [
-  { name: 'services', label: 'خدمات', href: '/admin/services' },
-  { name: 'doctors', label: 'پزشکان', href: '/admin/doctors' },
-  { name: 'orders', label: 'سفارشات', href: '/admin/orders' },
-  { name: 'bookings', label: 'نوبت‌ها', href: '/admin/bookings' },
-  { name: 'availability-blocks', label: 'بازه‌های غیرفعال', href: '/admin/availability-blocks' },
-  { name: 'products', label: 'محصولات', href: '/admin/products' },
-  { name: 'stock_levels', label: 'موجودی انبار', href: '/admin/stock-levels' },
-  { name: 'diseases', label: 'بیماری‌ها', href: '/admin/diseases' },
-  { name: 'testimonials', label: 'بازخوردها', href: '/admin/testimonials' },
-  { name: 'site_content', label: 'اطلاعات کلینیک', href: '/admin/site-content' },
-  { name: 'animals', label: 'حیوانات', href: '/admin/animals' },
-  { name: 'species', label: 'گونه‌ها', href: '/admin/species' },
-  { name: 'breeds', label: 'نژادها', href: '/admin/breeds' },
-  { name: 'medical_items', label: 'واکسن‌ها و درمان‌ها', href: '/admin/medical-items' },
-  { name: 'reminders', label: 'یادآوری‌ها', href: '/admin/reminders' },
+const NAV_GROUPS = [
+  {
+    key: 'shop',
+    label: 'فروشگاه و نوبت',
+    items: [
+      { name: 'services', label: 'خدمات', href: '/admin/services' },
+      { name: 'doctors', label: 'پزشکان', href: '/admin/doctors' },
+      { name: 'orders', label: 'سفارشات', href: '/admin/orders' },
+      { name: 'bookings', label: 'نوبت‌ها', href: '/admin/bookings' },
+      { name: 'availability-blocks', label: 'بازه‌های غیرفعال', href: '/admin/availability-blocks' },
+      { name: 'products', label: 'محصولات', href: '/admin/products' },
+    ],
+  },
+  {
+    key: 'operations',
+    label: 'عملیات روزانه',
+    items: [
+      { name: 'stock_levels', label: 'موجودی انبار', href: '/admin/stock-levels' },
+      { name: 'animals', label: 'حیوانات', href: '/admin/animals' },
+      { name: 'reminders', label: 'یادآوری‌ها', href: '/admin/reminders' },
+    ],
+  },
+  {
+    key: 'catalog',
+    label: 'داده‌های پایه',
+    items: [
+      { name: 'diseases', label: 'بیماری‌ها', href: '/admin/diseases' },
+      { name: 'species-and-breeds', label: 'گونه‌ها و نژادها', href: '/admin/species-and-breeds' },
+      { name: 'medical_items', label: 'واکسن‌ها و درمان‌ها', href: '/admin/medical-items' },
+    ],
+  },
+  {
+    key: 'content',
+    label: 'محتوا و تنظیمات',
+    items: [
+      { name: 'testimonials', label: 'بازخوردها', href: '/admin/testimonials' },
+      { name: 'site_content', label: 'اطلاعات کلینیک', href: '/admin/site-content' },
+    ],
+  },
 ] as const;
 
-type NavItemName = typeof NAV_ITEMS[number]['name'];
+type NavItemName = typeof NAV_GROUPS[number]['items'][number]['name'];
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>({});
   const sidebarRef = useRef<HTMLDivElement>(null);
+
+  const toggleGroup = (key: string) => {
+    setCollapsedGroups((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
 // Check permissions for each nav item using useCan
    const serviceCanList = useCan({ resource: 'services', action: 'list' });
@@ -65,13 +93,10 @@ const canMap: Record<NavItemName, boolean> = {
   testimonials: !!testimonialCanList.data,
   site_content: !!siteContentCanList.data,
   animals: !!animalCanList.data,
-  species: !!speciesCanList.data,
-  breeds: !!breedCanList.data,
   medical_items: !!(vaccineCanList.data || treatmentCanList.data),
   reminders: !!reminderCanList.data,
+  'species-and-breeds': !!speciesCanList.data && !!breedCanList.data,
 };
-
-  const allowedNavItems = NAV_ITEMS.filter((item) => canMap[item.name]);
 
   useGSAP(
     () => {
@@ -150,26 +175,49 @@ const canMap: Record<NavItemName, boolean> = {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 p-4 space-y-1 overflow-y-auto" aria-label="منوی اصلی">
-            {allowedNavItems.map((item) => {
-              const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+          <nav className="flex-1 p-4 space-y-2 overflow-y-auto" aria-label="منوی اصلی">
+            {NAV_GROUPS.map((group) => {
+              const allowedItems = group.items.filter((item) => canMap[item.name]);
+              if (allowedItems.length === 0) return null;
+              const isCollapsed = !!collapsedGroups[group.key];
               return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(item.href);
-                  }}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-app text-sm font-medium transition-colors ${
-                    isActive
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-foreground hover:bg-muted'
-                  }`}
-                >
-                  <span className="flex-1">{item.label}</span>
-                  {isActive && <ArrowIcon direction="forward" className="size-4" />}
-                </Link>
+                <div key={group.key} className="space-y-0.5">
+                  <button
+                    type="button"
+                    onClick={() => toggleGroup(group.key)}
+                    aria-expanded={!isCollapsed}
+                    className="w-full flex items-center justify-between px-3 pt-3 pb-1 rounded-app group"
+                  >
+                    <h1 className="text-base font-bold text-foreground/80 group-hover:text-foreground transition-colors">
+                      {group.label}
+                    </h1>
+                    <ChevronDownIcon
+                      className={`size-4 text-foreground/40 transition-transform duration-200 ${isCollapsed ? '-rotate-90' : ''}`}
+                    />
+                  </button>
+                  {!isCollapsed &&
+                    allowedItems.map((item) => {
+                      const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+                      return (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleNavClick(item.href);
+                          }}
+                          className={`flex items-center gap-3 px-3 py-2 rounded-app text-sm font-medium transition-colors ${
+                            isActive
+                              ? 'bg-primary text-primary-foreground'
+                              : 'text-foreground/80 hover:bg-muted hover:text-foreground'
+                          }`}
+                        >
+                          <h2 className="flex-1">{item.label}</h2>
+                          {isActive && <ArrowIcon direction="forward" className="size-4" />}
+                        </Link>
+                      );
+                    })}
+                </div>
               );
             })}
           </nav>

@@ -168,23 +168,15 @@ export default function TreatmentCreatePage() {
         disabled={isSubmitting}
       />
 
-      <div className="flex gap-3">
-        <Button 
-          type="submit" 
-          disabled={mutation.isPending || isSubmitting}
-          isLoading={mutation.isPending || isSubmitting}
-        >
-          {isSubmitting ? 'در حال افزودن...' : 'افزودن نوع درمان'}
-        </Button>
-        <Button 
-          type="button" 
-          variant="outline" 
-          onClick={() => router.push('/admin/medical-items')}
-          disabled={isSubmitting}
-        >
-          انصراف
-        </Button>
-      </div>
-    </form>
-  );
-}
+<div className="flex gap-3">
+         <Button 
+           type="submit" 
+           disabled={mutation.isPending || isSubmitting}
+           isLoading={mutation.isPending || isSubmitting}
+         >
+           {isSubmitting ? 'در حال افزودن...' : 'افزودن نوع درمان'}
+         </Button>
+       </div>
+     </form>
+   );
+ }

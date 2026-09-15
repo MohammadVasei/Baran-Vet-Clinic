@@ -121,6 +121,7 @@ export function AdminApp({ children }: { children: React.ReactNode }) {
             list: '/admin/animals',
             create: '/admin/animals/create',
             edit: '/admin/animals/edit/:id',
+            show: '/admin/animals/show/:id',
             meta: {
               label: 'حیوانات',
               icon: 'animal',
@@ -164,6 +165,14 @@ export function AdminApp({ children }: { children: React.ReactNode }) {
             meta: {
               label: 'انواع درمان',
               icon: 'treatment',
+            },
+          },
+          {
+            name: 'reminders',
+            list: '/admin/reminders',
+            meta: {
+              label: 'یادآوری‌ها',
+              icon: 'reminder',
             },
           },
         ]}

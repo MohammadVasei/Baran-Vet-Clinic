@@ -165,23 +165,15 @@ export default function VaccineCreatePage() {
         disabled={isSubmitting}
       />
 
-      <div className="flex gap-3">
-        <Button 
-          type="submit" 
-          disabled={mutation.isPending || isSubmitting}
-          isLoading={mutation.isPending || isSubmitting}
-        >
-          {isSubmitting ? 'در حال افزودن...' : 'افزودن واکسن'}
-        </Button>
-        <Button 
-          type="button" 
-          variant="outline" 
-          onClick={() => router.push('/admin/medical-items')}
-          disabled={isSubmitting}
-        >
-          انصراف
-        </Button>
-      </div>
-    </form>
-  );
-}
+<div className="flex gap-3">
+         <Button 
+           type="submit" 
+           disabled={mutation.isPending || isSubmitting}
+           isLoading={mutation.isPending || isSubmitting}
+         >
+           {isSubmitting ? 'در حال افزودن...' : 'افزودن واکسن'}
+</Button>
+       </div>
+     </form>
+   );
+ }

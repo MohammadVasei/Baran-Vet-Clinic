@@ -77,6 +77,7 @@ export default function AnimalsList() {
     setApplied({ search, speciesId: speciesFilter, status: statusFilter });
   };
 
+  const handleShow = (id: string) => navigation.show('animals', id);
   const handleEdit = (id: string) => navigation.edit('animals', id);
   const handleCreate = () => navigation.create('animals');
 
@@ -84,8 +85,13 @@ export default function AnimalsList() {
     {
       accessorKey: 'name' as keyof AnimalRow,
       header: 'نام',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => (
-        <span className="font-medium">{getValue('name') as string}</span>
+      cellWithMeta: ({ getValue, original }: { getValue: (key: string) => unknown; original: AnimalRow }) => (
+        <button
+          onClick={() => handleShow(original.id)}
+          className="font-medium text-primary hover:underline"
+        >
+          {getValue('name') as string}
+        </button>
       ),
     },
     {

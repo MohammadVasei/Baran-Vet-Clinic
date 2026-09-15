@@ -16,19 +16,19 @@ export default function SpeciesCreatePage() {
   const [description, setDescription] = useState('');
   const [isActive, setIsActive] = useState(true);
 
-  const submit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    await createSpecies({
-      resource: 'species',
-      values: {
-        name: name.trim(),
-        code: code.trim().toLowerCase().replace(/\s+/g, '-'),
-        description: description.trim() || null,
-        active: isActive,
-      },
-    });
-    navigation.list('species');
-  };
+const submit = async (event: React.FormEvent) => {
+     event.preventDefault();
+     await createSpecies({
+       resource: 'species',
+       values: {
+         name: name.trim(),
+         code: code.trim().toLowerCase().replace(/\s+/g, '-'),
+         description: description.trim() || null,
+         active: isActive,
+       },
+     });
+     navigation.list('species-and-breeds');
+   };
 
   return (
     <form onSubmit={submit} className="mx-auto max-w-2xl space-y-6">
@@ -57,10 +57,10 @@ export default function SpeciesCreatePage() {
         </label>
       </div>
 
-      <div className="flex gap-3">
-        <Button type="submit" disabled={mutation.isPending}>افزودن گونه</Button>
-        <Button type="button" variant="outline" onClick={() => navigation.list('species')}>انصراف</Button>
-      </div>
+<div className="flex gap-3">
+         <Button type="submit" disabled={mutation.isPending}>افزودن گونه</Button>
+         <Button type="button" variant="outline" onClick={() => navigation.list('species-and-breeds')}>انصراف</Button>
+       </div>
     </form>
   );
 }

@@ -26,53 +26,60 @@ export const accessControlProvider: AccessControlProvider = {
       return { can: true };
     }
 
-    // Staff permissions
-    if (role === 'staff') {
-      const allowedResources = [
-        'services',
-        'doctors',
-        'bookings',
-        'availability-blocks',
-        'products',
-        'stock_levels',
-        'orders',
-        'diseases',
-        'testimonials',
-        'site_content',
-        // Animal medical log
-        'species',
-        'breeds',
-        'vaccines',
-        'treatment_types',
-        'animals',
-      ];
+// Staff permissions
+     if (role === 'staff') {
+       const allowedResources = [
+         'services',
+         'doctors',
+         'bookings',
+         'availability-blocks',
+         'products',
+         'stock_levels',
+         'orders',
+         'diseases',
+         'testimonials',
+         'site_content',
+         // Animal medical log
+         'species',
+         'breeds',
+         'vaccines',
+         'treatment_types',
+         'animals',
+         'medical_records',
+         'reminders',
+         'notifications',
+       ];
 
-      if (allowedResources.includes(resourceStr)) {
-        // Staff can read all allowed resources
-        if (action === 'list' || action === 'show') {
-          return { can: true };
-        }
-        // Staff can create/edit content resources
-        if (['services', 'doctors', 'products', 'diseases', 'testimonials', 'site_content', 'species', 'breeds', 'vaccines', 'treatment_types', 'animals'].includes(resourceStr)) {
-          if (action === 'create' || action === 'edit') {
-            return { can: true };
-          }
-        }
-        // Staff can manage stock levels
-        if (resourceStr === 'stock_levels' && action === 'edit') {
-          return { can: true };
-        }
-        // Staff can update bookings (confirm, cancel, complete)
-        if (resourceStr === 'bookings' && action === 'edit') {
-          return { can: true };
-        }
-        // Staff can manage availability blocks
-        if (resourceStr === 'availability-blocks') {
-          return { can: true };
-        }
-      }
-      return { can: false };
-    }
+       if (allowedResources.includes(resourceStr)) {
+         // Staff can read all allowed resources
+         if (action === 'list' || action === 'show') {
+           return { can: true };
+         }
+         // Staff can create/edit content resources
+         if (['services', 'doctors', 'products', 'diseases', 'testimonials', 'site_content', 'species', 'breeds', 'vaccines', 'treatment_types', 'animals', 'medical_records', 'reminders'].includes(resourceStr)) {
+           if (action === 'create' || action === 'edit') {
+             return { can: true };
+           }
+         }
+         // Staff can manage stock levels
+         if (resourceStr === 'stock_levels' && action === 'edit') {
+           return { can: true };
+         }
+         // Staff can update bookings (confirm, cancel, complete)
+         if (resourceStr === 'bookings' && action === 'edit') {
+           return { can: true };
+         }
+         // Staff can manage availability blocks
+         if (resourceStr === 'availability-blocks') {
+           return { can: true };
+         }
+         // Staff can manage notifications (mark as read/unread)
+         if (resourceStr === 'notifications' && action === 'edit') {
+           return { can: true };
+         }
+       }
+       return { can: false };
+     }
 
     // Public can only list published content
     if (role === 'public') {

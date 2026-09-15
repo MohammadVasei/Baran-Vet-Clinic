@@ -80,10 +80,10 @@ const log = (msg: string, data?: unknown) => {
 test.describe.configure({ mode: "serial" });
 
 test.beforeAll(async () => {
-  // Provision the shared staff account (idempotent; reuse if present).
-  const { data: listData } = await admin.auth.admin.listUsers({ page: 1, perPage: 1000 });
-  let user = listData?.users.find((u) => u.email === STAFF_EMAIL);
-  if (!user) {
+   // Provision the shared staff account (idempotent; reuse if present).
+const { data: listData } = await admin.auth.admin.listUsers({ page: 1, perPage: 1000 });
+    let user = (listData as any)?.users?.find((u) => u.email === STAFF_EMAIL);
+   if (!user) {
     const { data, error } = await admin.auth.admin.createUser({
       email: STAFF_EMAIL,
       password: STAFF_PASSWORD,
@@ -310,6 +310,159 @@ test("6. Animals: create with phone owner, species→breed cascade, search, edit
   expect(cleanupError).toBeNull();
   log("probe animal removed via service role");
 
-  console.log("\n\n========== ANIMAL DOMAIN SMOKE SUMMARY ==========");
-  console.log(JSON.stringify(results, null, 2));
-});
+console.log("\n\n========== ANIMAL DOMAIN SMOKE SUMMARY ==========");
+    console.log(JSON.stringify(results, null, 2));
+  });
+
+  test("7. Periodic treatment/vaccination tracking & reminders", async ({ page }) => {
+    page.on("dialog", (d) => d.accept());
+    await staffLogin(page);
+
+    // 7a. Create a probe vaccine with periodic interval (1 month)
+    await goto(page, `${BASE}/admin/vaccines/create`);
+    await page.waitForURL("**/admin/vaccines/create", { timeout: 15_000 });
+    await pickOption(page, "گونه را انتخاب کنید", SEEDED_SPECIES); // use seeded species "سگ"
+    await page.getByLabel("نام واکسن").fill("واکسن périodic تست");
+    await page.getByLabel("یادآوری دوره‌ای").click();
+// Interval config: 1 month
+    await page.getByLabel("فاصله‌ی یادآوری").fill("1");
+    await page.getByLabel(/واحد فاصله/).click();
+    await page.getByRole('option', { name: 'ماه' }).click();
+    await page.getByLabel("فعال").click(); // ensure active
+    await page.getByRole("button", { name: "افزودن واکسن" }).click();
+    await page.waitForURL("**/admin/vaccines", { timeout: 15_000 });
+    const vaccineRow = page.getByRole("row").filter({ hasText: "واکسن périodic تست" });
+    await expect(vaccineRow.first()).toBeVisible({ timeout: 20_000 });
+    results["periodicVaccineCreated"] = true;
+    log("periodic vaccine created");
+
+    // 7b. Create a probe treatment type with periodic interval (2 weeks)
+    await goto(page, `${BASE}/admin/treatments/create`);
+    await page.waitForURL("**/admin/treatments/create", { timeout: 15_000 });
+    await pickOption(page, "گونه را انتخاب کنید", SEEDED_SPECIES);
+    await pickOption(page, "سایر", "معاینه روتین");
+    await page.getByLabel("نام").fill("درمان périodic تست");
+    await page.getByLabel("یادآوری دوره‌ای").click();
+    await page.getByLabel("فاصله‌ی یادآوری").fill("2");
+    await page.getByLabel(/واحد فاصله/).click();
+    await page.getByRole('option', { name: 'هفته' }).click();
+    await page.getByLabel("فعال").click();
+    await page.getByRole("button", { name: "افزودن نوع درمان" }).click();
+    await page.waitForURL("**/admin/treatments", { timeout: 15_000 });
+    const treatmentRow = page.getByRole("row").filter({ hasText: "درمان périodic تست" });
+    await expect(treatmentRow.first()).toBeVisible({ timeout: 20_000 });
+    results["periodicTreatmentCreated"] = true;
+    log("periodic treatment type created");
+
+    // 7c. Create a probe animal to use for treatment recording
+    await goto(page, `${BASE}/admin/animals/create`);
+    await page.waitForURL("**/admin/animals/create", { timeout: 15_000 });
+    await page.getByLabel("تلفن صاحب").fill("091298765432");
+    await page.getByLabel("نام").fill("حیوان périodic تست");
+    await pickOption(page, "گونه را انتخاب کنید", SEEDED_SPECIES);
+    await page.locator("form").getByText("نامشخص", { exact: true }).locator("visible=true").first().click();
+    await page.getByRole("button", { name: "افزودن حیوان" }).click();
+    await page.waitForURL("**/admin/animals", { timeout: 15_000 });
+    const animalRow = page.getByRole("row").filter({ hasText: "حیوان périodic تست" });
+    await expect(animalRow.first()).toBeVisible({ timeout: 20_000 });
+    results["probeAnimalForTreatment"] = true;
+    log("probe animal created");
+
+    // 7d. Record the periodic vaccine for the animal
+    await animalRow.first().getByRole("button", { name: /ثبت ویروسیر/ }).click();
+    await page.waitForURL("**/admin/animals/record-treatment/**", { timeout: 15_000 });
+    // The record-treatment form should pre-fill animal and default date today
+    await pickOption(page, " واکسن را انتخاب کنید", "واکسن périodic تست");
+    await page.getByLabel("تاریخ").fill("2026-09-14"); // today fixed
+    await page.getByLabel("دکتر").click();
+    await page.getByRole("option", { name: /دکتر/ }).first().click(); // pick any doctor
+    await page.getByRole("button", { name: "ثبت ویروسیر" }).click();
+    await page.waitForURL("**/admin/animals/show/**", { timeout: 15_000 });
+    // Success screen should show next reminder date
+    await expect(page.getByText(/موعود/)).toBeVisible({ timeout: 15_000 });
+    results["periodicVaccineRecorded"] = true;
+    log("periodic vaccine recorded for animal");
+
+    // 7e. Verify treatment history shows the record
+    await page.getByRole("button", { name: "سابقه درمان" }).click();
+    await page.waitForTimeout(500);
+    const historyRows = page.getByRole("row").filter({ hasText: "واکسن périodic تست" });
+    await expect(historyRows.first()).toBeVisible({ timeout: 10_000 });
+    results["treatmentHistoryShowsRecord"] = true;
+    log("treatment history displays recorded vaccine");
+
+    // 7f. Verify reminders widget shows a reminder with correct due date (approx 1 month later)
+    await page.getByRole("button", { name: "یادآوری‌ها" }).click();
+    await page.waitForTimeout(500);
+    const reminderItem = page.getByRole("row").filter({ hasText: "واکسن périodic تست" });
+    await expect(reminderItem.first()).toBeVisible({ timeout: 10_000 });
+    // Check status is pending or due (depends on time)
+    await expect(reminderItem.first()).toContainText(["pending", "due", "overdue"]);
+    results["reminderWidgetShowsReminder"] = true;
+    log("reminders widget shows reminder for periodic vaccine");
+
+    // 7g. Test idempotency: record the same vaccine again (should cancel old reminder and create new)
+    await goto(page, `${BASE}/admin/animals`);
+    await page.getByLabel("جستجوی حیوان").fill("حیوان périodic تست");
+    await page.getByRole("button", { name: "جستجو" }).click();
+    await page.getByRole("row").filter({ hasText: "حیوان périodic تست" }).first().getByRole("button", { name: /ثبت ویروسیر/ }).click();
+    await page.waitForURL("**/admin/animals/record-treatment/**", { timeout: 15_000 });
+    await pickOption(page, " واکسن را انتخاب کنید", "واکسن périodic تست");
+    await page.getByLabel("تاریخ").fill("2026-09-15"); // next day
+    await page.getByLabel("دکتر").click();
+    await page.getByRole("option", { name: /دکتر/ }).first().click();
+    await page.getByRole("button", { name: "ثبت ویروسیر" }).click();
+    await page.waitForURL("**/admin/animals/show/**", { timeout: 15_000 });
+    // After recording, there should still be only one reminder (idempotent via unique index)
+    await page.getByRole("button", { name: "یادآوری‌ها" }).click();
+    await page.waitForTimeout(500);
+    const reminderCount = await page.getByRole("row").filter({ hasText: "واکسن périodic تست" }).count();
+    expect(reminderCount).toBe(1);
+    results["reminderIdempotency"] = true;
+    log("reminder idempotency verified (still one reminder after re-record)");
+
+    // 7h. Verify non-periodic treatment works unchanged (no reminder)
+    await goto(page, `${BASE}/admin/treatments/create`);
+    await page.waitForURL("**/admin/treatments/create", { timeout: 15_000 });
+    await pickOption(page, "گونه را انتخاب کنید", SEEDED_SPECIES);
+    await pickOption(page, "سایر", "معاینة روتین");
+    await page.getByLabel("نام").fill("درمان غیردورتی تست");
+    // Leave interval blank or set non-periodic (is_periodic false)
+    await page.getByLabel("فعال").click();
+    await page.getByRole("button", { name: "افزودن نوع درمان" }).click();
+    await page.waitForURL("**/admin/treatments", { timeout: 15_000 });
+    const nonPeriodicTreatmentRow = page.getByRole("row").filter({ hasText: "درمان غیردورتی تست" });
+    await expect(nonPeriodicTreatmentRow.first()).toBeVisible({ timeout: 20_000 });
+    results["nonPeriodicTreatmentCreated"] = true;
+    log("non-periodic treatment type created");
+
+    // Record non-periodic treatment for the animal
+    await goto(page, `${BASE}/admin/animals`);
+    await page.getByLabel("جستجوی حیوان").fill("حیوان périodic تست");
+    await page.getByRole("button", { name: "جستجو" }).click();
+    await page.getByRole("row").filter({ hasText: "حیوان периodic تست" }).first().getByRole("button", { name: /ثبت درمان/ }).click();
+    await page.waitForURL("**/admin/animals/record-treatment/**", { timeout: 15_000 });
+    await pickOption(page, " دارو/درمان را انتخاب کنید", "درمان غیردورتی تست");
+    await page.getByLabel("تاریخ").fill("2026-09-14");
+    await page.getByLabel("دکتر").click();
+    await page.getByRole("option", { name: /دکتر/ }).first().click();
+    await page.getByRole("button", { name: "ثبت درمان" }).click();
+    await page.waitForURL("**/admin/animals/show/**", { timeout: 15_000 });
+    // Check that no reminder was created for this treatment
+    await page.getByRole("button", { name: "یادآوری‌ها" }).click();
+    await page.waitForTimeout(500);
+    const nonPeriodicReminderCount = await page.getByRole("row").filter({ hasText: "درمان غیردورتی تست" }).count();
+    expect(nonPeriodicReminderCount).toBe(0);
+    results["nonPeriodicTreatmentNoReminder"] = true;
+    log("non-periodic treatment recorded and no reminder created");
+
+    // Cleanup: delete probe animal, vaccine, treatment type, non-periodic treatment
+    await admin.from("animals").delete().eq("name", "حیوان périodic تست");
+    await admin.from("vaccines").delete().eq("name", "واکسن périodic تست");
+    await admin.from("treatment_types").delete().eq("name", "درمان périodic تست");
+    await admin.from("treatment_types").delete().eq("name", "درمان غیردورتی تست");
+    log("probe cleanup completed");
+
+    console.log("\n\n========== PERIODIC TREATMENT SMOKE SUMMARY ==========");
+    console.log(JSON.stringify(results, null, 2));
+  });

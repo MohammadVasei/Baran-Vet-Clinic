@@ -36,21 +36,21 @@ export default function SpeciesEditPage() {
     setIsActive(result.active);
   }, [result]);
 
-  const submit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    if (!result) return;
-    await updateSpecies({
-      resource: 'species',
-      id: result.id,
-      values: {
-        name: name.trim(),
-        code: code.trim().toLowerCase().replace(/\s+/g, '-'),
-        description: description.trim() || null,
-        active: isActive,
-      },
-    });
-    navigation.list('species');
-  };
+const submit = async (event: React.FormEvent) => {
+     event.preventDefault();
+     if (!result) return;
+     await updateSpecies({
+       resource: 'species',
+       id: result.id,
+       values: {
+         name: name.trim(),
+         code: code.trim().toLowerCase().replace(/\s+/g, '-'),
+         description: description.trim() || null,
+         active: isActive,
+       },
+     });
+     navigation.list('species-and-breeds');
+   };
 
   if (query.isLoading) return <div className="p-8 text-center">در حال بارگذاری...</div>;
   if (!result) return <div className="p-8 text-center text-destructive">گونه یافت نشد.</div>;
@@ -81,10 +81,10 @@ export default function SpeciesEditPage() {
         </label>
       </div>
 
-      <div className="flex gap-3">
-        <Button type="submit" disabled={mutation.isPending}>{mutation.isPending ? 'در حال ذخیره...' : 'ذخیره تغییرات'}</Button>
-        <Button type="button" variant="outline" onClick={() => navigation.list('species')}>انصراف</Button>
-      </div>
+<div className="flex gap-3">
+         <Button type="submit" disabled={mutation.isPending}>{mutation.isPending ? 'در حال ذخیره...' : 'ذخیره تغییرات'}</Button>
+         <Button type="button" variant="outline" onClick={() => navigation.list('species-and-breeds')}>انصراف</Button>
+       </div>
     </form>
   );
 }

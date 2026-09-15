@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { EditIcon, TrashIcon } from '@/components/icons';
-import { TREATMENT_CATEGORY_LABELS } from '@/lib/animals';
+import { TREATMENT_CATEGORY_LABELS, formatReminderInterval } from '@/lib/animals';
 
 interface TreatmentRow {
   id: string;
@@ -13,6 +13,9 @@ interface TreatmentRow {
   species?: { name: string } | null;
   category: string;
   active: boolean;
+  is_periodic: boolean;
+  reminder_interval_value: number | null;
+  reminder_interval_unit: string | null;
 }
 
 export default function TreatmentsList() {
@@ -20,7 +23,9 @@ export default function TreatmentsList() {
     resource: 'treatment_types',
     sorters: [{ field: 'name', order: 'asc' }],
     pagination: { pageSize: 200 },
-    meta: { select: 'id,name,species_id,category,species:species(name),active' },
+    meta: {
+      select: 'id,name,species_id,category,species:species(name),active,is_periodic,reminder_interval_value,reminder_interval_unit',
+    },
   });
   const navigation = useNavigation();
   const { mutate: deleteItem } = useDelete();
@@ -56,6 +61,21 @@ export default function TreatmentsList() {
       cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
         const category = getValue('category') as string;
         return <span className="px-2 py-1 text-xs rounded-full bg-muted">{TREATMENT_CATEGORY_LABELS[category] || category}</span>;
+      },
+    },
+    {
+      accessorKey: 'is_periodic' as keyof TreatmentRow,
+      header: 'دوره‌ای',
+      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
+        const periodic = getValue('is_periodic') as boolean;
+        if (!periodic) return <span className="text-muted-foreground">—</span>;
+        const value = getValue('reminder_interval_value') as number | null;
+        const unit = getValue('reminder_interval_unit') as string | null;
+        return (
+          <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-700">
+            هر {formatReminderInterval(value, unit)}
+          </span>
+        );
       },
     },
     {

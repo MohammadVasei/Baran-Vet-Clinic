@@ -108,6 +108,48 @@ export async function sendOrderSMS(data: {
   }
 }
 
+export async function sendReminderSMS(data: {
+  phone: string;
+  animalName: string;
+  treatmentName: string;
+  /** Display date, already formatted for the end user (e.g. Jalali). */
+  dueDateLabel: string;
+}): Promise<void> {
+  const apiKey = process.env.KAVENEGAR_API_KEY;
+  const isDev = process.env.NODE_ENV === 'development';
+
+  const message = `یادآوری کلینیک باران
+${data.animalName} باید برای «${data.treatmentName}» مراجعه کند.
+موعد: ${data.dueDateLabel}
+
+برای هماهنگی با کلینیک تماس بگیرید.`;
+
+  if (!apiKey || isDev) {
+    console.log('📱 [DEV MODE] Reminder SMS would be sent to:', data.phone);
+    console.log('📱 [DEV MODE] Message:', message);
+    return;
+  }
+
+  try {
+    const response = await fetch('https://api.kavenegar.com/v1/' + apiKey + '/sms/send.json', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        receptor: data.phone.replace(/^0/, '98'),
+        message,
+        sender: '1000596446',
+      }),
+    });
+
+    const result = await response.json();
+    if (result.return?.status !== 200) {
+      console.error('Kavenegar error:', result);
+    }
+  } catch (error) {
+    console.error('Kavenegar request failed:', error);
+  }
+}
+
 export async function sendShippingSMS(data: {
   phone: string;
   orderId: string;
