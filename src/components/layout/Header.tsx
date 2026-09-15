@@ -31,19 +31,19 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-header">
-      <div className="container-site flex h-16 items-center justify-between gap-6 border-b border-border bg-[var(--nav-bg)] backdrop-blur-lg rounded-app">
-        <Link href="/" className="group flex items-center gap-2.5" aria-label="کلینیک دام‌های کوچک باران — صفحه اصلی">
+      <div className="container-site flex h-16 items-center justify-between gap-2 border-b border-border bg-[var(--nav-bg)] backdrop-blur-lg rounded-app sm:gap-6">
+        <Link href="/" className="group flex items-center gap-1.5 sm:gap-2.5" aria-label="کلینیک دام‌های کوچک باران — صفحه اصلی">
           <Image
             src="/baran-logo-navbar.png"
             alt="باران کلینیک دام‌های کوچک"
             width={56}
             height={56}
-            className="transition-transform duration-normal ease-out group-hover:-rotate-6"
+            className="shrink-0 transition-transform duration-normal ease-out group-hover:-rotate-6"
             priority
           />
-          <span className="leading-tight">
+          <span className="leading-tight min-w-0">
             <span className="block font-display text-lg font-bold text-foreground">باران</span>
-            <span className="block font-label text-xs text-muted-foreground">کلینیک دام‌های کوچک باران</span>
+            <span className="hidden font-label text-xs text-muted-foreground sm:block">کلینیک دام‌های کوچک باران</span>
           </span>
         </Link>
 
