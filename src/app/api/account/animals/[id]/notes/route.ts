@@ -25,6 +25,20 @@ async function getOwnedAnimal(binding: { params: Promise<{ id: string }> }) {
 
   if (error) return { user, animal: null };
 
+  // Check if user is clinic owner or staff
+  const { data: staff } = await supabaseAdmin
+    .from('staff_users')
+    .select('role')
+    .eq('id', user.id)
+    .single();
+
+  const isStaff = staff && ["owner", "staff"].includes(staff.role);
+
+  // If staff, bypass ownership check; otherwise check normally
+  if (isStaff) {
+    return { user, animal };
+  }
+
   const userPhone = user.phone ?? (user.user_metadata?.phone as string | undefined) ?? null;
   const owned =
     animal.owner_id === user.id ||

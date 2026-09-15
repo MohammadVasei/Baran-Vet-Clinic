@@ -23,17 +23,29 @@ export async function GET(_request: NextRequest, binding: { params: Promise<{ id
       .eq('id', id)
       .single();
 
-    if (error || !animal) {
+if (error || !animal) {
       return NextResponse.json({ error: 'حیوان یافت نشد' }, { status: 404 });
     }
 
-    const userPhone = user.phone ?? (user.user_metadata?.phone as string | undefined) ?? null;
-    const owned =
-      animal.owner_id === user.id ||
-      (!!userPhone && canonicalIranianPhone(userPhone) === canonicalIranianPhone(animal.owner_phone));
+    // Check if user is clinic owner or staff
+    const { data: staff } = await supabaseAdmin
+      .from('staff_users')
+      .select('role')
+      .eq('id', user.id)
+      .single();
 
-    if (!owned) {
-      return NextResponse.json({ error: 'حیوان یافت نشد یا به حساب شما تعلق ندارد' }, { status: 404 });
+    const isStaff = staff && ["owner", "staff"].includes(staff.role);
+
+    // If not staff, check ownership
+    if (!isStaff) {
+      const userPhone = user.phone ?? (user.user_metadata?.phone as string | undefined) ?? null;
+      const owned =
+        animal.owner_id === user.id ||
+        (!!userPhone && canonicalIranianPhone(userPhone) === canonicalIranianPhone(animal.owner_phone));
+
+      if (!owned) {
+        return NextResponse.json({ error: 'حیوان یافت نشد یا به-account شما تعلق ندارد' }, { status: 404 });
+      }
     }
 
     const [recordsRes, remindersRes, historyRes] = await Promise.all([
