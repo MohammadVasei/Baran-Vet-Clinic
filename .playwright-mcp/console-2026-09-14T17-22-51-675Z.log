@@ -1,0 +1,1183 @@
+[     248ms] [LOG] [Fast Refresh] done in 702ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1098ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1190ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1292ms] [WARNING] Image with src "/baran-logo-navbar.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1614ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1870ms] [LOG] [Fast Refresh] done in 358ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   52109ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   52296ms] [LOG] [Fast Refresh] done in 290ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   75944ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   75987ms] [LOG] [Fast Refresh] done in 144ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  152089ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  154402ms] [LOG] [Fast Refresh] done in 2412ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  156703ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  156819ms] [LOG] [Fast Refresh] done in 217ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  191916ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  192114ms] [LOG] [Fast Refresh] done in 298ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  235924ms] [ERROR] React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element. isLoading isloading @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  235936ms] [WARNING] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  282767ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  282883ms] [LOG] [Fast Refresh] done in 218ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  363622ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  363764ms] [LOG] [Fast Refresh] done in 242ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  629820ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  629839ms] [LOG] [Fast Refresh] done in 121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  789951ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  790048ms] [LOG] [Fast Refresh] done in 201ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  817694ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  839055ms] [LOG] [Fast Refresh] done in 13428ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  852256ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  852784ms] [LOG] [Fast Refresh] done in 633ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  856292ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  858808ms] [LOG] [Fast Refresh] done in 2624ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  862068ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  862269ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  862535ms] [WARNING] Image with src "/baran-logo-navbar.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  862655ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  863614ms] [LOG] [Fast Refresh] done in 1059ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  873057ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  875456ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:179:3
+Error: Expected '</', got ')'
+  177 |           type="button" 
+  178 |           variant="outline" 
+> 179 |   );
+      |   ^
+  180 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  877985ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:179:3
+Error: Expected '</', got ')'
+  177 |           type="button" 
+  178 |           variant="outline" 
+> 179 |   );
+      |   ^
+  180 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  878055ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  887241ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  887596ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:179:3
+Error: Expected '</', got ')'
+  177 |           type="button" 
+  178 |           variant="outline" 
+> 179 |   );
+      |   ^
+  180 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  893032ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  893992ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:179:3
+Error: Expected '</', got ')'
+  177 |           type="button" 
+  178 |           variant="outline" 
+> 179 |   );
+      |   ^
+  180 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  893992ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  921074ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  921285ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  926037ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  943953ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:3
+Error: Expected '</', got ')'
+  175 |         </Button>
+  176 |         <Button 
+> 177 |   );
+      |   ^
+  178 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  943953ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  943968ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  955863ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  957857ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  957952ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  960587ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  969602ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  970294ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  979283ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:5
+Error: Expression expected
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |     ^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  979283ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:6
+Error: Unterminated regexp literal
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |      ^^^^^^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  979284ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  979351ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  995762ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:5
+Error: Expression expected
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |     ^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  995762ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:6
+Error: Unterminated regexp literal
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |      ^^^^^^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  995762ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  995840ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1008803ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:5
+Error: Expression expected
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |     ^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1008804ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:6
+Error: Unterminated regexp literal
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |      ^^^^^^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1008804ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1024175ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:5
+Error: Expression expected
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |     ^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1024176ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:6
+Error: Unterminated regexp literal
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |      ^^^^^^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1024176ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1030352ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:5
+Error: Expression expected
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |     ^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1030352ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:6
+Error: Unterminated regexp literal
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |      ^^^^^^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1030353ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1030603ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1030665ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1030671ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:5
+Error: Expression expected
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |     ^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1030672ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:6
+Error: Unterminated regexp literal
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |      ^^^^^^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1030672ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1030759ms] [WARNING] Image with src "/baran-logo-navbar.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1030878ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1031123ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:5
+Error: Expression expected
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |     ^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1031123ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:6
+Error: Unterminated regexp literal
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |      ^^^^^^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1031123ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1033041ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:5
+Error: Expression expected
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |     ^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1033041ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:6
+Error: Unterminated regexp literal
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |      ^^^^^^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1033042ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1033667ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:5
+Error: Expression expected
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |     ^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1033668ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:6
+Error: Unterminated regexp literal
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |      ^^^^^^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1033668ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1033700ms] [WARNING] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1033767ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:5
+Error: Expression expected
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |     ^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1033767ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:6
+Error: Unterminated regexp literal
+  175 |         </Button>
+  176 |         <Button 
+> 177 |     </form>
+      |      ^^^^^^
+  178 |   );
+  179 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1033767ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1039327ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1039376ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:182:3
+Error: Expected '</', got ')'
+  180 |           type="button" 
+  181 |           variant="outline" 
+> 182 |   );
+      |   ^
+  183 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1068140ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1068184ms] [LOG] [Fast Refresh] done in 54ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1069945ms] [LOG] [Fast Refresh] done in 54ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1076474ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:181:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  179 |     </form>
+  180 |   );
+> 181 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1076550ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1097264ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:179:1
+Error: Expected '</', got '<eof>'
+  177 |           type="button" 
+  178 |           variant="outline" 
+> 179 |
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1097264ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:181:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  179 |     </form>
+  180 |   );
+> 181 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1097339ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1111828ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:179:1
+Error: Expected '</', got '<eof>'
+  177 |           type="button" 
+  178 |           variant="outline" 
+> 179 |
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1111829ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:181:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  179 |     </form>
+  180 |   );
+> 181 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1137702ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:1
+Error: Expected '</', got '<eof>'
+  175 |         </Button>
+  176 |         <Button 
+> 177 |
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1137702ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:181:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  179 |     </form>
+  180 |   );
+> 181 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1137778ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1171591ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:1
+Error: Expected '</', got '<eof>'
+  175 |         </Button>
+  176 |         <Button 
+> 177 |
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1171626ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1189110ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:1
+Error: Expected '</', got '<eof>'
+  175 |         </Button>
+  176 |         <Button 
+> 177 |
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1189110ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:181:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  179 |     </form>
+  180 |   );
+> 181 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1189172ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1233955ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:1
+Error: Expected '</', got '<eof>'
+  175 |         </Button>
+  176 |         <Button 
+> 177 |
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1233956ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:181:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  179 |     </form>
+  180 |   );
+> 181 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1237922ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:1
+Error: Expected '</', got '<eof>'
+  175 |         </Button>
+  176 |         <Button 
+> 177 |
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1237923ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:181:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  179 |     </form>
+  180 |   );
+> 181 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1238261ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1238305ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1238316ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:1
+Error: Expected '</', got '<eof>'
+  175 |         </Button>
+  176 |         <Button 
+> 177 |
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1238316ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:181:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  179 |     </form>
+  180 |   );
+> 181 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1238386ms] [WARNING] Image with src "/baran-logo-navbar.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1238531ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1238652ms] [ERROR] ./src/app/admin/vaccines/create/page.tsx:177:1
+Error: Expected '</', got '<eof>'
+  175 |         </Button>
+  176 |         <Button 
+> 177 |
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component Browser]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/vaccines/create/page.tsx [Client Component SSR]
+    ./src/app/admin/vaccines/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1238652ms] [ERROR] ./src/app/admin/treatments/create/page.tsx:181:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  179 |     </form>
+  180 |   );
+> 181 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/treatments/create/page.tsx [Client Component Browser]
+    ./src/app/admin/treatments/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/treatments/create/page.tsx [Client Component SSR]
+    ./src/app/admin/treatments/create/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052

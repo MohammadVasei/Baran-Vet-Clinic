@@ -1,0 +1,348 @@
+- generic [ref=f8e1]:
+  - link "به محتوای اصلی برو" [ref=f8e2] [cursor=pointer]:
+    - /url: "#main"
+  - paragraph [ref=f8e12]:
+    - generic [ref=f8e15]: "اورژانس دامپزشکی (۹ صبح تا ۱۰ شب):"
+    - link "۰۵۱-۳۸۴۷-۵۳۷۷" [ref=f8e16] [cursor=pointer]:
+      - /url: tel:+985138475377
+  - banner [ref=f8e17]:
+    - generic [ref=f8e18]:
+      - link "کلینیک دام‌های کوچک باران — صفحه اصلی" [ref=f8e19] [cursor=pointer]:
+        - /url: /
+        - img "باران کلینیک دام‌های کوچک" [ref=f8e20]
+        - generic [ref=f8e21]:
+          - generic [ref=f8e22]: باران
+          - generic [ref=f8e23]: کلینیک دام‌های کوچک باران
+      - navigation "ناوبری اصلی" [ref=f8e24]:
+        - link "خانه" [ref=f8e25] [cursor=pointer]:
+          - /url: /
+        - link "خدمات" [ref=f8e26] [cursor=pointer]:
+          - /url: /services
+        - link "پت‌شاپ" [ref=f8e27] [cursor=pointer]:
+          - /url: /services/petshop
+        - link "بیماری‌های شایع" [ref=f8e28] [cursor=pointer]:
+          - /url: /common-diseases
+        - link "پزشکان" [ref=f8e29] [cursor=pointer]:
+          - /url: /doctors
+        - link "درباره ما" [ref=f8e30] [cursor=pointer]:
+          - /url: /about
+        - link "تماس با ما" [ref=f8e31] [cursor=pointer]:
+          - /url: /contact
+      - generic [ref=f8e32]:
+        - button "حالت تیره" [ref=f8e33] [cursor=pointer]
+        - button "سبد خرید، خالی" [ref=f8e38]
+        - link "کارمند کلینیک" [ref=f8e44] [cursor=pointer]:
+          - /url: /admin/services
+        - link "تماس و نوبت" [ref=f8e45] [cursor=pointer]:
+          - /url: /contact
+    - dialog:
+      - generic:
+        - generic: باران
+        - button
+      - list:
+        - listitem:
+          - link:
+            - /url: /
+            - text: خانه
+        - listitem:
+          - link:
+            - /url: /services
+            - text: خدمات
+        - listitem:
+          - link:
+            - /url: /services/petshop
+            - text: پت‌شاپ
+        - listitem:
+          - link:
+            - /url: /doctors
+            - text: پزشکان
+        - listitem:
+          - link:
+            - /url: /common-diseases
+            - text: بیماری‌های شایع
+        - listitem:
+          - link:
+            - /url: /about
+            - text: درباره ما
+        - listitem:
+          - link:
+            - /url: /contact
+            - text: تماس با ما
+      - generic:
+        - link:
+          - /url: /admin/services
+          - text: حساب کاربری
+      - generic:
+        - link:
+          - /url: /contact
+          - text: تماس و نوبت
+        - link:
+          - /url: tel:+985138475377
+          - generic: ۰۵۱-۳۸۴۷-۵۳۷۷
+        - link:
+          - /url: https://wa.me/989153588160
+          - generic: ۰۹۱۵-۳۵۸-۸۱۶۰ (واتساپ)
+  - main [ref=f8e46]:
+    - generic [ref=f8e148]:
+      - complementary "منوی مدیریت" [ref=f8e149]:
+        - generic [ref=f8e150]:
+          - generic [ref=f8e151]: باران
+          - navigation "منوی اصلی" [ref=f8e158]:
+            - link "خدمات" [ref=f8e159] [cursor=pointer]:
+              - /url: /admin/services
+            - link "پزشکان" [ref=f8e161] [cursor=pointer]:
+              - /url: /admin/doctors
+            - link "سفارشات" [ref=f8e163] [cursor=pointer]:
+              - /url: /admin/orders
+            - link "نوبت‌ها" [ref=f8e165] [cursor=pointer]:
+              - /url: /admin/bookings
+            - link "بازه‌های غیرفعال" [ref=f8e167] [cursor=pointer]:
+              - /url: /admin/availability-blocks
+            - link "محصولات" [ref=f8e169] [cursor=pointer]:
+              - /url: /admin/products
+            - link "موجودی انبار" [ref=f8e171] [cursor=pointer]:
+              - /url: /admin/stock-levels
+            - link "بیماری‌ها" [ref=f8e173] [cursor=pointer]:
+              - /url: /admin/diseases
+            - link "بازخوردها" [ref=f8e175] [cursor=pointer]:
+              - /url: /admin/testimonials
+            - link "اطلاعات کلینیک" [ref=f8e177] [cursor=pointer]:
+              - /url: /admin/site-content
+            - link "حیوانات" [ref=f8e179] [cursor=pointer]:
+              - /url: /admin/animals
+            - link "گونه‌ها" [ref=f8e181] [cursor=pointer]:
+              - /url: /admin/species
+            - link "نژادها" [ref=f8e183] [cursor=pointer]:
+              - /url: /admin/breeds
+            - link "واکسن‌ها و درمان‌ها" [ref=f8e185] [cursor=pointer]:
+              - /url: /admin/medical-items
+            - link "یادآوری‌ها" [ref=f8e189] [cursor=pointer]:
+              - /url: /admin/reminders
+          - button "خروج" [ref=f8e192]
+      - main [ref=f8e196]:
+        - generic [ref=f8e198]:
+          - heading "پنل مدیریت" [level=1] [ref=f8e200]
+          - generic [ref=f8e201]: پنل مدیریت کلینیک باران
+        - generic [ref=f8e1928]:
+          - generic [ref=f8e1929]:
+            - generic [ref=f8e1930]:
+              - heading "انواع درمان" [level=1] [ref=f8e2138]
+              - paragraph [ref=f8e1932]: کاتالوگ انواع درمان و خدمات پزشکی قابل انجام در کلینیک
+            - button "افزودن نوع درمان" [ref=f8e2139]
+          - tablist [ref=f8e1935]:
+            - tab "واکسن‌ها" [ref=f8e1936]
+            - tab "انواع درمان" [active] [selected] [ref=f8e1937]
+          - tabpanel [ref=f8e2140]:
+            - generic [ref=f8e2141]:
+              - generic [ref=f8e2143]:
+                - searchbox "جستجو در جدول" [ref=f8e2148]
+                - button "افزودن نوع درمان" [ref=f8e2149]
+              - table [ref=f8e2152]:
+                - rowgroup [ref=f8e2153]:
+                  - row [ref=f8e2154]:
+                    - columnheader "نام" [ref=f8e2155]
+                    - columnheader "گونه" [ref=f8e2157]
+                    - columnheader "دسته‌بندی" [ref=f8e2159]
+                    - columnheader "دوره‌ای" [ref=f8e2161]
+                    - columnheader "وضعیت" [ref=f8e2163]
+                    - columnheader "عملیات" [ref=f8e2165]
+                - rowgroup [ref=f8e2166]:
+                  - row [ref=f8e2167]:
+                    - cell "درمان پوست" [ref=f8e2168]
+                    - cell "سگ" [ref=f8e2169]
+                    - cell "پوست" [ref=f8e2170]
+                    - cell "—" [ref=f8e2171]
+                    - cell "فعال" [ref=f8e2172]
+                    - cell [ref=f8e2174]:
+                      - generic [ref=f8e2175]:
+                        - button "ویرایش" [ref=f8e2176]
+                        - button "حذف" [ref=f8e2180]
+                  - row [ref=f8e2183]:
+                    - cell "درمان پوست" [ref=f8e2184]
+                    - cell "گربه" [ref=f8e2185]
+                    - cell "پوست" [ref=f8e2186]
+                    - cell "—" [ref=f8e2187]
+                    - cell "فعال" [ref=f8e2188]
+                    - cell [ref=f8e2190]:
+                      - generic [ref=f8e2191]:
+                        - button "ویرایش" [ref=f8e2192]
+                        - button "حذف" [ref=f8e2196]
+                  - row [ref=f8e2199]:
+                    - cell "ضد انگل خارجی" [ref=f8e2200]
+                    - cell "سگ" [ref=f8e2201]
+                    - cell "پیشگیری" [ref=f8e2202]
+                    - cell "—" [ref=f8e2203]
+                    - cell "فعال" [ref=f8e2204]
+                    - cell [ref=f8e2206]:
+                      - generic [ref=f8e2207]:
+                        - button "ویرایش" [ref=f8e2208]
+                        - button "حذف" [ref=f8e2212]
+                  - row [ref=f8e2215]:
+                    - cell "ضد انگل خارجی" [ref=f8e2216]
+                    - cell "گربه" [ref=f8e2217]
+                    - cell "پیشگیری" [ref=f8e2218]
+                    - cell "—" [ref=f8e2219]
+                    - cell "فعال" [ref=f8e2220]
+                    - cell [ref=f8e2222]:
+                      - generic [ref=f8e2223]:
+                        - button "ویرایش" [ref=f8e2224]
+                        - button "حذف" [ref=f8e2228]
+                  - row [ref=f8e2231]:
+                    - cell "ضد انگل داخلی" [ref=f8e2232]
+                    - cell "سگ" [ref=f8e2233]
+                    - cell "ضد انگل" [ref=f8e2234]
+                    - cell "هر ۳ ماه" [ref=f8e2235]
+                    - cell "فعال" [ref=f8e2237]
+                    - cell [ref=f8e2239]:
+                      - generic [ref=f8e2240]:
+                        - button "ویرایش" [ref=f8e2241]
+                        - button "حذف" [ref=f8e2245]
+                  - row [ref=f8e2248]:
+                    - cell "ضد انگل داخلی" [ref=f8e2249]
+                    - cell "گربه" [ref=f8e2250]
+                    - cell "ضد انگل" [ref=f8e2251]
+                    - cell "هر ۳ ماه" [ref=f8e2252]
+                    - cell "فعال" [ref=f8e2254]
+                    - cell [ref=f8e2256]:
+                      - generic [ref=f8e2257]:
+                        - button "ویرایش" [ref=f8e2258]
+                        - button "حذف" [ref=f8e2262]
+                  - row [ref=f8e2265]:
+                    - cell "لایزر پوست" [ref=f8e2266]
+                    - cell "گربه" [ref=f8e2267]
+                    - cell "پوست" [ref=f8e2268]
+                    - cell "—" [ref=f8e2269]
+                    - cell "فعال" [ref=f8e2270]
+                    - cell [ref=f8e2272]:
+                      - generic [ref=f8e2273]:
+                        - button "ویرایش" [ref=f8e2274]
+                        - button "حذف" [ref=f8e2278]
+                  - row [ref=f8e2281]:
+                    - cell "معاینه عمومی" [ref=f8e2282]
+                    - cell "گربه" [ref=f8e2283]
+                    - cell "معاینه روتین" [ref=f8e2284]
+                    - cell "—" [ref=f8e2285]
+                    - cell "فعال" [ref=f8e2286]
+                    - cell [ref=f8e2288]:
+                      - generic [ref=f8e2289]:
+                        - button "ویرایش" [ref=f8e2290]
+                        - button "حذف" [ref=f8e2294]
+                  - row [ref=f8e2297]:
+                    - cell "معاینه عمومی" [ref=f8e2298]
+                    - cell "سگ" [ref=f8e2299]
+                    - cell "معاینه روتین" [ref=f8e2300]
+                    - cell "—" [ref=f8e2301]
+                    - cell "فعال" [ref=f8e2302]
+                    - cell [ref=f8e2304]:
+                      - generic [ref=f8e2305]:
+                        - button "ویرایش" [ref=f8e2306]
+                        - button "حذف" [ref=f8e2310]
+              - generic [ref=f8e2313]:
+                - generic [ref=f8e2314]: صفحه 1 از 1
+                - generic [ref=f8e2315]:
+                  - button "صفحه قبلی" [disabled]
+                  - button "صفحه بعدی" [disabled]
+  - contentinfo [ref=f8e48]:
+    - generic [ref=f8e49]:
+      - generic [ref=f8e50]:
+        - link "باران کلینیک دام‌های کوچک باران کلینیک دام‌های کوچک باران" [ref=f8e51] [cursor=pointer]:
+          - /url: "#top"
+          - img "باران کلینیک دام‌های کوچک" [ref=f8e52]
+          - generic [ref=f8e53]:
+            - generic [ref=f8e54]: باران
+            - generic [ref=f8e55]: کلینیک دام‌های کوچک باران
+        - paragraph [ref=f8e56]: درمان • شناسنامه سلامت • شستشو و اصلاح حرفه‌ای • پت‌شاپ
+        - list [ref=f8e57]:
+          - listitem [ref=f8e58]:
+            - link "اینستاگرام" [ref=f8e59] [cursor=pointer]:
+              - /url: https://www.instagram.com/baran_clinic_petshop/
+          - listitem [ref=f8e63]:
+            - link "ترددز" [ref=f8e64] [cursor=pointer]:
+              - /url: https://www.threads.com/@baran_clinic_petshop/
+      - navigation "دسترسی سریع" [ref=f8e67]:
+        - heading "دسترسی سریع" [level=2] [ref=f8e68]
+        - list [ref=f8e69]:
+          - listitem [ref=f8e70]:
+            - link "خانه" [ref=f8e71] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f8e72]:
+            - link "خدمات" [ref=f8e73] [cursor=pointer]:
+              - /url: /services
+          - listitem [ref=f8e74]:
+            - link "بیماری‌های شایع" [ref=f8e75] [cursor=pointer]:
+              - /url: /common-diseases
+          - listitem [ref=f8e76]:
+            - link "پزشکان" [ref=f8e77] [cursor=pointer]:
+              - /url: /doctors
+          - listitem [ref=f8e78]:
+            - link "درباره ما" [ref=f8e79] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=f8e80]:
+            - link "تماس با ما" [ref=f8e81] [cursor=pointer]:
+              - /url: /contact
+      - navigation "خدمات" [ref=f8e82]:
+        - heading "خدمات" [level=2] [ref=f8e83]
+        - list [ref=f8e84]:
+          - listitem [ref=f8e85]:
+            - link "درمان" [ref=f8e86] [cursor=pointer]:
+              - /url: /services/darman
+          - listitem [ref=f8e87]:
+            - link "شناسنامه سلامت" [ref=f8e88] [cursor=pointer]:
+              - /url: /services/shenasname
+          - listitem [ref=f8e89]:
+            - link "شستشو و اصلاح" [ref=f8e90] [cursor=pointer]:
+              - /url: /services/grooming
+          - listitem [ref=f8e91]:
+            - link "پت‌شاپ" [ref=f8e92] [cursor=pointer]:
+              - /url: /services/petshop
+      - navigation "اطلاعات سلامت" [ref=f8e93]:
+        - heading "اطلاعات سلامت" [level=2] [ref=f8e94]
+        - list [ref=f8e95]:
+          - listitem [ref=f8e96]:
+            - link "بیماری‌های گربه" [ref=f8e97] [cursor=pointer]:
+              - /url: /common-diseases#cat
+          - listitem [ref=f8e98]:
+            - link "بیماری‌های سگ" [ref=f8e99] [cursor=pointer]:
+              - /url: /common-diseases#dog
+          - listitem [ref=f8e100]:
+            - link "بیماری‌های پرنده" [ref=f8e101] [cursor=pointer]:
+              - /url: /common-diseases#bird
+          - listitem [ref=f8e102]:
+            - link "نکات پیشگیری" [ref=f8e103] [cursor=pointer]:
+              - /url: /common-diseases#advice-heading
+      - generic [ref=f8e104]:
+        - heading "تماس با ما" [level=2] [ref=f8e105]
+        - list [ref=f8e106]:
+          - listitem [ref=f8e107]:
+            - generic [ref=f8e111]: مشهد، احمدآباد، بلوار بعثت، بین بلوار رضا و ابوذر غفاری، پلاک ۹۴
+          - listitem [ref=f8e112]:
+            - link "۰۵۱-۳۸۴۷-۵۳۷۷" [ref=f8e115] [cursor=pointer]:
+              - /url: tel:+985138475377
+          - listitem [ref=f8e116]:
+            - link "۰۹۱۵-۳۵۸-۸۱۶۰" [ref=f8e119] [cursor=pointer]:
+              - /url: tel:+989153588160
+            - link "واتساپ" [ref=f8e120] [cursor=pointer]:
+              - /url: https://wa.me/989153588160
+          - listitem [ref=f8e121]:
+            - link "۰۹۱۵-۹۹۰-۵۹۰۰" [ref=f8e124] [cursor=pointer]:
+              - /url: tel:+989159905900
+            - link "واتساپ" [ref=f8e125] [cursor=pointer]:
+              - /url: https://wa.me/989159905900
+          - listitem [ref=f8e126]:
+            - generic [ref=f8e130]:
+              - paragraph [ref=f8e131]: لطفاً قبل از مراجعه تماس بگیرید
+              - generic [ref=f8e132]: "شنبه تا پنج‌شنبه: ۱۰ صبح تا ۹:۳۰ شب"
+              - generic [ref=f8e133]: "جمعه: ۴ عصر تا ۹ شب"
+    - generic [ref=f8e135]:
+      - paragraph [ref=f8e136]: © ۱۴۰۵ کلینیک دام‌های کوچک باران — تمامی حقوق محفوظ است.
+      - paragraph [ref=f8e137]: ساخته‌شده با دقت و مهربانی
+  - generic [ref=f8e142] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=f8e143]
+    - generic [ref=f8e802]:
+      - button "Open issues overlay" [ref=f8e803]:
+        - generic [ref=f8e804]:
+          - generic [aria-hidden] [ref=f8e805]: "0"
+          - generic [ref=f8e806]: "1"
+        - generic [ref=f8e807]: Issue
+      - button "Collapse issues badge" [ref=f8e808]
+  - alert [ref=f8e147]: پنل مدیریت

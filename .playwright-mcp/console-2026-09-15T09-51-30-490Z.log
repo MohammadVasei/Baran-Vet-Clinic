@@ -1,0 +1,964 @@
+[    2955ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    2997ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    3283ms] [WARNING] Image with src "/baran-logo-navbar.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    3832ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://hxcjlpzfoadnjmsjjexx.supabase.co/rest/v1/staff_users?select=role&id=eq.3165920a-7f9f-4074-9ca4-e0e046d8c649:0
+[    3834ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://hxcjlpzfoadnjmsjjexx.supabase.co/rest/v1/staff_users?select=role&id=eq.3165920a-7f9f-4074-9ca4-e0e046d8c649:0
+[    4165ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://hxcjlpzfoadnjmsjjexx.supabase.co/rest/v1/staff_users?select=role&id=eq.3165920a-7f9f-4074-9ca4-e0e046d8c649:0
+[    4216ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    4250ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://hxcjlpzfoadnjmsjjexx.supabase.co/rest/v1/staff_users?select=role&id=eq.3165920a-7f9f-4074-9ca4-e0e046d8c649:0
+[    6246ms] [LOG] [Fast Refresh] done in 2131ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  323487ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  323653ms] [LOG] [Fast Refresh] done in 268ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  761824ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2821188ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2821757ms] [LOG] [Fast Refresh] done in 671ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2824370ms] [LOG] [Fast Refresh] done in 1860ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2833814ms] [LOG] [Fast Refresh] done in 1860ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2834245ms] [LOG] [Fast Refresh] done in 1860ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2836850ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2836985ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2838606ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2838998ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2839342ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2840917ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2842208ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2844097ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2844213ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2844771ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2845835ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2845929ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2846104ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2847165ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2847379ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2848428ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2848717ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2850267ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2850322ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2850453ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2856425ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2860725ms] [LOG] [Fast Refresh] done in 13802ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2870577ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2871908ms] [LOG] [Fast Refresh] done in 1432ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2873492ms] [LOG] [Fast Refresh] done in 1514ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2876808ms] [LOG] [Fast Refresh] done in 1514ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2880395ms] [LOG] [Fast Refresh] done in 1514ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2881034ms] [LOG] [Fast Refresh] done in 1514ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2881207ms] [LOG] [Fast Refresh] done in 1514ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2885041ms] [LOG] [Fast Refresh] done in 1514ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2885488ms] [LOG] [Fast Refresh] done in 1514ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2889258ms] [LOG] [Fast Refresh] done in 1514ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2889931ms] [LOG] [Fast Refresh] done in 1514ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2890166ms] [LOG] [Fast Refresh] done in 1514ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2892721ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2898720ms] [LOG] [Fast Refresh] done in 3874ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2899852ms] [LOG] [Fast Refresh] done in 6216ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2904347ms] [LOG] [Fast Refresh] done in 6216ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2906853ms] [LOG] [Fast Refresh] done in 6216ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2906995ms] [LOG] [Fast Refresh] done in 6216ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2907506ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2908683ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2909635ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2909883ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2910457ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2910681ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2911005ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2911135ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2913834ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2914968ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2915573ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2917286ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2923589ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2924277ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2926109ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2927034ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2929353ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2929764ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2930583ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2930934ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2931555ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2931959ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2932177ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2932583ms] [LOG] [Fast Refresh] done in 1121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2933668ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 2937531ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 2938069ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 2939332ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef?_rsc=XPnNTTbZADw4zpM1:0
+[ 2939363ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef?_rsc=XPnNTTbZADw4zpM1:0
+[ 2939367ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef?_rsc=XPnNTTbZADw4zpM1:0
+[ 2939372ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef?_rsc=XPnNTTbZADw4zpM1:0
+[ 2939380ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef?_rsc=XPnNTTbZADw4zpM1:0
+[ 2939393ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef?_rsc=XPnNTTbZADw4zpM1:0
+[ 2939397ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 2940178ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 2940226ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 2940277ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 2940343ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 2940350ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef?_rsc=XPnNTTbZADw4zpM1:0
+[ 2940379ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef?_rsc=XPnNTTbZADw4zpM1:0
+[ 2940407ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 2940418ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef?_rsc=XPnNTTbZADw4zpM1:0
+[ 2940489ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 2940504ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef?_rsc=XPnNTTbZADw4zpM1:0
+[ 2940596ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 2940816ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef?_rsc=XPnNTTbZADw4zpM1:0
+[ 2940821ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef?_rsc=XPnNTTbZADw4zpM1:0
+[ 2940948ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 2940949ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef?_rsc=XPnNTTbZADw4zpM1:0
+[ 2941192ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef:0
+[ 2942817ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 2942902ms] Error: ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./src/app/account/pets/[id]/page.tsx:387:1)
+    at Object.getCompilationErrors (file:///Users/mohammad/Documents/VSCode/Baran-Vet_clinic/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1417:59)
+    at DevBundlerService.getCompilationError (file:///Users/mohammad/Documents/VSCode/Baran-Vet_clinic/node_modules/next/dist/server/lib/dev-bundler-service.js:59:55)
+    at DevServer.getCompilationError (file:///Users/mohammad/Documents/VSCode/Baran-Vet_clinic/node_modules/next/dist/server/dev/next-dev-server.js:754:42)
+    at DevServer.findPageComponents (file:///Users/mohammad/Documents/VSCode/Baran-Vet_clinic/node_modules/next/dist/server/dev/next-dev-server.js:724:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/mohammad/Documents/VSCode/Baran-Vet_clinic/node_modules/next/dist/server/base-server.js:1828:26)
+[ 2942914ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 2943103ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 2943400ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 2943560ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 2943627ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 2987941ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 2989311ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 2995028ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3006925ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 3007786ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3037038ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 3038831ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3038832ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:294:94
+Error: Expression expected
+  292 | ...
+  293 | ...-1">
+> 294 | ...text-xs">_{note.created_at.split('T')[0]}_{</span>
+      |                                               ^
+  295 | ...e-wrap break-word">{note.content}</span>
+  296 | ...
+  297 | ...
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3038832ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:294:95
+Error: Unterminated regexp literal
+  292 | ...
+  293 | ...
+> 294 | ...-xs">_{note.created_at.split('T')[0]}_{</span>
+      |                                            ^^^^^^
+  295 | ...ap break-word">{note.content}</span>
+  296 | ...
+  297 | ...
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3235956ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 3237333ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3237334ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3513885ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 3514072ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3514072ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3514180ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3514180ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3514274ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 3514538ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3514538ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3514684ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/account/pets/7108bc3c-54a7-4028-8be0-e85e7cc570ef:0
+[ 3515089ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15093
+[ 3515119ms] Error: ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./src/app/account/pets/[id]/page.tsx:387:1)
+    at Object.getCompilationErrors (file:///Users/mohammad/Documents/VSCode/Baran-Vet_clinic/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1417:59)
+    at DevBundlerService.getCompilationError (file:///Users/mohammad/Documents/VSCode/Baran-Vet_clinic/node_modules/next/dist/server/lib/dev-bundler-service.js:59:55)
+    at DevServer.getCompilationError (file:///Users/mohammad/Documents/VSCode/Baran-Vet_clinic/node_modules/next/dist/server/dev/next-dev-server.js:754:42)
+    at DevServer.findPageComponents (file:///Users/mohammad/Documents/VSCode/Baran-Vet_clinic/node_modules/next/dist/server/dev/next-dev-server.js:724:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/mohammad/Documents/VSCode/Baran-Vet_clinic/node_modules/next/dist/server/base-server.js:1828:26)
+[ 3515136ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 3515246ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3515247ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3515379ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 3515544ms] [ERROR] ./src/app/account/pets/[id]/page.tsx:387:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  385 |     </div>
+  386 |   );
+> 387 | }
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/pets/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/pets/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/pets/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/pets/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 3515544ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 4337696ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 4339012ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 4426967ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:756
+[ 4427343ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1817
+[ 4435262ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4435394ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4435444ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 4435592ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/account/p..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="fa" dir="rtl" className="vazirmatn_..." suppressHydrationWarning={true}>
+                          <head>
+                          <body
+                            className="min-h-full flex flex-col"
+-                           style={{padding-right:"12px",overflow-x:"hidden",overflow-y:"hidden"}}
+                          >
+                  ...
+ @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 4435597ms] [WARNING] Image with src "/baran-logo-navbar.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4435662ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4436690ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 4436829ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://hxcjlpzfoadnjmsjjexx.supabase.co/rest/v1/staff_users?select=role&id=eq.3165920a-7f9f-4074-9ca4-e0e046d8c649:0
+[ 4436847ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://hxcjlpzfoadnjmsjjexx.supabase.co/rest/v1/staff_users?select=role&id=eq.3165920a-7f9f-4074-9ca4-e0e046d8c649:0
+[ 4437918ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 4438003ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 4438074ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 4438233ms] [ERROR] ./src/app/account/appointments/[id]/page.tsx:278:10
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  276 |               />
+  277 | </div>
+> 278 |         )}
+      |          ^
+  279 |       </div>
+  280 |     </div>
+  281 |   );
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component Browser]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/account/appointments/[id]/page.tsx [Client Component SSR]
+    ./src/app/account/appointments/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 4438245ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/account/animals/7108bc3c-54a7-4028-8be0-e85e7cc570ef:0
+[ 4438246ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/account/animals/7108bc3c-54a7-4028-8be0-e85e7cc570ef:0
+[ 4438285ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4752888ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4754866ms] [LOG] [Fast Refresh] done in 1968ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4756660ms] [LOG] [Fast Refresh] done in 1968ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4786556ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4786633ms] [LOG] [Fast Refresh] done in 178ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4789794ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4789906ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4790358ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4790591ms] [WARNING] Image with src "/baran-logo-navbar.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4791251ms] [LOG] [Fast Refresh] done in 994ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4791284ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://hxcjlpzfoadnjmsjjexx.supabase.co/rest/v1/staff_users?select=role&id=eq.3165920a-7f9f-4074-9ca4-e0e046d8c649:0
+[ 4791309ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://hxcjlpzfoadnjmsjjexx.supabase.co/rest/v1/staff_users?select=role&id=eq.3165920a-7f9f-4074-9ca4-e0e046d8c649:0
+[ 4791741ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4792002ms] [LOG] [Fast Refresh] done in 363ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4798684ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4801376ms] [LOG] [Fast Refresh] done in 2636ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4802581ms] [LOG] [Fast Refresh] done in 2636ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4813842ms] [LOG] [Fast Refresh] done in 2636ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4816444ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4817946ms] [LOG] [Fast Refresh] done in 1399ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4818518ms] [LOG] [Fast Refresh] done in 1399ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4858867ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4860431ms] [LOG] [Fast Refresh] done in 1564ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4861707ms] [LOG] [Fast Refresh] done in 1564ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 4874954ms] [LOG] [Fast Refresh] done in 1564ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

@@ -1,0 +1,233 @@
+- generic [active] [ref=f11e1]:
+  - link "به محتوای اصلی برو" [ref=f11e2] [cursor=pointer]:
+    - /url: "#main"
+  - paragraph [ref=f11e12]:
+    - generic [ref=f11e15]: "اورژانس دامپزشکی (۹ صبح تا ۱۰ شب):"
+    - link "۰۵۱-۳۸۴۷-۵۳۷۷" [ref=f11e16] [cursor=pointer]:
+      - /url: tel:+985138475377
+  - banner [ref=f11e17]:
+    - generic [ref=f11e18]:
+      - link "کلینیک دام‌های کوچک باران — صفحه اصلی" [ref=f11e19] [cursor=pointer]:
+        - /url: /
+        - img "باران کلینیک دام‌های کوچک" [ref=f11e20]
+        - generic [ref=f11e21]:
+          - generic [ref=f11e22]: باران
+          - generic [ref=f11e23]: کلینیک دام‌های کوچک باران
+      - generic [ref=f11e24]:
+        - button "حالت تیره" [ref=f11e143] [cursor=pointer]
+        - button "سبد خرید، خالی" [ref=f11e30]
+        - link "mohammad vasei" [ref=f11e146] [cursor=pointer]:
+          - /url: /account
+        - link "تماس و نوبت" [ref=f11e36] [cursor=pointer]:
+          - /url: /contact
+        - button "باز کردن منوی موبایل" [ref=f11e37] [cursor=pointer]
+    - dialog:
+      - generic:
+        - generic: باران
+        - button
+      - list:
+        - listitem:
+          - link:
+            - /url: /
+            - text: خانه
+        - listitem:
+          - link:
+            - /url: /services
+            - text: خدمات
+        - listitem:
+          - link:
+            - /url: /services/petshop
+            - text: پت‌شاپ
+        - listitem:
+          - link:
+            - /url: /doctors
+            - text: پزشکان
+        - listitem:
+          - link:
+            - /url: /common-diseases
+            - text: بیماری‌های شایع
+        - listitem:
+          - link:
+            - /url: /about
+            - text: درباره ما
+        - listitem:
+          - link:
+            - /url: /contact
+            - text: تماس با ما
+      - generic:
+        - link:
+          - /url: /account
+          - text: حساب کاربری
+      - generic:
+        - link:
+          - /url: /contact
+          - text: تماس و نوبت
+        - link:
+          - /url: tel:+985138475377
+          - generic: ۰۵۱-۳۸۴۷-۵۳۷۷
+        - link:
+          - /url: https://wa.me/989153588160
+          - generic: ۰۹۱۵-۳۵۸-۸۱۶۰ (واتساپ)
+  - main [ref=f11e40]:
+    - main [ref=f11e148]:
+      - generic [ref=f11e149]:
+        - generic [ref=f11e150]:
+          - generic [ref=f11e160]:
+            - heading "milo" [level=1] [ref=f11e161]
+            - paragraph [ref=f11e162]: سگ · گلدن رتریور — ۱ ماه
+          - generic [ref=f11e163]: فعال
+        - generic [ref=f11e218]: یادداشت ذخیره شد و برای پزشک قابل مشاهده است.
+        - generic [ref=f11e164]:
+          - generic [ref=f11e165]:
+            - text: جنسیت
+            - paragraph [ref=f11e166]: نر
+          - generic [ref=f11e167]:
+            - text: وزن
+            - paragraph [ref=f11e168]: 20 کیلوگرم
+          - generic [ref=f11e169]:
+            - text: رنگ
+            - paragraph [ref=f11e170]: zard
+          - generic [ref=f11e171]:
+            - text: میکروچیپ
+            - paragraph [ref=f11e172]: "93932983098"
+          - generic [ref=f11e173]:
+            - text: عقیم‌سازی
+            - paragraph [ref=f11e174]: انجام نشده
+          - generic [ref=f11e175]:
+            - text: تولد
+            - paragraph [ref=f11e176]: 22 مرداد 1405
+          - generic [ref=f11e177]:
+            - text: حساسیت‌ها
+            - paragraph [ref=f11e178]: janjknjafnafjna
+        - generic [ref=f11e179]:
+          - heading "یادداشت برای پزشک" [level=2] [ref=f11e184]
+          - generic [ref=f11e185]:
+            - text: هر نکته‌ای که پزشک باید بداند اینجا بنویسید
+            - textbox "هر نکته‌ای که پزشک باید بداند اینجا بنویسید" [ref=f11e186]:
+              - /placeholder: "مثلاً: نسبت به غذای جدید حساس شد، وقتی مراجعه می‌کنیم لطفاً واکسن یادآوری را بزنید..."
+              - text: checking-history
+          - button "ذخیره یادداشت" [ref=f11e188]
+        - generic [ref=f11e189]:
+          - heading "سابقه درمان و واکسیناسیون" [level=2] [ref=f11e190]
+          - table [ref=f11e192]:
+            - rowgroup [ref=f11e193]:
+              - row [ref=f11e194]:
+                - columnheader "تاریخ" [ref=f11e195]
+                - columnheader "نوع" [ref=f11e196]
+                - columnheader "درمان / واکسن" [ref=f11e197]
+                - columnheader "پزشک" [ref=f11e198]
+                - columnheader "یادآوری بعدی" [ref=f11e199]
+            - rowgroup [ref=f11e200]:
+              - row [ref=f11e201]:
+                - cell "23 شهریور 1405" [ref=f11e202]
+                - cell "واکسیناسیون" [ref=f11e203]
+                - cell [ref=f11e204]:
+                  - text: DHP آپدیت شده
+                  - paragraph [ref=f11e205]: "57757"
+                - cell "دکتر محمد ابراهیم تازیک" [ref=f11e206]
+                - cell "23 شهریور 1406" [ref=f11e207]
+        - generic [ref=f11e208]:
+          - heading "یادآوری‌های این حیوان" [level=2] [ref=f11e209]
+          - generic [ref=f11e211]:
+            - generic [ref=f11e212]:
+              - generic [ref=f11e213]:
+                - generic [ref=f11e214]: DHP
+                - generic [ref=f11e215]: واکسیناسیون
+              - generic [ref=f11e216]: "موعد: 23 شهریور 1406"
+            - generic [ref=f11e217]: در انتظار
+  - contentinfo [ref=f11e43]:
+    - generic [ref=f11e44]:
+      - generic [ref=f11e45]:
+        - link "باران کلینیک دام‌های کوچک باران کلینیک دام‌های کوچک باران" [ref=f11e46] [cursor=pointer]:
+          - /url: "#top"
+          - img "باران کلینیک دام‌های کوچک" [ref=f11e47]
+          - generic [ref=f11e48]:
+            - generic [ref=f11e49]: باران
+            - generic [ref=f11e50]: کلینیک دام‌های کوچک باران
+        - paragraph [ref=f11e51]: درمان • شناسنامه سلامت • شستشو و اصلاح حرفه‌ای • پت‌شاپ
+        - list [ref=f11e52]:
+          - listitem [ref=f11e53]:
+            - link "اینستاگرام" [ref=f11e54] [cursor=pointer]:
+              - /url: https://www.instagram.com/baran_clinic_petshop/
+          - listitem [ref=f11e58]:
+            - link "ترددز" [ref=f11e59] [cursor=pointer]:
+              - /url: https://www.threads.com/@baran_clinic_petshop/
+      - navigation "دسترسی سریع" [ref=f11e62]:
+        - heading "دسترسی سریع" [level=2] [ref=f11e63]
+        - list [ref=f11e64]:
+          - listitem [ref=f11e65]:
+            - link "خانه" [ref=f11e66] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f11e67]:
+            - link "خدمات" [ref=f11e68] [cursor=pointer]:
+              - /url: /services
+          - listitem [ref=f11e69]:
+            - link "بیماری‌های شایع" [ref=f11e70] [cursor=pointer]:
+              - /url: /common-diseases
+          - listitem [ref=f11e71]:
+            - link "پزشکان" [ref=f11e72] [cursor=pointer]:
+              - /url: /doctors
+          - listitem [ref=f11e73]:
+            - link "درباره ما" [ref=f11e74] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=f11e75]:
+            - link "تماس با ما" [ref=f11e76] [cursor=pointer]:
+              - /url: /contact
+      - navigation "خدمات" [ref=f11e77]:
+        - heading "خدمات" [level=2] [ref=f11e78]
+        - list [ref=f11e79]:
+          - listitem [ref=f11e80]:
+            - link "درمان" [ref=f11e81] [cursor=pointer]:
+              - /url: /services/darman
+          - listitem [ref=f11e82]:
+            - link "شناسنامه سلامت" [ref=f11e83] [cursor=pointer]:
+              - /url: /services/shenasname
+          - listitem [ref=f11e84]:
+            - link "شستشو و اصلاح" [ref=f11e85] [cursor=pointer]:
+              - /url: /services/grooming
+          - listitem [ref=f11e86]:
+            - link "پت‌شاپ" [ref=f11e87] [cursor=pointer]:
+              - /url: /services/petshop
+      - navigation "اطلاعات سلامت" [ref=f11e88]:
+        - heading "اطلاعات سلامت" [level=2] [ref=f11e89]
+        - list [ref=f11e90]:
+          - listitem [ref=f11e91]:
+            - link "بیماری‌های گربه" [ref=f11e92] [cursor=pointer]:
+              - /url: /common-diseases#cat
+          - listitem [ref=f11e93]:
+            - link "بیماری‌های سگ" [ref=f11e94] [cursor=pointer]:
+              - /url: /common-diseases#dog
+          - listitem [ref=f11e95]:
+            - link "بیماری‌های پرنده" [ref=f11e96] [cursor=pointer]:
+              - /url: /common-diseases#bird
+          - listitem [ref=f11e97]:
+            - link "نکات پیشگیری" [ref=f11e98] [cursor=pointer]:
+              - /url: /common-diseases#advice-heading
+      - generic [ref=f11e99]:
+        - heading "تماس با ما" [level=2] [ref=f11e100]
+        - list [ref=f11e101]:
+          - listitem [ref=f11e102]:
+            - generic [ref=f11e106]: مشهد، احمدآباد، بلوار بعثت، بین بلوار رضا و ابوذر غفاری، پلاک ۹۴
+          - listitem [ref=f11e107]:
+            - link "۰۵۱-۳۸۴۷-۵۳۷۷" [ref=f11e110] [cursor=pointer]:
+              - /url: tel:+985138475377
+          - listitem [ref=f11e111]:
+            - link "۰۹۱۵-۳۵۸-۸۱۶۰" [ref=f11e114] [cursor=pointer]:
+              - /url: tel:+989153588160
+            - link "واتساپ" [ref=f11e115] [cursor=pointer]:
+              - /url: https://wa.me/989153588160
+          - listitem [ref=f11e116]:
+            - link "۰۹۱۵-۹۹۰-۵۹۰۰" [ref=f11e119] [cursor=pointer]:
+              - /url: tel:+989159905900
+            - link "واتساپ" [ref=f11e120] [cursor=pointer]:
+              - /url: https://wa.me/989159905900
+          - listitem [ref=f11e121]:
+            - generic [ref=f11e125]:
+              - paragraph [ref=f11e126]: لطفاً قبل از مراجعه تماس بگیرید
+              - generic [ref=f11e127]: "شنبه تا پنج‌شنبه: ۱۰ صبح تا ۹:۳۰ شب"
+              - generic [ref=f11e128]: "جمعه: ۴ عصر تا ۹ شب"
+    - generic [ref=f11e130]:
+      - paragraph [ref=f11e131]: © ۱۴۰۵ کلینیک دام‌های کوچک باران — تمامی حقوق محفوظ است.
+      - paragraph [ref=f11e132]: ساخته‌شده با دقت و مهربانی
+  - button "Open Next.js Dev Tools" [ref=f11e138] [cursor=pointer]
+  - alert [ref=f11e142]

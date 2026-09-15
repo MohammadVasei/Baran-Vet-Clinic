@@ -49,7 +49,7 @@ export default function AccountProfilePage() {
     defaultValues: {
       full_name: user?.user_metadata?.full_name || "",
       email: user?.email || "",
-      phone: user?.phone?.replace("+98", "0") || "",
+      phone: (user?.phone || "").replace(/^\+?98/, "0") || "",
     },
   });
 

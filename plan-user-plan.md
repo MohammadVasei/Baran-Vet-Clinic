@@ -589,6 +589,15 @@ A feature is **NOT complete** until:
 
 ## 11. Changelog
 
+### [2026-09-15] Account tabs: "نوبتهای من" + "حیوانات من"
+- **New pages:** `/account/appointments` (upcoming/history tabs, status badges, links to detail), `/account/appointments/[id]` (service/doctor/date/time/reference/status + per-appointment notes for doctor + cancel when pending/confirmed), `/account/appointments/book` (4-step booking wizard: service → pet type/name → day+time from `/api/availability` → confirm; submits via existing public `POST /api/bookings`), `/account/pets` (cards from owned animals), `/account/pets/[id]` (pet info, treatment history, reminders, notes for doctor).
+- **New API routes (admin-backed, server-side auth):** `GET /api/account/bookings`, `GET|PUT|POST /api/account/bookings/[id]`, `GET /api/account/animals`, `GET /api/account/animals/[id]`, `PUT /api/account/animals/[id]/notes`. Bookings/notes skip fragile phone RLS; pets write path consistent.
+- **Phone canonicalization fix (`src/lib/phone.ts`):** `canonicalIranianPhone()` normalizes any dialing style (`0915…` / `98915…` / `+98…` / `915…`) to `0` + last 10 digits for matching; booking form also submits local-digit phone so `POST /api/bookings` (`^0?\d{10,11}$`) accepts it.
+- **Bug fixed:** account pet detail used RLS-scoped `supabaseClient`, but `user_owns_animal` compares raw digit strings — user JWT phone is `98…` (12-digit) while `animals.owner_phone` is `09…` (11-digit) → 0 rows / “not found”. Rerouted detail page through `/api/account/animals/[id]` (canonical phone ownership). Same bug fixed in notes route + bookings routes.
+- **Verified live in browser:** bookings list now shows real user data (1 upcoming + 5 history, previously empty due to the phone-format bug); pet detail + notes save + appointment notes save all confirmed via accessibility snapshots; pet note `/api/account/animals/[id]/notes` returns 200.
+- **Typecheck:** no new TS errors (admin/smoke pre-existing only). ESLint: 0 errors (4 pre-existing-style warnings).
+- **History verification (2026-09-15):** pet and appointment note histories are visible via Playwright; the appointment notes‑history endpoint now validates booking ownership and filters by `entity_type = 'booking'`; duplicate rows are expected due to append‑only saving.
+
 ### [2026-08-29] Phase 7 Live E2E complete (against real Supabase)
 - **Migrations applied live:** `011` (`decrement_stock_on_payment`), `012` (customer_addresses + orders `user_id` column — it never existed in 001), `013` (SELECT grants for `orders`/`order_items` + RLS rewritten to digit-normalized phone compare), `014` (SELECT on `auth.users` for the RLS phone fallback; auth schema is internal/not exposed)
 - **Bugs found & fixed by the E2E:**

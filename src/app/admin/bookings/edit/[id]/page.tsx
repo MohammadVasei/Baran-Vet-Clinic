@@ -4,7 +4,7 @@ import { useShow, useUpdate, useNavigation } from '@refinedev/core';
 import { useState } from 'react';
 import { gsap, useGSAP } from '@/lib/gsap';
 import { prefersReducedMotion, duration, ease } from '@/lib/motion';
-import { ArrowIcon, CalendarIcon, ClockIcon, PhoneIcon, UserIcon, PawIcon } from '@/components/icons';
+import { ArrowIcon, CalendarIcon, ClockIcon, PhoneIcon, UserIcon, PawIcon, EditIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -52,7 +52,7 @@ export function BookingEdit() {
   const { result, query } = useShow({
     resource: 'bookings',
     meta: {
-      select: 'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,payment_status,amount_rial,reference_code,created_at',
+      select: 'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,payment_status,amount_rial,reference_code,notes,created_at',
     },
   });
   const { mutate: updateBooking, mutation } = useUpdate();
@@ -248,6 +248,17 @@ export function BookingEdit() {
                 {new Date(booking.created_at).toLocaleString('fa-IR', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
               </div>
             </div>
+            {booking.notes && (
+              <div className="pt-4 border-t border-border">
+                <label className="block text-sm font-medium text-foreground mb-1 flex items-center gap-1">
+                  <EditIcon className="size-4 text-primary" />
+                  یادداشت مشتری برای پزشک
+                </label>
+                <p className="text-sm text-foreground whitespace-pre-wrap mt-1 bg-muted/50 rounded-app p-3">
+                  {booking.notes}
+                </p>
+              </div>
+            )}
           </CardContent>
         </Card>
 

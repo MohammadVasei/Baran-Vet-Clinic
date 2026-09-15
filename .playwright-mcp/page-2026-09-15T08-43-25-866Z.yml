@@ -1,0 +1,255 @@
+- generic [active] [ref=e1]:
+  - link "به محتوای اصلی برو" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - paragraph [ref=e12]:
+    - generic [ref=e15]: "اورژانس دامپزشکی (۹ صبح تا ۱۰ شب):"
+    - link "۰۵۱-۳۸۴۷-۵۳۷۷" [ref=e16] [cursor=pointer]:
+      - /url: tel:+985138475377
+  - banner [ref=e17]:
+    - generic [ref=e18]:
+      - link "کلینیک دام‌های کوچک باران — صفحه اصلی" [ref=e19] [cursor=pointer]:
+        - /url: /
+        - img "باران کلینیک دام‌های کوچک" [ref=e20]
+        - generic [ref=e21]:
+          - generic [ref=e22]: باران
+          - generic [ref=e23]: کلینیک دام‌های کوچک باران
+      - navigation "ناوبری اصلی" [ref=e24]:
+        - link "خانه" [ref=e25] [cursor=pointer]:
+          - /url: /
+        - link "خدمات" [ref=e26] [cursor=pointer]:
+          - /url: /services
+        - link "پت‌شاپ" [ref=e27] [cursor=pointer]:
+          - /url: /services/petshop
+        - link "بیماری‌های شایع" [ref=e28] [cursor=pointer]:
+          - /url: /common-diseases
+        - link "پزشکان" [ref=e29] [cursor=pointer]:
+          - /url: /doctors
+        - link "درباره ما" [ref=e30] [cursor=pointer]:
+          - /url: /about
+        - link "تماس با ما" [ref=e31] [cursor=pointer]:
+          - /url: /contact
+      - generic [ref=e32]:
+        - button "حالت تیره" [ref=e138] [cursor=pointer]
+        - button "سبد خرید، خالی" [ref=e38]
+        - link "mohammad vasei" [ref=e141] [cursor=pointer]:
+          - /url: /account
+        - link "تماس و نوبت" [ref=e44] [cursor=pointer]:
+          - /url: /contact
+    - dialog:
+      - generic:
+        - generic: باران
+        - button
+      - list:
+        - listitem:
+          - link:
+            - /url: /
+            - text: خانه
+        - listitem:
+          - link:
+            - /url: /services
+            - text: خدمات
+        - listitem:
+          - link:
+            - /url: /services/petshop
+            - text: پت‌شاپ
+        - listitem:
+          - link:
+            - /url: /doctors
+            - text: پزشکان
+        - listitem:
+          - link:
+            - /url: /common-diseases
+            - text: بیماری‌های شایع
+        - listitem:
+          - link:
+            - /url: /about
+            - text: درباره ما
+        - listitem:
+          - link:
+            - /url: /contact
+            - text: تماس با ما
+      - generic:
+        - link:
+          - /url: /account
+          - text: حساب کاربری
+      - generic:
+        - link:
+          - /url: /contact
+          - text: تماس و نوبت
+        - link:
+          - /url: tel:+985138475377
+          - generic: ۰۵۱-۳۸۴۷-۵۳۷۷
+        - link:
+          - /url: https://wa.me/989153588160
+          - generic: ۰۹۱۵-۳۵۸-۸۱۶۰ (واتساپ)
+  - main [ref=e45]:
+    - generic [ref=e142]:
+      - complementary [ref=e143]:
+        - generic [ref=e144]:
+          - generic [ref=e150]:
+            - paragraph [ref=e151]: mohammad vasei
+            - paragraph [ref=e152]: mohammad@baran.com
+          - navigation "منوی حساب کاربری" [ref=e153]:
+            - link "داشبورد" [ref=e154] [cursor=pointer]:
+              - /url: /account
+            - link "نوبت‌های من" [ref=e158] [cursor=pointer]:
+              - /url: /account/appointments
+            - link "حیوانات من" [ref=e161] [cursor=pointer]:
+              - /url: /account/pets
+            - link "سفارشات من" [ref=e169] [cursor=pointer]:
+              - /url: /account/orders
+            - link "آدرس‌ها" [ref=e173] [cursor=pointer]:
+              - /url: /account/addresses
+            - link "تنظیمات" [ref=e177] [cursor=pointer]:
+              - /url: /account/profile
+          - button "خروج از حساب" [ref=e182]
+      - main [ref=e186]:
+        - generic [ref=e218]:
+          - generic [ref=e219]:
+            - heading "ثبت نوبت جدید" [level=1] [ref=e220]
+            - paragraph [ref=e221]: نوبت خود را با چند مرحله ساده ثبت کنید.
+          - generic [ref=e223]:
+            - list "مراحل رزرو" [ref=e224]:
+              - listitem [ref=e225]:
+                - generic [ref=e226]:
+                  - generic [ref=e227]: ۱
+                  - generic [ref=e228]: خدمت
+              - listitem [ref=e229]:
+                - generic [ref=e231]:
+                  - generic [ref=e232]: ۲
+                  - generic [ref=e233]: حیوان
+              - listitem [ref=e234]:
+                - generic [ref=e236]:
+                  - generic [ref=e237]: ۳
+                  - generic [ref=e238]: زمان
+              - listitem [ref=e239]:
+                - generic [ref=e241]:
+                  - generic [ref=e242]: ۴
+                  - generic [ref=e243]: تأیید
+            - heading "خدمت مورد نظر" [level=3] [ref=e246]
+            - paragraph [ref=e247]: خدمتی که می‌خواهید رزرو کنید را انتخاب کنید.
+            - radiogroup "انتخاب خدمت" [ref=e249]:
+              - radio "درمان ۵۰۰٬۰۰۰ ریال" [ref=e250] [cursor=pointer]:
+                - generic [ref=e251]: درمان
+                - generic [ref=e252]: ۵۰۰٬۰۰۰ ریال
+              - radio "تریم ناخن و تمیز کردن گوش ۱۵۰٬۰۰۰ ریال" [ref=e253] [cursor=pointer]:
+                - generic [ref=e254]: تریم ناخن و تمیز کردن گوش
+                - generic [ref=e255]: ۱۵۰٬۰۰۰ ریال
+              - radio "واکسن‌سازی ۳۰۰٬۰۰۰ ریال" [ref=e256] [cursor=pointer]:
+                - generic [ref=e257]: واکسن‌سازی
+                - generic [ref=e258]: ۳۰۰٬۰۰۰ ریال
+              - radio "شستشو و اصلاح ۶۰۰٬۰۰۰ ریال" [ref=e259] [cursor=pointer]:
+                - generic [ref=e260]: شستشو و اصلاح
+                - generic [ref=e261]: ۶۰۰٬۰۰۰ ریال
+              - radio "جراحی نرم ۲٬۰۰۰٬۰۰۰ ریال" [ref=e262] [cursor=pointer]:
+                - generic [ref=e263]: جراحی نرم
+                - generic [ref=e264]: ۲٬۰۰۰٬۰۰۰ ریال
+              - radio "شناسنامه سلامت ۸۰۰٬۰۰۰ ریال" [ref=e265] [cursor=pointer]:
+                - generic [ref=e266]: شناسنامه سلامت
+                - generic [ref=e267]: ۸۰۰٬۰۰۰ ریال
+              - radio "پت‌شاپ" [ref=e268] [cursor=pointer]
+            - generic [ref=e269]:
+              - button "قبلی" [disabled]
+              - button "بعدی" [disabled]
+  - contentinfo [ref=e48]:
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - link "باران کلینیک دام‌های کوچک باران کلینیک دام‌های کوچک باران" [ref=e51] [cursor=pointer]:
+          - /url: "#top"
+          - img "باران کلینیک دام‌های کوچک" [ref=e52]
+          - generic [ref=e53]:
+            - generic [ref=e54]: باران
+            - generic [ref=e55]: کلینیک دام‌های کوچک باران
+        - paragraph [ref=e56]: درمان • شناسنامه سلامت • شستشو و اصلاح حرفه‌ای • پت‌شاپ
+        - list [ref=e57]:
+          - listitem [ref=e58]:
+            - link "اینستاگرام" [ref=e59] [cursor=pointer]:
+              - /url: https://www.instagram.com/baran_clinic_petshop/
+          - listitem [ref=e63]:
+            - link "ترددز" [ref=e64] [cursor=pointer]:
+              - /url: https://www.threads.com/@baran_clinic_petshop/
+      - navigation "دسترسی سریع" [ref=e67]:
+        - heading "دسترسی سریع" [level=2] [ref=e68]
+        - list [ref=e69]:
+          - listitem [ref=e70]:
+            - link "خانه" [ref=e71] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e72]:
+            - link "خدمات" [ref=e73] [cursor=pointer]:
+              - /url: /services
+          - listitem [ref=e74]:
+            - link "بیماری‌های شایع" [ref=e75] [cursor=pointer]:
+              - /url: /common-diseases
+          - listitem [ref=e76]:
+            - link "پزشکان" [ref=e77] [cursor=pointer]:
+              - /url: /doctors
+          - listitem [ref=e78]:
+            - link "درباره ما" [ref=e79] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e80]:
+            - link "تماس با ما" [ref=e81] [cursor=pointer]:
+              - /url: /contact
+      - navigation "خدمات" [ref=e82]:
+        - heading "خدمات" [level=2] [ref=e83]
+        - list [ref=e84]:
+          - listitem [ref=e85]:
+            - link "درمان" [ref=e86] [cursor=pointer]:
+              - /url: /services/darman
+          - listitem [ref=e87]:
+            - link "شناسنامه سلامت" [ref=e88] [cursor=pointer]:
+              - /url: /services/shenasname
+          - listitem [ref=e89]:
+            - link "شستشو و اصلاح" [ref=e90] [cursor=pointer]:
+              - /url: /services/grooming
+          - listitem [ref=e91]:
+            - link "پت‌شاپ" [ref=e92] [cursor=pointer]:
+              - /url: /services/petshop
+      - navigation "اطلاعات سلامت" [ref=e93]:
+        - heading "اطلاعات سلامت" [level=2] [ref=e94]
+        - list [ref=e95]:
+          - listitem [ref=e96]:
+            - link "بیماری‌های گربه" [ref=e97] [cursor=pointer]:
+              - /url: /common-diseases#cat
+          - listitem [ref=e98]:
+            - link "بیماری‌های سگ" [ref=e99] [cursor=pointer]:
+              - /url: /common-diseases#dog
+          - listitem [ref=e100]:
+            - link "بیماری‌های پرنده" [ref=e101] [cursor=pointer]:
+              - /url: /common-diseases#bird
+          - listitem [ref=e102]:
+            - link "نکات پیشگیری" [ref=e103] [cursor=pointer]:
+              - /url: /common-diseases#advice-heading
+      - generic [ref=e104]:
+        - heading "تماس با ما" [level=2] [ref=e105]
+        - list [ref=e106]:
+          - listitem [ref=e107]:
+            - generic [ref=e111]: مشهد، احمدآباد، بلوار بعثت، بین بلوار رضا و ابوذر غفاری، پلاک ۹۴
+          - listitem [ref=e112]:
+            - link "۰۵۱-۳۸۴۷-۵۳۷۷" [ref=e115] [cursor=pointer]:
+              - /url: tel:+985138475377
+          - listitem [ref=e116]:
+            - link "۰۹۱۵-۳۵۸-۸۱۶۰" [ref=e119] [cursor=pointer]:
+              - /url: tel:+989153588160
+            - link "واتساپ" [ref=e120] [cursor=pointer]:
+              - /url: https://wa.me/989153588160
+          - listitem [ref=e121]:
+            - link "۰۹۱۵-۹۹۰-۵۹۰۰" [ref=e124] [cursor=pointer]:
+              - /url: tel:+989159905900
+            - link "واتساپ" [ref=e125] [cursor=pointer]:
+              - /url: https://wa.me/989159905900
+          - listitem [ref=e126]:
+            - generic [ref=e130]:
+              - paragraph [ref=e131]: لطفاً قبل از مراجعه تماس بگیرید
+              - generic [ref=e132]: "شنبه تا پنج‌شنبه: ۱۰ صبح تا ۹:۳۰ شب"
+              - generic [ref=e133]: "جمعه: ۴ عصر تا ۹ شب"
+    - generic [ref=e135]:
+      - paragraph [ref=e136]: © ۱۴۰۵ کلینیک دام‌های کوچک باران — تمامی حقوق محفوظ است.
+      - paragraph [ref=e137]: ساخته‌شده با دقت و مهربانی
+  - button "Open Next.js Dev Tools" [ref=e270] [cursor=pointer]:
+    - generic [ref=e273]:
+      - text: Compiling
+      - generic [ref=e274]:
+        - generic [ref=e275]: .
+        - generic [ref=e276]: .
+        - generic [ref=e277]: .
+  - alert [ref=e217]: ثبت نوبت جدید

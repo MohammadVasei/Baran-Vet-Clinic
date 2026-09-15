@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { UserIcon, PackageIcon, MapPinIcon, SettingsIcon, ArrowIcon, LogOutIcon } from "@/components/icons";
+import { UserIcon, PackageIcon, MapPinIcon, SettingsIcon, ArrowIcon, LogOutIcon, CalendarIcon, PawIcon } from "@/components/icons";
 
 const ACCOUNT_NAV = [
   { label: "داشبورد", href: "/account", icon: UserIcon },
+  { label: "نوبت‌های من", href: "/account/appointments", icon: CalendarIcon },
+  { label: "حیوانات من", href: "/account/pets", icon: PawIcon },
   { label: "سفارشات من", href: "/account/orders", icon: PackageIcon },
   { label: "آدرس‌ها", href: "/account/addresses", icon: MapPinIcon },
   { label: "تنظیمات", href: "/account/profile", icon: SettingsIcon },

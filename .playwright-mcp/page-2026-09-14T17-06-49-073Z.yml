@@ -1,0 +1,329 @@
+- generic:
+  - link [aria-hidden]:
+    - /url: "#main"
+    - text: به محتوای اصلی برو
+  - generic [aria-hidden]:
+    - generic:
+      - paragraph:
+        - generic: "اورژانس دامپزشکی (۹ صبح تا ۱۰ شب):"
+        - link:
+          - /url: tel:+985138475377
+          - text: ۰۵۱-۳۸۴۷-۵۳۷۷
+  - banner [aria-hidden]:
+    - generic:
+      - link:
+        - /url: /
+        - generic:
+          - generic: باران
+          - generic: کلینیک دام‌های کوچک باران
+      - navigation:
+        - link:
+          - /url: /
+          - text: خانه
+        - link:
+          - /url: /services
+          - text: خدمات
+        - link:
+          - /url: /services/petshop
+          - text: پت‌شاپ
+        - link:
+          - /url: /common-diseases
+          - text: بیماری‌های شایع
+        - link:
+          - /url: /doctors
+          - text: پزشکان
+        - link:
+          - /url: /about
+          - text: درباره ما
+        - link:
+          - /url: /contact
+          - text: تماس با ما
+      - generic:
+        - button:
+          - generic: حالت تیره
+        - button
+        - generic:
+          - link:
+            - /url: /admin/services
+            - text: کارمند کلینیک
+        - link:
+          - /url: /contact
+          - text: تماس و نوبت
+    - dialog:
+      - generic:
+        - generic: باران
+        - button
+      - list:
+        - listitem:
+          - link:
+            - /url: /
+            - text: خانه
+        - listitem:
+          - link:
+            - /url: /services
+            - text: خدمات
+        - listitem:
+          - link:
+            - /url: /services/petshop
+            - text: پت‌شاپ
+        - listitem:
+          - link:
+            - /url: /doctors
+            - text: پزشکان
+        - listitem:
+          - link:
+            - /url: /common-diseases
+            - text: بیماری‌های شایع
+        - listitem:
+          - link:
+            - /url: /about
+            - text: درباره ما
+        - listitem:
+          - link:
+            - /url: /contact
+            - text: تماس با ما
+      - generic:
+        - link:
+          - /url: /admin/services
+          - text: حساب کاربری
+      - generic:
+        - link:
+          - /url: /contact
+          - text: تماس و نوبت
+        - link:
+          - /url: tel:+985138475377
+          - generic: ۰۵۱-۳۸۴۷-۵۳۷۷
+        - link:
+          - /url: https://wa.me/989153588160
+          - generic: ۰۹۱۵-۳۵۸-۸۱۶۰ (واتساپ)
+  - main [aria-hidden]:
+    - generic:
+      - complementary:
+        - generic:
+          - generic: باران
+          - navigation:
+            - link:
+              - /url: /admin/services
+              - generic: خدمات
+            - link:
+              - /url: /admin/doctors
+              - generic: پزشکان
+            - link:
+              - /url: /admin/orders
+              - generic: سفارشات
+            - link:
+              - /url: /admin/bookings
+              - generic: نوبت‌ها
+            - link:
+              - /url: /admin/availability-blocks
+              - generic: بازه‌های غیرفعال
+            - link:
+              - /url: /admin/products
+              - generic: محصولات
+            - link:
+              - /url: /admin/stock-levels
+              - generic: موجودی انبار
+            - link:
+              - /url: /admin/diseases
+              - generic: بیماری‌ها
+            - link:
+              - /url: /admin/testimonials
+              - generic: بازخوردها
+            - link:
+              - /url: /admin/site-content
+              - generic: اطلاعات کلینیک
+            - link:
+              - /url: /admin/animals
+              - generic: حیوانات
+            - link:
+              - /url: /admin/species
+              - generic: گونه‌ها
+            - link:
+              - /url: /admin/breeds
+              - generic: نژادها
+            - link:
+              - /url: /admin/medical-items
+              - generic: واکسن‌ها و درمان‌ها
+            - link:
+              - /url: /admin/reminders
+              - generic: یادآوری‌ها
+          - generic:
+            - button: خروج
+      - main:
+        - generic:
+          - generic:
+            - generic:
+              - heading [level=1]: پنل مدیریت
+            - generic: پنل مدیریت کلینیک باران
+        - generic:
+          - generic:
+            - generic:
+              - heading [level=1]: افزودن واکسن
+              - paragraph: واکسن جدیدی را به کاتالوگ یک گونه اضافه کنید.
+            - generic:
+              - generic:
+                - generic: گونه *
+                - combobox [expanded]:
+                  - generic: گونه را انتخاب کنید
+                - combobox [aria-hidden]
+              - generic:
+                - generic: نام واکسن *
+                - textbox:
+                  - /placeholder: هاری
+              - generic:
+                - text: سازنده
+                - textbox
+              - generic:
+                - text: توضیحات
+                - textbox
+              - generic:
+                - checkbox [checked]
+                - generic: این واکسن فعال باشد
+            - generic:
+              - generic:
+                - checkbox [checked]
+                - generic: یادآوری مجدد این واکسن (دوره‌ای)
+              - generic:
+                - paragraph: پس از ثبت‌شدن هر دوره‌ی این درمان، به‌صورت خودکار یادآوری اجرای مجدد برای صاحب حیوان و کلینیک ارسال می‌شود.
+                - generic:
+                  - generic:
+                    - generic: فاصله‌ی یادآوری *
+                    - spinbutton: "12"
+                  - generic:
+                    - generic: واحد فاصله *
+                    - combobox:
+                      - generic: ماه
+                    - combobox [aria-hidden]
+                - generic:
+                  - generic: "انتخاب سریع:"
+                  - button: ۱ ماه
+                  - button: ۳ ماه
+                  - button: ۶ ماه
+                  - button: ۱۲ ماه
+                  - button: ۲۱ روز
+                  - button: ۱ سال
+                  - button: ۲ سال
+            - generic:
+              - button: افزودن واکسن
+              - button: انصراف
+  - contentinfo [aria-hidden]:
+    - generic:
+      - generic:
+        - link:
+          - /url: "#top"
+          - generic:
+            - generic: باران
+            - generic: کلینیک دام‌های کوچک باران
+        - paragraph: درمان • شناسنامه سلامت • شستشو و اصلاح حرفه‌ای • پت‌شاپ
+        - list:
+          - listitem:
+            - link:
+              - /url: https://www.instagram.com/baran_clinic_petshop/
+          - listitem:
+            - link:
+              - /url: https://www.threads.com/@baran_clinic_petshop/
+      - navigation:
+        - heading [level=2]: دسترسی سریع
+        - list:
+          - listitem:
+            - link:
+              - /url: /
+              - text: خانه
+          - listitem:
+            - link:
+              - /url: /services
+              - text: خدمات
+          - listitem:
+            - link:
+              - /url: /common-diseases
+              - text: بیماری‌های شایع
+          - listitem:
+            - link:
+              - /url: /doctors
+              - text: پزشکان
+          - listitem:
+            - link:
+              - /url: /about
+              - text: درباره ما
+          - listitem:
+            - link:
+              - /url: /contact
+              - text: تماس با ما
+      - navigation:
+        - heading [level=2]: خدمات
+        - list:
+          - listitem:
+            - link:
+              - /url: /services/darman
+              - text: درمان
+          - listitem:
+            - link:
+              - /url: /services/shenasname
+              - text: شناسنامه سلامت
+          - listitem:
+            - link:
+              - /url: /services/grooming
+              - text: شستشو و اصلاح
+          - listitem:
+            - link:
+              - /url: /services/petshop
+              - text: پت‌شاپ
+      - navigation:
+        - heading [level=2]: اطلاعات سلامت
+        - list:
+          - listitem:
+            - link:
+              - /url: /common-diseases#cat
+              - text: بیماری‌های گربه
+          - listitem:
+            - link:
+              - /url: /common-diseases#dog
+              - text: بیماری‌های سگ
+          - listitem:
+            - link:
+              - /url: /common-diseases#bird
+              - text: بیماری‌های پرنده
+          - listitem:
+            - link:
+              - /url: /common-diseases#advice-heading
+              - text: نکات پیشگیری
+      - generic:
+        - heading [level=2]: تماس با ما
+        - list:
+          - listitem:
+            - generic: مشهد، احمدآباد، بلوار بعثت، بین بلوار رضا و ابوذر غفاری، پلاک ۹۴
+          - listitem:
+            - link:
+              - /url: tel:+985138475377
+              - text: ۰۵۱-۳۸۴۷-۵۳۷۷
+          - listitem:
+            - link:
+              - /url: tel:+989153588160
+              - text: ۰۹۱۵-۳۵۸-۸۱۶۰
+            - link:
+              - /url: https://wa.me/989153588160
+              - text: واتساپ
+          - listitem:
+            - link:
+              - /url: tel:+989159905900
+              - text: ۰۹۱۵-۹۹۰-۵۹۰۰
+            - link:
+              - /url: https://wa.me/989159905900
+              - text: واتساپ
+          - listitem:
+            - generic:
+              - paragraph: لطفاً قبل از مراجعه تماس بگیرید
+              - generic: "شنبه تا پنج‌شنبه: ۱۰ صبح تا ۹:۳۰ شب"
+              - generic: "جمعه: ۴ عصر تا ۹ شب"
+    - generic:
+      - generic:
+        - paragraph: © ۱۴۰۵ کلینیک دام‌های کوچک باران — تمامی حقوق محفوظ است.
+        - paragraph: ساخته‌شده با دقت و مهربانی
+  - button "Open Next.js Dev Tools" [ref=f6e143] [cursor=pointer]
+  - alert: پنل مدیریت
+  - listbox [ref=f6e792]:
+    - option "سگ" [active] [ref=f6e793]
+    - option "گربه" [ref=f6e796]
+    - option "خرگوش" [ref=f6e799]
+    - option "پرنده" [ref=f6e802]
+    - option "سایر" [ref=f6e805]

@@ -1,0 +1,63 @@
+[    1451ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1494ms] [LOG] [Fast Refresh] done in 146ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    1966ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    2151ms] [LOG] [Fast Refresh] done in 286ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    3280ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    3371ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    3557ms] [WARNING] Image with src "/baran-logo-navbar.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    3751ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    4014ms] [LOG] [Fast Refresh] done in 363ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    4181ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://hxcjlpzfoadnjmsjjexx.supabase.co/rest/v1/staff_users?select=role&id=eq.3165920a-7f9f-4074-9ca4-e0e046d8c649:0
+[    4189ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://hxcjlpzfoadnjmsjjexx.supabase.co/rest/v1/staff_users?select=role&id=eq.3165920a-7f9f-4074-9ca4-e0e046d8c649:0
+[    6539ms] [WARNING] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   11022ms] [WARNING] Image with src "/images/service-grooming.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   11058ms] [WARNING] Image with src "/images/service-darman.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   11082ms] [WARNING] Image with src "/images/service-shenasname.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   12752ms] [WARNING] Image with src "/images/service-petshop.jpg" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   22169ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   22216ms] [LOG] [Fast Refresh] done in 148ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   24314ms] [WARNING] The texture size ([Extent3D width:0, height:0, depthOrArrayLayers:1]) or mipLevelCount (1) is empty.
+    at ValidateTextureDescriptor (../../third_party/dawn/src/dawn/native/Texture.cpp:846)
+ @ http://localhost:3000/:0
+[   24315ms] [WARNING] The texture size ([Extent3D width:0, height:0, depthOrArrayLayers:1]) or mipLevelCount (1) is empty.
+ - While validating [TextureDescriptor ""SurfaceControllerWgpu::render_target""].
+ - While calling [Device].CreateTexture([TextureDescriptor ""SurfaceControllerWgpu::render_target""]).
+ @ http://localhost:3000/:0
+[   24315ms] [WARNING] [Invalid Texture "SurfaceControllerWgpu::render_target"] is invalid due to a previous error.
+ - While calling [Invalid Texture "SurfaceControllerWgpu::render_target"].CreateView([TextureViewDescriptor ""SurfaceControllerWgpu::render_target_view""]).
+ @ http://localhost:3000/:0
+[   24315ms] [WARNING] The texture size ([Extent3D width:0, height:0, depthOrArrayLayers:1]) or mipLevelCount (1) is empty.
+ - While validating [TextureDescriptor ""RenderTarget::multisample_color_texture""].
+ - While calling [Device].CreateTexture([TextureDescriptor ""RenderTarget::multisample_color_texture""]).
+ @ http://localhost:3000/:0
+[   24315ms] [WARNING] [Invalid Texture "RenderTarget::multisample_color_texture"] is invalid due to a previous error.
+ - While calling [Invalid Texture "RenderTarget::multisample_color_texture"].CreateView([TextureViewDescriptor ""RenderTarget::multisample_color_view""]).
+ @ http://localhost:3000/:0
+[   24315ms] [WARNING] The texture size ([Extent3D width:0, height:0, depthOrArrayLayers:1]) or mipLevelCount (1) is empty.
+ - While validating [TextureDescriptor ""RenderTarget::multisample_stencil_texture""].
+ - While calling [Device].CreateTexture([TextureDescriptor ""RenderTarget::multisample_stencil_texture""]).
+ @ http://localhost:3000/:0
+[   24315ms] [WARNING] [Invalid Texture "RenderTarget::multisample_stencil_texture"] is invalid due to a previous error.
+ - While calling [Invalid Texture "RenderTarget::multisample_stencil_texture"].CreateView([TextureViewDescriptor ""RenderTarget::multisample_stencil_view""]).
+ @ http://localhost:3000/:0
+[   24316ms] [WARNING] The texture size ([Extent3D width:0, height:0, depthOrArrayLayers:1]) or mipLevelCount (1) is empty.
+ - While validating [TextureDescriptor ""RenderTarget::resolve_color_texture""].
+ - While calling [Device].CreateTexture([TextureDescriptor ""RenderTarget::resolve_color_texture""]).
+ @ http://localhost:3000/:0
+[   24316ms] [WARNING] [Invalid Texture "RenderTarget::resolve_color_texture"] is invalid due to a previous error.
+ - While calling [Invalid Texture "RenderTarget::resolve_color_texture"].CreateView([TextureViewDescriptor ""RenderTarget::resolve_color_view""]).
+ @ http://localhost:3000/:0
+[   24316ms] [WARNING] [Invalid TextureView "RenderTarget::resolve_color_view"] is invalid due to a previous error.
+ - While validating entries[0] against { binding: 0, visibility: ShaderStage::Fragment, texture: {sampleType: TextureSampleType::UnfilterableFloat, viewDimension: TextureViewDimension::e2D, multisampled: 0} }.
+ - While validating [BindGroupDescriptor ""Grid::bind_group""] against [BindGroupLayout "Grid::bind_group_layout"]
+ - While calling [Device].CreateBindGroup([BindGroupDescriptor ""Grid::bind_group""]).
+ @ http://localhost:3000/:0
+[   29273ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   29322ms] [LOG] [Fast Refresh] done in 150ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   30654ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   30764ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   31030ms] [WARNING] Image with src "/baran-logo-navbar.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   31213ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   31369ms] [LOG] [Fast Refresh] done in 256ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   31442ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://hxcjlpzfoadnjmsjjexx.supabase.co/rest/v1/staff_users?select=role&id=eq.3165920a-7f9f-4074-9ca4-e0e046d8c649:0
+[   31455ms] [ERROR] Failed to load resource: the server responded with a status of 406 () @ https://hxcjlpzfoadnjmsjjexx.supabase.co/rest/v1/staff_users?select=role&id=eq.3165920a-7f9f-4074-9ca4-e0e046d8c649:0

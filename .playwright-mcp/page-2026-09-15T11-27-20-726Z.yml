@@ -1,0 +1,174 @@
+- generic [ref=f18e1]:
+  - link "به محتوای اصلی برو" [ref=f18e2] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=f18e4]:
+    - img "باران کلینیک دام‌های کوچک" [ref=f18e5]
+    - generic [ref=f18e6]:
+      - paragraph [ref=f18e7]: باران
+      - paragraph [ref=f18e8]: کلینیک دامپزشکی
+  - paragraph [ref=f18e12]:
+    - generic [ref=f18e15]: "اورژانس دامپزشکی (۹ صبح تا ۱۰ شب):"
+    - link "۰۵۱-۳۸۴۷-۵۳۷۷" [ref=f18e16] [cursor=pointer]:
+      - /url: tel:+985138475377
+  - banner [ref=f18e17]:
+    - generic [ref=f18e18]:
+      - link "کلینیک دام‌های کوچک باران — صفحه اصلی" [ref=f18e19] [cursor=pointer]:
+        - /url: /
+        - img "باران کلینیک دام‌های کوچک" [ref=f18e20]
+        - generic [ref=f18e21]:
+          - generic [ref=f18e22]: باران
+          - generic [ref=f18e23]: کلینیک دام‌های کوچک باران
+      - generic [ref=f18e24]:
+        - button "تبدیل تم" [ref=f18e25] [cursor=pointer]:
+          - generic [ref=f18e29]: در حال بارگذاری...
+        - button "سبد خرید، خالی" [ref=f18e30]
+        - link "عضویت" [ref=f18e35] [cursor=pointer]:
+          - /url: /auth/register
+        - link "تماس و نوبت" [ref=f18e36] [cursor=pointer]:
+          - /url: /contact
+        - button "باز کردن منوی موبایل" [ref=f18e37] [cursor=pointer]
+    - dialog:
+      - generic:
+        - generic: باران
+        - button
+      - list:
+        - listitem:
+          - link:
+            - /url: /
+            - text: خانه
+        - listitem:
+          - link:
+            - /url: /services
+            - text: خدمات
+        - listitem:
+          - link:
+            - /url: /services/petshop
+            - text: پت‌شاپ
+        - listitem:
+          - link:
+            - /url: /doctors
+            - text: پزشکان
+        - listitem:
+          - link:
+            - /url: /common-diseases
+            - text: بیماری‌های شایع
+        - listitem:
+          - link:
+            - /url: /about
+            - text: درباره ما
+        - listitem:
+          - link:
+            - /url: /contact
+            - text: تماس با ما
+      - generic:
+        - link:
+          - /url: /auth/login
+          - text: ورود
+        - link:
+          - /url: /auth/register
+          - text: عضویت
+      - generic:
+        - link:
+          - /url: /contact
+          - text: تماس و نوبت
+        - link:
+          - /url: tel:+985138475377
+          - generic: ۰۵۱-۳۸۴۷-۵۳۷۷
+        - link:
+          - /url: https://wa.me/989153588160
+          - generic: ۰۹۱۵-۳۵۸-۸۱۶۰ (واتساپ)
+  - main [ref=f18e40]
+  - contentinfo [ref=f18e43]:
+    - generic [ref=f18e44]:
+      - generic [ref=f18e45]:
+        - link "باران کلینیک دام‌های کوچک باران کلینیک دام‌های کوچک باران" [ref=f18e46] [cursor=pointer]:
+          - /url: "#top"
+          - img "باران کلینیک دام‌های کوچک" [ref=f18e47]
+          - generic [ref=f18e48]:
+            - generic [ref=f18e49]: باران
+            - generic [ref=f18e50]: کلینیک دام‌های کوچک باران
+        - paragraph [ref=f18e51]: درمان • شناسنامه سلامت • شستشو و اصلاح حرفه‌ای • پت‌شاپ
+        - list [ref=f18e52]:
+          - listitem [ref=f18e53]:
+            - link "اینستاگرام" [ref=f18e54] [cursor=pointer]:
+              - /url: https://www.instagram.com/baran_clinic_petshop/
+          - listitem [ref=f18e58]:
+            - link "ترددز" [ref=f18e59] [cursor=pointer]:
+              - /url: https://www.threads.com/@baran_clinic_petshop/
+      - navigation "دسترسی سریع" [ref=f18e62]:
+        - heading "دسترسی سریع" [level=2] [ref=f18e63]
+        - list [ref=f18e64]:
+          - listitem [ref=f18e65]:
+            - link "خانه" [ref=f18e66] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f18e67]:
+            - link "خدمات" [ref=f18e68] [cursor=pointer]:
+              - /url: /services
+          - listitem [ref=f18e69]:
+            - link "بیماری‌های شایع" [ref=f18e70] [cursor=pointer]:
+              - /url: /common-diseases
+          - listitem [ref=f18e71]:
+            - link "پزشکان" [ref=f18e72] [cursor=pointer]:
+              - /url: /doctors
+          - listitem [ref=f18e73]:
+            - link "درباره ما" [ref=f18e74] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=f18e75]:
+            - link "تماس با ما" [ref=f18e76] [cursor=pointer]:
+              - /url: /contact
+      - navigation "خدمات" [ref=f18e77]:
+        - heading "خدمات" [level=2] [ref=f18e78]
+        - list [ref=f18e79]:
+          - listitem [ref=f18e80]:
+            - link "درمان" [ref=f18e81] [cursor=pointer]:
+              - /url: /services/darman
+          - listitem [ref=f18e82]:
+            - link "شناسنامه سلامت" [ref=f18e83] [cursor=pointer]:
+              - /url: /services/shenasname
+          - listitem [ref=f18e84]:
+            - link "شستشو و اصلاح" [ref=f18e85] [cursor=pointer]:
+              - /url: /services/grooming
+          - listitem [ref=f18e86]:
+            - link "پت‌شاپ" [ref=f18e87] [cursor=pointer]:
+              - /url: /services/petshop
+      - navigation "اطلاعات سلامت" [ref=f18e88]:
+        - heading "اطلاعات سلامت" [level=2] [ref=f18e89]
+        - list [ref=f18e90]:
+          - listitem [ref=f18e91]:
+            - link "بیماری‌های گربه" [ref=f18e92] [cursor=pointer]:
+              - /url: /common-diseases#cat
+          - listitem [ref=f18e93]:
+            - link "بیماری‌های سگ" [ref=f18e94] [cursor=pointer]:
+              - /url: /common-diseases#dog
+          - listitem [ref=f18e95]:
+            - link "بیماری‌های پرنده" [ref=f18e96] [cursor=pointer]:
+              - /url: /common-diseases#bird
+          - listitem [ref=f18e97]:
+            - link "نکات پیشگیری" [ref=f18e98] [cursor=pointer]:
+              - /url: /common-diseases#advice-heading
+      - generic [ref=f18e99]:
+        - heading "تماس با ما" [level=2] [ref=f18e100]
+        - list [ref=f18e101]:
+          - listitem [ref=f18e102]:
+            - generic [ref=f18e106]: مشهد، احمدآباد، بلوار بعثت، بین بلوار رضا و ابوذر غفاری، پلاک ۹۴
+          - listitem [ref=f18e107]:
+            - link "۰۵۱-۳۸۴۷-۵۳۷۷" [ref=f18e110] [cursor=pointer]:
+              - /url: tel:+985138475377
+          - listitem [ref=f18e111]:
+            - link "۰۹۱۵-۳۵۸-۸۱۶۰" [ref=f18e114] [cursor=pointer]:
+              - /url: tel:+989153588160
+            - link "واتساپ" [ref=f18e115] [cursor=pointer]:
+              - /url: https://wa.me/989153588160
+          - listitem [ref=f18e116]:
+            - link "۰۹۱۵-۹۹۰-۵۹۰۰" [ref=f18e119] [cursor=pointer]:
+              - /url: tel:+989159905900
+            - link "واتساپ" [ref=f18e120] [cursor=pointer]:
+              - /url: https://wa.me/989159905900
+          - listitem [ref=f18e121]:
+            - generic [ref=f18e125]:
+              - paragraph [ref=f18e126]: لطفاً قبل از مراجعه تماس بگیرید
+              - generic [ref=f18e127]: "شنبه تا پنج‌شنبه: ۱۰ صبح تا ۹:۳۰ شب"
+              - generic [ref=f18e128]: "جمعه: ۴ عصر تا ۹ شب"
+    - generic [ref=f18e130]:
+      - paragraph [ref=f18e131]: © ۱۴۰۵ کلینیک دام‌های کوچک باران — تمامی حقوق محفوظ است.
+      - paragraph [ref=f18e132]: ساخته‌شده با دقت و مهربانی
