@@ -18,6 +18,7 @@ interface PeriodicConfigFieldsProps {
   intervalUnit: ReminderIntervalUnit;
   onIntervalUnitChange: (value: ReminderIntervalUnit) => void;
   title?: string;
+  disabled?: boolean;
 }
 
 /**
@@ -33,11 +34,17 @@ export function PeriodicConfigFields({
   intervalUnit,
   onIntervalUnitChange,
   title = 'یادآوری دوره‌ای',
+  disabled = false,
 }: PeriodicConfigFieldsProps) {
   return (
     <div className="space-y-4 rounded-app-lg border border-border bg-surface p-5">
       <label className="flex items-center gap-2">
-        <input type="checkbox" checked={isPeriodic} onChange={(event) => onIsPeriodicChange(event.target.checked)} />
+        <input
+          type="checkbox"
+          checked={isPeriodic}
+          onChange={(event) => onIsPeriodicChange(event.target.checked)}
+          disabled={disabled}
+        />
         <span className="font-medium">{title}</span>
       </label>
 
@@ -59,11 +66,16 @@ export function PeriodicConfigFields({
                 onChange={(event) => onIntervalValueChange(event.target.value)}
                 className="mt-2"
                 placeholder="۱"
+                disabled={disabled}
               />
             </div>
             <div>
               <Label>واحد فاصله <span className="text-destructive">*</span></Label>
-              <Select value={intervalUnit} onValueChange={(value) => onIntervalUnitChange(value as ReminderIntervalUnit)}>
+              <Select
+                value={intervalUnit}
+                onValueChange={(value) => onIntervalUnitChange(value as ReminderIntervalUnit)}
+                disabled={disabled}
+              >
                 <SelectTrigger className="mt-2"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   {REMINDER_INTERVAL_UNITS.map((unit) => (
@@ -83,14 +95,16 @@ export function PeriodicConfigFields({
                   key={`${preset.value}-${preset.unit}`}
                   type="button"
                   onClick={() => {
+                    if (disabled) return;
                     onIntervalValueChange(String(preset.value));
                     onIntervalUnitChange(preset.unit);
                   }}
+                  disabled={disabled}
                   className={`px-2.5 py-1 text-xs rounded-full border transition-colors ${
                     active
                       ? 'bg-primary text-on-primary border-primary'
                       : 'border-border hover:bg-muted'
-                  }`}
+                  } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   {preset.label}
                 </button>

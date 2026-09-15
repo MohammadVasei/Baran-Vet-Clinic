@@ -82,7 +82,7 @@ test.describe.configure({ mode: "serial" });
 test.beforeAll(async () => {
    // Provision the shared staff account (idempotent; reuse if present).
 const { data: listData } = await admin.auth.admin.listUsers({ page: 1, perPage: 1000 });
-    let user = (listData as any)?.users?.find((u) => u.email === STAFF_EMAIL);
+    let user = (listData as any)?.users?.find((u: { email?: string }) => u.email === STAFF_EMAIL);
    if (!user) {
     const { data, error } = await admin.auth.admin.createUser({
       email: STAFF_EMAIL,
