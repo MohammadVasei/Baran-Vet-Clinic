@@ -34,14 +34,14 @@ export function AnimalExperienceDesktop() {
   const [tabsFocused, setTabsFocused] = useState(false);
 
   const paused = reduced || hovering || tabsFocused;
-  const category = categories.find((c) => c.key === active) ?? categories[0] ?? {
-    key: 'dog' as AnimalKey,
-    name: '',
-    image: '',
-    alt: '',
-    title: '',
-    text: '',
-  };
+const category = categories.find((c) => c.key === active) ?? categories[0] ?? {
+     key: 'dog' as AnimalCategory["key"],
+     name: '',
+     image: '',
+     alt: '',
+     title: '',
+     text: '',
+   };
   const accent = ACCENTS[active];
 
   // Auto-advance (pauses on hover/focus; disabled under reduced motion).
