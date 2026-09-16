@@ -156,12 +156,23 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-border">
-        <div className="container-site flex flex-col items-center justify-between gap-2 py-6 text-xs text-muted-foreground sm:flex-row">
-          <p>© ۱۴۰۵ کلینیک دام‌های کوچک باران — تمامی حقوق محفوظ است.</p>
-          <p className="font-label">ساخته‌شده با دقت و مهربانی</p>
+<div className="border-t border-border">
+          <div className="container-site flex flex-col items-center justify-between gap-2 py-6 text-xs text-muted-foreground sm:flex-row">
+            <p>© ۱۴۰۵ کلینیک dam‌های کوچک باران — تمامی حقوق محفوظ است.</p>
+            <p className="font-label">
+              Developed by{" "}
+              <a
+                href="https://Moahmmadvasei.ir"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:no-underline"
+              >
+                Mohammad Vasi
+              </a>
+            </p>
+            <p className="font-label">ساخته‌شده با دقت و مهربانی</p>
+          </div>
         </div>
-      </div>
     </footer>
   );
 }
