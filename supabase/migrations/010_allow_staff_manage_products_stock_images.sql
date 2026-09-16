@@ -9,6 +9,7 @@
 -- 1. public.products — staff can manage (was owner-only)
 -- ============================================================
 DROP POLICY IF EXISTS "Owners can manage products" ON public.products;
+DROP POLICY IF EXISTS "Staff can manage products" ON public.products;
 
 CREATE POLICY "Staff can manage products"
     ON public.products
@@ -20,6 +21,7 @@ CREATE POLICY "Staff can manage products"
 -- 2. public.stock_levels — staff can manage (was owner-only)
 -- ============================================================
 DROP POLICY IF EXISTS "Owners can manage stock levels" ON public.stock_levels;
+DROP POLICY IF EXISTS "Staff can manage stock levels" ON public.stock_levels;
 
 CREATE POLICY "Staff can manage stock levels"
     ON public.stock_levels
@@ -33,6 +35,9 @@ CREATE POLICY "Staff can manage stock levels"
 DROP POLICY IF EXISTS "Owners can upload product images" ON storage.objects;
 DROP POLICY IF EXISTS "Owners can update product images" ON storage.objects;
 DROP POLICY IF EXISTS "Owners can delete product images" ON storage.objects;
+DROP POLICY IF EXISTS "Staff can upload product images" ON storage.objects;
+DROP POLICY IF EXISTS "Staff can update product images" ON storage.objects;
+DROP POLICY IF EXISTS "Staff can delete product images" ON storage.objects;
 
 CREATE POLICY "Staff can upload product images"
     ON storage.objects

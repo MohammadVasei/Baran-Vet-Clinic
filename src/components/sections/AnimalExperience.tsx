@@ -21,17 +21,27 @@ const AUTO_ADVANCE_MS = 5000;
 
 export function AnimalExperienceDesktop() {
   const ANIMALS = useCms().animals;
+  const categories = ANIMALS?.categories ?? [];
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();
   const first = useRef(true);
 
-  const [active, setActive] = useState<AnimalCategory["key"]>(ANIMALS.categories[0].key);
+  const [active, setActive] = useState<AnimalCategory["key"]>(
+    categories[0]?.key ?? 'dog'
+  );
   const [hovering, setHovering] = useState(false);
   const [tabsFocused, setTabsFocused] = useState(false);
 
   const paused = reduced || hovering || tabsFocused;
-  const category = ANIMALS.categories.find((c) => c.key === active) ?? ANIMALS.categories[0];
+  const category = categories.find((c) => c.key === active) ?? categories[0] ?? {
+    key: 'dog' as AnimalKey,
+    name: '',
+    image: '',
+    alt: '',
+    title: '',
+    text: '',
+  };
   const accent = ACCENTS[active];
 
   // Auto-advance (pauses on hover/focus; disabled under reduced motion).
@@ -39,15 +49,15 @@ export function AnimalExperienceDesktop() {
     if (paused) return;
     const id = window.setInterval(() => {
       setActive((prev) => {
-        const idx = ANIMALS.categories.findIndex((c) => c.key === prev);
-        return ANIMALS.categories[(idx + 1) % ANIMALS.categories.length].key;
+        const idx = categories.findIndex((c) => c.key === prev);
+        return categories[(idx + 1) % categories.length].key;
       });
     }, AUTO_ADVANCE_MS);
     return () => window.clearInterval(id);
-  }, [paused]);
+  }, [paused, categories.length]);
 
   function handleTabsKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
-    const keys = ANIMALS.categories.map((c) => c.key);
+    const keys = categories.map((c) => c.key);
     const next = moveTabFocus(keys, active, e.key);
     if (next === null) return;
     e.preventDefault();
@@ -125,20 +135,20 @@ export function AnimalExperienceDesktop() {
 
       <div className="container-site relative">
         <div className="max-w-2xl">
-          <p className="animal-eyebrow eyebrow">{ANIMALS.eyebrow}</p>
+          <p className="animal-eyebrow eyebrow">{ANIMALS?.eyebrow ?? ''}</p>
           <h2
             ref={headline}
             className="mt-8 font-display text-3xl font-bold leading-[1.35] text-foreground sm:text-4xl lg:text-[2.75rem]"
           >
-            {ANIMALS.headline.map((line, i) => (
+            {(ANIMALS?.headline ?? []).map((line, i) => (
               <Fragment key={line}>
                 {line}
-                {i < ANIMALS.headline.length - 1 && <br />}
+                {i < (ANIMALS?.headline ?? []).length - 1 && <br />}
               </Fragment>
             ))}
           </h2>
           <p className="animal-intro mt-6 text-lg leading-relaxed text-muted-foreground">
-            {ANIMALS.intro}
+            {ANIMALS?.intro ?? ''}
           </p>
         </div>
 
@@ -147,7 +157,7 @@ export function AnimalExperienceDesktop() {
           <div className="animal-media relative lg:col-span-7">
             <div className="relative aspect-[16/10] overflow-hidden rounded-app-lg border border-border bg-surface shadow-lg">
               <div className={`absolute inset-x-0 top-0 z-10 h-1.5 transition-colors duration-slow ${accent.bar}`} aria-hidden />
-              {ANIMALS.categories.map((c) => (
+              {categories.map((c) => (
                 <div
                   key={c.key}
                   data-key={c.key}
@@ -187,7 +197,7 @@ export function AnimalExperienceDesktop() {
               onBlur={() => setTabsFocused(false)}
               className="animal-tabs flex flex-wrap gap-2"
             >
-              {ANIMALS.categories.map((c) => (
+              {categories.map((c) => (
                 <button
                   key={c.key}
                   role="tab"
