@@ -59,7 +59,7 @@ function DoctorsDesktop() {
             {DOCTORS.headline.map((line, i) => (
               <Fragment key={line}>
                 {line}
-                {i < DOCTORS.headline.length - 1 && <br />}
+                {i < DOCTORS.headline.length - 1 && " "}
               </Fragment>
             ))}
           </h2>
@@ -100,7 +100,7 @@ function DoctorsDesktop() {
 
               {/* Hover arrow hint (desktop only) */}
               <span
-                className="absolute end-4 top-4 z-10 flex size-9 items-center justify-center rounded-full bg-background/70 text-foreground opacity-0 backdrop-blur-sm transition-all duration-normal group-hover:opacity-100"
+                className="absolute end-4 top-4 z-10 flex size-9 items-center justify-center rounded-full bg-background/70 text-foreground opacity-100 backdrop-blur-sm transition-all duration-normal md:opacity-0 md:group-hover:opacity-100"
                 aria-hidden
               >
                 <ArrowIcon direction="forward" className="size-4" />

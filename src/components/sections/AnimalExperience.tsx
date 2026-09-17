@@ -143,7 +143,7 @@ const category = categories.find((c) => c.key === active) ?? categories[0] ?? {
             {(ANIMALS?.headline ?? []).map((line, i) => (
               <Fragment key={line}>
                 {line}
-                {i < (ANIMALS?.headline ?? []).length - 1 && <br />}
+                {i < (ANIMALS?.headline ?? []).length - 1 && " "}
               </Fragment>
             ))}
           </h2>

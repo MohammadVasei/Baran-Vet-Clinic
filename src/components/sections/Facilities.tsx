@@ -132,7 +132,7 @@ function FacilitiesDesktop() {
               {FACILITIES.headline.map((line, i) => (
                 <Fragment key={line}>
                   {line}
-                  {i < FACILITIES.headline.length - 1 && <br />}
+                  {i < FACILITIES.headline.length - 1 && " "}
                 </Fragment>
               ))}
             </h2>
@@ -186,7 +186,7 @@ function FacilitiesDesktop() {
             {FACILITIES.headline.map((line, i) => (
               <Fragment key={line}>
                 {line}
-                {i < FACILITIES.headline.length - 1 && <br />}
+                {i < FACILITIES.headline.length - 1 && " "}
               </Fragment>
             ))}
           </h2>

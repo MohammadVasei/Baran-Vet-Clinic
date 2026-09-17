@@ -437,7 +437,7 @@ export function AppointmentCTA() {
             {APPOINTMENT.headline.map((line, i) => (
               <Fragment key={line}>
                 {line}
-                {i < APPOINTMENT.headline.length - 1 && <br />}
+                {i < APPOINTMENT.headline.length - 1 && " "}
               </Fragment>
             ))}
           </h2>

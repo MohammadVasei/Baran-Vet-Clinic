@@ -48,7 +48,7 @@ export function MobileSectionHeader({ eyebrow, headline, intro, inverse = false 
         {headline.map((line, i) => (
           <Fragment key={line}>
             {line}
-            {i < headline.length - 1 && <br />}
+            {i < headline.length - 1 && " "}
           </Fragment>
         ))}
       </h2>

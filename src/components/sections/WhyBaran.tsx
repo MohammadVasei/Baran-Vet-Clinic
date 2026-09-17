@@ -88,7 +88,7 @@ function WhyBaranDesktop() {
             {WHY.headline.map((line, i) => (
               <Fragment key={line}>
                 {line}
-                {i < WHY.headline.length - 1 && <br />}
+                {i < WHY.headline.length - 1 && " "}
               </Fragment>
             ))}
           </h2>

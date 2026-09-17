@@ -61,7 +61,7 @@ export function AboutMobile() {
                 <span className={STATEMENT_COLORS[i]}>
                   {line}
                 </span>
-                {i < ABOUT.statement.length - 1 && <br />}
+                {i < ABOUT.statement.length - 1 && " "}
               </Fragment>
             ))}
           </h2>

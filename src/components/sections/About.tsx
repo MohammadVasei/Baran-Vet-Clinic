@@ -87,7 +87,7 @@ function AboutDesktop() {
             {ABOUT.statement.map((line, i) => (
               <Fragment key={line}>
                 {line}
-                {i < ABOUT.statement.length - 1 && <br />}
+                {i < ABOUT.statement.length - 1 && " "}
               </Fragment>
             ))}
           </h2>

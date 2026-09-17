@@ -69,7 +69,7 @@ function ServicesDesktop() {
             {SERVICES.headline.map((line, i) => (
               <Fragment key={line}>
                 {line}
-                {i < SERVICES.headline.length - 1 && <br />}
+                {i < SERVICES.headline.length - 1 && " "}
               </Fragment>
             ))}
           </h2>

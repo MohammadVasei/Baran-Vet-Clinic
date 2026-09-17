@@ -9,7 +9,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useCms } from "@/context/CmsContext";
 import { ANIMAL_ACCENTS } from "@/lib/accents";
-import { PhoneIcon, ChevronDownIcon, SearchIcon, XIcon, FilterIcon } from "@/components/icons";
+import { PhoneIcon, ChevronDownIcon, SearchIcon, XIcon, FilterIcon, PawIcon } from "@/components/icons";
 
 export function CommonDiseasesPage() {
   const cms = useCms();
@@ -106,7 +106,6 @@ export function CommonDiseasesPage() {
                 {["dog", "cat", "bird"].map((key) => {
                   const animal = DISEASES_DATA.find((a) => a.key === key);
                   const label = animal?.label || key;
-                  const icon = key === "dog" ? "🐕" : key === "cat" ? "🐈" : "🐦";
                   return (
                     <button
                       key={key}
@@ -118,7 +117,7 @@ export function CommonDiseasesPage() {
                       }`}
                       aria-pressed={selectedAnimal === key}
                     >
-                      <span className="inline-flex items-center gap-1.5">{icon} {label}</span>
+                      <span className="inline-flex items-center gap-1.5"><PawIcon className="size-4" aria-hidden="true" /> {label}</span>
                     </button>
                   );
                 })}
@@ -206,7 +205,6 @@ export function CommonDiseasesPage() {
                 {["all", "dog", "cat", "bird"].map((key) => {
                   const animal = DISEASES_DATA.find((a) => a.key === key);
                   const label = key === "all" ? "همه" : animal?.label || key;
-                  const icon = key === "dog" ? "🐕" : key === "cat" ? "🐈" : key === "bird" ? "🐦" : "🐾";
                   return (
                     <button
                       key={key}
@@ -218,7 +216,7 @@ export function CommonDiseasesPage() {
                       }`}
                       aria-pressed={selectedAnimal === key}
                     >
-                      <span className="inline-flex items-center gap-2 justify-end">{icon} {label}</span>
+                      <span className="inline-flex items-center gap-2 justify-end"><PawIcon className="size-4" aria-hidden="true" /> {label}</span>
                     </button>
                   );
                 })}
@@ -323,8 +321,7 @@ export function CommonDiseasesPage() {
                 ref={headline}
                 className="mt-4 font-display text-3xl font-bold leading-[1.3] text-foreground sm:text-4xl lg:text-[2.75rem]"
               >
-                شناختن علائم،<br />
-                مراقبت به‌تر از عزیزتان
+                شناختن علائم، مراقبت به‌تر از عزیزتان
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
                 پت شما عضو خانواده است. دانستن بیماری‌های رایج به شما کمک می‌کند تا زودتر متوجه تغییرات شوید و به‌موقع اقدام کنید. اطلاعات زیر تنها جهت آگاهی است — برای تشخیص و درمان حتماً با دامپزشک مشورت کنید.

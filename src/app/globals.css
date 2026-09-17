@@ -15,6 +15,7 @@
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
   --color-on-primary: var(--on-primary);
+  --color-primary-foreground: var(--on-primary);
   --color-primary-soft: var(--primary-soft);
   --color-primary-soft-fg: var(--primary-soft-fg);
 
@@ -209,6 +210,7 @@
     padding-block: var(--space-1);
     padding-inline: var(--space-3);
     border-radius: var(--eyebrow-radius);
+    border: 1px solid var(--eyebrow-border);
     background: var(--eyebrow-bg);
     color: var(--eyebrow-fg);
     font-family: var(--font-numeral);

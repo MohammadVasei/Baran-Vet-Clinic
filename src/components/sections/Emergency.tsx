@@ -13,7 +13,7 @@ import Link from "next/link";
 
 export function Emergency() {
   const isMobile = useIsMobile();
-  return isMobile ? <EmergencyMobile /> : <EmergencyDesktop />;
+  return isMobile ? <EmergencyMobile /> : null;
 }
 
 function EmergencyDesktop() {
@@ -54,7 +54,7 @@ function EmergencyDesktop() {
           {EMERGENCY.headline.map((line, i) => (
             <Fragment key={line}>
               {line}
-              {i < EMERGENCY.headline.length - 1 && <br />}
+              {i < EMERGENCY.headline.length - 1 && " "}
             </Fragment>
           ))}
         </h2>

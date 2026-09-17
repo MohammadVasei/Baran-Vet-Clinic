@@ -50,8 +50,9 @@
   --card-shadow: var(--shadow-soft);
 
   /* ---------- Eyebrow / badge ---------- */
-  --eyebrow-bg: var(--surface-alt);
+  --eyebrow-bg: var(--surface);
   --eyebrow-fg: var(--primary-text);
+  --eyebrow-border: var(--border);
   --eyebrow-radius: var(--radius-full);
 
   /* ---------- Links ---------- */

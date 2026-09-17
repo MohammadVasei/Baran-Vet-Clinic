@@ -7,7 +7,7 @@ import { MobileSectionHeader } from "@/components/sections/mobile/MobileSectionH
 export function EmergencyMobile() {
   const EMERGENCY = useCms().emergency;
   return (
-    <section id="emergency" className="relative overflow-hidden bg-[var(--emergency-bg)] text-[var(--emergency-fg)] py-20">
+    <section id="emergency" className="relative overflow-hidden bg-[var(--emergency-bg)] text-[var(--emergency-fg)] py-20 lg:hidden">
       <div className="container-site">
         <MobileSectionHeader
           eyebrow={EMERGENCY.eyebrow}

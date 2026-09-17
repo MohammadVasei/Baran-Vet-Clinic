@@ -43,7 +43,7 @@ export function ContactPage() {
             {CONTACT.headline.map((line, i) => (
               <Fragment key={line}>
                 {line}
-                {i < CONTACT.headline.length - 1 && <br />}
+                {i < CONTACT.headline.length - 1 && " "}
               </Fragment>
             ))}
           </h1>
