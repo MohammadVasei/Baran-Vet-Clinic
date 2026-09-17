@@ -427,12 +427,12 @@ export function AppointmentCTA() {
       </div>
 
       <div className="container-site relative">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="max-w-2xl">
           <p className="ap-eyebrow eyebrow">{APPOINTMENT.eyebrow}</p>
           <h2
             id="appointment-heading"
             ref={headline}
-            className="mt-8 font-display text-3xl font-bold leading-[1.35] text-foreground sm:text-4xl lg:text-[2.75rem]"
+            className="mt-8 !text-start font-display text-3xl font-bold leading-[1.35] text-foreground sm:text-4xl lg:text-[2.75rem]"
           >
             {APPOINTMENT.headline.map((line, i) => (
               <Fragment key={line}>
@@ -441,7 +441,7 @@ export function AppointmentCTA() {
               </Fragment>
             ))}
           </h2>
-          <p className="ap-intro mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+          <p className="ap-intro mt-6 max-w-[22rem] text-lg leading-relaxed text-muted-foreground sm:max-w-xl">
             {APPOINTMENT.intro}
           </p>
         </div>
