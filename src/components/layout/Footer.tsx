@@ -10,20 +10,6 @@ const QUICK_LINKS = [
   { label: "تماس با ما", href: "/contact" },
 ];
 
-const HEALTH_INFO = [
-  { label: "بیماری‌های گربه", href: "/common-diseases#cat" },
-  { label: "بیماری‌های سگ", href: "/common-diseases#dog" },
-  { label: "بیماری‌های پرنده", href: "/common-diseases#bird" },
-  { label: "نکات پیشگیری", href: "/common-diseases#advice-heading" },
-];
-
-const SERVICES = [
-  { label: "درمان", href: "/services/darman" },
-  { label: "شناسنامه سلامت", href: "/services/shenasname" },
-  { label: "شستشو و اصلاح", href: "/services/grooming" },
-  { label: "پت‌شاپ", href: "/services/petshop" },
-];
-
 const CONTACT = {
   address: "مشهد، احمدآباد، بلوار بعثت، بین بلوار رضا و ابوذر غفاری، پلاک ۹۴",
   phones: [
@@ -46,7 +32,7 @@ const SOCIALS = [
 export function Footer() {
   return (
     <footer className="border-t border-border bg-surface">
-      <div className="container-site grid gap-10 py-16 grid-cols-2 lg:grid-cols-5">
+      <div className="container-site grid grid-cols-2 gap-6 py-10 lg:grid-cols-3 lg:gap-10 lg:py-16">
         <div className="space-y-4">
           <a href="#top" className="flex items-center gap-2.5">
             <Logo className="transition-transform duration-normal ease-out group-hover:-rotate-6" width={48} height={48} />
@@ -75,7 +61,7 @@ export function Footer() {
 
         <nav aria-label="دسترسی سریع">
           <h2 className="font-display text-base font-bold text-foreground">دسترسی سریع</h2>
-          <ul className="mt-4 space-y-2.5">
+          <ul className="mt-3 space-y-2.5 lg:mt-4">
             {QUICK_LINKS.map((link) => (
               <li key={link.label}>
                 <a
@@ -89,41 +75,9 @@ export function Footer() {
           </ul>
         </nav>
 
-        <nav aria-label="خدمات">
-          <h2 className="font-display text-base font-bold text-foreground">خدمات</h2>
-          <ul className="mt-4 space-y-2.5">
-            {SERVICES.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-fast hover:text-primary-text-hover"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <nav aria-label="اطلاعات سلامت">
-          <h2 className="font-display text-base font-bold text-foreground">اطلاعات سلامت</h2>
-          <ul className="mt-4 space-y-2.5">
-            {HEALTH_INFO.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-fast hover:text-primary-text-hover"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div>
+        <div className="col-span-2 lg:col-span-1">
           <h2 className="font-display text-base font-bold text-foreground">تماس با ما</h2>
-          <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+          <ul className="mt-3 space-y-2 text-sm text-muted-foreground lg:mt-4 lg:space-y-3">
             <li className="flex items-start gap-2.5">
               <PinIcon className="mt-0.5 size-4 shrink-0 text-primary-text" />
               <span className="leading-relaxed">{CONTACT.address}</span>
@@ -157,7 +111,7 @@ export function Footer() {
       </div>
 
 <div className="border-t border-border">
-          <div className="container-site flex flex-col items-center justify-between gap-2 py-6 text-xs text-muted-foreground sm:flex-row">
+          <div className="container-site flex flex-col items-center justify-between gap-2 py-4 text-xs text-muted-foreground sm:flex-row sm:py-6">
             <p>© ۱۴۰۵ کلینیک dam‌های کوچک باران — تمامی حقوق محفوظ است.</p>
             <p className="font-label">
               Developed by{" "}

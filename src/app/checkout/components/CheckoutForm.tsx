@@ -32,9 +32,13 @@ export function CheckoutForm({ onSubmit, form }: CheckoutFormProps) {
           {...form.register("customerName")}
           required
           className="mt-2"
+          aria-invalid={form.formState.errors.customerName ? "true" : "false"}
+          aria-describedby={form.formState.errors.customerName ? "customer-name-error" : undefined}
         />
         {form.formState.errors.customerName && (
-          <p className="text-sm text-red-600">{form.formState.errors.customerName.message}</p>
+          <p id="customer-name-error" className="text-sm text-destructive" role="alert">
+            {form.formState.errors.customerName.message}
+          </p>
         )}
       </div>
 
@@ -46,9 +50,13 @@ export function CheckoutForm({ onSubmit, form }: CheckoutFormProps) {
           {...form.register("customerPhone")}
           required
           className="mt-2"
+          aria-invalid={form.formState.errors.customerPhone ? "true" : "false"}
+          aria-describedby={form.formState.errors.customerPhone ? "customer-phone-error" : undefined}
         />
         {form.formState.errors.customerPhone && (
-          <p className="text-sm text-red-600">{form.formState.errors.customerPhone.message}</p>
+          <p id="customer-phone-error" className="text-sm text-destructive" role="alert">
+            {form.formState.errors.customerPhone.message}
+          </p>
         )}
       </div>
 
@@ -60,9 +68,13 @@ export function CheckoutForm({ onSubmit, form }: CheckoutFormProps) {
           required
           rows={3}
           className="mt-2"
+          aria-invalid={form.formState.errors.customerAddress ? "true" : "false"}
+          aria-describedby={form.formState.errors.customerAddress ? "customer-address-error" : undefined}
         />
         {form.formState.errors.customerAddress && (
-          <p className="text-sm text-red-600">{form.formState.errors.customerAddress.message}</p>
+          <p id="customer-address-error" className="text-sm text-destructive" role="alert">
+            {form.formState.errors.customerAddress.message}
+          </p>
         )}
       </div>
 

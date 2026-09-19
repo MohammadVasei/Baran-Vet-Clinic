@@ -150,13 +150,13 @@ export function LoginClient({ callbackUrl = "/account" }: { callbackUrl?: string
 
           {/* Error/Success Messages */}
           {error && (
-            <div className="flex items-center gap-2 p-3 rounded-app bg-red-50 border border-red-100 text-red-700 text-sm">
+            <div className="flex items-center gap-2 p-3 rounded-app bg-destructive-soft border border-destructive text-destructive-soft-fg text-sm" role="alert">
               <AlertCircleIcon className="size-4" />
               <span>{error}</span>
             </div>
           )}
           {success && (
-            <div className="flex items-center gap-2 p-3 rounded-app bg-green-50 border border-green-100 text-green-700 text-sm">
+            <div className="flex items-center gap-2 p-3 rounded-app bg-accent-green-soft border border-accent-green text-accent-green-fg text-sm" role="status">
               <CheckCircleIcon className="size-4" />
               <span>{success}</span>
             </div>
@@ -176,9 +176,11 @@ export function LoginClient({ callbackUrl = "/account" }: { callbackUrl?: string
                     placeholder="example@email.com"
                     className="pr-10"
                     disabled={loading}
+                    aria-invalid={emailForm.formState.errors.email ? "true" : "false"}
+                    aria-describedby={emailForm.formState.errors.email ? "login-email-error" : undefined}
                   />
                   {emailForm.formState.errors.email && (
-                    <p className="text-sm text-red-600">{emailForm.formState.errors.email.message}</p>
+                    <p id="login-email-error" className="text-sm text-destructive" role="alert">{emailForm.formState.errors.email.message}</p>
                   )}
                 </div>
               </div>
@@ -202,6 +204,8 @@ export function LoginClient({ callbackUrl = "/account" }: { callbackUrl?: string
                     placeholder="******"
                     className="pr-10"
                     disabled={loading}
+                    aria-invalid={emailForm.formState.errors.password ? "true" : "false"}
+                    aria-describedby={emailForm.formState.errors.password ? "login-password-error" : undefined}
                   />
                   <button
                     type="button"
@@ -212,13 +216,13 @@ export function LoginClient({ callbackUrl = "/account" }: { callbackUrl?: string
                     {showPassword ? <EyeOffIcon className="size-5" /> : <EyeIcon className="size-5" />}
                   </button>
                   {emailForm.formState.errors.password && (
-                    <p className="text-sm text-red-600">{emailForm.formState.errors.password.message}</p>
+                    <p id="login-password-error" className="text-sm text-destructive" role="alert">{emailForm.formState.errors.password.message}</p>
                   )}
                 </div>
               </div>
 
-              <Button type="submit" className="w-full py-3" disabled={loading}>
-                {loading ? "در حال ورود..." : "ورود"}
+              <Button type="submit" className="w-full py-3" isLoading={loading}>
+                ورود
               </Button>
             </form>
           )}
@@ -238,9 +242,11 @@ export function LoginClient({ callbackUrl = "/account" }: { callbackUrl?: string
                     className="pr-10"
                     disabled={loading}
                     dir="ltr"
+                    aria-invalid={phoneForm.formState.errors.phone ? "true" : "false"}
+                    aria-describedby={phoneForm.formState.errors.phone ? "login-phone-error" : undefined}
                   />
                   {phoneForm.formState.errors.phone && (
-                    <p className="text-sm text-red-600">{phoneForm.formState.errors.phone.message}</p>
+                    <p id="login-phone-error" className="text-sm text-destructive" role="alert">{phoneForm.formState.errors.phone.message}</p>
                   )}
                 </div>
                 <p className="text-xs text-muted-foreground">
@@ -248,8 +254,8 @@ export function LoginClient({ callbackUrl = "/account" }: { callbackUrl?: string
                 </p>
               </div>
 
-              <Button type="submit" className="w-full py-3" disabled={loading}>
-                {loading ? "در حال ارسال..." : "ارسال کد تایید"}
+              <Button type="submit" className="w-full py-3" isLoading={loading}>
+                ارسال کد تایید
               </Button>
             </form>
           )}

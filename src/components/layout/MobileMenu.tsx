@@ -2,8 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { CloseIcon, PhoneIcon } from "@/components/icons";
 import { Logo } from "@/components/ui/Logo";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import { CartIcon } from "@/components/layout/CartIcon";
 import { useAuth } from "@/context/AuthContext";
 import { useDashboardPath } from "@/hooks/useDashboardPath";
 
@@ -17,7 +20,15 @@ const NAV_LINKS = [
   { label: "تماس با ما", href: "/contact" },
 ];
 
-export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function MobileMenu({
+  open,
+  onClose,
+  triggerRef,
+}: {
+  open: boolean;
+  onClose: () => void;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
+}) {
   const menuRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
@@ -36,6 +47,8 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
     if (!open) return;
 
     const prevOverflow = document.body.style.overflow;
+    const menuElement = menuRef.current;
+    const triggerElement = triggerRef.current;
     document.body.style.overflow = "hidden";
     closeBtnRef.current?.focus();
 
@@ -47,8 +60,11 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
     return () => {
       document.body.style.overflow = prevOverflow;
       document.removeEventListener("keydown", onKeyDown);
+      if (document.activeElement instanceof HTMLElement && menuElement?.contains(document.activeElement)) {
+        triggerElement?.focus();
+      }
     };
-  }, [open, onClose]);
+  }, [open, onClose, triggerRef]);
 
   return (
     <div
@@ -93,7 +109,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
             const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
             return (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   className={`block rounded-app px-4 py-2 font-display text-base font-medium transition-colors duration-fast hover:bg-muted ${
                     isActive ? "text-primary-text bg-muted" : "text-foreground truncate"
@@ -102,33 +118,43 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
                   onClick={onClose}
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             );
           })}
         </ul>
 
-        <div className="space-y-2">
+        <div className="space-y-2 border-t border-border pt-5">
           {user ? (
-            <a href={dashboardPath} className="btn btn-primary w-full" onClick={onClose}>
+            <Link href={dashboardPath} className="btn btn-primary w-full" onClick={onClose}>
               حساب کاربری
-            </a>
+            </Link>
           ) : (
             <>
-              <a href="/auth/login" className="btn btn-primary w-full" onClick={onClose}>
+              <Link href="/auth/login" className="btn btn-primary w-full" onClick={onClose}>
                 ورود
-              </a>
-              <a href="/auth/register" className="btn btn-outline w-full" onClick={onClose}>
+              </Link>
+              <Link href="/auth/register" className="btn btn-outline w-full" onClick={onClose}>
                 عضویت
-              </a>
+              </Link>
             </>
           )}
         </div>
 
-        <div className="mt-auto space-y-3 border-t border-border pt-6">
-          <a href="/contact" className="btn btn-primary w-full" onClick={onClose}>
+        <div className="space-y-3 border-t border-border pt-5">
+          <div className="grid grid-cols-2 gap-2">
+            <div className="flex items-center justify-between rounded-app bg-muted px-4 py-2">
+              <span className="font-label text-sm font-medium text-foreground">حالت نمایش</span>
+              <ThemeToggle />
+            </div>
+            <div className="flex items-center justify-between rounded-app bg-muted px-4 py-2">
+              <span className="font-label text-sm font-medium text-foreground">سبد خرید</span>
+              <CartIcon />
+            </div>
+          </div>
+          <Link href="/#appointment" className="btn btn-primary w-full" onClick={onClose}>
             تماس و نوبت
-          </a>
+          </Link>
           <a
             href="tel:+985138475377"
             className="btn btn-outline w-full"

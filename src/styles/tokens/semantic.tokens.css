@@ -9,84 +9,84 @@
 :root {
   color-scheme: light dark;
 
-  /* ---------- Surfaces — No pure white ---------- */
-  --background: #E8F4FC;           /* Page background — soft blue */
-  --foreground: #1B2A4A;           /* Primary text — deep indigo */
-  --surface: #EAF7F2;              /* Cards / panels — soft mint */
-  --surface-alt: #F4EEF8;          /* Secondary sections — soft lavender */
+  /* ---------- Surfaces ---------- */
+  --background: #F8FBFD;
+  --foreground: #17313B;
+  --surface: #FFFFFF;
+  --surface-alt: #F1F7FA;
 
   /* ---------- Primary (Main accent blue) ---------- */
-  --primary: #0091EA;
-  --primary-hover: #0073C2;
+  --primary: #009FEA;
+  --primary-hover: #008DD0;
   --on-primary: #FFFFFF;
-  --primary-soft: #D6EAF8;         /* Hover / selected state */
-  --primary-soft-fg: #1B2A4A;
+  --primary-soft: #E6F6FD;
+  --primary-soft-fg: #17313B;
 
   /* ---------- Primary Text (Headings) ---------- */
-  --primary-text: #1B2A4A;
-  --primary-text-hover: #2C3E50;
+  --primary-text: #17313B;
+  --primary-text-hover: #2A4A57;
 
   /* ---------- Secondary ---------- */
-  --secondary: #F4EEF8;
-  --secondary-foreground: #1B2A4A;
+  --secondary: #F1F7FA;
+  --secondary-foreground: #58717B;
 
-  /* ---------- Accent (Same as primary for consistency) ---------- */
-  --accent: #0091EA;
-  --accent-hover: #0073C2;
+  /* ---------- Accent ---------- */
+  --accent: #009FEA;
+  --accent-hover: #008DD0;
   --accent-foreground: #FFFFFF;
-  --accent-soft: #D6EAF8;
-  --accent-soft-fg: #1B2A4A;
+  --accent-soft: #E6F6FD;
+  --accent-soft-fg: #17313B;
 
   /* ---------- Muted ---------- */
-  --muted: #F4EEF8;
-  --muted-foreground: #5D6D7E;
+  --muted: #F1F7FA;
+  --muted-foreground: #8499A1;
 
   /* ---------- Borders ---------- */
-  --border: #D0E3F0;
-  --border-strong: #B0C4DE;
+  --border: #DCEAF0;
+  --border-strong: #C5DCE4;
 
   /* ---------- Focus ring ---------- */
-  --ring: #0091EA;
+  --ring: #009FEA;
 
-  /* ---------- Destructive (Magenta-based) ---------- */
-  --destructive: #D81B60;
+  /* ---------- Destructive ---------- */
+  --destructive: #C5006F;
   --destructive-foreground: #FFFFFF;
-  --destructive-soft: #FCE4EC;
-  --destructive-soft-fg: #C2185B;
+  --destructive-soft: #FCE7F2;
+  --destructive-soft-fg: #C5006F;
 
-  /* ---------- Supporting Accents (for service numbers, highlights) ---------- */
-  --accent-purple: #7E57C2;
-  --accent-purple-soft: #F3E5F5;
-  --accent-purple-fg: #584392;
+  /* ---------- Supporting Accents ---------- */
+  --accent-purple: #7C5AC0;
+  --accent-purple-soft: #F1EAFB;
+  --accent-purple-fg: #5B3E94;
 
-  --accent-orange: #FF9800;
-  --accent-orange-soft: #FFF3E0;
-  --accent-orange-fg: #CC7A00;
+  --accent-orange: #E88000;
+  --accent-orange-soft: #FFF2E3;
+  --accent-orange-fg: #B96B00;
 
-  --accent-lime: #8BC34A;
-  --accent-lime-soft: #F1F8E9;
-  --accent-lime-fg: #689F38;
+  --accent-lime: #96BD20;
+  --accent-lime-soft: #F1F8DC;
+  --accent-lime-fg: #6C8A12;
 
-  --accent-magenta: #EC407A;
-  --accent-magenta-soft: #FCE4EC;
-  --accent-magenta-fg: #C2185B;
+  --accent-magenta: #C5006F;
+  --accent-magenta-soft: #FCE7F2;
+  --accent-magenta-fg: #8C0052;
 
-  /* ---------- Legacy Category Accents (mapped to new supporting accents) ---------- */
-  --accent-yellow: #FF9800;        /* → Orange */
-  --accent-yellow-soft: #FFF3E0;
-  --accent-yellow-fg: #CC7A00;
+  /* ---------- Legacy Category Accents (mapped to the official support palette) ---------- */
+  --accent-yellow: #E88000;
+  --accent-yellow-soft: #FFF2E3;
+  --accent-yellow-fg: #B96B00;
 
-  --accent-coral: #EC407A;         /* → Magenta */
-  --accent-coral-soft: #FCE4EC;
-  --accent-coral-fg: #C2185B;
+  --accent-coral: #C5006F;
+  --accent-coral-soft: #FCE7F2;
+  --accent-coral-fg: #8C0052;
 
-  --accent-green: #8BC34A;         /* → Lime */
-  --accent-green-soft: #F1F8E9;
-  --accent-green-fg: #689F38;
+  --accent-green: #96BD20;
+  --accent-green-soft: #F1F8DC;
+  --accent-green-fg: #6C8A12;
 
-  --accent-lavender: #7E57C2;      /* → Purple */
-  --accent-lavender-soft: #F3E5F5;
-  --accent-lavender-fg: #584392;
+  --accent-lavender: #7C5AC0;
+  --accent-lavender-soft: #F1EAFB;
+  --accent-lavender-fg: #5B3E94;
 
   /* ---------- Semantic spacing / layout ---------- */
   --spacing-gutter: var(--space-6);
@@ -104,165 +104,165 @@
 /* Class-based dark mode (via next-themes adding .dark to <html>) */
 .dark {
   /* ---------- Surfaces ---------- */
-  --background: #0D1B2A;           /* Deep navy */
-  --foreground: #E8F4FC;           /* Light blue-white */
-  --surface: #1B2A4A;              /* Dark indigo for cards */
-  --surface-alt: #2C3E50;          /* Darker indigo for sections */
+  --background: #08161D;
+  --foreground: #F1F8FA;
+  --surface: #0E2028;
+  --surface-alt: #10252E;
 
   /* ---------- Primary (Lighter blue on dark) ---------- */
-  --primary: #4DA7FF;
-  --primary-hover: #7ABFFF;
-  --on-primary: #0D1B2A;
-  --primary-soft: #1A2E4A;
-  --primary-soft-fg: #A8D9FF;
+  --primary: #27B4F2;
+  --primary-hover: #50C3F5;
+  --on-primary: #08161D;
+  --primary-soft: #073B52;
+  --primary-soft-fg: #EAF8FF;
 
   /* ---------- Primary Text ---------- */
-  --primary-text: #A8D9FF;
-  --primary-text-hover: #D6EFFF;
+  --primary-text: #F1F8FA;
+  --primary-text-hover: #D1EAF2;
 
   /* ---------- Secondary ---------- */
-  --secondary: #2C3E50;
-  --secondary-foreground: #D6EFFF;
+  --secondary: #10252E;
+  --secondary-foreground: #B3C8CF;
 
   /* ---------- Accent ---------- */
-  --accent: #4DA7FF;
-  --accent-hover: #7ABFFF;
-  --accent-foreground: #0D1B2A;
-  --accent-soft: #1A2E4A;
-  --accent-soft-fg: #A8D9FF;
+  --accent: #27B4F2;
+  --accent-hover: #50C3F5;
+  --accent-foreground: #08161D;
+  --accent-soft: #073B52;
+  --accent-soft-fg: #EAF8FF;
 
   /* ---------- Muted ---------- */
-  --muted: #2C3E50;
-  --muted-foreground: #90A8C8;
+  --muted: #10252E;
+  --muted-foreground: #78919A;
 
   /* ---------- Borders ---------- */
-  --border: #3C4B5E;
-  --border-strong: #4A5A6E;
+  --border: #25404B;
+  --border-strong: #36535E;
 
   /* ---------- Focus ring ---------- */
-  --ring: #4DA7FF;
+  --ring: #27B4F2;
 
   /* ---------- Destructive ---------- */
-  --destructive: #EC407A;
-  --destructive-foreground: #0D1B2A;
-  --destructive-soft: #3A1624;
-  --destructive-soft-fg: #F8BBD0;
+  --destructive: #E43A93;
+  --destructive-foreground: #08161D;
+  --destructive-soft: #46152F;
+  --destructive-soft-fg: #F8D2E7;
 
-  /* ---------- Supporting Accents (lighter for dark mode) ---------- */
-  --accent-purple: #B39DDB;
-  --accent-purple-soft: #2D1B3D;
-  --accent-purple-fg: #D1C4E9;
+  /* ---------- Supporting Accents ---------- */
+  --accent-purple: #B699D8;
+  --accent-purple-soft: #2F213D;
+  --accent-purple-fg: #EDE0F8;
 
-  --accent-orange: #FFB74D;
-  --accent-orange-soft: #3D2A0D;
-  --accent-orange-fg: #FFE0B2;
+  --accent-orange: #F39A32;
+  --accent-orange-soft: #4A2D0D;
+  --accent-orange-fg: #F7D5A3;
 
-  --accent-lime: #A5D6A7;
-  --accent-lime-soft: #1B3D1B;
-  --accent-lime-fg: #C8E6C9;
+  --accent-lime: #B0D83A;
+  --accent-lime-soft: #293710;
+  --accent-lime-fg: #D8F1A5;
 
-  --accent-magenta: #F48FB1;
-  --accent-magenta-soft: #3D1628;
-  --accent-magenta-fg: #FCE4EC;
+  --accent-magenta: #E43A93;
+  --accent-magenta-soft: #46152F;
+  --accent-magenta-fg: #F8D2E7;
 
   /* ---------- Legacy Category Accents (mapped) ---------- */
-  --accent-yellow: #FFB74D;
-  --accent-yellow-soft: #3D2A0D;
-  --accent-yellow-fg: #FFE0B2;
+  --accent-yellow: #F39A32;
+  --accent-yellow-soft: #4A2D0D;
+  --accent-yellow-fg: #F7D5A3;
 
-  --accent-coral: #F48FB1;
-  --accent-coral-soft: #3D1628;
-  --accent-coral-fg: #FCE4EC;
+  --accent-coral: #E43A93;
+  --accent-coral-soft: #46152F;
+  --accent-coral-fg: #F8D2E7;
 
-  --accent-green: #A5D6A7;
-  --accent-green-soft: #1B3D1B;
-  --accent-green-fg: #C8E6C9;
+  --accent-green: #B0D83A;
+  --accent-green-soft: #293710;
+  --accent-green-fg: #D8F1A5;
 
-  --accent-lavender: #B39DDB;
-  --accent-lavender-soft: #2D1B3D;
-  --accent-lavender-fg: #D1C4E9;
+  --accent-lavender: #B699D8;
+  --accent-lavender-soft: #2F213D;
+  --accent-lavender-fg: #EDE0F8;
 }
 
 /* System preference dark mode (when no explicit .light/.dark class) */
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
     /* ---------- Surfaces ---------- */
-    --background: #0D1B2A;
-    --foreground: #E8F4FC;
-    --surface: #1B2A4A;
-    --surface-alt: #2C3E50;
+    --background: #08161D;
+    --foreground: #F1F8FA;
+    --surface: #0E2028;
+    --surface-alt: #10252E;
 
     /* ---------- Primary ---------- */
-    --primary: #4DA7FF;
-    --primary-hover: #7ABFFF;
-    --on-primary: #0D1B2A;
-    --primary-soft: #1A2E4A;
-    --primary-soft-fg: #A8D9FF;
+    --primary: #27B4F2;
+    --primary-hover: #50C3F5;
+    --on-primary: #08161D;
+    --primary-soft: #073B52;
+    --primary-soft-fg: #EAF8FF;
 
     /* ---------- Primary Text ---------- */
-    --primary-text: #A8D9FF;
-    --primary-text-hover: #D6EFFF;
+    --primary-text: #F1F8FA;
+    --primary-text-hover: #D1EAF2;
 
     /* ---------- Secondary ---------- */
-    --secondary: #2C3E50;
-    --secondary-foreground: #D6EFFF;
+    --secondary: #10252E;
+    --secondary-foreground: #B3C8CF;
 
     /* ---------- Accent ---------- */
-    --accent: #4DA7FF;
-    --accent-hover: #7ABFFF;
-    --accent-foreground: #0D1B2A;
-    --accent-soft: #1A2E4A;
-    --accent-soft-fg: #A8D9FF;
+    --accent: #27B4F2;
+    --accent-hover: #50C3F5;
+    --accent-foreground: #08161D;
+    --accent-soft: #073B52;
+    --accent-soft-fg: #EAF8FF;
 
     /* ---------- Muted ---------- */
-    --muted: #2C3E50;
-    --muted-foreground: #90A8C8;
+    --muted: #10252E;
+    --muted-foreground: #78919A;
 
     /* ---------- Borders ---------- */
-    --border: #3C4B5E;
-    --border-strong: #4A5A6E;
+    --border: #25404B;
+    --border-strong: #36535E;
 
     /* ---------- Focus ring ---------- */
-    --ring: #4DA7FF;
+    --ring: #27B4F2;
 
     /* ---------- Destructive ---------- */
-    --destructive: #EC407A;
-    --destructive-foreground: #0D1B2A;
-    --destructive-soft: #3A1624;
-    --destructive-soft-fg: #F8BBD0;
+    --destructive: #E43A93;
+    --destructive-foreground: #08161D;
+    --destructive-soft: #46152F;
+    --destructive-soft-fg: #F8D2E7;
 
     /* ---------- Supporting Accents ---------- */
-    --accent-purple: #B39DDB;
-    --accent-purple-soft: #2D1B3D;
-    --accent-purple-fg: #D1C4E9;
+    --accent-purple: #B699D8;
+    --accent-purple-soft: #2F213D;
+    --accent-purple-fg: #EDE0F8;
 
-    --accent-orange: #FFB74D;
-    --accent-orange-soft: #3D2A0D;
-    --accent-orange-fg: #FFE0B2;
+    --accent-orange: #F39A32;
+    --accent-orange-soft: #4A2D0D;
+    --accent-orange-fg: #F7D5A3;
 
-    --accent-lime: #A5D6A7;
-    --accent-lime-soft: #1B3D1B;
-    --accent-lime-fg: #C8E6C9;
+    --accent-lime: #B0D83A;
+    --accent-lime-soft: #293710;
+    --accent-lime-fg: #D8F1A5;
 
-    --accent-magenta: #F48FB1;
-    --accent-magenta-soft: #3D1628;
-    --accent-magenta-fg: #FCE4EC;
+    --accent-magenta: #E43A93;
+    --accent-magenta-soft: #46152F;
+    --accent-magenta-fg: #F8D2E7;
 
     /* ---------- Legacy Category Accents ---------- */
-    --accent-yellow: #FFB74D;
-    --accent-yellow-soft: #3D2A0D;
-    --accent-yellow-fg: #FFE0B2;
+    --accent-yellow: #F39A32;
+    --accent-yellow-soft: #4A2D0D;
+    --accent-yellow-fg: #F7D5A3;
 
-    --accent-coral: #F48FB1;
-    --accent-coral-soft: #3D1628;
-    --accent-coral-fg: #FCE4EC;
+    --accent-coral: #E43A93;
+    --accent-coral-soft: #46152F;
+    --accent-coral-fg: #F8D2E7;
 
-    --accent-green: #A5D6A7;
-    --accent-green-soft: #1B3D1B;
-    --accent-green-fg: #C8E6C9;
+    --accent-green: #B0D83A;
+    --accent-green-soft: #293710;
+    --accent-green-fg: #D8F1A5;
 
-    --accent-lavender: #B39DDB;
-    --accent-lavender-soft: #2D1B3D;
-    --accent-lavender-fg: #D1C4E9;
+    --accent-lavender: #B699D8;
+    --accent-lavender-soft: #2F213D;
+    --accent-lavender-fg: #EDE0F8;
   }
 }

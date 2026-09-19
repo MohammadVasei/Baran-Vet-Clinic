@@ -9,16 +9,16 @@
      1.1 Color — Softly Playful Palette
    ---------------------------------------------------------- */
   /* Play Blue — Main accent */
-  --play-blue-50: #D6EFFF;
-  --play-blue-100: #A8D9FF;
-  --play-blue-200: #7ABFFF;
-  --play-blue-300: #4DA7FF;
-  --play-blue-400: #1F8FFF;
-  --play-blue-500: #0091EA;
-  --play-blue-600: #0073C2;
-  --play-blue-700: #005699;
-  --play-blue-800: #003870;
-  --play-blue-900: #001B47;
+  --play-blue-50: #E6F6FD;
+  --play-blue-100: #CDECFB;
+  --play-blue-200: #A7E1F9;
+  --play-blue-300: #5FC8F2;
+  --play-blue-400: #2DB5EE;
+  --play-blue-500: #009FEA;
+  --play-blue-600: #008DD0;
+  --play-blue-700: #0074AE;
+  --play-blue-800: #005B8C;
+  --play-blue-900: #004569;
 
   /* Play Indigo — Primary text / headings */
   --play-indigo-50: #E8EAF6;
@@ -54,45 +54,45 @@
   --play-lavender-800: #561670;
 
   /* Play Peach/Orange — Supporting accent */
-  --play-peach-50: #FFF3E0;
-  --play-peach-100: #FFE8D6;
-  --play-peach-200: #FFD1AD;
-  --play-peach-300: #FFBA84;
-  --play-peach-400: #FFA35B;
-  --play-peach-500: #FF9800;
-  --play-peach-600: #E68900;
-  --play-peach-700: #CC7A00;
+  --play-peach-50: #FFF2E3;
+  --play-peach-100: #FFE3B8;
+  --play-peach-200: #FFD08A;
+  --play-peach-300: #F6B566;
+  --play-peach-400: #F2992E;
+  --play-peach-500: #E88000;
+  --play-peach-600: #D26F00;
+  --play-peach-700: #B45C00;
 
   /* Play Purple — Supporting accent */
-  --play-purple-50: #F3E5F5;
-  --play-purple-100: #E1BEE7;
-  --play-purple-200: #CE93D8;
-  --play-purple-300: #BA68C8;
-  --play-purple-400: #AB47BC;
-  --play-purple-500: #9C27B0;
-  --play-purple-600: #8E24AA;
-  --play-purple-700: #7E57C2;
-  --play-purple-800: #6A1B9A;
+  --play-purple-50: #F4E8F4;
+  --play-purple-100: #E9D2E9;
+  --play-purple-200: #D8A8D7;
+  --play-purple-300: #C57CC6;
+  --play-purple-400: #B657B1;
+  --play-purple-500: #A742A0;
+  --play-purple-600: #922D8F;
+  --play-purple-700: #7D257E;
+  --play-purple-800: #661C65;
 
   /* Play Lime — Supporting accent */
-  --play-lime-50: #F1F8E9;
-  --play-lime-100: #E8F5E9;
-  --play-lime-200: #D4F5E9;
-  --play-lime-300: #B2E7D0;
-  --play-lime-400: #90DAB7;
-  --play-lime-500: #8BC34A;
-  --play-lime-600: #7CB342;
-  --play-lime-700: #689F38;
+  --play-lime-50: #F1F8DC;
+  --play-lime-100: #E6F1B7;
+  --play-lime-200: #D7E98A;
+  --play-lime-300: #C4DD5D;
+  --play-lime-400: #B0D336;
+  --play-lime-500: #96BD20;
+  --play-lime-600: #7EA316;
+  --play-lime-700: #658A10;
 
   /* Play Magenta — Supporting accent */
-  --play-magenta-50: #FCE4EC;
-  --play-magenta-100: #F8BBD0;
-  --play-magenta-200: #F48FB1;
-  --play-magenta-300: #F06292;
-  --play-magenta-400: #EC407A;
-  --play-magenta-500: #E91E63;
-  --play-magenta-600: #D81B60;
-  --play-magenta-700: #C2185B;
+  --play-magenta-50: #FCE7F2;
+  --play-magenta-100: #F9D2E6;
+  --play-magenta-200: #F0A4CF;
+  --play-magenta-300: #E468AB;
+  --play-magenta-400: #D93D97;
+  --play-magenta-500: #C5006F;
+  --play-magenta-600: #AC005E;
+  --play-magenta-700: #90004E;
 
   /* Play Gray — Neutrals, borders, muted text */
   --play-gray-50: #ECEFF1;

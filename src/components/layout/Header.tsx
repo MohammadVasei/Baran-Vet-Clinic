@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { MenuIcon, CloseIcon } from "@/components/icons";
+import { MenuIcon, CloseIcon, UserIcon } from "@/components/icons";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
@@ -24,6 +24,7 @@ const NAV_LINKS = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const menuTriggerRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
   const { user } = useAuth();
 
@@ -65,29 +66,50 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <ThemeToggle />
-          <CartIcon />
-{user ? (
+          <span className="hidden lg:inline-flex">
+            <ThemeToggle />
+          </span>
+          <span className="hidden lg:inline-flex">
+            <CartIcon />
+          </span>
+          {user ? (
             <div className="flex items-center gap-2">
               <Link
                 href={dashboardPath}
-                className="text-sm text-foreground truncate hover:underline"
+                className="hidden text-sm text-foreground truncate hover:underline lg:inline"
               >
                 {user.user_metadata?.full_name || user.email?.split("@")[0] || "کاربر"}
               </Link>
+              <Link
+                href={dashboardPath}
+                className="btn btn-outline size-10 !p-0 lg:hidden"
+                aria-label="حساب کاربری"
+              >
+                <UserIcon className="size-5" />
+              </Link>
             </div>
           ) : (
-            <MagneticButton
-              href="/auth/register"
-              className="btn btn-primary"
-            >
-              عضویت
-            </MagneticButton>
+            <>
+              <MagneticButton
+                href="/auth/register"
+                className="btn btn-primary hidden lg:inline-flex"
+              >
+                عضویت
+              </MagneticButton>
+              <Link
+                href="/auth/register"
+                className="btn btn-outline size-10 !p-0 lg:hidden"
+                aria-label="ورود یا عضویت"
+              >
+                <UserIcon className="size-5" />
+              </Link>
+            </>
           )}
-          <MagneticButton href="/contact" className="btn btn-primary hidden sm:inline-flex">
+          <MagneticButton href="/#appointment" className="btn btn-primary hidden lg:inline-flex">
             تماس و نوبت
           </MagneticButton>
           <button
+            ref={menuTriggerRef}
             type="button"
             className="btn btn-outline lg:hidden"
             aria-expanded={open}
@@ -100,7 +122,7 @@ export function Header() {
         </div>
       </div>
 
-      <MobileMenu open={open} onClose={() => setOpen(false)} />
+      <MobileMenu open={open} onClose={() => setOpen(false)} triggerRef={menuTriggerRef} />
     </header>
   );
 }

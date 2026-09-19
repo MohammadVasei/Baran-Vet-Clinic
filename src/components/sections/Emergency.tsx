@@ -7,13 +7,12 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { useCms } from "@/context/CmsContext";
-import { EmergencyMobile } from "@/components/sections/mobile/EmergencyMobile";
 import { PhoneIcon, ArrowIcon } from "@/components/icons";
 import Link from "next/link";
 
 export function Emergency() {
   const isMobile = useIsMobile();
-  return isMobile ? <EmergencyMobile /> : null;
+  return isMobile ? null : <EmergencyDesktop />;
 }
 
 function EmergencyDesktop() {

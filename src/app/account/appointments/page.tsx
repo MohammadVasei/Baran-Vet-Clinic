@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { CalendarIcon, ClockIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { formatJalaliDate } from "@/lib/animals";
 
 interface Booking {
@@ -20,22 +21,6 @@ interface Booking {
   notes: string | null;
   service?: { id: string; name: string } | null;
   doctor?: { id: string; name: string } | null;
-}
-
-const STATUS_CONFIG: Record<string, { label: string; className: string }> = {
-  pending: { label: "در انتظار", className: "bg-yellow-100 text-yellow-700" },
-  confirmed: { label: "تأیید شده", className: "bg-blue-100 text-blue-700" },
-  completed: { label: "انجام شده", className: "bg-green-100 text-green-700" },
-  cancelled: { label: "لغو شده", className: "bg-red-100 text-red-700" },
-};
-
-function StatusBadge({ status }: { status: string }) {
-  const config = STATUS_CONFIG[status] || { label: status, className: "bg-gray-100 text-gray-700" };
-  return (
-    <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full ${config.className}`}>
-      {config.label}
-    </span>
-  );
 }
 
 function isUpcoming(booking: Booking): boolean {

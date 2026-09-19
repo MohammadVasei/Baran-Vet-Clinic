@@ -13,6 +13,7 @@ import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { CmsProvider } from "@/context/CmsContext";
 import { CartDrawer } from "@/components/shop/CartDrawer";
+import { MobileQuickAccess } from "@/components/layout/MobileQuickAccess";
 import { getCmsData } from "@/lib/cms";
 
 // Self-hosted via next/font/google (variable, arabic subset for Persian).
@@ -98,6 +99,7 @@ export default async function RootLayout({
                 </main>
                 <Footer />
                 <CartDrawer />
+                <MobileQuickAccess />
               </CartProvider>
             </AuthProvider>
           </ThemeProvider>

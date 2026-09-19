@@ -19,6 +19,7 @@ interface AdminTableProps<T> {
   onCreate?: () => void;
   createLabel?: string;
   isLoading?: boolean;
+  error?: string;
 }
 
 type SortingState = { id: string; desc: boolean }[];
@@ -55,6 +56,7 @@ export function AdminTable<T extends { id: string }>({
   onCreate,
   createLabel = 'افزودن',
   isLoading = false,
+  error,
 }: AdminTableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [pagination, setPagination] = useState<PaginationState>({
@@ -71,7 +73,7 @@ export function AdminTable<T extends { id: string }>({
     return [...filteredData].sort(createSortComparator(id as keyof T, desc));
   }, [filteredData, sorting]);
 
-  const pageCount = Math.ceil(sortedData.length / pagination.pageSize);
+  const pageCount = Math.max(1, Math.ceil(sortedData.length / pagination.pageSize));
   const paginatedData = useMemo(() => {
     const start = pagination.pageIndex * pagination.pageSize;
     return sortedData.slice(start, start + pagination.pageSize);
@@ -125,11 +127,22 @@ export function AdminTable<T extends { id: string }>({
                 <th
                   key={String(column.id || column.accessorKey || column.header)}
                   className="px-4 py-3 text-right text-sm font-semibold text-foreground"
+                  aria-sort={
+                    column.accessorKey && sorting.find((s) => s.id === column.accessorKey)
+                      ? sorting.find((s) => s.id === column.accessorKey)!.desc
+                        ? 'descending'
+                        : 'ascending'
+                      : column.accessorKey
+                        ? 'none'
+                        : undefined
+                  }
                 >
                   {column.accessorKey ? (
-                    <div
-                      className="flex items-center gap-2 cursor-pointer"
+                    <button
+                      type="button"
+                      className="inline-flex min-h-11 items-center gap-2 rounded-sm text-right focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                       onClick={() => handleSort(column.accessorKey as string)}
+                      aria-label={`مرتب‌سازی بر اساس ${column.header}`}
                     >
                       {column.header}
                       {sorting.find((s) => s.id === column.accessorKey) && (
@@ -141,7 +154,7 @@ export function AdminTable<T extends { id: string }>({
                           )}
                         </span>
                       )}
-                    </div>
+                    </button>
                   ) : (
                     column.header
                   )}
@@ -154,6 +167,12 @@ export function AdminTable<T extends { id: string }>({
               <tr>
                 <td colSpan={columns.length} className="px-4 py-8 text-center text-muted-foreground">
                   در حال بارگذاری...
+                </td>
+              </tr>
+            ) : error ? (
+              <tr>
+                <td colSpan={columns.length} className="px-4 py-8 text-center text-destructive">
+                  {error}
                 </td>
               </tr>
             ) : paginatedData.length === 0 ? (
@@ -187,7 +206,7 @@ export function AdminTable<T extends { id: string }>({
       {/* Pagination */}
       <div className="flex items-center justify-between px-4 py-3 border-t border-border">
         <div className="text-sm text-muted-foreground">
-          صفحه {pagination.pageIndex + 1} از {pageCount}
+          {sortedData.length === 0 ? 'صفحه‌ای وجود ندارد' : `صفحه ${pagination.pageIndex + 1} از ${pageCount}`}
         </div>
         <div className="flex items-center gap-2">
           <Button

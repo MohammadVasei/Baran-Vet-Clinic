@@ -6,7 +6,7 @@ export async function EmergencyBar() {
   const emergency: EmergencySection = (await getCmsData()).emergency;
 
   return (
-    <div className="bg-[var(--emergency-bg)] text-[var(--emergency-fg)]">
+    <div className="hidden bg-[var(--emergency-bg)] text-[var(--emergency-fg)] lg:block">
       <div className="container-site flex items-center justify-between gap-6 py-2 text-sm">
         <p className="flex items-center gap-2 font-label font-medium">
           <PhoneIcon className="size-4 shrink-0" />

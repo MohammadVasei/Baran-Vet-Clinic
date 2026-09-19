@@ -23,7 +23,13 @@ import { useCart } from "@/context/CartContext";
 
 const MAX_QTY = 99;
 
-export function ProductCard({ product }: { product: ProductCardType }) {
+export function ProductCard({
+  product,
+  featured = false,
+}: {
+  product: ProductCardType;
+  featured?: boolean;
+}) {
   const { addItem, openCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const stockStatus = getStockStatus(product);
@@ -49,7 +55,7 @@ export function ProductCard({ product }: { product: ProductCardType }) {
 
   return (
     <article
-      className={`relative rounded-app-lg border border-border bg-surface overflow-hidden transition-all duration-300 hover:shadow-lg ${isOutOfStock ? 'opacity-60' : ''}`}
+      className={`relative rounded-app-lg border ${featured ? "border-2 border-accent-yellow bg-accent-yellow-soft" : "border-border bg-surface"} overflow-hidden transition-all duration-300 hover:shadow-lg ${isOutOfStock ? 'opacity-60' : ''}`}
       role="listitem"
     >
       {/* Product Image */}
@@ -93,6 +99,11 @@ export function ProductCard({ product }: { product: ProductCardType }) {
 
       {/* Product Info */}
       <div className="p-3 space-y-2 sm:p-5 sm:space-y-3">
+        {featured && (
+          <span className="inline-flex rounded-full bg-accent-yellow px-2.5 py-1 text-xs font-bold text-accent-yellow-fg">
+            ویژه
+          </span>
+        )}
         <h3 className="font-display text-sm font-bold text-foreground line-clamp-2 sm:text-lg">
           <Link href={`/services/petshop/products/${product.id}`} className="hover:text-primary-text transition-colors">
             {product.name}

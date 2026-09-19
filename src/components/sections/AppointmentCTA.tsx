@@ -873,7 +873,7 @@ export function AppointmentCTA() {
               </li>
             </ul>
 
-            <MagneticButton href={CLINIC.phoneHref} className="btn btn-outline mt-auto">
+            <MagneticButton href={CLINIC.phoneHref} className="btn btn-primary mt-auto">
               تماس با کلینیک
             </MagneticButton>
           </aside>

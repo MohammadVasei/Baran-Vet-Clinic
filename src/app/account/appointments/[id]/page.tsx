@@ -10,6 +10,7 @@ import { useAuth } from "@/context/AuthContext";
 import { CalendarIcon, ClockIcon, CheckCircleIcon, XCircleIcon, AlertCircleIcon, ArrowIcon, EditIcon, PawIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { formatJalaliDate } from "@/lib/animals";
 
 interface Booking {
@@ -36,13 +37,6 @@ interface NotesHistory {
   content: string;
   created_at: string;
 }
-
-const STATUS_CONFIG: Record<string, { label: string; className: string }> = {
-  pending: { label: "در انتظار تأیید", className: "bg-yellow-100 text-yellow-700" },
-  confirmed: { label: "تأیید شده", className: "bg-blue-100 text-blue-700" },
-  completed: { label: "انجام شده", className: "bg-green-100 text-green-700" },
-  cancelled: { label: "لغو شده", className: "bg-red-100 text-red-700" },
-};
 
 export default function AccountAppointmentDetailPage() {
   const params = useParams();
@@ -177,7 +171,6 @@ export default function AccountAppointmentDetailPage() {
     );
   }
 
-  const statusConfig = STATUS_CONFIG[booking.status] || { label: booking.status, className: "bg-gray-100 text-gray-700" };
   const cancellable = booking.status === "pending" || booking.status === "confirmed";
   const completed = booking.status === "completed";
   const cancelled = booking.status === "cancelled";
@@ -201,8 +194,8 @@ export default function AccountAppointmentDetailPage() {
         <div
           className={`flex items-center gap-2 p-3 rounded-app border text-sm ${
             saved || cancelled
-              ? "bg-green-50 border-green-100 text-green-700"
-              : "bg-red-50 border-red-100 text-red-700"
+              ? "bg-accent-green-soft border-accent-green text-accent-green-fg"
+              : "bg-destructive-soft border-destructive text-destructive-soft-fg"
           }`}
         >
           <CheckCircleIcon className="size-4" />
@@ -213,9 +206,10 @@ export default function AccountAppointmentDetailPage() {
       <div className="booking-summary rounded-app-lg border border-border bg-surface p-6 grid gap-6 sm:grid-cols-3">
         <div className="col-span-full flex items-center justify-between gap-4">
           <h2 className="font-display text-lg font-bold text-foreground">{booking.service?.name || "خدمت"}</h2>
-          <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full ${statusConfig.className}`}>
-            {statusConfig.label}
-          </span>
+          <StatusBadge
+            status={booking.status}
+            labels={{ pending: "در انتظار تأیید" }}
+          />
         </div>
         <div className="flex items-center gap-3">
           <CalendarIcon className="size-5 text-primary shrink-0" />
