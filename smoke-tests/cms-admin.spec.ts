@@ -63,8 +63,8 @@ async function staffLogin(page: Page) {
   // NOTE: the submit button sits at visibility:hidden (GSAP revealUp on
   // .login-submit never fires), so submit via Enter on the password field.
   await page.getByLabel(/رمز عبور/).press("Enter");
-  await page.waitForURL("**/admin/services", { timeout: 20_000 });
-  await expect(page.getByText("خدمات").first()).toBeVisible({ timeout: 15_000 });
+  await page.waitForURL("**/admin", { timeout: 20_000 });
+  await expect(page.getByText("هشدارهای مهم").first()).toBeVisible({ timeout: 15_000 });
 }
 
 const results: Record<string, unknown> = {};
@@ -160,7 +160,7 @@ test("2. Diseases CRUD reflects on the public encyclopedia (revalidation)", asyn
   await page.getByLabel("نام بیماری").fill(PROBE_DISEASE);
   await page.getByLabel("علائم (هر مورد در یک خط)").fill("تب\nبی‌اشتهایی\nسرفه");
   await page.getByLabel("مراقبت و درمان (هر مورد در یک خط)").fill("مراجعه به دامپزشک\nاستراحت کامل");
-await page.getByRole("button", { name: "افزودن بیماری" }).click();
+  await page.getByRole("button", { name: "افزودن بیماری" }).click();
   await page.waitForURL("**/admin/diseases", { timeout: 15_000 });
 
   // 55+ rows paginate 10/page — narrow with the table search first.
@@ -324,7 +324,7 @@ test("4. Site-content clinic editor persists + revalidates, then restores", asyn
     results["clinicHoursNoteMatchesOriginalAfterSuite"] = note === originalHoursNote;
     log("clinic hoursNote final state", { matchesOriginal: note === originalHoursNote });
   }
-
-  console.log("\n\n========== CMS/ADMIN SMOKE SUMMARY ==========");
-  console.log(JSON.stringify(results, null, 2));
 });
+
+console.log("\n\n========== CMS/ADMIN SMOKE SUMMARY ==========");
+console.log(JSON.stringify(results, null, 2));
