@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { ProductCard as ProductCardData } from "@/lib/products";
+import { SnapCarousel } from "@/components/sections/mobile/SnapCarousel";
 
 export function PetshopBanner({ products }: { products: ProductCardData[] }) {
   return (
@@ -29,14 +30,15 @@ export function PetshopBanner({ products }: { products: ProductCardData[] }) {
         </div>
 
         {products && products.length > 0 ? (
-          <div
-            className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-3"
-            role="list"
-            aria-label="لیست محصولات ویژه پت‌شاپ"
-          >
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} featured />
-            ))}
+          <div className="mt-12 -mx-6">
+            <SnapCarousel
+              ariaLabel="لیست محصولات ویژه پت‌شاپ"
+              slideClassName="w-[45%] sm:w-[70%] md:w-[60%] lg:w-[340px]"
+            >
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} featured />
+              ))}
+            </SnapCarousel>
           </div>
         ) : (
           <div className="py-20 text-center">

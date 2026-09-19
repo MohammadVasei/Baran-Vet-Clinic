@@ -419,7 +419,7 @@ export function AppointmentCTA() {
       id="appointment"
       ref={root}
       aria-labelledby="appointment-heading"
-      className="relative overflow-hidden bg-background py-20 lg:py-32"
+      className="relative overflow-hidden bg-background py-16 lg:py-24"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute start-[-5rem] top-16 size-80 rounded-full bg-primary-soft opacity-50 blur-3xl" />

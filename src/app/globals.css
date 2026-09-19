@@ -434,6 +434,8 @@
     color: var(--input-fg);
     font-family: var(--font-body);
     font-size: var(--text-base);
+    text-align: left;
+    direction: ltr;
     transition-property: border-color, box-shadow;
     transition-duration: var(--duration-fast);
     transition-timing-function: var(--ease-out);

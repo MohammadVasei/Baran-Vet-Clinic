@@ -48,13 +48,30 @@
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--space-xs` | `4px` / `0.25rem` | Tight gaps |
-| `--space-sm` | `8px` / `0.5rem` | Icon gaps, inline spacing |
-| `--space-md` | `16px` / `1rem` | Standard padding |
-| `--space-lg` | `24px` / `1.5rem` | Section padding |
-| `--space-xl` | `32px` / `2rem` | Large gaps |
-| `--space-2xl` | `48px` / `3rem` | Section margins |
-| `--space-3xl` | `64px` / `4rem` | Hero padding |
+| `--space-1` | `4px` / `0.25rem` | Tight gaps |
+| `--space-2` | `8px` / `0.5rem` | Icon gaps and inline spacing |
+| `--space-4` | `16px` / `1rem` | Standard control and card padding |
+| `--space-6` | `24px` / `1.5rem` | Public page gutter and larger component padding |
+| `--space-8` | `32px` / `2rem` | Large component gaps |
+| `--space-12` | `48px` / `3rem` | Section spacing |
+| `--space-16` | `64px` / `4rem` | Large section spacing |
+| `--space-24` | `96px` / `6rem` | Extra-large section spacing |
+
+The spacing scale uses a 4px base unit and is defined in
+`src/styles/tokens/primitives.tokens.css`. Use the semantic layout tokens
+below when the spacing represents a site-wide rule:
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--spacing-gutter` | `24px` / `--space-6` | Horizontal gutter for `.container-site` |
+| `--spacing-section` | `64px` / `--space-16` | Standard section spacing |
+| `--spacing-section-lg` | `96px` / `--space-24` | Large section spacing |
+| `--container-max` | `1216px` / `76rem` | Maximum width for `.container-site` |
+
+Admin screens intentionally use a denser layout: `16px` padding on mobile
+and `24px` on large screens (`p-4 lg:p-6`). Commerce screens may also use
+shorter vertical spacing than editorial pages to keep transactional flows
+compact.
 
 ### Shadow Depths
 

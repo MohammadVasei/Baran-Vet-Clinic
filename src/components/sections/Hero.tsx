@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 const LIGHT_SCENE = "https://prod.spline.design/Whp9AlSt62gpHEcm-JDn/scene.hanacode";
 const DARK_SCENE = "https://prod.spline.design/Whp9AlSt62gpHEcm-Wal/scene.hanacode";
 const MOBILE_SCENE = "https://prod.spline.design/Whp9AlSt62gpHEcm-HLo/scene.hanacode";
+const MOBILE_DARK_EMBED = "https://my.spline.design/untitled-mxPaJhgTqx4iZRiioVbt6FNt-3T7/";
 
 export function Hero() {
   const { resolvedTheme } = useTheme();
@@ -27,13 +28,24 @@ export function Hero() {
         aria-label="باران کلینیک حیوانات، صحنه سه‌بعدی تعاملی"
         suppressHydrationWarning
       >
-        {/* @ts-expect-error - hana-viewer is a custom web component */}
-        <hana-viewer
-          url={MOBILE_SCENE}
-          className="absolute inset-0 w-full h-full"
-          aria-label="باران کلینیک حیوانات، صحنه سه‌بعدی تعاملی"
-          suppressHydrationWarning
-        />
+        {resolvedTheme === "dark" ? (
+          <iframe
+            src={MOBILE_DARK_EMBED}
+            title="باران کلینیک حیوانات، صحنه سه‌بعدی تعاملی"
+            aria-label="باران کلینیک حیوانات، صحنه سه‌بعدی تعاملی"
+            className="absolute inset-0 w-full h-full"
+            style={{ border: 0 }}
+            allowFullScreen
+          />
+        ) : (
+          /* @ts-expect-error - hana-viewer is a custom web component */
+          <hana-viewer
+            url={MOBILE_SCENE}
+            className="absolute inset-0 w-full h-full"
+            aria-label="باران کلینیک حیوانات، صحنه سه‌بعدی تعاملی"
+            suppressHydrationWarning
+          />
+        )}
       </section>
     );
   }

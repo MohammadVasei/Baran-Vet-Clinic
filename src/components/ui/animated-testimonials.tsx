@@ -127,7 +127,7 @@ function AnimatedTestimonialsDesktop({
     <section
       id="testimonials"
       ref={rootRef}
-      className="relative overflow-hidden bg-background py-20 lg:py-28"
+      className="relative overflow-hidden bg-background py-16 lg:py-24"
       dir="rtl"
       aria-labelledby="testimonials-heading"
     >
@@ -243,7 +243,7 @@ function AnimatedTestimonialsMobile({
 }: AnimatedTestimonialsProps) {
   const TESTIMONIALS = useCms().testimonials;
   return (
-    <section id="testimonials" className="relative overflow-hidden bg-background py-20" dir="rtl" aria-labelledby="testimonials-heading">
+    <section id="testimonials" className="relative overflow-hidden bg-background py-16 lg:py-24" dir="rtl" aria-labelledby="testimonials-heading">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute start-[8%] top-[-3rem] size-[22rem] rounded-full bg-primary-soft opacity-40 blur-3xl" />
       </div>

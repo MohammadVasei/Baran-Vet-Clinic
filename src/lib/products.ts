@@ -167,11 +167,13 @@ export function getStockLabel(status: 'in_stock' | 'low_stock' | 'out_of_stock')
 export function getStockColor(status: 'in_stock' | 'low_stock' | 'out_of_stock'): string {
   switch (status) {
     case 'in_stock':
-      return 'bg-green-100 text-green-700';
+      return 'bg-accent-green-soft text-accent-green-fg';
     case 'low_stock':
-      return 'bg-yellow-100 text-yellow-700';
+      return 'bg-accent-yellow-soft text-accent-yellow-fg';
     case 'out_of_stock':
-      return 'bg-red-100 text-red-700';
+      return 'bg-destructive-soft text-destructive-soft-fg';
+    default:
+      return 'bg-muted text-muted-foreground';
   }
 }
 

@@ -70,7 +70,7 @@ function WhyBaranDesktop() {
     <section
       id="why"
       ref={root}
-      className="relative overflow-hidden bg-surface-alt py-20 lg:py-32"
+      className="relative overflow-hidden bg-surface-alt py-16 lg:py-24"
     >
       {/* Decorative soft accent orb (green — health moment) */}
       <div className="pointer-events-none absolute inset-0" aria-hidden>

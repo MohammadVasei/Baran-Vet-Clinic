@@ -53,7 +53,7 @@ function ServicesDesktop() {
     <section
       id="services"
       ref={root}
-      className="relative overflow-hidden bg-surface-alt py-20 lg:py-32"
+      className="relative overflow-hidden bg-surface-alt py-16 lg:py-24"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute end-[-6rem] top-24 size-96 rounded-full bg-accent-soft opacity-60 blur-3xl" />

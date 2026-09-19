@@ -88,7 +88,7 @@ export function ProductCard({
           {/* Category Badge */}
           {product.category && (
             <div className="absolute top-2 right-2 sm:top-3 sm:right-3">
-              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-white/90 text-foreground sm:gap-1 sm:px-2.5 sm:py-1 sm:text-xs">
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-muted text-foreground sm:gap-1 sm:px-2.5 sm:py-1 sm:text-xs">
                 <TagIcon className="size-2.5 sm:size-3" />
                 {CATEGORY_LABELS[product.category] || product.category}
               </span>

@@ -43,7 +43,7 @@ function DoctorsDesktop() {
     <section
       id="doctors"
       ref={root}
-      className="relative overflow-hidden bg-surface-alt py-20 lg:py-32"
+      className="relative overflow-hidden bg-surface-alt py-16 lg:py-24"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute start-1/2 top-[-4rem] size-[30rem] -translate-x-1/2 rounded-full bg-primary-soft opacity-40 blur-3xl" />
