@@ -265,7 +265,7 @@ const chartOptions = {
     legend: { display: false },
     tooltip: {
       enabled: true,
-      mode: "index",
+      mode: "index" as const,
       intersect: false,
     },
   },

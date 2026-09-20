@@ -21,7 +21,7 @@ interface CustomChart {
 
 interface CustomChartBuilderModalProps {
   onClose: () => void;
-  onSave: (chart: CustomChart) => Promise<void>;
+  onSave: (chart: Omit<CustomChart, "id" | "user_id">) => Promise<void>;
   initialChart?: CustomChart;
 }
 
