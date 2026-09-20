@@ -1,0 +1,309 @@
+- generic [ref=f3e1]:
+  - link "به محتوای اصلی برو" [ref=f3e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f3e17]:
+    - generic [ref=f3e18]:
+      - link "کلینیک دام‌های کوچک باران — صفحه اصلی" [ref=f3e19] [cursor=pointer]:
+        - /url: /
+        - img "باران کلینیک دام‌های کوچک" [ref=f3e20]
+        - generic [ref=f3e21]: باران
+      - generic [ref=f3e32]:
+        - link "حساب کاربری" [ref=f3e287] [cursor=pointer]:
+          - /url: /admin
+        - button "باز کردن منوی موبایل" [ref=f3e291] [cursor=pointer]
+    - dialog:
+      - generic:
+        - generic: باران
+        - button
+      - list:
+        - listitem:
+          - link:
+            - /url: /
+            - text: خانه
+        - listitem:
+          - link:
+            - /url: /services
+            - text: خدمات
+        - listitem:
+          - link:
+            - /url: /services/petshop
+            - text: پت‌شاپ
+        - listitem:
+          - link:
+            - /url: /doctors
+            - text: پزشکان
+        - listitem:
+          - link:
+            - /url: /common-diseases
+            - text: بیماری‌های شایع
+        - listitem:
+          - link:
+            - /url: /about
+            - text: درباره ما
+        - listitem:
+          - link:
+            - /url: /contact
+            - text: تماس با ما
+      - generic:
+        - link:
+          - /url: /admin
+          - text: حساب کاربری
+      - generic:
+        - generic:
+          - generic:
+            - generic: حالت نمایش
+            - button:
+              - generic: حالت تیره
+          - generic:
+            - generic: سبد خرید
+            - button
+        - link:
+          - /url: /#appointment
+          - text: تماس و نوبت
+        - link:
+          - /url: tel:+985138475377
+          - generic: ۰۵۱-۳۸۴۷-۵۳۷۷
+        - link:
+          - /url: https://wa.me/989153588160
+          - generic: ۰۹۱۵-۳۵۸-۸۱۶۰ (واتساپ)
+  - main [ref=f3e48]:
+    - generic [ref=f3e130]:
+      - complementary "منوی مدیریت" [ref=f3e131]:
+        - generic [ref=f3e132]:
+          - generic [ref=f3e133]:
+            - generic [ref=f3e134]: باران
+            - button "بستن منو" [ref=f3e294]
+          - navigation "منوی اصلی" [ref=f3e140]:
+            - generic [ref=f3e141]:
+              - button [expanded] [ref=f3e142]:
+                - heading "فروشگاه و نوبت" [level=1] [ref=f3e143]
+              - link [ref=f3e146] [cursor=pointer]:
+                - /url: /admin/services
+                - heading "خدمات" [level=2] [ref=f3e147]
+              - link [ref=f3e148] [cursor=pointer]:
+                - /url: /admin/doctors
+                - heading "پزشکان" [level=2] [ref=f3e149]
+              - link [ref=f3e150] [cursor=pointer]:
+                - /url: /admin/orders
+                - heading "سفارشات" [level=2] [ref=f3e151]
+              - link [ref=f3e152] [cursor=pointer]:
+                - /url: /admin/bookings
+                - heading "نوبت‌ها" [level=2] [ref=f3e153]
+              - link [ref=f3e154] [cursor=pointer]:
+                - /url: /admin/availability-blocks
+                - heading "بازه‌های غیرفعال" [level=2] [ref=f3e155]
+              - link [ref=f3e156] [cursor=pointer]:
+                - /url: /admin/products
+                - heading "محصولات" [level=2] [ref=f3e157]
+            - generic [ref=f3e158]:
+              - button [expanded] [ref=f3e159]:
+                - heading "عملیات روزانه" [level=1] [ref=f3e160]
+              - link [ref=f3e163] [cursor=pointer]:
+                - /url: /admin/stock-levels
+                - heading "موجودی انبار" [level=2] [ref=f3e164]
+              - link [ref=f3e165] [cursor=pointer]:
+                - /url: /admin/animals
+                - heading "حیوانات" [level=2] [ref=f3e166]
+              - link [ref=f3e167] [cursor=pointer]:
+                - /url: /admin/reminders
+                - heading "یادآوری‌ها" [level=2] [ref=f3e168]
+            - generic [ref=f3e169]:
+              - button [expanded] [ref=f3e170]:
+                - heading "داده‌های پایه" [level=1] [ref=f3e171]
+              - link [ref=f3e174] [cursor=pointer]:
+                - /url: /admin/diseases
+                - heading "بیماری‌ها" [level=2] [ref=f3e175]
+              - link [ref=f3e176] [cursor=pointer]:
+                - /url: /admin/species-and-breeds
+                - heading "گونه‌ها و نژادها" [level=2] [ref=f3e177]
+              - link [ref=f3e178] [cursor=pointer]:
+                - /url: /admin/medical-items
+                - heading "واکسن‌ها و درمان‌ها" [level=2] [ref=f3e179]
+            - generic [ref=f3e180]:
+              - button [expanded] [ref=f3e181]:
+                - heading "محتوا و تنظیمات" [level=1] [ref=f3e182]
+              - link [ref=f3e185] [cursor=pointer]:
+                - /url: /admin/testimonials
+                - heading "بازخوردها" [level=2] [ref=f3e186]
+              - link [ref=f3e187] [cursor=pointer]:
+                - /url: /admin/site-content
+                - heading "اطلاعات کلینیک" [level=2] [ref=f3e188]
+              - link [ref=f3e189] [cursor=pointer]:
+                - /url: /admin/custom-charts
+                - heading "نمودارهای سفارشی" [level=2] [ref=f3e190]
+          - button "خروج" [ref=f3e194]
+      - main [ref=f3e198]:
+        - generic [ref=f3e200]:
+          - button "باز کردن منو" [ref=f3e297]
+          - heading "پنل مدیریت" [level=1] [ref=f3e202]
+        - generic [ref=f3e207]:
+          - generic [ref=f3e208]:
+            - generic [ref=f3e209]:
+              - heading "مدیریت نمودارهای سفارشی" [level=1] [ref=f3e210]
+              - paragraph [ref=f3e211]: لیست تمام نمودارهای سفارشی که توسط کاربران ایجاد شده‌اند
+            - button "نمودار جدید" [active] [ref=f3e212]
+          - generic [ref=f3e215]:
+            - generic [ref=f3e217]:
+              - searchbox "جستجو در جدول" [ref=f3e222]
+              - button "افزودن نمودار سفارشی" [ref=f3e223]
+            - table [ref=f3e226]:
+              - rowgroup [ref=f3e227]:
+                - row [ref=f3e228]:
+                  - columnheader [ref=f3e229]:
+                    - button "مرتب‌سازی بر اساس نام نمودار" [ref=f3e230]: نام نمودار
+                  - columnheader [ref=f3e231]:
+                    - button "مرتب‌سازی بر اساس نوع" [ref=f3e232]: نوع
+                  - columnheader [ref=f3e233]:
+                    - button "مرتب‌سازی بر اساس منبع داده" [ref=f3e234]: منبع داده
+                  - columnheader [ref=f3e235]:
+                    - button "مرتب‌سازی بر اساس بازه زمانی" [ref=f3e236]: بازه زمانی
+                  - columnheader [ref=f3e237]:
+                    - button "مرتب‌سازی بر اساس تاریخ ایجاد" [ref=f3e238]: تاریخ ایجاد
+                  - columnheader "عملیات" [ref=f3e239]
+              - rowgroup [ref=f3e240]:
+                - row [ref=f3e241]:
+                  - cell "هیچ موردی یافت نشد" [ref=f3e242]
+            - generic [ref=f3e243]:
+              - generic [ref=f3e244]: صفحه‌ای وجود ندارد
+              - generic [ref=f3e245]:
+                - button "صفحه قبلی" [disabled]
+                - button "صفحه بعدی" [disabled]
+          - generic [ref=f3e301]:
+            - generic [ref=f3e302]:
+              - heading "ساخت نمودار سفارشی" [level=2] [ref=f3e303]
+              - button [ref=f3e304]
+            - generic [ref=f3e307]:
+              - generic [ref=f3e308]:
+                - generic [ref=f3e309]: نام نمودار
+                - textbox [ref=f3e310]
+              - generic [ref=f3e311]:
+                - generic [ref=f3e312]: نوع نمودار
+                - combobox [ref=f3e313]:
+                  - option "خطی" [selected]
+                  - option "ستونی"
+                  - option "دایره‌ای"
+                  - option "دایره‌ای توخالی"
+              - generic [ref=f3e314]:
+                - generic [ref=f3e315]: منبع داده
+                - combobox [ref=f3e316]:
+                  - option "نوبت‌ها" [selected]
+                  - option "سفارشات"
+                  - option "موجودی انبار"
+              - generic [ref=f3e317]:
+                - generic [ref=f3e318]: فیلد محور X
+                - combobox [ref=f3e319]:
+                  - option "id" [selected]
+                  - option "booking_date"
+                  - option "status"
+                  - option "created_at"
+              - generic [ref=f3e320]:
+                - generic [ref=f3e321]: فیلد محور Y
+                - combobox [ref=f3e322]:
+                  - option "id" [selected]
+                  - option "booking_date"
+                  - option "status"
+                  - option "created_at"
+              - generic [ref=f3e323]:
+                - generic [ref=f3e324]: تجمیع
+                - combobox [ref=f3e325]:
+                  - option "count" [selected]
+              - generic [ref=f3e326]:
+                - generic [ref=f3e327]: بازه زمانی
+                - combobox [ref=f3e328]:
+                  - option "7 روز اخیر" [selected]
+                  - option "30 روز اخیر"
+                  - option "90 روز اخیر"
+                  - option "محدود شده"
+              - generic [ref=f3e329]:
+                - button "انصراف" [ref=f3e330]
+                - button "ذخیره" [ref=f3e331]
+  - contentinfo [ref=f3e50]:
+    - generic [ref=f3e51]:
+      - generic [ref=f3e52]:
+        - link "باران کلینیک دام‌های کوچک باران کلینیک دام‌های کوچک باران" [ref=f3e53] [cursor=pointer]:
+          - /url: "#top"
+          - img "باران کلینیک دام‌های کوچک" [ref=f3e54]
+          - generic [ref=f3e55]:
+            - generic [ref=f3e56]: باران
+            - generic [ref=f3e57]: کلینیک دام‌های کوچک باران
+        - paragraph [ref=f3e58]: درمان • شناسنامه سلامت • شستشو و اصلاح حرفه‌ای • پت‌شاپ
+        - list [ref=f3e59]:
+          - listitem [ref=f3e60]:
+            - link "اینستاگرام" [ref=f3e61] [cursor=pointer]:
+              - /url: https://www.instagram.com/baran_clinic_petshop/
+          - listitem [ref=f3e65]:
+            - link "ترددز" [ref=f3e66] [cursor=pointer]:
+              - /url: https://www.threads.com/@baran_clinic_petshop/
+      - navigation "دسترسی سریع" [ref=f3e69]:
+        - heading "دسترسی سریع" [level=2] [ref=f3e70]
+        - list [ref=f3e71]:
+          - listitem [ref=f3e72]:
+            - link "خانه" [ref=f3e73] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f3e74]:
+            - link "خدمات" [ref=f3e75] [cursor=pointer]:
+              - /url: /services
+          - listitem [ref=f3e76]:
+            - link "بیماری‌های شایع" [ref=f3e77] [cursor=pointer]:
+              - /url: /common-diseases
+          - listitem [ref=f3e78]:
+            - link "پزشکان" [ref=f3e79] [cursor=pointer]:
+              - /url: /doctors
+          - listitem [ref=f3e80]:
+            - link "درباره ما" [ref=f3e81] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=f3e82]:
+            - link "تماس با ما" [ref=f3e83] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=f3e84]:
+        - heading "تماس با ما" [level=2] [ref=f3e85]
+        - list [ref=f3e86]:
+          - listitem [ref=f3e87]:
+            - generic [ref=f3e91]: مشهد، احمدآباد، بلوار بعثت، بین بلوار رضا و ابوذر غفاری، پلاک ۹۴
+          - listitem [ref=f3e92]:
+            - link "۰۵۱-۳۸۴۷-۵۳۷۷" [ref=f3e95] [cursor=pointer]:
+              - /url: tel:+985138475377
+          - listitem [ref=f3e96]:
+            - link "۰۹۱۵-۳۵۸-۸۱۶۰" [ref=f3e99] [cursor=pointer]:
+              - /url: tel:+989153588160
+            - link "واتساپ" [ref=f3e100] [cursor=pointer]:
+              - /url: https://wa.me/989153588160
+          - listitem [ref=f3e101]:
+            - link "۰۹۱۵-۹۹۰-۵۹۰۰" [ref=f3e104] [cursor=pointer]:
+              - /url: tel:+989159905900
+            - link "واتساپ" [ref=f3e105] [cursor=pointer]:
+              - /url: https://wa.me/989159905900
+          - listitem [ref=f3e106]:
+            - generic [ref=f3e110]:
+              - paragraph [ref=f3e111]: لطفاً قبل از مراجعه تماس بگیرید
+              - generic [ref=f3e112]: "شنبه تا پنج‌شنبه: ۱۰ صبح تا ۹:۳۰ شب"
+              - generic [ref=f3e113]: "جمعه: ۴ عصر تا ۹ شب"
+    - generic [ref=f3e115]:
+      - paragraph [ref=f3e116]: © ۱۴۰۵ کلینیک dam‌های کوچک باران — تمامی حقوق محفوظ است.
+      - paragraph [ref=f3e117]:
+        - text: Developed by
+        - link "Mohammad Vasi" [ref=f3e118] [cursor=pointer]:
+          - /url: https://Moahmmadvasei.ir
+      - paragraph [ref=f3e119]: ساخته‌شده با دقت و مهربانی
+  - generic [ref=f3e332]:
+    - generic [aria-hidden]:
+      - link:
+        - /url: tel:+985138475377
+        - text: تماس فوری
+      - link:
+        - /url: https://wa.me/989153588160
+        - text: واتساپ
+      - link:
+        - /url: /#appointment
+        - text: رزرو نوبت
+    - button "باز کردن دسترسی سریع تماس" [ref=f3e333] [cursor=pointer]
+  - generic [ref=f3e124] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=f3e125]
+    - generic [ref=f3e278]:
+      - button "Open issues overlay" [ref=f3e279]:
+        - generic [ref=f3e280]:
+          - generic [aria-hidden] [ref=f3e281]: "0"
+          - generic [ref=f3e282]: "1"
+        - generic [ref=f3e283]: Issue
+      - button "Collapse issues badge" [ref=f3e284]
+  - alert [ref=f3e129]

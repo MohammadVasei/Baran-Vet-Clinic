@@ -318,7 +318,7 @@
     position: fixed;
     inset: 0;
     z-index: var(--z-menu);
-    background: rgb(7 13 24 / 0.45);
+    background: var(--menu-backdrop-background);
     opacity: 0;
     transition: opacity var(--duration-normal) var(--ease-out);
   }

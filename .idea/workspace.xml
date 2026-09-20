@@ -6,6 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="4f78e6e9-660e-4b29-abd1-dec8c1acc1ea" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/products/create/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/products/create/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/products/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/products/edit/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/admin/AdminLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/AdminLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/shop/CartDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/shop/CartDrawer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/dialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/tokens/semantic.tokens.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/tokens/semantic.tokens.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-results/animal-domain-1-Logged-out-9d61e--redirected-away-from-admin-chromium/error-context.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-results/animal-domain-1-Logged-out-9d61e--redirected-away-from-admin-chromium/test-failed-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-results/animal-domain-1-Logged-out-9d61e--redirected-away-from-admin-chromium/trace.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-results/cms-admin-1-Public-pages-r-ea4c7-S-content-from-the-database-chromium/error-context.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-results/cms-admin-1-Public-pages-r-ea4c7-S-content-from-the-database-chromium/test-failed-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-results/cms-admin-1-Public-pages-r-ea4c7-S-content-from-the-database-chromium/trace.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-results/guest-buyer-Guest-buyer-end-to-end-smoke-chromium/error-context.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-results/guest-buyer-Guest-buyer-end-to-end-smoke-chromium/test-failed-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-results/guest-buyer-Guest-buyer-end-to-end-smoke-chromium/trace.zip" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,61 +41,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.3173292874704352" />
-      <entry key="MS500" value="3.3109369688077703" />
-      <entry key="S2" value="7.960300793940852" />
-      <entry key="S5" value="11.944413771796365" />
-      <entry key="S10" value="14.156138763715074" />
-      <entry key="S30" value="18.180694098784507" />
-      <entry key="S60" value="23.42054356275636" />
-      <entry key="M2" value="29.283690897303696" />
-      <entry key="M5" value="35.94091329894594" />
-      <entry key="M10" value="42.52215536867105" />
-      <entry key="M15" value="47.345680339015296" />
-      <entry key="M30" value="56.74111348526574" />
-      <entry key="H1" value="74.76659013564397" />
-      <entry key="H2" value="115.28839717414878" />
-      <entry key="H4" value="176.5497558417249" />
-      <entry key="D1" value="418.4573731682169" />
-      <entry key="W1" value="595.553691007794" />
+      <entry key="MS100" value="1.3711429602151264" />
+      <entry key="MS500" value="4.0592558615410965" />
+      <entry key="S2" value="6.601707823535667" />
+      <entry key="S5" value="7.3948209831253395" />
+      <entry key="S10" value="7.689139243363404" />
+      <entry key="S30" value="7.894479277563023" />
+      <entry key="S60" value="7.948791796627868" />
+      <entry key="M2" value="8.223143947994098" />
+      <entry key="M5" value="13.201163835841175" />
+      <entry key="M10" value="23.08183801390486" />
+      <entry key="M15" value="30.211190026799898" />
+      <entry key="M30" value="43.0088767740658" />
+      <entry key="H1" value="56.98263207539435" />
+      <entry key="H2" value="79.04391194843136" />
+      <entry key="H4" value="129.8912702463156" />
+      <entry key="D1" value="455.1149235279452" />
+      <entry key="W1" value="724.4693365595643" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="2.0092506166889258E-269" />
-      <entry key="S5" value="3.320577678073089E-108" />
-      <entry key="S10" value="1.8222452299493307E-54" />
-      <entry key="S30" value="1.2214310069293879E-18" />
-      <entry key="S60" value="1.1051836982734545E-9" />
-      <entry key="M2" value="3.3244303245420164E-5" />
-      <entry key="M5" value="0.01616913898321011" />
-      <entry key="M10" value="0.1271579292974296" />
-      <entry key="M15" value="0.2528690234442014" />
-      <entry key="M30" value="0.5028608390748186" />
-      <entry key="H1" value="0.7091323510537455" />
-      <entry key="H2" value="0.8444496657166802" />
-      <entry key="H4" value="0.9661658659362901" />
-      <entry key="D1" value="1.5896849255550671" />
-      <entry key="W1" value="1.9284419526789465" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="2.2215397161190165E-189" />
+      <entry key="M2" value="4.713321245278125E-95" />
+      <entry key="M5" value="1.8592201448812522E-38" />
+      <entry key="M10" value="1.363532230965318E-19" />
+      <entry key="M15" value="2.649172707169444E-13" />
+      <entry key="M30" value="5.147011470253797E-7" />
+      <entry key="H1" value="7.174323551035971E-4" />
+      <entry key="H2" value="0.026859665399807418" />
+      <entry key="H4" value="0.17231183409394799" />
+      <entry key="D1" value="1.1926736520970596" />
+      <entry key="W1" value="1.850885313237256" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.2663988931359103" />
-      <entry key="MS500" value="3.287812187639111" />
-      <entry key="S2" value="7.945869199960865" />
-      <entry key="S5" value="11.935348359517203" />
-      <entry key="S10" value="14.150563476817567" />
-      <entry key="S30" value="18.175775073914625" />
-      <entry key="S60" value="23.414606788736275" />
-      <entry key="M2" value="29.278516819817824" />
-      <entry key="M5" value="35.95394155269778" />
-      <entry key="M10" value="42.647252726037514" />
-      <entry key="M15" value="47.596939478628286" />
-      <entry key="M30" value="57.242959962389236" />
-      <entry key="H1" value="75.47508858879578" />
-      <entry key="H2" value="116.13242220292005" />
-      <entry key="H4" value="177.5156322100421" />
-      <entry key="D1" value="420.0469713271467" />
-      <entry key="W1" value="597.4821171598636" />
+      <entry key="MS100" value="1.3193729914866061" />
+      <entry key="MS500" value="4.029249289121583" />
+      <entry key="S2" value="6.589243346222433" />
+      <entry key="S5" value="7.389204870769654" />
+      <entry key="S10" value="7.686213728655099" />
+      <entry key="S30" value="7.893476739993346" />
+      <entry key="S60" value="7.948286645283852" />
+      <entry key="M2" value="8.222849914995834" />
+      <entry key="M5" value="13.200641407918846" />
+      <entry key="M10" value="23.081156813084064" />
+      <entry key="M15" value="30.210540156834714" />
+      <entry key="M30" value="43.00838087384955" />
+      <entry key="H1" value="56.98300982339986" />
+      <entry key="H2" value="79.07053981210663" />
+      <entry key="H4" value="130.06339686067057" />
+      <entry key="D1" value="456.3075028847458" />
+      <entry key="W1" value="726.320202266652" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -98,7 +115,6 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
@@ -112,8 +128,9 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;
+    &quot;ts.external.directory.path&quot;: &quot;/Users/mohammad/Documents/VSCode/Baran-Vet_clinic/node_modules/typescript/lib&quot;
   }
 }</component>
   <component name="RunManager" selected="npm.Next.js: server-side">
@@ -154,6 +171,8 @@
       <workItem from="1789558209817" duration="20930000" />
       <workItem from="1789590307493" duration="5000" />
       <workItem from="1789637552073" duration="2349000" />
+      <workItem from="1789812331286" duration="28678000" />
+      <workItem from="1789887076996" duration="2628000" />
     </task>
     <servers />
   </component>

@@ -94,6 +94,18 @@
   --spacing-section-lg: var(--space-24);
   --container-max: 76rem;
   --container-wide: 88rem;
+  
+  /* ---------- Overlay ---------- */
+  --overlay-background: rgb(0 0 0 / 0.8);
+  --overlay-background-hover: rgb(0 0 0 / 0.9);
+  
+  /* ---------- Menu Backdrop ---------- */
+  --menu-backdrop-background: rgb(0 0 0 / 0.45);
+  --menu-backdrop-background-hover: rgb(0 0 0 / 0.5);
+  
+  /* ---------- Sidebar Overlay ---------- */
+  --sidebar-overlay-background: rgb(0 0 0 / 0.35);
+  --sidebar-overlay-background-hover: rgb(0 0 0 / 0.4);
 }
 
 /* ============================================================
@@ -165,23 +177,35 @@
   --accent-magenta-soft: #46152F;
   --accent-magenta-fg: #F8D2E7;
 
-  /* ---------- Legacy Category Accents (mapped) ---------- */
-  --accent-yellow: #F39A32;
-  --accent-yellow-soft: #4A2D0D;
-  --accent-yellow-fg: #F7D5A3;
-
-  --accent-coral: #E43A93;
-  --accent-coral-soft: #46152F;
-  --accent-coral-fg: #F8D2E7;
-
-  --accent-green: #B0D83A;
-  --accent-green-soft: #293710;
-  --accent-green-fg: #D8F1A5;
-
-  --accent-lavender: #B699D8;
-  --accent-lavender-soft: #2F213D;
-  --accent-lavender-fg: #EDE0F8;
-}
+/* ---------- Legacy Category Accents (mapped) ---------- */
+   --accent-yellow: #F39A32;
+   --accent-yellow-soft: #4A2D0D;
+   --accent-yellow-fg: #F7D5A3;
+ 
+   --accent-coral: #E43A93;
+   --accent-coral-soft: #46152F;
+   --accent-coral-fg: #F8D2E7;
+ 
+   --accent-green: #B0D83A;
+   --accent-green-soft: #293710;
+   --accent-green-fg: #D8F1A5;
+ 
+   --accent-lavender: #B699D8;
+   --accent-lavender-soft: #2F213D;
+   --accent-lavender-fg: #EDE0F8;
+   
+   /* ---------- Overlay (dark theme) ---------- */
+   --overlay-background: rgb(0 0 0 / 0.6);
+   --overlay-background-hover: rgb(0 0 0 / 0.7);
+   
+   /* ---------- Menu Backdrop (dark theme) ---------- */
+   --menu-backdrop-background: rgb(0 0 0 / 0.35);
+   --menu-backdrop-background-hover: rgb(0 0 0 / 0.45);
+   
+   /* ---------- Sidebar Overlay (dark theme) ---------- */
+   --sidebar-overlay-background: rgb(0 0 0 / 0.25);
+   --sidebar-overlay-background-hover: rgb(0 0 0 / 0.35);
+ }
 
 /* System preference dark mode (when no explicit .light/.dark class) */
 @media (prefers-color-scheme: dark) {

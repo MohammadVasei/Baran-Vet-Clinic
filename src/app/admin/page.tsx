@@ -10,40 +10,26 @@ import {
 } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { subDays, format } from "date-fns";
+import { subDays } from "date-fns";
 import clsx from "clsx";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, ArcElement, Tooltip, Legend, Title, Filler } from "chart.js";
 import { Line, Bar, Pie } from "react-chartjs-2";
+import { supabaseClient } from "@/lib/supabase-client";
+import { CustomChartBuilderModal } from "@/components/admin/CustomChartBuilderModal";
+import { CustomChart } from "@/components/admin/CustomChart";
 
 ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  ArcElement,
-  Tooltip,
-  Legend,
-  Title,
-  Filler
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    BarElement,
+    ArcElement,
+    Tooltip,
+    Legend,
+    Title,
+    Filler
 );
-
-const formatDateAgo = (dateStr: string): string => {
-  const date = new Date(dateStr);
-  const now = new Date();
-  const diffMinutes = Math.floor((now.getTime() - date.getTime()) / 60000);
-  if (diffMinutes < 1) return "همین الان";
-  if (diffMinutes < 60) return `${diffMinutes} دقیقه پیش`;
-  const diffHours = Math.floor(diffMinutes / 60);
-  if (diffHours < 24) return `${diffHours} ساعت پیش`;
-  const diffDays = Math.floor(diffHours / 24);
-  if (diffDays < 7) return `${diffDays} روز پیش`;
-  return new Date(dateStr).toLocaleDateString("fa-IR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-};
 
 interface AlertItem {
   id: string;
@@ -53,7 +39,7 @@ interface AlertItem {
   created_at: string;
   resource: string;
   itemId: string;
-}
+};
 
 const severityColors = {
   critical: { bg: "bg-red-500/20", border: "border-red-500/30", icon: "text-red-500" },
@@ -66,6 +52,8 @@ export default function AdminDashboard() {
   const [alerts, setAlerts] = useState<AlertItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [expandedAlertId, setExpandedAlertId] = useState<string | null>(null);
+  const [showCustomChartModal, setShowCustomChartModal] = useState(false);
+  const [customCharts, setCustomCharts] = useState<any[]>([]);
 
   // Metric data
   const pendingBookingsListResult = useList({
@@ -81,7 +69,7 @@ export default function AdminDashboard() {
     sorters: [{ field: "quantity_on_hand", order: "asc" }],
     meta: {
       select:
-        "product_id,quantity_on_hand,low_stock_threshold,updated_at,products(name,price_rial,category,is_active)",
+          "product_id,quantity_on_hand,low_stock_threshold,updated_at,products(name,price_rial,category,is_active)",
     },
   });
 
@@ -156,10 +144,10 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     try {
-      const alerts: AlertItem[] = [];
+      const newAlerts: AlertItem[] = [];
 
       if (pendingCount > 0) {
-        alerts.push({
+        newAlerts.push({
           id: "1",
           title: "نوبت‌های منتظر تأیید",
           description: `${pendingCount} نوبت در انتظار بررسی`,
@@ -171,7 +159,7 @@ export default function AdminDashboard() {
       }
 
       if (lowStockCount > 0) {
-        alerts.push({
+        newAlerts.push({
           id: "2",
           title: "موجودی انبار کم",
           description: `${lowStockCount} محصول تحت حد موجودی`,
@@ -183,7 +171,7 @@ export default function AdminDashboard() {
       }
 
       if (unpaidCount > 0) {
-        alerts.push({
+        newAlerts.push({
           id: "3",
           title: "سفارشات پرداخت نشده",
           description: `${unpaidCount} سفارش مبلغ قابل دریافت`,
@@ -195,7 +183,7 @@ export default function AdminDashboard() {
       }
 
       if (todayCount >= 5) {
-        alerts.push({
+        newAlerts.push({
           id: "4",
           title: "حجم نوبت‌های امروز بالا",
           description: `${todayCount} نوبت برای امروز رزرو شده`,
@@ -206,7 +194,7 @@ export default function AdminDashboard() {
         });
       }
 
-      setAlerts(alerts.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()));
+      setAlerts(newAlerts.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()));
       setLoading(false);
     } catch (error) {
       console.error("Error fetching alerts:", error);
@@ -249,7 +237,7 @@ export default function AdminDashboard() {
     // Stock levels distribution chart
     if (lowStockResult?.data) {
       const items = lowStockResult.data;
-      const categories = ["بسیار کم", "کم", "متوسط", "بسیار", "بیش از حد"];
+      const categories = ["بسیار کم", "کم", "متوسط", "زیاد", "بیش از حد"];
       const counts = [0, 0, 0, 0, 0];
       items.forEach((item) => {
         const qty = item.quantity_on_hand ?? 0;
@@ -277,8 +265,8 @@ export default function AdminDashboard() {
               "rgb(239 68 68)",   // red-500: بسیار کم
               "rgb(245 158 11)",  // orange-500: کم
               "rgb(212 175 55)",  // yellow-500: متوسط
-              "rgb(34 197 94)",   // green-500: بسیار
-              "rgb(139 92 246)",  // blue-500: بیش از حد
+              "rgb(34 197 94)",   // green-500: زیاد
+              "rgb(139 92 246)",  // purple-500: بیش از حد
             ],
             borderColor: [
               "rgb(239 68 68)",
@@ -301,14 +289,14 @@ export default function AdminDashboard() {
       const paid = orders.filter((o) => o.status !== "pending").length;
       const unpaid = orders.filter((o) => o.status === "pending").length;
       setUnpaidChartData({
-        labels: ["پرداخت شده", "پeding"],
+        labels: ["پرداخت شده", "در انتظار پرداخت"],
         datasets: [
           {
             label: "وضعیت مالی سفارشات",
             data: [paid, unpaid],
             backgroundColor: [
               "rgb(34 197 94)",   // green-500: پرداخت شده
-              "rgb(239 68 68)",   // red-500: پending
+              "rgb(239 68 68)",   // red-500: در انتظار پرداخت
             ],
             hoverBackgroundColor: [
               "rgba(34, 197, 94, 0.8)",
@@ -320,9 +308,32 @@ export default function AdminDashboard() {
     } else {
       setUnpaidChartData(null);
     }
-}, [bookingsTrendResult?.data, lowStockResult?.data, ordersOverviewResult?.data]);
+  }, [bookingsTrendResult?.data, lowStockResult?.data, ordersOverviewResult?.data]);
 
-   const handleNavigate = (resource: string, id?: string) => {
+  // Fetch custom charts
+  useEffect(() => {
+    fetchCustomCharts();
+  }, []);
+
+const fetchCustomCharts = async () => {
+      try {
+        const { data, error } = await supabaseClient
+            .from('admin_custom_charts')
+            .select('*')
+            .eq('is_active', true)
+            .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Error fetching custom charts:', error);
+        } else {
+          setCustomCharts(data);
+        }
+      } catch (error) {
+        console.error('Error fetching custom charts:', error);
+      }
+};
+
+  const handleNavigate = (resource: string, id?: string) => {
     if (resource === "bookings") {
       if (id) navigation.show("bookings", id);
       else navigation.list("bookings");
@@ -337,24 +348,23 @@ export default function AdminDashboard() {
     setExpandedAlertId(id === expandedAlertId ? null : id);
   };
 
-  return (
-    <div className="p-4 lg:p-6">
-      <div className="min-h-screen">
-        <div className="space-y-6">
-          {/* Metric Cards Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
+return (
+        <div className="p-4 lg:p-6">
+          <div className="min-h-screen relative">
+{/* Metric Cards Row */}
+           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 mb-4">
             {/* Card 1: Pending Bookings */}
             <div
-              key="1"
-              className={clsx(
-                "rounded-xl border border-card bg-card p-4 hover:bg-primary/5 transition-colors cursor-pointer select-none",
-                pendingCount > 0 && "border-primary/30 hover:ring-2 hover:ring-primary/20"
-              )}
-              onClick={() => handleNavigate("bookings")}
-              aria-label={`نوبت‌های pending: ${pendingCount}`}
-              tabIndex={0}
-              role="button"
-              onKeyDown={(e) => e.key === "Enter" && handleNavigate("bookings")}
+                key="1"
+                className={clsx(
+                    "rounded-xl border border-card bg-card p-4 hover:bg-primary/5 transition-colors cursor-pointer select-none",
+                    pendingCount > 0 && "border-primary/30 hover:ring-2 hover:ring-primary/20"
+                )}
+                onClick={() => handleNavigate("bookings")}
+                aria-label={`نوبت‌های pending: ${pendingCount}`}
+                tabIndex={0}
+                role="button"
+                onKeyDown={(e) => e.key === "Enter" && handleNavigate("bookings")}
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -374,16 +384,16 @@ export default function AdminDashboard() {
 
             {/* Card 2: Low Stock */}
             <div
-              key="2"
-              className={clsx(
-                "rounded-xl border border-card bg-card p-4 hover:bg-primary/5 transition-colors cursor-pointer select-none",
-                lowStockCount > 0 && "border-primary/30 hover:ring-2 hover:ring-primary/20"
-              )}
-              onClick={() => handleNavigate("stock-levels")}
-              aria-label={`موجودی کم: ${lowStockCount}`}
-              tabIndex={0}
-              role="button"
-              onKeyDown={(e) => e.key === "Enter" && handleNavigate("stock-levels")}
+                key="2"
+                className={clsx(
+                    "rounded-xl border border-card bg-card p-4 hover:bg-primary/5 transition-colors cursor-pointer select-none",
+                    lowStockCount > 0 && "border-primary/30 hover:ring-2 hover:ring-primary/20"
+                )}
+                onClick={() => handleNavigate("stock-levels")}
+                aria-label={`موجودی کم: ${lowStockCount}`}
+                tabIndex={0}
+                role="button"
+                onKeyDown={(e) => e.key === "Enter" && handleNavigate("stock-levels")}
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -403,16 +413,16 @@ export default function AdminDashboard() {
 
             {/* Card 3: Unpaid Orders */}
             <div
-              key="3"
-              className={clsx(
-                "rounded-xl border border-card bg-card p-4 hover:bg-primary/5 transition-colors cursor-pointer select-none",
-                unpaidCount > 0 && "border-primary/30 hover:ring-2 hover:ring-primary/20"
-              )}
-              onClick={() => handleNavigate("orders")}
-              aria-label={`سفارشات پرداخت نشده: ${unpaidCount}`}
-              tabIndex={0}
-              role="button"
-              onKeyDown={(e) => e.key === "Enter" && handleNavigate("orders")}
+                key="3"
+                className={clsx(
+                    "rounded-xl border border-card bg-card p-4 hover:bg-primary/5 transition-colors cursor-pointer select-none",
+                    unpaidCount > 0 && "border-primary/30 hover:ring-2 hover:ring-primary/20"
+                )}
+                onClick={() => handleNavigate("orders")}
+                aria-label={`سفارشات پرداخت نشده: ${unpaidCount}`}
+                tabIndex={0}
+                role="button"
+                onKeyDown={(e) => e.key === "Enter" && handleNavigate("orders")}
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -432,16 +442,16 @@ export default function AdminDashboard() {
 
             {/* Card 4: Today's Bookings */}
             <div
-              key="4"
-              className={clsx(
-                "rounded-xl border border-card bg-card p-4 hover:bg-primary/5 transition-colors cursor-pointer select-none",
-                todayCount > 0 && "border-primary/30 hover:ring-2 hover:ring-primary/20"
-              )}
-              onClick={() => handleNavigate("bookings")}
-              aria-label={`نوبت‌های امروز: ${todayCount}`}
-              tabIndex={0}
-              role="button"
-              onKeyDown={(e) => e.key === "Enter" && handleNavigate("bookings")}
+                key="4"
+                className={clsx(
+                    "rounded-xl border border-card bg-card p-4 hover:bg-primary/5 transition-colors cursor-pointer select-none",
+                    todayCount > 0 && "border-primary/30 hover:ring-2 hover:ring-primary/20"
+                )}
+                onClick={() => handleNavigate("bookings")}
+                aria-label={`نوبت‌های امروز: ${todayCount}`}
+                tabIndex={0}
+                role="button"
+                onKeyDown={(e) => e.key === "Enter" && handleNavigate("bookings")}
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -460,31 +470,32 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          {/* Charts Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+{/* Charts Section */}
+           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-4">
+            {/* Default charts */}
             <div className="rounded-xl border bg-card p-4">
               <h3 className="font-medium text-muted-foreground mb-3">روند نوبت‌های هفته جاری</h3>
               <div className="h-48">
                 {bookingsChartData ? (
-                  <Line data={bookingsChartData} options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                      legend: { display: false },
-                      tooltip: { enabled: true, mode: 'index', callbacks: {
-                        label: ({ raw }) => `${raw} نوبت`,
-                        title: (context) => `روز ${context[0].label}`
-                      }},
-                    },
-                    scales: {
-                      y: { display: false, grid: { display: false } },
-                      x: { display: false, grid: { display: false } },
-                    },
-                  }} />
+                    <Line data={bookingsChartData} options={{
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: true, mode: 'index', callbacks: {
+                            label: ({ raw }) => `${raw} نوبت`,
+                            title: (context) => `روز ${context[0].label}`
+                          }},
+                      },
+                      scales: {
+                        y: { display: false, grid: { display: false } },
+                        x: { display: false, grid: { display: false } },
+                      },
+                    }} />
                 ) : (
-                  <div className="h-full flex items-center justify-center text-muted-foreground">
-                    می‌آماده می‌شود...
-                  </div>
+                    <div className="h-full flex items-center justify-center text-muted-foreground">
+                      می‌آماده می‌شود...
+                    </div>
                 )}
               </div>
             </div>
@@ -493,24 +504,24 @@ export default function AdminDashboard() {
               <h3 className="font-medium text-muted-foreground mb-3">تحلیل موجودی انبار</h3>
               <div className="h-48">
                 {stockChartData ? (
-                  <Bar data={stockChartData} options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                      legend: { display: false },
-                      tooltip: { enabled: true, callbacks: {
-                        label: ({ raw }) => `${raw} محصول`
-                      }},
-                    },
-                    scales: {
-                      y: { display: false, grid: { display: false } },
-                      x: { display: false, grid: { display: false } },
-                    },
-                  }} />
+                    <Bar data={stockChartData} options={{
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: true, callbacks: {
+                            label: ({ raw }) => `${raw} محصول`
+                          }},
+                      },
+                      scales: {
+                        y: { display: false, grid: { display: false } },
+                        x: { display: false, grid: { display: false } },
+                      },
+                    }} />
                 ) : (
-                  <div className="h-full flex items-center justify-center text-muted-foreground">
-                    می‌آماده می‌شود...
-                  </div>
+                    <div className="h-full flex items-center justify-center text-muted-foreground">
+                      می‌آماده می‌شود...
+                    </div>
                 )}
               </div>
             </div>
@@ -519,23 +530,33 @@ export default function AdminDashboard() {
               <h3 className="font-medium text-muted-foreground mb-3">تحلیل وضعیت مالی سفارشات</h3>
               <div className="h-48">
                 {unpaidChartData ? (
-                  <Pie data={unpaidChartData} options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                      legend: { position: 'bottom' },
-                      tooltip: { enabled: true, callbacks: {
-                        label: ({ raw }) => `${raw}% سفارشات`
-                      }},
-                    },
-                  }} />
+                    <Pie data={unpaidChartData} options={{
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: { enabled: true, callbacks: {
+                            label: ({ raw }) => `${raw} سفارش`
+                          }},
+                      },
+                    }} />
                 ) : (
-                  <div className="h-full flex items-center justify-center text-muted-foreground">
-                    می‌آماده می‌شود...
-                  </div>
+                    <div className="h-full flex items-center justify-center text-muted-foreground">
+                      می‌آماده می‌شود...
+                    </div>
                 )}
               </div>
             </div>
+
+            {/* Custom charts */}
+            {customCharts.map((chart) => (
+                <div key={chart.id} className="rounded-xl border bg-card p-4">
+                  <h3 className="font-medium text-muted-foreground mb-3">{chart.chart_name}</h3>
+                  <div className="h-48">
+                    <CustomChart chart={chart} />
+                  </div>
+                </div>
+            ))}
           </div>
 
           {/* Alerts Feed */}
@@ -545,80 +566,104 @@ export default function AdminDashboard() {
               <span className="text-xs text-muted-foreground">مشاهده همه({alerts.length})</span>
             </div>
             {loading ? (
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto my-6" />
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto my-6" />
             ) : alerts.length === 0 ? (
-              <div className="p-4 text-center text-muted-foreground rounded-app">
-                هیچ هشدار فعال وجود ندارد
-              </div>
+                <div className="p-4 text-center text-muted-foreground rounded-app">
+                  هیچ هشدار فعال وجود ندارد
+                </div>
             ) : (
-              <div className="space-y-3">
-                {alerts.map((alert) => (
-                  <div
-                    key={alert.id}
-                    onClick={() => toggleAlertExpand(alert.id)}
-                    className={clsx(
-                      "rounded-xl border p-4 transition-colors cursor-pointer hover:bg-primary/5",
-                      alert.severity === "critical" && "border-red-500/20",
-                      alert.severity === "warning" && "border-yellow-500/20",
-                      alert.severity === "info" && "border-blue-500/20"
-                    )}
-                    aria-label={alert.title}
-                    tabIndex={0}
-                    role="button"
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        toggleAlertExpand(alert.id);
+                <div className="space-y-3">
+                  {alerts.map((alert) => (
+                      <div
+                          key={alert.id}
+                          onClick={() => toggleAlertExpand(alert.id)}
+                          className={clsx(
+                              "rounded-xl border p-4 transition-colors cursor-pointer hover:bg-primary/5",
+                              alert.severity === "critical" && "border-red-500/20",
+                              alert.severity === "warning" && "border-yellow-500/20",
+                              alert.severity === "info" && "border-blue-500/20"
+                          )}
+                          aria-label={alert.title}
+                          tabIndex={0}
+                          role="button"
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              toggleAlertExpand(alert.id);
+                            }
+                          }}
+                      >
+                        <div className="flex items-start gap-4">
+                          <div className={clsx(
+                              "w-10 h-10 rounded flex items-center justify-center",
+                              severityColors[alert.severity].bg,
+                              severityColors[alert.severity].icon
+                          )}>
+                            {alert.severity === "critical"
+                                ? <AlertCircleIcon className="size-4" />
+                                : alert.severity === "warning"
+                                    ? <FilterIcon className="size-4" />
+                                    : <CalendarIcon className="size-4" />}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium truncate">{alert.title}</p>
+                            <p className="text-xs text-muted-foreground truncate">{alert.description}</p>
+                          </div>
+                          <div className="mt-1 flex-shrink-0">
+                            <ArrowIcon
+                                className={clsx(
+                                    "size-4",
+                                    expandedAlertId === alert.id && "rotate-180"
+                                )}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  toggleAlertExpand(alert.id);
+                                }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                  ))}
+                </div>
+            )}
+            <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setAlerts([]);
+                  alert("همه هشدارها با موفقیت پاک شد");
+                }}
+                className="mt-2 w-full"
+            >
+              پاک کردن
+            </Button>
+
+            {/* Custom Chart Builder Modal */}
+            {showCustomChartModal && (
+                <CustomChartBuilderModal
+                    onClose={() => setShowCustomChartModal(false)}
+                    onSave={async (newChart) => {
+                      try {
+                        const { data, error } = await supabaseClient
+                            .from('admin_custom_charts')
+                            .insert([newChart])
+                            .select()
+                            .single();
+
+                        if (error) throw error;
+
+                        // Optimistically add the new chart to the state
+                        setCustomCharts(prev => [data, ...prev]);
+                        setShowCustomChartModal(false);
+                      } catch (error) {
+                        console.error('Error saving custom chart:', error);
+                        alert('خطا در ذخیره نمودار سفارشی');
                       }
                     }}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className={clsx(
-                        "w-10 h-10 rounded flex items-center justify-center",
-                        severityColors[alert.severity].bg,
-                        severityColors[alert.severity].icon
-      )}>
-                        {alert.severity === "critical"
-                          ? <AlertCircleIcon className="size-4" />
-                          : alert.severity === "warning"
-                          ? <FilterIcon className="size-4" />
-                          : <CalendarIcon className="size-4" />}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium truncate">{alert.title}</p>
-                        <p className="text-xs text-muted-foreground truncate">{alert.description}</p>
-                      </div>
-                      <div className="mt-1 flex-shrink-0">
-                        <ArrowIcon
-                          className={clsx(
-                            "size-4",
-                            expandedAlertId === alert.id && "rotate-180"
-                          )}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleAlertExpand(alert.id);
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-<Button
-  variant="outline"
-  size="sm"
-  onClick={() => {
-    setAlerts([]);
-    alert("همه هشدارها با موفقیت پاک شد");
-  }}
-  className="mt-2 w-full"
->
-  پاک کردن
-</Button>
-              </div>
+                />
             )}
           </div>
         </div>
       </div>
-    </div>
   );
 }

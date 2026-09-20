@@ -1,0 +1,66 @@
+- generic:
+  - generic [active]:
+    - generic [ref=f8e3]:
+      - generic [ref=f8e4]:
+        - navigation [ref=f8e6]:
+          - button [disabled] [ref=f8e7]:
+            - img "previous" [ref=f8e8]
+          - generic [ref=f8e10]:
+            - generic [ref=f8e11]: 1/
+            - generic [ref=f8e12]: "1"
+          - button [disabled] [ref=f8e13]:
+            - img "next" [ref=f8e14]
+        - link "Next.js 16.3.1 (stale) Turbopack" [ref=f8e17] [cursor=pointer]:
+          - /url: https://nextjs.org/docs/messages/version-staleness
+          - generic "There is a newer version (16.3.5) available, upgrade recommended!" [ref=f8e20]: Next.js 16.3.1 (stale)
+          - generic [ref=f8e21]: Turbopack
+      - dialog "Build Error" [ref=f8e23]:
+        - generic [ref=f8e26]:
+          - generic [ref=f8e28]:
+            - generic [ref=f8e29]:
+              - generic [ref=f8e30]: Build Error
+              - generic [ref=f8e32]:
+                - button "Copy Error Info" [ref=f8e33] [cursor=pointer]
+                - button "No related documentation found" [disabled] [ref=f8e36]
+                - button "Attach Node.js inspector" [ref=f8e39] [cursor=pointer]
+            - generic [ref=f8e48]: await isn't allowed in non-async function
+          - generic [ref=f8e51]:
+            - generic [ref=f8e53]:
+              - generic [ref=f8e58]: ./src/app/admin/custom-charts/page.tsx (62:23)
+              - button "Open in editor" [ref=f8e59] [cursor=pointer]
+            - generic [ref=f8e64]:
+              - text: Error
+              - generic [ref=f8e65]: ": await isn't allowed in non-async function"
+              - generic [ref=f8e66]: 60 |
+              - text: if
+              - generic [ref=f8e67]: (!userId)
+              - text: throw new Error(
+              - generic [ref=f8e68]: "'User not authenticated'"
+              - generic [ref=f8e69]: );
+              - generic [ref=f8e70]: 61 |
+              - text: ">"
+              - generic [ref=f8e71]: 62 |
+              - text: const
+              - generic [ref=f8e72]: "{ error } ="
+              - text: await
+              - generic [ref=f8e73]: supabaseClient
+              - generic [ref=f8e74]: "|"
+              - text: ^^^^^
+              - generic [ref=f8e75]: 63 |
+              - generic [ref=f8e76]: .
+              - text: from('admin_custom_charts'
+              - generic [ref=f8e77]: )
+              - generic [ref=f8e78]: 64 |
+              - generic [ref=f8e79]: ".update({ is_active: !currentIsActive })"
+              - generic [ref=f8e80]: 65 |
+              - generic [ref=f8e81]: .eq(
+              - text: "'id'"
+              - generic [ref=f8e82]: ", id); Parsing ecmascript source code failed Import traces: Client Component Browser: ./src/app/admin/custom-charts/page.tsx [Client Component Browser] ./src/app/admin/custom-charts/page.tsx [Server Component] Client Component SSR: ./src/app/admin/custom-charts/page.tsx [Client Component SSR] ./src/app/admin/custom-charts/page.tsx [Server Component]"
+    - generic [ref=f8e87] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=f8e88]
+      - button "Open issues overlay" [ref=f8e93]:
+        - generic [ref=f8e94]:
+          - generic [aria-hidden] [ref=f8e95]: "0"
+          - generic [ref=f8e96]: "1"
+        - generic [ref=f8e97]: Issue
+  - alert [ref=f8e98]

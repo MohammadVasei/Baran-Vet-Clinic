@@ -67,11 +67,11 @@ export function CartDrawer() {
 
   return (
     <>
-      <div
-        className="fixed inset-0 z-overlay bg-black/40 backdrop-blur-sm"
-        onClick={closeCart}
-        aria-hidden="true"
-      />
+<div
+         className="fixed inset-0 z-overlay bg-[var(--overlay-background)] backdrop-blur-sm"
+         onClick={closeCart}
+         aria-hidden="true"
+       />
       <div
         ref={drawerRef}
         className="fixed right-0 top-0 z-overlay h-full w-full max-w-sm lg:max-w-md bg-background shadow-2xl flex flex-col"

@@ -1,0 +1,164 @@
+- generic [active] [ref=f6e1]:
+  - link "به محتوای اصلی برو" [ref=f6e2] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=f6e4]:
+    - img "باران کلینیک دام‌های کوچک" [ref=f6e5]
+    - generic [ref=f6e6]:
+      - paragraph [ref=f6e7]: باران
+      - paragraph [ref=f6e8]: کلینیک دامپزشکی
+  - banner [ref=f6e10]:
+    - generic [ref=f6e11]:
+      - link "کلینیک دام‌های کوچک باران — صفحه اصلی" [ref=f6e12] [cursor=pointer]:
+        - /url: /
+        - img "باران کلینیک دام‌های کوچک" [ref=f6e13]
+        - generic [ref=f6e14]:
+          - generic [ref=f6e15]: باران
+          - generic [ref=f6e16]: کلینیک دام‌های کوچک باران
+      - generic [ref=f6e17]:
+        - link "حساب کاربری" [ref=f6e19] [cursor=pointer]:
+          - /url: /account
+        - button "باز کردن منوی موبایل" [ref=f6e23] [cursor=pointer]
+    - dialog:
+      - generic:
+        - generic: باران
+        - button
+      - list:
+        - listitem:
+          - link:
+            - /url: /
+            - text: خانه
+        - listitem:
+          - link:
+            - /url: /services
+            - text: خدمات
+        - listitem:
+          - link:
+            - /url: /services/petshop
+            - text: پت‌شاپ
+        - listitem:
+          - link:
+            - /url: /doctors
+            - text: پزشکان
+        - listitem:
+          - link:
+            - /url: /common-diseases
+            - text: بیماری‌های شایع
+        - listitem:
+          - link:
+            - /url: /about
+            - text: درباره ما
+        - listitem:
+          - link:
+            - /url: /contact
+            - text: تماس با ما
+      - generic:
+        - link:
+          - /url: /account
+          - text: حساب کاربری
+      - generic:
+        - generic:
+          - generic:
+            - generic: حالت نمایش
+            - button:
+              - generic: حالت تیره
+          - generic:
+            - generic: سبد خرید
+            - button
+        - link:
+          - /url: /#appointment
+          - text: تماس و نوبت
+        - link:
+          - /url: tel:+985138475377
+          - generic: ۰۵۱-۳۸۴۷-۵۳۷۷
+        - link:
+          - /url: https://wa.me/989153588160
+          - generic: ۰۹۱۵-۳۵۸-۸۱۶۰ (واتساپ)
+  - main [ref=f6e26]
+  - contentinfo [ref=f6e28]:
+    - generic [ref=f6e29]:
+      - generic [ref=f6e30]:
+        - link "باران کلینیک دام‌های کوچک باران کلینیک دام‌های کوچک باران" [ref=f6e31] [cursor=pointer]:
+          - /url: "#top"
+          - img "باران کلینیک دام‌های کوچک" [ref=f6e32]
+          - generic [ref=f6e33]:
+            - generic [ref=f6e34]: باران
+            - generic [ref=f6e35]: کلینیک دام‌های کوچک باران
+        - paragraph [ref=f6e36]: درمان • شناسنامه سلامت • شستشو و اصلاح حرفه‌ای • پت‌شاپ
+        - list [ref=f6e37]:
+          - listitem [ref=f6e38]:
+            - link "اینستاگرام" [ref=f6e39] [cursor=pointer]:
+              - /url: https://www.instagram.com/baran_clinic_petshop/
+          - listitem [ref=f6e43]:
+            - link "ترددز" [ref=f6e44] [cursor=pointer]:
+              - /url: https://www.threads.com/@baran_clinic_petshop/
+      - navigation "دسترسی سریع" [ref=f6e47]:
+        - heading "دسترسی سریع" [level=2] [ref=f6e48]
+        - list [ref=f6e49]:
+          - listitem [ref=f6e50]:
+            - link "خانه" [ref=f6e51] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f6e52]:
+            - link "خدمات" [ref=f6e53] [cursor=pointer]:
+              - /url: /services
+          - listitem [ref=f6e54]:
+            - link "بیماری‌های شایع" [ref=f6e55] [cursor=pointer]:
+              - /url: /common-diseases
+          - listitem [ref=f6e56]:
+            - link "پزشکان" [ref=f6e57] [cursor=pointer]:
+              - /url: /doctors
+          - listitem [ref=f6e58]:
+            - link "درباره ما" [ref=f6e59] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=f6e60]:
+            - link "تماس با ما" [ref=f6e61] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=f6e62]:
+        - heading "تماس با ما" [level=2] [ref=f6e63]
+        - list [ref=f6e64]:
+          - listitem [ref=f6e65]:
+            - generic [ref=f6e69]: مشهد، احمدآباد، بلوار بعثت، بین بلوار رضا و ابوذر غفاری، پلاک ۹۴
+          - listitem [ref=f6e70]:
+            - link "۰۵۱-۳۸۴۷-۵۳۷۷" [ref=f6e73] [cursor=pointer]:
+              - /url: tel:+985138475377
+          - listitem [ref=f6e74]:
+            - link "۰۹۱۵-۳۵۸-۸۱۶۰" [ref=f6e77] [cursor=pointer]:
+              - /url: tel:+989153588160
+            - link "واتساپ" [ref=f6e78] [cursor=pointer]:
+              - /url: https://wa.me/989153588160
+          - listitem [ref=f6e79]:
+            - link "۰۹۱۵-۹۹۰-۵۹۰۰" [ref=f6e82] [cursor=pointer]:
+              - /url: tel:+989159905900
+            - link "واتساپ" [ref=f6e83] [cursor=pointer]:
+              - /url: https://wa.me/989159905900
+          - listitem [ref=f6e84]:
+            - generic [ref=f6e88]:
+              - paragraph [ref=f6e89]: لطفاً قبل از مراجعه تماس بگیرید
+              - generic [ref=f6e90]: "شنبه تا پنج‌شنبه: ۱۰ صبح تا ۹:۳۰ شب"
+              - generic [ref=f6e91]: "جمعه: ۴ عصر تا ۹ شب"
+    - generic [ref=f6e93]:
+      - paragraph [ref=f6e94]: © ۱۴۰۵ کلینیک dam‌های کوچک باران — تمامی حقوق محفوظ است.
+      - paragraph [ref=f6e95]:
+        - text: Developed by
+        - link "Mohammad Vasi" [ref=f6e96] [cursor=pointer]:
+          - /url: https://Moahmmadvasei.ir
+      - paragraph [ref=f6e97]: ساخته‌شده با دقت و مهربانی
+  - generic [ref=f6e98]:
+    - generic [aria-hidden]:
+      - link:
+        - /url: tel:+985138475377
+        - text: تماس فوری
+      - link:
+        - /url: https://wa.me/989153588160
+        - text: واتساپ
+      - link:
+        - /url: /#appointment
+        - text: رزرو نوبت
+    - button "باز کردن دسترسی سریع تماس" [ref=f6e99] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=f6e107] [cursor=pointer]:
+    - generic [ref=f6e110]:
+      - text: Compiling
+      - generic [ref=f6e111]:
+        - generic [ref=f6e112]: .
+        - generic [ref=f6e113]: .
+        - generic [ref=f6e114]: .
+  - alert [ref=f6e115]

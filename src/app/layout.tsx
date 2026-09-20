@@ -64,6 +64,8 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/baran-logo.svg" />
       </head>
       <body className="min-h-full flex flex-col">
         {/* Skip link for keyboard navigation */}

@@ -211,7 +211,7 @@ export default function ProductCreatePage() {
                     <button
                       type="button"
                       onClick={() => removeImage(idx)}
-                      className="absolute top-1 left-1 p-1 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                      className="absolute top-1 left-1 p-1 rounded-full bg-destructive/20 text-destructive hover:bg-destructive/30 transition-colors"
                       aria-label="حذف تصویر"
                     >
                       <XIcon className="size-3" />

@@ -40,14 +40,15 @@ const NAV_GROUPS = [
       { name: 'medical_items', label: 'واکسن‌ها و درمان‌ها', href: '/admin/medical-items' },
     ],
   },
-  {
-    key: 'content',
-    label: 'محتوا و تنظیمات',
-    items: [
-      { name: 'testimonials', label: 'بازخوردها', href: '/admin/testimonials' },
-      { name: 'site_content', label: 'اطلاعات کلینیک', href: '/admin/site-content' },
-    ],
-  },
+{
+      key: 'content',
+      label: 'محتوا و تنظیمات',
+      items: [
+        { name: 'custom_charts', label: 'نمودار سفارشی', href: '/admin/custom-charts' },
+        { name: 'testimonials', label: 'بازخوردها', href: '/admin/testimonials' },
+        { name: 'site_content', label: 'اطلاعات کلینیک', href: '/admin/site-content' },
+      ],
+    },
 ] as const;
 
 type NavItemName = typeof NAV_GROUPS[number]['items'][number]['name'];
@@ -77,26 +78,28 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
    const animalCanList = useCan({ resource: 'animals', action: 'list' });
    const speciesCanList = useCan({ resource: 'species', action: 'list' });
    const breedCanList = useCan({ resource: 'breeds', action: 'list' });
-   const vaccineCanList = useCan({ resource: 'vaccines', action: 'list' });
-   const treatmentCanList = useCan({ resource: 'treatment_types', action: 'list' });
-   const reminderCanList = useCan({ resource: 'reminders', action: 'list' });
+const vaccineCanList = useCan({ resource: 'vaccines', action: 'list' });
+    const treatmentCanList = useCan({ resource: 'treatment_types', action: 'list' });
+    const reminderCanList = useCan({ resource: 'reminders', action: 'list' });
+    const customChartsCanList = useCan({ resource: 'admin_custom_charts', action: 'list' });
 
 const canMap: Record<NavItemName, boolean> = {
-  services: !!serviceCanList.data,
-  doctors: !!doctorCanList.data,
-  orders: !!orderCanList.data,
-  bookings: !!bookingCanList.data,
-  'availability-blocks': !!availabilityBlockCanList.data,
-  products: !!productCanList.data,
-  stock_levels: !!stockLevelCanList.data,
-  diseases: !!diseaseCanList.data,
-  testimonials: !!testimonialCanList.data,
-  site_content: !!siteContentCanList.data,
-  animals: !!animalCanList.data,
-  medical_items: !!(vaccineCanList.data || treatmentCanList.data),
-  reminders: !!reminderCanList.data,
-  'species-and-breeds': !!speciesCanList.data && !!breedCanList.data,
-};
+   services: !!serviceCanList.data,
+   doctors: !!doctorCanList.data,
+   orders: !!orderCanList.data,
+   bookings: !!bookingCanList.data,
+   'availability-blocks': !!availabilityBlockCanList.data,
+   products: !!productCanList.data,
+   stock_levels: !!stockLevelCanList.data,
+   diseases: !!diseaseCanList.data,
+   testimonials: !!testimonialCanList.data,
+   site_content: !!siteContentCanList.data,
+   animals: !!animalCanList.data,
+   medical_items: !!(vaccineCanList.data || treatmentCanList.data),
+   reminders: !!reminderCanList.data,
+   custom_charts: !!customChartsCanList.data,
+   'species-and-breeds': !!speciesCanList.data && !!breedCanList.data,
+ };
 
   useGSAP(
     () => {
@@ -138,9 +141,9 @@ const canMap: Record<NavItemName, boolean> = {
     <div className="min-h-screen bg-background flex" dir="rtl">
       {/* Mobile sidebar overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-black/50 lg:hidden transition-opacity ${
-          sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+className={`fixed inset-0 z-40 bg-[var(--sidebar-overlay-background)] lg:hidden transition-opacity ${
+           sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+         }`}
         onClick={() => setSidebarOpen(false)}
         aria-hidden="true"
       />
