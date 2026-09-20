@@ -87,7 +87,7 @@ export default function ServiceCreatePage() {
           <Label>پزشک مسئول</Label>
           <Select value={doctorId} onValueChange={setDoctorId}>
             <SelectTrigger className="mt-2"><SelectValue placeholder="پزشک را انتخاب کنید" /></SelectTrigger>
-            <SelectContent>{doctors.map((doctor) => <SelectItem key={doctor.value} value={doctor.value}>{doctor.label} {doctor.role && `- ${doctor.role}`}</SelectItem>)}</SelectContent>
+            <SelectContent>{doctors.map((doctor) => <SelectItem key={doctor.value} value={doctor.value}>{doctor.label} { (doctor as { role?: string }).role && `- ${ (doctor as { role?: string }).role }` }</SelectItem>)}</SelectContent>
           </Select>
         </div>
         <label className="flex items-center gap-2">

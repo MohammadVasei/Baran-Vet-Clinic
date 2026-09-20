@@ -74,11 +74,11 @@ export function RecordTreatmentForm({ animalId }: RecordTreatmentFormProps) {
   });
 
 const { options: doctors } = useSelect({
-  resource: 'doctors',
-  optionLabel: 'name',
-  optionValue: 'id',
-  filters: [{ field: 'is_active', operator: 'eq', value: true }],
-  meta: { select: 'id,name,role' },
+   resource: 'doctors',
+   optionLabel: 'name',
+   optionValue: 'id',
+   filters: [{ field: 'is_active', operator: 'eq', value: true }],
+   meta: { select: 'id,name,role' },
 });
 
   const [definitionType, setDefinitionType] = useState<'vaccine' | 'treatment'>('vaccine');
@@ -237,7 +237,7 @@ const { options: doctors } = useSelect({
             <Select value={doctorId} onValueChange={setDoctorId}>
               <SelectTrigger className="mt-2"><SelectValue placeholder="انتخاب پزشک..." /></SelectTrigger>
               <SelectContent>
-                {doctors.map((d) => <SelectItem key={d.value} value={d.value}>{d.label} {d.role && `- ${d.role}`}</SelectItem>)}
+                {doctors.map((d) => <SelectItem key={d.value} value={d.value}>{d.label} { (d as { role?: string }).role && `- ${ (d as { role?: string }).role }` }</SelectItem>)}
               </SelectContent>
             </Select>
           </div>

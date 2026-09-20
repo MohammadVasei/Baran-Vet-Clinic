@@ -88,9 +88,11 @@ meta: {
       accessorKey: 'doctor' as keyof TreatmentHistoryRecord,
       header: 'پزشک',
 cellWithMeta: ({ original }: { original: TreatmentHistoryRecord }) => (
-         <span>{original.doctor?.name || '—'}</span>
-         {original.doctor?.role && <span className="ml-1 text-xs text-muted-foreground">({original.doctor.role})</span>}
-       ),
+          <>
+            <span>{original.doctor?.name || '—'}</span>
+            {original.doctor?.role && <span className="ml-1 text-xs text-muted-foreground">({original.doctor.role})</span>}
+          </>
+        ),
     },
     {
       accessorKey: 'reminders' as keyof TreatmentHistoryRecord,
