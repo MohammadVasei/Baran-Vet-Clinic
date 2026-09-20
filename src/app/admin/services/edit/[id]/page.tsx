@@ -140,10 +140,10 @@ const { options: serviceCategories } = useSelect({ resource: 'service_categories
   ) : (
     <p className="text-xs text-muted-foreground">پزشک مسئول تعیین نشده است</p>
   )}
-  <Select value={doctorId} onValueChange={setDoctorId} className="mt-2">
-    <SelectTrigger><SelectValue placeholder="پزشک را انتخاب کنید" /></SelectTrigger>
-    <SelectContent>{doctors.map((doctor) => <SelectItem key={doctor.value} value={doctor.value}>{doctor.label} {doctor.role && `- ${doctor.role}`}</SelectItem>)}</SelectContent>
-  </Select>
+<Select value={doctorId} onValueChange={setDoctorId}>
+  <SelectTrigger className="mt-2"><SelectValue placeholder="پزشک مسئول determinations نشده است" /></SelectTrigger>
+  <SelectContent>{doctors.map((doctor) => <SelectItem key={doctor.value} value={doctor.value}>{doctor.label} { (doctor as { role?: string }).role && `- ${ (doctor as { role?: string }).role }` }</SelectItem>)}</SelectContent>
+</Select>
 </div>
         <label className="flex items-center gap-2">
           <input type="checkbox" checked={isActive} onChange={(event) => setIsActive(event.target.checked)} />
