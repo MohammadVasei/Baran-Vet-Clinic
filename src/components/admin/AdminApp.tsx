@@ -30,6 +30,16 @@ export function AdminApp({ children }: { children: React.ReactNode }) {
               },
             },
             {
+              name: 'service_categories',
+              list: '/admin/service-categories',
+              create: '/admin/service-categories/create',
+              edit: '/admin/service-categories/edit/:id',
+              meta: {
+                label: 'دسته‌بندی خدمات',
+                icon: 'category',
+              },
+            },
+            {
               name: 'doctors',
               list: '/admin/doctors',
               create: '/admin/doctors/create',

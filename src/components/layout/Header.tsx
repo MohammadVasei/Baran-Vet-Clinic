@@ -37,9 +37,9 @@ export function Header() {
           <Image
             src="/baran-logo-navbar.png"
             alt="باران کلینیک دام‌های کوچک"
-            width={56}
-            height={56}
-            className="shrink-0 transition-transform duration-normal ease-out group-hover:-rotate-6"
+            width={64}
+            height={36}
+            className="h-auto w-14 shrink-0 transition-transform duration-normal ease-out group-hover:-rotate-6"
             priority
           />
           <span className="leading-tight min-w-0">

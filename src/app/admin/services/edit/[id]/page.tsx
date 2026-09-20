@@ -31,16 +31,19 @@ interface ServiceData {
   accent: string | null;
   href: string | null;
   display_order: number;
+  category: string | null;
+  doctor?: { name: string; role: string } | null;
 }
 
 export default function ServiceEditPage() {
-  const { result, query } = useShow<ServiceData>({
-    resource: 'services',
-    meta: { select: 'id,name,price_rial,is_active,doctor_id,key,numeral,tagline,title,description,image,alt,accent,href,display_order' },
-  });
+const { result, query } = useShow<ServiceData>({
+   resource: 'services',
+   meta: { select: 'id,name,price_rial,is_active,doctor_id,key,numeral,tagline,title,description,image,alt,accent,href,display_order,category,doctor:doctors(*)' },
+});
+const { options: serviceCategories } = useSelect({ resource: 'service_categories', optionLabel: 'label', optionValue: 'name', filters: [{ field: 'is_active', operator: 'eq', value: true }], meta: { select: 'id,name,label,display_order' } });
   const { mutateAsync: updateService, mutation } = useUpdate();
   const navigation = useNavigation();
-  const { options: doctors } = useSelect({ resource: 'doctors', optionLabel: 'name', optionValue: 'id', filters: [{ field: 'is_active', operator: 'eq', value: true }], meta: { select: 'id,name' } });
+  const { options: doctors } = useSelect({ resource: 'doctors', optionLabel: 'name', optionValue: 'id', filters: [{ field: 'is_active', operator: 'eq', value: true }], meta: { select: 'id,name,role' } });
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -56,6 +59,7 @@ export default function ServiceEditPage() {
   const [accent, setAccent] = useState('purple');
   const [href, setHref] = useState('');
   const [displayOrder, setDisplayOrder] = useState('0');
+  const [category, setCategory] = useState('');
 
   useEffect(() => {
     if (!result) return;
@@ -73,6 +77,7 @@ export default function ServiceEditPage() {
     setAccent(result.accent || 'purple');
     setHref(result.href || '');
     setDisplayOrder(String(result.display_order ?? 0));
+    setCategory(result.category || '');
   }, [result]);
 
   if (query.isLoading) return <div className="p-8 text-center">در حال بارگذاری...</div>;
@@ -98,6 +103,7 @@ export default function ServiceEditPage() {
         accent: accent || null,
         href: href.trim() || null,
         display_order: Number(displayOrder) || 0,
+        category: category.trim() || null,
       },
     });
     navigation.show('services', result.id);
@@ -124,13 +130,21 @@ export default function ServiceEditPage() {
           <Label htmlFor="service-price">قیمت (ریال)</Label>
           <Input id="service-price" type="number" min="0" value={price} onChange={(event) => setPrice(event.target.value)} className="mt-2" />
         </div>
-        <div>
-          <Label>پزشک مسئول</Label>
-          <Select value={doctorId} onValueChange={setDoctorId}>
-            <SelectTrigger className="mt-2"><SelectValue placeholder="پزشک را انتخاب کنید" /></SelectTrigger>
-            <SelectContent>{doctors.map((doctor) => <SelectItem key={doctor.value} value={doctor.value}>{doctor.label}</SelectItem>)}</SelectContent>
-          </Select>
-        </div>
+<div>
+  <Label>پزشک مسئول</Label>
+  {result.doctor ? (
+    <div className="mb-2">
+      <p className="text-sm font-medium text-foreground">{result.doctor.name}</p>
+      {result.doctor.role && <p className="text-xs text-muted-foreground">{result.doctor.role}</p>}
+    </div>
+  ) : (
+    <p className="text-xs text-muted-foreground">پزشک مسئول تعیین نشده است</p>
+  )}
+  <Select value={doctorId} onValueChange={setDoctorId} className="mt-2">
+    <SelectTrigger><SelectValue placeholder="پزشک را انتخاب کنید" /></SelectTrigger>
+    <SelectContent>{doctors.map((doctor) => <SelectItem key={doctor.value} value={doctor.value}>{doctor.label} {doctor.role && `- ${doctor.role}`}</SelectItem>)}</SelectContent>
+  </Select>
+</div>
         <label className="flex items-center gap-2">
           <input type="checkbox" checked={isActive} onChange={(event) => setIsActive(event.target.checked)} />
           <span>این خدمت در سایت قابل رزرو باشد</span>
@@ -173,6 +187,19 @@ export default function ServiceEditPage() {
         <div>
           <Label htmlFor="service-href">پیوند صفحه خدمت</Label>
           <Input id="service-href" value={href} onChange={(event) => setHref(event.target.value)} className="mt-2" dir="ltr" />
+        </div>
+        <div>
+          <Label htmlFor="service-category">دسته‌بندی</Label>
+          <Select value={category} onValueChange={setCategory}>
+            <SelectTrigger className="mt-2"><SelectValue placeholder="دسته‌بندی را انتخاب کنید" /></SelectTrigger>
+            <SelectContent>
+              {serviceCategories.map((cat) => (
+                <SelectItem key={cat.value} value={cat.value}>
+                  {cat.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         <div>
           <Label htmlFor="service-order">ترتیب نمایش</Label>

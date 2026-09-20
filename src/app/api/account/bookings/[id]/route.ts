@@ -17,13 +17,13 @@ async function getOwnedBooking(binding: { params: Promise<{ id: string }> }) {
 
   const { id } = await binding.params;
 
-  const { data: booking, error } = await supabaseAdmin
-    .from('bookings')
-    .select(
-      'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,payment_status,amount_rial,reference_code,notes,created_at,service:services(id,name),doctor:doctors(id,name)'
-    )
-    .eq('id', id)
-    .single();
+const { data: booking, error } = await supabaseAdmin
+     .from('bookings')
+     .select(
+       'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,payment_status,amount_rial,reference_code,notes,created_at,service:services(id,name),doctor:doctors(*)'
+     )
+     .eq('id', id)
+     .single();
 
   if (error) return { user, booking: null };
 

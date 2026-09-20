@@ -38,6 +38,7 @@ const NAV_GROUPS = [
       { name: 'diseases', label: 'بیماری‌ها', href: '/admin/diseases' },
       { name: 'species-and-breeds', label: 'گونه‌ها و نژادها', href: '/admin/species-and-breeds' },
       { name: 'medical_items', label: 'واکسن‌ها و درمان‌ها', href: '/admin/medical-items' },
+      { name: 'service_categories', label: 'دسته‌بندی خدمات', href: '/admin/service-categories' },
     ],
   },
 {
@@ -82,6 +83,7 @@ const vaccineCanList = useCan({ resource: 'vaccines', action: 'list' });
     const treatmentCanList = useCan({ resource: 'treatment_types', action: 'list' });
     const reminderCanList = useCan({ resource: 'reminders', action: 'list' });
     const customChartsCanList = useCan({ resource: 'admin_custom_charts', action: 'list' });
+    const serviceCategoryCanList = useCan({ resource: 'service_categories', action: 'list' });
 
 const canMap: Record<NavItemName, boolean> = {
    services: !!serviceCanList.data,
@@ -99,6 +101,7 @@ const canMap: Record<NavItemName, boolean> = {
    reminders: !!reminderCanList.data,
    custom_charts: !!customChartsCanList.data,
    'species-and-breeds': !!speciesCanList.data && !!breedCanList.data,
+   service_categories: !!serviceCategoryCanList.data,
  };
 
   useGSAP(
@@ -159,7 +162,7 @@ className={`fixed inset-0 z-40 bg-[var(--sidebar-overlay-background)] lg:hidden 
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-border">
-            <div className="flex items-center gap-2">
+            <Link href="/admin" className="flex items-center gap-2" aria-label="صفحه اصلی پنل مدیریت">
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                 <svg className="w-5 h-5 text-on-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                   <path d="M12 21s-6.5-5.4-6.5-10A6.5 6.5 0 0 1 12 4.5 6.5 6.5 0 0 1 18.5 11c0 4.6-6.5 10-6.5 10Z" />
@@ -167,7 +170,7 @@ className={`fixed inset-0 z-40 bg-[var(--sidebar-overlay-background)] lg:hidden 
                 </svg>
               </div>
               <span className="font-display text-lg font-bold text-foreground">باران</span>
-            </div>
+            </Link>
             <button
               className="lg:hidden p-2 rounded-lg hover:bg-muted"
               onClick={() => setSidebarOpen(false)}
@@ -252,7 +255,9 @@ className={`fixed inset-0 z-40 bg-[var(--sidebar-overlay-background)] lg:hidden 
             </button>
 
             <div className="flex-1 lg:flex-none">
-              <h1 className="font-display text-xl font-bold text-foreground">پنل مدیریت</h1>
+              <Link href="/admin" className="inline-block">
+                <h1 className="font-display text-xl font-bold text-foreground">پنل مدیریت</h1>
+              </Link>
             </div>
 
             <div className="flex items-center gap-4">

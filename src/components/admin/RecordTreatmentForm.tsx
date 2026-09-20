@@ -73,13 +73,13 @@ export function RecordTreatmentForm({ animalId }: RecordTreatmentFormProps) {
     meta: { select: 'id,name,category,is_periodic,reminder_interval_value,reminder_interval_unit' },
   });
 
-  const { options: doctors } = useSelect({
-    resource: 'doctors',
-    optionLabel: 'name',
-    optionValue: 'id',
-    filters: [{ field: 'is_active', operator: 'eq', value: true }],
-    meta: { select: 'id,name' },
-  });
+const { options: doctors } = useSelect({
+  resource: 'doctors',
+  optionLabel: 'name',
+  optionValue: 'id',
+  filters: [{ field: 'is_active', operator: 'eq', value: true }],
+  meta: { select: 'id,name,role' },
+});
 
   const [definitionType, setDefinitionType] = useState<'vaccine' | 'treatment'>('vaccine');
   const [definitionId, setDefinitionId] = useState('');
@@ -237,7 +237,7 @@ export function RecordTreatmentForm({ animalId }: RecordTreatmentFormProps) {
             <Select value={doctorId} onValueChange={setDoctorId}>
               <SelectTrigger className="mt-2"><SelectValue placeholder="انتخاب پزشک..." /></SelectTrigger>
               <SelectContent>
-                {doctors.map((d) => <SelectItem key={d.value} value={d.value}>{d.label}</SelectItem>)}
+                {doctors.map((d) => <SelectItem key={d.value} value={d.value}>{d.label} {d.role && `- ${d.role}`}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>

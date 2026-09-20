@@ -48,27 +48,27 @@ if (error || !animal) {
       }
     }
 
-    const [recordsRes, remindersRes, historyRes] = await Promise.all([
-      supabaseAdmin
-        .from('medical_records')
-        .select(
-          'id,type,title,description,performed_at,next_reminder_date,vaccine:vaccines(id,name),treatment_type:treatment_types(id,name),doctor:doctors(id,name)'
-        )
-        .eq('animal_id', id)
-        .order('performed_at', { ascending: false }),
-      supabaseAdmin
-        .from('reminders')
-        .select('id,type,title,due_date,status,priority')
-        .eq('animal_id', id)
-        .in('status', ['pending', 'due', 'overdue'])
-        .order('due_date', { ascending: true }),
-      supabaseAdmin
-        .from('notes_history')
-        .select('id,entity_type,author_id,content,created_at')
-        .eq('entity_type', 'animal')
-        .eq('entity_id', id)
-        .order('created_at', { ascending: false }),
-    ]);
+const [recordsRes, remindersRes, historyRes] = await Promise.all([
+       supabaseAdmin
+         .from('medical_records')
+         .select(
+           'id,type,title,description,performed_at,next_reminder_date,vaccine:vaccines(id,name),treatment_type:treatment_types(id,name),doctor:doctors(*)'
+         )
+         .eq('animal_id', id)
+         .order('performed_at', { ascending: false }),
+       supabaseAdmin
+         .from('reminders')
+         .select('id,type,title,due_date,status,priority')
+         .eq('animal_id', id)
+         .in('status', ['pending', 'due', 'overdue'])
+         .order('due_date', { ascending: true }),
+       supabaseAdmin
+         .from('notes_history')
+         .select('id,entity_type,author_id,content,created_at')
+         .eq('entity_type', 'animal')
+         .eq('entity_id', id)
+         .order('created_at', { ascending: false }),
+     ]);
 
     if (recordsRes.error || remindersRes.error || historyRes.error) {
       console.error('Account animal detail subqueries error:', recordsRes.error, remindersRes.error, historyRes.error);

@@ -21,18 +21,18 @@ const reasonColors: Record<string, string> = {
 };
 
 export function AvailabilityBlocksList() {
-  const doctorsQuery = useList({
-    resource: 'doctors',
-    sorters: [{ field: 'display_order', order: 'asc' }],
-    meta: { select: 'id,name,key,is_active' },
-    pagination: { mode: 'off' },
-  });
+const doctorsQuery = useList({
+  resource: 'doctors',
+  sorters: [{ field: 'display_order', order: 'asc' }],
+  meta: { select: 'id,name,key,is_active,role' },
+  pagination: { mode: 'off' },
+});
   const listResult = useList({
     resource: 'availability_blocks',
     sorters: [{ field: 'start_at', order: 'desc' }],
-    meta: {
-      select: 'id,doctor_id,start_at,end_at,reason,created_at,doctor:doctors(name)',
-    },
+meta: {
+        select: 'id,doctor_id,start_at,end_at,reason,created_at,doctor:doctors(*)',
+      },
     pagination: { mode: 'off' },
   });
   const { result, query } = listResult;
@@ -50,12 +50,13 @@ export function AvailabilityBlocksList() {
   };
   const handleCreate = () => navigation.create('availability-blocks');
 
-  const doctors = (doctorsQuery.result?.data || []) as Array<{
-    id: string;
-    name: string;
-    key: string | null;
-    is_active: boolean;
-  }>;
+const doctors = (doctorsQuery.result?.data || []) as Array<{
+  id: string;
+  name: string;
+  key: string | null;
+  is_active: boolean;
+  role: string | null;
+}>;
   const blocks = (result?.data || []) as Array<{
     id: string;
     doctor_id: string;
@@ -184,10 +185,11 @@ export function AvailabilityBlocksList() {
             return (
               <article key={doctor.id} className="rounded-app-lg border border-border bg-surface p-4">
                 <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="font-display font-bold text-foreground">{doctor.name}</h3>
-                    <p className="mt-1 font-mono text-xs text-muted-foreground">{doctor.key || doctor.id}</p>
-                  </div>
+<div>
+  <h3 className="font-display font-bold text-foreground">{doctor.name}</h3>
+  {doctor.role && <p className="mt-1 font-mono text-xs text-muted-foreground">{doctor.role}</p>}
+  <p className="mt-1 font-mono text-xs text-muted-foreground">{doctor.key || doctor.id}</p>
+</div>
                   <span className="rounded-full bg-accent-green-soft px-2 py-1 text-xs font-medium text-accent-green-fg">پذیرش فعال</span>
                 </div>
                 <div className="mt-4 rounded-app border border-border bg-background/60 p-3 text-sm">

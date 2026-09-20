@@ -21,14 +21,14 @@ export async function GET(request: NextRequest) {
 
     // Fetch a window of recent bookings and filter by digit-normalized phone,
     // mirroring how orders are matched (any dialing style matches).
-    const { data: allBookings, error } = await supabaseAdmin
-      .from('bookings')
-      .select(
-        'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,payment_status,amount_rial,reference_code,notes,created_at,service:services(id,name),doctor:doctors(id,name)'
-      )
-      .order('booking_date', { ascending: false })
-      .order('booking_time', { ascending: false })
-      .limit(300);
+const { data: allBookings, error } = await supabaseAdmin
+       .from('bookings')
+       .select(
+         'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,payment_status,amount_rial,reference_code,notes,created_at,service:services(id,name),doctor:doctors(*)'
+       )
+       .order('booking_date', { ascending: false })
+       .order('booking_time', { ascending: false })
+       .limit(300);
 
     if (error) {
       console.error('Account bookings error:', error);

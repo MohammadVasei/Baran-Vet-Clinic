@@ -18,7 +18,8 @@ const ACCENTS = [
 export default function ServiceCreatePage() {
   const { mutateAsync: createService, mutation } = useCreate();
   const navigation = useNavigation();
-  const { options: doctors } = useSelect({ resource: 'doctors', optionLabel: 'name', optionValue: 'id', filters: [{ field: 'is_active', operator: 'eq', value: true }], meta: { select: 'id,name' } });
+  const { options: doctors } = useSelect({ resource: 'doctors', optionLabel: 'name', optionValue: 'id', filters: [{ field: 'is_active', operator: 'eq', value: true }], meta: { select: 'id,name,role' } });
+  const { options: serviceCategories } = useSelect({ resource: 'service_categories', optionLabel: 'label', optionValue: 'name', filters: [{ field: 'is_active', operator: 'eq', value: true }], meta: { select: 'id,name,label,display_order' } });
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -34,6 +35,7 @@ export default function ServiceCreatePage() {
   const [accent, setAccent] = useState('purple');
   const [href, setHref] = useState('');
   const [displayOrder, setDisplayOrder] = useState('0');
+  const [category, setCategory] = useState(''); // New category state
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -54,6 +56,7 @@ export default function ServiceCreatePage() {
         accent: accent || null,
         href: href.trim() || null,
         display_order: Number(displayOrder) || 0,
+        category: category.trim() || null, // Add category to values
       },
     });
     navigation.list('services');
@@ -74,7 +77,7 @@ export default function ServiceCreatePage() {
         <div>
           <Label htmlFor="service-key">کلید یکتا</Label>
           <Input id="service-key" value={key} onChange={(event) => setKey(event.target.value)} className="mt-2" dir="ltr" placeholder="darman" />
-          <p className="mt-1 text-xs text-muted-foreground">برای نمایش در سایت لازم است؛ بدون آن خدمت در بخش عمومی دیده نمی‌شود.</p>
+          <p className="mt-1 text-xs text-muted-foreground">برای نمایش در سایت لازم است؛ بدون آن servant در بخش عمومی دیده نمی‌شود.</p>
         </div>
         <div>
           <Label htmlFor="service-price">قیمت (ریال)</Label>
@@ -84,7 +87,7 @@ export default function ServiceCreatePage() {
           <Label>پزشک مسئول</Label>
           <Select value={doctorId} onValueChange={setDoctorId}>
             <SelectTrigger className="mt-2"><SelectValue placeholder="پزشک را انتخاب کنید" /></SelectTrigger>
-            <SelectContent>{doctors.map((doctor) => <SelectItem key={doctor.value} value={doctor.value}>{doctor.label}</SelectItem>)}</SelectContent>
+            <SelectContent>{doctors.map((doctor) => <SelectItem key={doctor.value} value={doctor.value}>{doctor.label} {doctor.role && `- ${doctor.role}`}</SelectItem>)}</SelectContent>
           </Select>
         </div>
         <label className="flex items-center gap-2">
@@ -129,6 +132,19 @@ export default function ServiceCreatePage() {
         <div>
           <Label htmlFor="service-href">پیوند صفحه خدمت</Label>
           <Input id="service-href" value={href} onChange={(event) => setHref(event.target.value)} className="mt-2" dir="ltr" placeholder="/services/darman" />
+        </div>
+        <div>
+          <Label htmlFor="service-category">دسته‌بندی</Label>
+          <Select value={category} onValueChange={setCategory}>
+            <SelectTrigger className="mt-2"><SelectValue placeholder="دسته‌بندی را انتخاب کنید" /></SelectTrigger>
+            <SelectContent>
+              {serviceCategories.map((cat) => (
+                <SelectItem key={cat.value} value={cat.value}>
+                  {cat.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         <div>
           <Label htmlFor="service-order">ترتیب نمایش</Label>

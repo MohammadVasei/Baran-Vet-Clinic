@@ -20,7 +20,7 @@ interface Booking {
   pet_name: string | null;
   notes: string | null;
   service?: { id: string; name: string } | null;
-  doctor?: { id: string; name: string } | null;
+  doctor?: { id: string; name: string; role: string } | null;
 }
 
 function isUpcoming(booking: Booking): boolean {
@@ -161,9 +161,9 @@ export default function AccountAppointmentsPage() {
                       <span className="font-medium text-foreground">
                         {booking.service?.name || "خدمت"}
                       </span>
-                      {booking.doctor?.name && (
-                        <span className="text-sm text-muted-foreground">— {booking.doctor.name}</span>
-                      )}
+{booking.doctor?.name && (
+                         <span className="text-sm text-muted-foreground">— {booking.doctor.name}{booking.doctor.role && ` (${booking.doctor.role})`}</span>
+                       )}
                     </div>
                     <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
                       <span className="inline-flex items-center gap-1.5">

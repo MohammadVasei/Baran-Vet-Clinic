@@ -17,7 +17,7 @@ interface TreatmentHistoryRecord {
   next_reminder_date: string | null;
   vaccine?: { id: string; name: string } | null;
   treatment_type?: { id: string; name: string } | null;
-  doctor?: { id: string; name: string } | null;
+  doctor?: { id: string; name: string; role: string } | null;
   reminders?: { id: string; status: string }[] | null;
 }
 
@@ -46,9 +46,9 @@ export function TreatmentHistory({ animalId }: TreatmentHistoryProps) {
     ],
     sorters: [{ field: 'performed_at', order: 'desc' }],
     pagination: { pageSize: 200 },
-    meta: {
-      select: 'id,type,title,performed_at,next_reminder_date,vaccine:vaccines(id,name),treatment_type:treatment_types(id,name),doctor:doctors(id,name),reminders:reminders(id,status)',
-    },
+meta: {
+        select: 'id,type,title,performed_at,next_reminder_date,vaccine:vaccines(id,name),treatment_type:treatment_types(id,name),doctor:doctors(*),reminders:reminders(id,status)',
+      },
   });
 
   const records = (result?.data as TreatmentHistoryRecord[]) || [];
@@ -87,9 +87,10 @@ export function TreatmentHistory({ animalId }: TreatmentHistoryProps) {
     {
       accessorKey: 'doctor' as keyof TreatmentHistoryRecord,
       header: 'پزشک',
-      cellWithMeta: ({ original }: { original: TreatmentHistoryRecord }) => (
-        <span>{original.doctor?.name || '—'}</span>
-      ),
+cellWithMeta: ({ original }: { original: TreatmentHistoryRecord }) => (
+         <span>{original.doctor?.name || '—'}</span>
+         {original.doctor?.role && <span className="ml-1 text-xs text-muted-foreground">({original.doctor.role})</span>}
+       ),
     },
     {
       accessorKey: 'reminders' as keyof TreatmentHistoryRecord,

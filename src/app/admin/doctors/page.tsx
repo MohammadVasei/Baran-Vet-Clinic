@@ -11,6 +11,7 @@ interface Doctor {
   key: string | null;
   bio: string | null;
   is_active: boolean;
+  role: string | null;
 }
 
 interface Service {
@@ -21,12 +22,12 @@ interface Service {
 }
 
 export default function DoctorsList() {
-  const { result: doctorResult, query: doctorQuery } = useList<Doctor>({
-    resource: 'doctors',
-    sorters: [{ field: 'display_order', order: 'asc' }],
-    meta: { select: 'id,name,key,bio,is_active' },
-    pagination: { mode: 'off' },
-  });
+const { result: doctorResult, query: doctorQuery } = useList<Doctor>({
+  resource: 'doctors',
+  sorters: [{ field: 'display_order', order: 'asc' }],
+  meta: { select: 'id,name,key,bio,is_active,role' },
+  pagination: { mode: 'off' },
+});
   const { result: serviceResult } = useList<Service>({
     resource: 'services',
     meta: { select: 'id,name,doctor_id,is_active' },
@@ -59,10 +60,11 @@ export default function DoctorsList() {
           return (
             <article key={doctor.id} className="rounded-app-lg border border-border bg-surface p-5">
               <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h2 className="font-display text-xl font-bold text-foreground">{doctor.name}</h2>
-                  <p className="mt-1 font-mono text-xs text-muted-foreground">{doctor.key || doctor.id}</p>
-                </div>
+<div>
+  <h2 className="font-display text-xl font-bold text-foreground">{doctor.name}</h2>
+  {doctor.role && <p className="mt-1 text-sm text-muted-foreground">{doctor.role}</p>}
+  <p className="mt-1 font-mono text-xs text-muted-foreground">{doctor.key || doctor.id}</p>
+</div>
                 <span className={`rounded-full px-2 py-1 text-xs ${doctor.is_active ? 'bg-accent-green-soft text-accent-green-fg' : 'bg-muted text-muted-foreground'}`}>
                   {doctor.is_active ? 'فعال' : 'غیرفعال'}
                 </span>

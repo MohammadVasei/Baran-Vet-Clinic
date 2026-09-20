@@ -1,18 +1,26 @@
 "use client";
 export const dynamic = 'force-dynamic';
 
-import { useList, useDelete, useNavigation, useCan, useUpdate } from '@refinedev/core';
+import { useList, useDelete, useNavigation, useCan, useUpdate, useSelect } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { EditIcon, TrashIcon, EyeIcon, CheckIcon, XIcon } from '@/components/icons';
 
 export function ServicesList() {
-  const listResult = useList({
-    resource: 'services',
-    sorters: [{ field: 'display_order', order: 'asc' }],
-    meta: {
-      select: 'id,name,description,duration_minutes,price_rial,category,display_order,is_active,created_at,doctor_id,doctor:doctors(name)',
-    },
+const listResult = useList({
+     resource: 'services',
+     sorters: [{ field: 'display_order', order: 'asc' }],
+     meta: {
+       select: 'id,name,description,duration_minutes,price_rial,category,display_order,is_active,created_at,doctor_id,doctor:doctors(*)',
+     },
+   });
+  const { options: serviceCategoryOptions } = useSelect({
+    resource: 'service_categories',
+    optionLabel: 'label',
+    optionValue: 'name',
+    filters: [{ field: 'is_active', operator: 'eq', value: true }],
+    meta: { select: 'id,name,label,display_order' },
   });
+  const categoryLabelMap = new Map<string, string>(serviceCategoryOptions.map((o) => [o.value as string, o.label as string]));
   const { result, query } = listResult;
   const navigation = useNavigation();
   const { mutate: deleteItem } = useDelete();
@@ -37,16 +45,17 @@ export function ServicesList() {
   };
   const handleCreate = () => navigation.create('services');
 
-  interface ServiceRow {
+interface ServiceRow {
     id: string;
     name: string;
     category: string;
+    category_label: string | null; // New field for category label from joined table
     duration_minutes: number;
     price_rial: number | null;
     display_order: number;
     is_active: boolean;
     doctor_id: string | null;
-    doctor?: { name: string } | null;
+    doctor?: { name: string; role: string } | null;
   }
 
   const columns = [
@@ -56,17 +65,13 @@ export function ServicesList() {
       cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => <span className="font-medium">{getValue('name') as string}</span>,
     },
     {
-      accessorKey: 'category' as keyof ServiceRow,
+      accessorKey: 'category_label' as keyof ServiceRow,
       header: 'دسته‌بندی',
       cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
-        const cat = getValue('category') as string;
-        const labels: Record<string, string> = {
-          darman: 'درمان',
-          shenasname: 'شناسنامه',
-          grooming: 'شستشو و اصلاح',
-          petshop: 'پت‌شاپ',
-        };
-        return <span className="px-2 py-1 text-xs rounded-full bg-muted">{labels[cat] || cat}</span>;
+        const label = getValue('category_label') as string | null;
+        // Fallback to the category value if label is not available (for backward compatibility)
+        const category = getValue('category') as string;
+        return <span className="px-2 py-1 text-xs rounded-full bg-muted">{label || category}</span>;
       },
     },
     {
@@ -85,9 +90,12 @@ export function ServicesList() {
     {
       accessorKey: 'doctor_id' as keyof ServiceRow,
       header: 'پزشک مسئول',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => (
-        <span>{(getValue('doctor') as { name?: string } | null)?.name || 'تعیین نشده'}</span>
-      ),
+cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => (
+         <span>
+           {(getValue('doctor') as { name?: string; role?: string } | null)?.name || 'تعیین نشده'}
+           {(getValue('doctor') as { name?: string; role?: string } | null)?.role && ` - ${(getValue('doctor') as { name?: string; role?: string } | null)?.role}`}
+         </span>
+       ),
     },
     {
       accessorKey: 'display_order' as keyof ServiceRow,
@@ -138,7 +146,10 @@ export function ServicesList() {
 
       <AdminTable
         columns={columns}
-        data={(result?.data as ServiceRow[]) || []}
+        data={(result?.data as ServiceRow[])?.map((row) => ({
+          ...row,
+          category_label: row.category ? (categoryLabelMap.get(row.category) ?? null) : null,
+        })) || []}
         isLoading={query.isLoading}
         onCreate={handleCreate}
         createLabel="افزودن خدمت"

@@ -48,7 +48,7 @@ interface MedicalRecord {
   performed_at: string;
   vaccine?: { id: string; name: string } | null;
   treatment_type?: { id: string; name: string } | null;
-  doctor?: { id: string; name: string } | null;
+  doctor?: { id: string; name: string; role: string } | null;
   next_reminder_date: string | null;
 }
 
@@ -335,7 +335,7 @@ export default function AccountPetDetailPage() {
                       {record.vaccine?.name || record.treatment_type?.name || record.title || "—"}
                       {record.description && <p className="mt-0.5 text-xs text-muted-foreground font-normal">{record.description}</p>}
                     </td>
-                    <td className="px-4 py-3 text-sm">{record.doctor?.name || "—"}</td>
+                    <td className="px-4 py-3 text-sm">{record.doctor?.name || "—"}{record.doctor?.role && ` (${record.doctor.role})`}</td>
                     <td className="px-4 py-3 text-sm">
                       {record.next_reminder_date ? formatJalaliDate(record.next_reminder_date) : "—"}
                     </td>

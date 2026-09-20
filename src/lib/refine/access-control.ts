@@ -39,6 +39,7 @@ export const accessControlProvider: AccessControlProvider = {
          'diseases',
          'testimonials',
          'site_content',
+         'service_categories',
          // Animal medical log
          'species',
          'breeds',
@@ -56,7 +57,7 @@ export const accessControlProvider: AccessControlProvider = {
            return { can: true };
          }
          // Staff can create/edit content resources
-         if (['services', 'doctors', 'products', 'diseases', 'testimonials', 'site_content', 'species', 'breeds', 'vaccines', 'treatment_types', 'animals', 'medical_records', 'reminders'].includes(resourceStr)) {
+         if (['services', 'doctors', 'products', 'diseases', 'testimonials', 'site_content', 'species', 'breeds', 'vaccines', 'treatment_types', 'animals', 'medical_records', 'reminders', 'service_categories'].includes(resourceStr)) {
            if (action === 'create' || action === 'edit') {
              return { can: true };
            }
