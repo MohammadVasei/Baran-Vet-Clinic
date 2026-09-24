@@ -166,54 +166,49 @@ export default function AnimalsList() {
           <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">حیوانات</h1><PageHelp id="animals-list" /></div>
           <p className="text-muted-foreground mt-1">جستجو و مدیریت پرونده‌های حیوانات کلینیک</p>
         </div>
-        <button
-          onClick={handleCreate}
-          className="inline-flex items-center gap-2 rounded-app bg-primary px-4 py-2 text-sm font-bold text-on-primary hover:opacity-90 transition-opacity"
-        >
-          + افزودن حیوان
-        </button>
       </div>
-
-      {/* Server-side search toolbar */}
-      <form onSubmit={applySearch} className="rounded-app-lg border border-border bg-surface p-4 space-y-4">
-        <div className="grid gap-3 sm:grid-cols-[1fr_auto_auto] sm:items-center">
-          <div className="relative">
-            <SearchIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-            <Input
-              type="search"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              placeholder="جستجو بر اساس نام، تلفن صاحب یا شماره میکروچیپ..."
-              className="pl-10 pr-10 py-2"
-              aria-label="جستجوی حیوان"
-            />
-          </div>
-          <Select value={speciesFilter} onValueChange={(value) => { const v = value === '__all' ? '' : value; setSpeciesFilter(v); setApplied((prev) => ({ ...prev, speciesId: v })); }}>
-            <SelectTrigger className="min-w-40"><SelectValue placeholder="همه گونه‌ها" /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="__all">همه گونه‌ها</SelectItem>
-              {(speciesResult?.data as { id: string; name: string }[] | undefined)?.map((s) => (
-                <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Select value={statusFilter} onValueChange={(value) => { const v = value === '__all' ? '' : value; setStatusFilter(v); setApplied((prev) => ({ ...prev, status: v })); }}>
-            <SelectTrigger className="min-w-40"><SelectValue placeholder="همه وضعیت‌ها" /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="__all">همه وضعیت‌ها</SelectItem>
-              {ANIMAL_STATUSES.map((st) => <SelectItem key={st} value={st}>{ANIMAL_STATUS_LABELS[st]}</SelectItem>)}
-            </SelectContent>
-          </Select>
-          <button type="submit" className="inline-flex items-center gap-2 rounded-app border border-border px-4 py-2 text-sm font-medium hover:bg-muted transition-colors whitespace-nowrap">
-            جستجو
-          </button>
-        </div>
-      </form>
 
       <AdminTable
         columns={columns}
         data={(result?.data as AnimalRow[]) || []}
         isLoading={query.isLoading}
+        hideSearch
+        onCreate={handleCreate}
+        createLabel="افزودن حیوان"
+        toolbar={
+          <form onSubmit={applySearch} className="flex flex-wrap items-center gap-3">
+            <div className="relative w-full sm:w-80 shrink-0">
+              <SearchIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+              <Input
+                type="search"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                placeholder="جستجو بر اساس نام، تلفن صاحب یا شماره میکروچیپ..."
+                className="pl-10 pr-10 py-2"
+                aria-label="جستجوی حیوان"
+              />
+            </div>
+            <Select value={speciesFilter} onValueChange={(value) => { const v = value === '__all' ? '' : value; setSpeciesFilter(v); setApplied((prev) => ({ ...prev, speciesId: v })); }}>
+              <SelectTrigger className="w-44 shrink-0"><SelectValue placeholder="همه گونه‌ها" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="__all">همه گونه‌ها</SelectItem>
+                {(speciesResult?.data as { id: string; name: string }[] | undefined)?.map((s) => (
+                  <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Select value={statusFilter} onValueChange={(value) => { const v = value === '__all' ? '' : value; setStatusFilter(v); setApplied((prev) => ({ ...prev, status: v })); }}>
+              <SelectTrigger className="w-44 shrink-0"><SelectValue placeholder="همه وضعیت‌ها" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="__all">همه وضعیت‌ها</SelectItem>
+                {ANIMAL_STATUSES.map((st) => <SelectItem key={st} value={st}>{ANIMAL_STATUS_LABELS[st]}</SelectItem>)}
+              </SelectContent>
+            </Select>
+            <button type="submit" className="inline-flex items-center gap-2 rounded-app border border-border px-4 py-2 text-sm font-medium hover:bg-muted transition-colors whitespace-nowrap">
+              جستجو
+            </button>
+          </form>
+        }
       />
 
       {query.isError && (

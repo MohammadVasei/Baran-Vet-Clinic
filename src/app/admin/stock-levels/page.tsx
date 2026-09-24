@@ -278,31 +278,6 @@ export function StockLevelsList() {
           <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">موجودی انبار</h1><PageHelp id="stock-levels-list" /></div>
           <p className="text-muted-foreground mt-1">مدیریت موجودی و نمایش محصولات در پت‌شاپ</p>
         </div>
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <Button
-            variant="outline"
-            onClick={handleExportExcel}
-            disabled={exporting || rows.length === 0}
-            aria-label="خروجی اکسل"
-          >
-            {exporting ? <LoaderIcon className="size-4" /> : <DownloadIcon className="size-4" />}
-            {exporting ? 'در حال ساخت…' : 'خروجی اکسل'}
-          </Button>
-          <Link
-            href="/admin/products"
-            className="inline-flex items-center justify-center gap-2 rounded-app border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-muted transition-colors"
-          >
-            <PackageIcon className="size-4" />
-            مدیریت محصولات
-          </Link>
-          <button
-            onClick={handleCreate}
-            className="inline-flex items-center justify-center gap-2 rounded-app bg-primary px-4 py-2 font-bold text-on-primary transition-opacity hover:opacity-90"
-          >
-            <span className="text-lg">+</span>
-            افزودن محصول
-          </button>
-        </div>
       </div>
 
       <div className="flex flex-wrap gap-2">
@@ -333,6 +308,26 @@ export function StockLevelsList() {
             row.products?.selling_unit ? UNIT_LABELS[row.products.selling_unit] : '',
             String(row.quantity_on_hand),
           ].join(' ')
+        }
+        toolbar={
+          <>
+            <Button
+              variant="outline"
+              onClick={handleExportExcel}
+              disabled={exporting || rows.length === 0}
+              aria-label="خروجی اکسل"
+            >
+              {exporting ? <LoaderIcon className="size-4" /> : <DownloadIcon className="size-4" />}
+              {exporting ? 'در حال ساخت…' : 'خروجی اکسل'}
+            </Button>
+            <Link
+              href="/admin/products"
+              className="inline-flex items-center justify-center gap-2 rounded-app border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-muted transition-colors"
+            >
+              <PackageIcon className="size-4" />
+              مدیریت محصولات
+            </Link>
+          </>
         }
       />
 

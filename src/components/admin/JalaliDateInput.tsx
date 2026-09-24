@@ -13,6 +13,7 @@ interface JalaliDateInputProps {
   ariaLabel?: string;
   className?: string;
   containerClassName?: string;
+  required?: boolean;
 }
 
 export function JalaliDateInput({
@@ -24,6 +25,7 @@ export function JalaliDateInput({
   ariaLabel,
   className = '',
   containerClassName = 'w-full',
+  required,
 }: JalaliDateInputProps) {
   const selectedDate = value
     ? new Date(`${value}T12:00:00.000Z`)
@@ -46,6 +48,7 @@ export function JalaliDateInput({
       name={name}
       placeholder={placeholder}
       aria-label={ariaLabel}
+      required={required}
     />
   );
 }

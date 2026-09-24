@@ -3,7 +3,7 @@
 import { useList, useUpdate, useNavigation, useCan } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { JalaliCalendar } from '@/components/admin/JalaliCalendar';
-import { CalendarIcon, EyeIcon, XIcon } from '@/components/icons';
+import { CalendarIcon, EyeIcon, XIcon, DownloadIcon, LoaderIcon } from '@/components/icons';
 import { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -25,6 +25,8 @@ interface BookingRow {
   doctor_id: string;
   service_name?: string;
   doctor_name?: string;
+  doctors?: { name: string } | null;
+  services?: { name: string } | null;
   created_at: string;
 }
 
@@ -75,7 +77,7 @@ export function BookingsList() {
       { field: 'booking_time', order: 'asc' },
     ],
     meta: {
-      select: 'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,payment_status,amount_rial,reference_code,created_at',
+      select: 'id,service_id,doctor_id,booking_date,booking_time,customer_name,customer_phone,pet_name,pet_type,status,payment_status,amount_rial,reference_code,created_at,doctors(name),services(name)',
     },
   });
   const navigation = useNavigation();
@@ -93,6 +95,7 @@ export function BookingsList() {
   const [calendarBlockedDates, setCalendarBlockedDates] = useState<string[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editStatus, setEditStatus] = useState<string>('');
+  const [exporting, setExporting] = useState(false);
 
   // Fetch calendar data when date filter changes
   useEffect(() => {
@@ -118,6 +121,21 @@ export function BookingsList() {
   }, [filterDate]);
 
   const handleEdit = (id: string) => navigation.edit('bookings', id);
+
+  const handleExportExcel = async () => {
+    const rows = (result?.data || []) as BookingRow[];
+    const currentRows = filteredData as BookingRow[];
+    if (exporting || rows.length === 0) return;
+    setExporting(true);
+    try {
+      const { exportBookingsToExcel } = await import('@/lib/export/bookings-excel');
+      await exportBookingsToExcel(currentRows, rows);
+    } catch (error) {
+      console.error('Export failed:', error);
+    } finally {
+      setExporting(false);
+    }
+  };
 
   const handleStatusChange = (id: string, newStatus: string) => {
     setEditingId(id);
@@ -175,6 +193,15 @@ export function BookingsList() {
     
     return dataArray;
   }, [result?.data, filterDate, filterStatus, filterDoctor]);
+
+  const doctorOptions = useMemo(() => {
+    const map = new Map<string, string>();
+    (result?.data || []).forEach((d) => {
+      const name = d.doctors?.name || d.doctor_name || d.doctor_id;
+      if (!map.has(d.doctor_id)) map.set(d.doctor_id, name);
+    });
+    return Array.from(map, ([value, label]) => ({ value, label }));
+  }, [result?.data]);
 
   const today = new Date().toISOString().slice(0, 10);
 
@@ -309,6 +336,61 @@ export function BookingsList() {
     },
   ];
 
+  const hasFilters = !!(filterDate || filterStatus || filterDoctor);
+
+  const toolbar = (
+    <>
+      <Select value={filterStatus} onValueChange={setFilterStatus}>
+        <SelectTrigger className="w-40">
+          <SelectValue placeholder="وضعیت" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="">همه</SelectItem>
+          {statusOptions.map(opt => (
+            <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+
+      <Select value={filterDoctor} onValueChange={setFilterDoctor}>
+        <SelectTrigger className="w-48">
+          <SelectValue placeholder="پزشک" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="">همه پزشکان</SelectItem>
+          {doctorOptions.map((doc) => (
+            <SelectItem key={doc.value} value={doc.value}>{doc.label}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+
+      {hasFilters && (
+        <Button variant="outline" size="sm" onClick={handleClearFilters}>
+          <XIcon className="size-4" />
+          پاک کردن فیلترها
+        </Button>
+      )}
+
+      <Button
+        variant="outline"
+        onClick={handleExportExcel}
+        disabled={exporting || (result?.data || []).length === 0}
+        aria-label="خروجی اکسل"
+      >
+        {exporting ? <LoaderIcon className="size-4" /> : <DownloadIcon className="size-4" />}
+        {exporting ? 'در حال ساخت…' : 'خروجی اکسل'}
+      </Button>
+
+      <Button
+        variant={showCalendar ? 'primary' : 'outline'}
+        onClick={() => setShowCalendar(!showCalendar)}
+      >
+        <CalendarIcon className="size-4" />
+        {showCalendar ? 'مخفی کردن تقویم' : 'نمایش تقویم'}
+      </Button>
+    </>
+  );
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -318,78 +400,31 @@ export function BookingsList() {
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="rounded-app-lg border border-border bg-surface p-4 space-y-4">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <Select value={filterStatus} onValueChange={setFilterStatus}>
-              <SelectTrigger className="w-40">
-                <SelectValue placeholder="وضعیت" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="">همه</SelectItem>
-                {statusOptions.map(opt => (
-                  <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            <Select value={filterDoctor} onValueChange={setFilterDoctor}>
-              <SelectTrigger className="w-48">
-                <SelectValue placeholder="پزشک" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="">همه پزشکان</SelectItem>
-                {(result?.data || []).map((d) => (
-                  <SelectItem key={d.doctor_id} value={d.doctor_id}>{d.doctor_name || d.doctor_id}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            {(filterDate || filterStatus || filterDoctor) && (
-              <Button variant="outline" size="sm" onClick={handleClearFilters}>
-                <XIcon className="size-4" />
-                پاک کردن فیلترها
-              </Button>
-            )}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Button
-              variant={showCalendar ? 'primary' : 'outline'}
-              onClick={() => setShowCalendar(!showCalendar)}
-            >
-              <CalendarIcon className="size-4" />
-              {showCalendar ? 'مخفی کردن تقویم' : 'نمایش تقویم'}
-            </Button>
-          </div>
-        </div>
-
-        {showCalendar && (
-          <div className="mt-4 flex justify-center rounded-app border border-border bg-surface/50 p-4">
-            <JalaliCalendar
-              selectedDate={selectedCalendarDate}
-              onDateSelect={handleCalendarDateSelect}
-              bookedDates={calendarBookedDates}
-              blockedDates={calendarBlockedDates}
-              appointments={(result?.data || []).map((booking) => ({
-                booking_date: booking.booking_date,
-                booking_time: booking.booking_time,
-                status: booking.status,
-                reference_code: booking.reference_code,
-              }))}
-              today={today}
-              className="w-full max-w-sm"
-            />
-          </div>
-        )}
-      </div>
-
       <AdminTable
         columns={columns}
         data={filteredData as BookingRow[]}
         isLoading={query.isLoading}
+        toolbar={toolbar}
       />
+
+      {showCalendar && (
+        <div className="flex justify-center rounded-app border border-border bg-surface/50 p-4">
+          <JalaliCalendar
+            selectedDate={selectedCalendarDate}
+            onDateSelect={handleCalendarDateSelect}
+            bookedDates={calendarBookedDates}
+            blockedDates={calendarBlockedDates}
+            appointments={(result?.data || []).map((booking) => ({
+              booking_date: booking.booking_date,
+              booking_time: booking.booking_time,
+              status: booking.status,
+              reference_code: booking.reference_code,
+            }))}
+            today={today}
+            className="w-full max-w-sm"
+          />
+        </div>
+      )}
 
       {query.isError && <div className="rounded-app border border-destructive bg-destructive/10 p-4 text-center text-destructive">خطا در بارگذاری نوبت‌ها</div>}
     </div>

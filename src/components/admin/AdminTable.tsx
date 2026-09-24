@@ -22,6 +22,7 @@ interface AdminTableProps<T> {
   error?: string;
   searchKey?: keyof T | ((row: T) => string);
   toolbar?: React.ReactNode;
+  hideSearch?: boolean;
 }
 
 type SortingState = { id: string; desc: boolean }[];
@@ -61,6 +62,7 @@ export function AdminTable<T extends { id: string }>({
   error,
   searchKey,
   toolbar,
+  hideSearch = false,
 }: AdminTableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [pagination, setPagination] = useState<PaginationState>({
@@ -102,20 +104,22 @@ export function AdminTable<T extends { id: string }>({
       {/* Toolbar */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 border-b border-border">
         <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-          <div className="relative w-full sm:w-80 shrink-0">
-            <SearchIcon className="absolute start-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="جستجو..."
-              value={globalFilter}
-              onChange={(e) => {
-                setGlobalFilter(e.target.value);
-                setPagination((prev) => ({ ...prev, pageIndex: 0 }));
-              }}
-              className="ps-10 pe-10 py-2"
-              aria-label="جستجو در جدول"
-            />
-          </div>
+          {!hideSearch && (
+            <div className="relative w-full sm:w-80 shrink-0">
+              <SearchIcon className="absolute start-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="جستجو..."
+                value={globalFilter}
+                onChange={(e) => {
+                  setGlobalFilter(e.target.value);
+                  setPagination((prev) => ({ ...prev, pageIndex: 0 }));
+                }}
+                className="ps-10 pe-10 py-2"
+                aria-label="جستجو در جدول"
+              />
+            </div>
+          )}
           {toolbar}
           {onCreate && (
             <Button onClick={onCreate} className="whitespace-nowrap">

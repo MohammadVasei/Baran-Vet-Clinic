@@ -239,24 +239,6 @@ export default function MedicalItemsPage() {
               : 'کاتالوگ انواع درمان و خدمات پزشکی قابل انجام در کلینیک'}
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          {activeTab === 'vaccines' && (
-            <button 
-              onClick={handleCreateVaccine}
-              className="px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded transition-colors flex items-center gap-1"
-            >
-              افزودن واکسن
-            </button>
-          )}
-          {activeTab === 'treatment_types' && (
-            <button 
-              onClick={handleCreateTreatment}
-              className="px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded transition-colors flex items-center gap-1"
-            >
-              افزودن نوع درمان
-            </button>
-          )}
-        </div>
       </div>
 
       <div role="tablist" className="flex border-b border-muted mb-4">

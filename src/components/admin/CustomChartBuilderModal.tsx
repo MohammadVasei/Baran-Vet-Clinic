@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { JalaliDateInput } from "@/components/admin/JalaliDateInput";
 
 interface CustomChart {
   id?: string;
@@ -280,26 +281,20 @@ return (
                      <label className="block text-sm font-medium text-foreground mb-2">
                        تاریخ شروع
                      </label>
-                     <input
-                       type="date"
+                     <JalaliDateInput
                        value={form.custom_start_date}
-                       onChange={(e) =>
-                         setForm((prev) => ({ ...prev, custom_start_date: e.target.value }))
-                       }
-                       className="w-full px-3 py-2 rounded-border border border-input bg-background/50 text-foreground ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                       onChange={(value) => setForm((prev) => ({ ...prev, custom_start_date: value }))}
+                       ariaLabel="تاریخ شروع"
                      />
                    </div>
                    <div>
                      <label className="block text-sm font-medium text-foreground mb-2">
                        تاریخ پایان
                      </label>
-                     <input
-                       type="date"
+                     <JalaliDateInput
                        value={form.custom_end_date}
-                       onChange={(e) =>
-                         setForm((prev) => ({ ...prev, custom_end_date: e.target.value }))
-                       }
-                       className="w-full px-3 py-2 rounded-border border border-input bg-background/50 text-foreground ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                       onChange={(value) => setForm((prev) => ({ ...prev, custom_end_date: value }))}
+                       ariaLabel="تاریخ پایان"
                      />
                    </div>
                  </>

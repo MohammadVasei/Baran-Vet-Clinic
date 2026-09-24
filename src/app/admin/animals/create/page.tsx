@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { ANIMAL_SEXES, ANIMAL_SEX_LABELS, normalizeDigits } from '@/lib/animals';
 import { PageHelp } from "@/components/admin/PageHelp";
+import { JalaliDateInput } from '@/components/admin/JalaliDateInput';
 
 export default function AnimalCreatePage() {
   const { mutateAsync: createAnimal, mutation } = useCreate();
@@ -130,7 +131,7 @@ export default function AnimalCreatePage() {
           </div>
           <div>
             <Label htmlFor="animal-dob">تاریخ تولد</Label>
-            <Input id="animal-dob" type="date" value={dateOfBirth} onChange={(event) => setDateOfBirth(event.target.value)} className="mt-2" />
+            <JalaliDateInput id="animal-dob" value={dateOfBirth} onChange={setDateOfBirth} ariaLabel="تاریخ تولد" className="mt-2" />
             <p className="mt-1 text-xs text-muted-foreground">در صورت نامشخص بودن، خالی بگذارید.</p>
           </div>
         </div>

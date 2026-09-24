@@ -17,6 +17,7 @@ import {
 } from '@/lib/animals';
 
 import { PageHelp } from "@/components/admin/PageHelp";
+import { JalaliDateInput } from '@/components/admin/JalaliDateInput';
 
 interface AnimalData {
   id: string;
@@ -182,7 +183,7 @@ export default function AnimalEditPage() {
           </div>
           <div>
             <Label htmlFor="animal-dob">تاریخ تولد</Label>
-            <Input id="animal-dob" type="date" value={dateOfBirth} onChange={(event) => setDateOfBirth(event.target.value)} className="mt-2" />
+            <JalaliDateInput id="animal-dob" value={dateOfBirth} onChange={setDateOfBirth} ariaLabel="تاریخ تولد" className="mt-2" />
           </div>
         </div>
 
