@@ -82,7 +82,7 @@ export function AdminLoginPage() {
                 ایمیل
               </label>
               <div className="relative">
-                <MailIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" aria-hidden />
+                <MailIcon className="absolute start-3 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" aria-hidden />
                 <input
                   {...register('email', {
                     required: 'ایمیل الزامی است',
@@ -94,7 +94,7 @@ export function AdminLoginPage() {
                   id="email"
                   type="email"
                   autoComplete="email"
-                  className="w-full pl-10 pr-4 py-3 rounded-app border border-border bg-surface text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full ps-10 pe-4 py-3 rounded-app border border-border bg-surface text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="admin@baran-clinic.ir"
                   aria-invalid={!!errors.email}
                   disabled={isPending}
@@ -122,7 +122,7 @@ export function AdminLoginPage() {
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   autoComplete="current-password"
-                  className="w-full pl-10 pr-12 py-3 rounded-app border border-border bg-surface text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full ps-11 pe-11 py-3 rounded-app border border-border bg-surface text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="••••••••"
                   aria-invalid={!!errors.password}
                   disabled={isPending}

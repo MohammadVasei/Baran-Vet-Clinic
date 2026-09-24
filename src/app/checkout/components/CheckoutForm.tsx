@@ -32,6 +32,7 @@ export function CheckoutForm({ onSubmit, form }: CheckoutFormProps) {
           {...form.register("customerName")}
           required
           className="mt-2"
+          dir="ltr"
           aria-invalid={form.formState.errors.customerName ? "true" : "false"}
           aria-describedby={form.formState.errors.customerName ? "customer-name-error" : undefined}
         />
@@ -50,6 +51,7 @@ export function CheckoutForm({ onSubmit, form }: CheckoutFormProps) {
           {...form.register("customerPhone")}
           required
           className="mt-2"
+          dir="ltr"
           aria-invalid={form.formState.errors.customerPhone ? "true" : "false"}
           aria-describedby={form.formState.errors.customerPhone ? "customer-phone-error" : undefined}
         />
@@ -68,6 +70,7 @@ export function CheckoutForm({ onSubmit, form }: CheckoutFormProps) {
           required
           rows={3}
           className="mt-2"
+          dir="ltr"
           aria-invalid={form.formState.errors.customerAddress ? "true" : "false"}
           aria-describedby={form.formState.errors.customerAddress ? "customer-address-error" : undefined}
         />

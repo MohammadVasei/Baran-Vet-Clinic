@@ -90,7 +90,7 @@ meta: {
 cellWithMeta: ({ original }: { original: TreatmentHistoryRecord }) => (
           <>
             <span>{original.doctor?.name || '—'}</span>
-            {original.doctor?.role && <span className="ml-1 text-xs text-muted-foreground">({original.doctor.role})</span>}
+            {original.doctor?.role && <span className="ms-1 text-xs text-muted-foreground">({original.doctor.role})</span>}
           </>
         ),
     },

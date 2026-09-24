@@ -116,6 +116,7 @@ export function RegisterClient({ callbackUrl = "/account" }: { callbackUrl?: str
                   type="text"
                   placeholder="محمد محمدی"
                   className="pr-10"
+                  dir="ltr"
                   disabled={loading}
                 />
                 {form.formState.errors.name && (
@@ -134,6 +135,7 @@ export function RegisterClient({ callbackUrl = "/account" }: { callbackUrl?: str
                   type="email"
                   placeholder="example@email.com"
                   className="pr-10"
+                  dir="ltr"
                   disabled={loading}
                 />
                 {form.formState.errors.email && (
@@ -152,6 +154,7 @@ export function RegisterClient({ callbackUrl = "/account" }: { callbackUrl?: str
                   type={showPassword ? "text" : "password"}
                   placeholder="حداقل ۶ کاراکتر"
                   className="pr-10"
+                  dir="ltr"
                   disabled={loading}
                 />
                 <button
@@ -178,6 +181,7 @@ export function RegisterClient({ callbackUrl = "/account" }: { callbackUrl?: str
                   type={showPassword ? "text" : "password"}
                   placeholder="تکرار رمز عبور"
                   className="pr-10"
+                  dir="ltr"
                   disabled={loading}
                 />
                 {form.formState.errors.confirmPassword && (

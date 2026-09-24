@@ -21,6 +21,7 @@ interface AdminTableProps<T> {
   isLoading?: boolean;
   error?: string;
   searchKey?: keyof T | ((row: T) => string);
+  toolbar?: React.ReactNode;
 }
 
 type SortingState = { id: string; desc: boolean }[];
@@ -59,6 +60,7 @@ export function AdminTable<T extends { id: string }>({
   isLoading = false,
   error,
   searchKey,
+  toolbar,
 }: AdminTableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [pagination, setPagination] = useState<PaginationState>({
@@ -99,9 +101,9 @@ export function AdminTable<T extends { id: string }>({
     <div className="rounded-app-lg border border-border bg-surface overflow-hidden">
       {/* Toolbar */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 border-b border-border">
-        <div className="flex items-center gap-3 w-full sm:w-auto">
-          <div className="relative flex-1 max-w-xs">
-            <SearchIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+        <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+          <div className="relative w-full sm:w-80 shrink-0">
+            <SearchIcon className="absolute start-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <Input
               type="search"
               placeholder="جستجو..."
@@ -110,10 +112,11 @@ export function AdminTable<T extends { id: string }>({
                 setGlobalFilter(e.target.value);
                 setPagination((prev) => ({ ...prev, pageIndex: 0 }));
               }}
-              className="pl-10 pr-4 py-2"
+              className="ps-10 pe-10 py-2"
               aria-label="جستجو در جدول"
             />
           </div>
+          {toolbar}
           {onCreate && (
             <Button onClick={onCreate} className="whitespace-nowrap">
               <PlusIcon className="size-4" />

@@ -297,6 +297,7 @@ const pieChartOptions = {
   plugins: {
     legend: {
       position: "bottom" as const,
+      rtl: true,
     },
     tooltip: {
       enabled: true,
@@ -318,6 +319,7 @@ const donutChartOptions = {
   plugins: {
     legend: {
       position: "bottom" as const,
+      rtl: true,
     },
     tooltip: {
       enabled: true,

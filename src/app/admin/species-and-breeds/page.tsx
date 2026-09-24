@@ -145,7 +145,7 @@ export default function SpeciesAndBreedsList() {
             
 {/* Breeds List (shown when expanded) */}
             {expandedSpeciesId === species.id && (
-              <div className="border-t border-border bg-muted/50 pl-4">
+              <div className="border-t border-border bg-muted/50 ps-4">
                 <div className="flex items-center justify-between px-4 py-3 bg-muted/50">
                   <div className="flex-1">
                     <span className="font-medium">نژادهای این گونه</span>

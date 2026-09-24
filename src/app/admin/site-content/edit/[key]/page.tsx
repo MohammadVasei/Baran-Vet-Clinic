@@ -22,6 +22,16 @@ interface HourRow {
   time: string;
 }
 
+const LATIN_CONTENT_KEYS = new Set([
+  'phoneHref',
+  'mobile1Href',
+  'mobile1WhatsApp',
+  'mobile2Href',
+  'mobile2WhatsApp',
+  'instagramUrl',
+  'threadsUrl',
+]);
+
 const CLINIC_FIELDS: { key: string; label: string; hint?: string }[] = [
   { key: 'name', label: 'نام کلینیک' },
   { key: 'brand', label: 'برند' },
@@ -169,7 +179,7 @@ export default function SiteContentEditPage() {
                   value={formData[field.key] ?? ''}
                   onChange={(event) => setField(field.key, event.target.value)}
                   className="mt-2"
-                  dir="ltr"
+                  dir={LATIN_CONTENT_KEYS.has(field.key) ? 'ltr' : undefined}
                 />
               </div>
             ))}

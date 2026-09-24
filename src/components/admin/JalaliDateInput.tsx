@@ -9,7 +9,10 @@ interface JalaliDateInputProps {
   onChange: (value: string) => void;
   id?: string;
   name?: string;
+  placeholder?: string;
+  ariaLabel?: string;
   className?: string;
+  containerClassName?: string;
 }
 
 export function JalaliDateInput({
@@ -17,7 +20,10 @@ export function JalaliDateInput({
   onChange,
   id,
   name,
+  placeholder,
+  ariaLabel,
   className = '',
+  containerClassName = 'w-full',
 }: JalaliDateInputProps) {
   const selectedDate = value
     ? new Date(`${value}T12:00:00.000Z`)
@@ -35,9 +41,11 @@ export function JalaliDateInput({
       locale={persian_fa}
       format="YYYY/MM/DD"
       inputClass={`flex h-10 w-full rounded-app border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring ${className}`}
-      containerClassName="w-full"
+      containerClassName={containerClassName}
       id={id}
       name={name}
+      placeholder={placeholder}
+      aria-label={ariaLabel}
     />
   );
 }

@@ -199,6 +199,7 @@ export default function AccountProfilePage() {
                   id="full_name"
                   placeholder="محمد محمدی"
                   className="pr-10"
+                  dir="ltr"
                   disabled={loading}
                 />
               </div>
@@ -214,6 +215,7 @@ export default function AccountProfilePage() {
                   type="email"
                   placeholder="example@email.com"
                   className="pr-10"
+                  dir="ltr"
                   disabled={loading || true} // Email change requires verification
                 />
               </div>
@@ -255,6 +257,7 @@ export default function AccountProfilePage() {
                   type={showCurrentPassword ? "text" : "password"}
                   placeholder="رمز عبور فعلی"
                   className="pr-10"
+                  dir="ltr"
                   disabled={loading}
                 />
                 <button
@@ -280,6 +283,7 @@ export default function AccountProfilePage() {
                   type={showNewPassword ? "text" : "password"}
                   placeholder="حداقل ۶ کاراکتر"
                   className="pr-10"
+                  dir="ltr"
                   disabled={loading}
                 />
                 <button
@@ -305,6 +309,7 @@ export default function AccountProfilePage() {
                   type={showNewPassword ? "text" : "password"}
                   placeholder="تکرار رمز عبور جدید"
                   className="pr-10"
+                  dir="ltr"
                   disabled={loading}
                 />
               </div>

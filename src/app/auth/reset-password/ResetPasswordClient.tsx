@@ -137,6 +137,7 @@ export function ResetPasswordClient({ type }: { type?: string | null }) {
                     type="email"
                     placeholder="example@email.com"
                     className="pr-10"
+                    dir="ltr"
                     disabled={loading}
                   />
                   {requestForm.formState.errors.email && (
@@ -163,6 +164,7 @@ export function ResetPasswordClient({ type }: { type?: string | null }) {
                     type={showPassword ? "text" : "password"}
                     placeholder="حداقل ۶ کاراکتر"
                     className="pr-10"
+                    dir="ltr"
                     disabled={loading}
                   />
                   <button
@@ -189,6 +191,7 @@ export function ResetPasswordClient({ type }: { type?: string | null }) {
                     type={showPassword ? "text" : "password"}
                     placeholder="تکرار رمز عبور"
                     className="pr-10"
+                    dir="ltr"
                     disabled={loading}
                   />
                   {resetForm.formState.errors.confirmPassword && (

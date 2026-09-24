@@ -3,8 +3,10 @@ export const dynamic = "force-dynamic";
 
 import { useList, useNavigation, useCan } from "@refinedev/core";
 import { AdminTable } from "@/components/admin/AdminTable";
-import { EyeIcon, TruckIcon, CheckCircleIcon, XCircleIcon, ClockIcon, CreditCardIcon } from "@/components/icons";
+import { JalaliDateInput } from "@/components/admin/JalaliDateInput";
+import { EyeIcon, TruckIcon, CheckCircleIcon, XCircleIcon, ClockIcon, CreditCardIcon, XIcon } from "@/components/icons";
 import { formatPrice } from "@/lib/products";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { PageHelp } from "@/components/admin/PageHelp";
 
@@ -166,57 +168,58 @@ export function OrdersList() {
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-4 p-4 rounded-app border border-border bg-surface">
-        <div className="flex flex-wrap gap-3">
-          <select
-            value={filters.status || ""}
-            onChange={(e) => setFilters({ ...filters, status: e.target.value || "" })}
-            className="px-3 py-2 rounded-app border border-border bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-          >
-            <option value="">همه وضعیت‌ها</option>
-            <option value="pending">در انتظار پرداخت</option>
-            <option value="paid">پرداخت شده</option>
-            <option value="failed">ناموفق</option>
-            <option value="shipped">ارسال شده</option>
-            <option value="delivered">تحویل داده شده</option>
-            <option value="fulfilled">تحویل داده شده</option>
-            <option value="cancelled">لغو شده</option>
-          </select>
-
-          <input
-            type="date"
-            value={dateRange.from || ""}
-            onChange={(e) => setDateRange({ ...dateRange, from: e.target.value || undefined })}
-            className="px-3 py-2 rounded-app border border-border bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-            placeholder="از تاریخ"
-          />
-          <input
-            type="date"
-            value={dateRange.to || ""}
-            onChange={(e) => setDateRange({ ...dateRange, to: e.target.value || undefined })}
-            className="px-3 py-2 rounded-app border border-border bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-            placeholder="تا تاریخ"
-          />
-        </div>
-        <div className="flex gap-2">
-          <button
-            onClick={() => {
-              setFilters({});
-              setDateRange({});
-              query.refetch();
-            }}
-            className="px-3 py-2 rounded-app border border-border text-sm hover:bg-muted transition-colors"
-          >
-            پاک کردن فیلترها
-          </button>
-        </div>
-      </div>
-
       <AdminTable
         columns={columns}
         data={(result?.data as OrderRow[]) || []}
         isLoading={query.isLoading}
+        toolbar={
+          <>
+            <select
+              value={filters.status || ""}
+              onChange={(e) => setFilters({ ...filters, status: e.target.value || "" })}
+              className="h-10 px-3 py-2 rounded-app border border-border bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              aria-label="فیلتر وضعیت سفارش"
+            >
+              <option value="">همه وضعیت‌ها</option>
+              <option value="pending">در انتظار پرداخت</option>
+              <option value="paid">پرداخت شده</option>
+              <option value="failed">ناموفق</option>
+              <option value="shipped">ارسال شده</option>
+              <option value="delivered">تحویل داده شده</option>
+              <option value="fulfilled">تحویل داده شده</option>
+              <option value="cancelled">لغو شده</option>
+            </select>
+
+            <JalaliDateInput
+              value={dateRange.from || ""}
+              onChange={(value) => setDateRange({ ...dateRange, from: value || undefined })}
+              placeholder="از تاریخ"
+              ariaLabel="از تاریخ شمسی"
+              containerClassName="w-auto max-w-[132px]"
+            />
+            <JalaliDateInput
+              value={dateRange.to || ""}
+              onChange={(value) => setDateRange({ ...dateRange, to: value || undefined })}
+              placeholder="تا تاریخ"
+              ariaLabel="تا تاریخ شمسی"
+              containerClassName="w-auto max-w-[132px]"
+            />
+
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                setFilters({});
+                setDateRange({});
+                query.refetch();
+              }}
+            >
+              <XIcon className="size-4" />
+              پاک کردن فیلترها
+            </Button>
+          </>
+        }
       />
 
       {query.isError && (

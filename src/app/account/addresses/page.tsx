@@ -239,6 +239,7 @@ export default function AccountAddressesPage() {
                 {...form.register("label")}
                 id="label"
                 placeholder="مثلا: خانه، محل کار"
+                dir="ltr"
               />
             </div>
 
@@ -248,6 +249,7 @@ export default function AccountAddressesPage() {
                 {...form.register("recipient_name")}
                 id="recipient_name"
                 placeholder="محمد محمدی"
+                dir="ltr"
               />
               {form.formState.errors.recipient_name && (
                 <p className="text-sm text-red-600">{form.formState.errors.recipient_name.message}</p>
@@ -274,6 +276,7 @@ export default function AccountAddressesPage() {
                   {...form.register("province")}
                   id="province"
                   placeholder="تهران"
+                  dir="ltr"
                 />
                 {form.formState.errors.province && (
                   <p className="text-sm text-red-600">{form.formState.errors.province.message}</p>
@@ -285,6 +288,7 @@ export default function AccountAddressesPage() {
                   {...form.register("city")}
                   id="city"
                   placeholder="تهران"
+                  dir="ltr"
                 />
                 {form.formState.errors.city && (
                   <p className="text-sm text-red-600">{form.formState.errors.city.message}</p>
@@ -298,6 +302,7 @@ export default function AccountAddressesPage() {
                 {...form.register("address_line")}
                 id="address_line"
                 placeholder="خیابان، کوچه، پلاک، واحد"
+                dir="ltr"
               />
               {form.formState.errors.address_line && (
                 <p className="text-sm text-red-600">{form.formState.errors.address_line.message}</p>
