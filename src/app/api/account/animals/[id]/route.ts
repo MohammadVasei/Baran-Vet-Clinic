@@ -58,10 +58,11 @@ const [recordsRes, remindersRes, historyRes] = await Promise.all([
          .order('performed_at', { ascending: false }),
        supabaseAdmin
          .from('reminders')
-         .select('id,type,title,due_date,status,priority')
+         .select('id,type,title,due_date,due_time,status,priority')
          .eq('animal_id', id)
          .in('status', ['pending', 'due', 'overdue'])
-         .order('due_date', { ascending: true }),
+         .order('due_date', { ascending: true })
+         .order('due_time', { ascending: true }),
        supabaseAdmin
          .from('notes_history')
          .select('id,entity_type,author_id,content,created_at')

@@ -19,6 +19,7 @@ import {
   REMINDER_TYPE_LABELS,
   getAnimalAge,
   formatJalaliDate,
+  formatReminderDue,
 } from "@/lib/animals";
 
 interface Animal {
@@ -57,6 +58,7 @@ interface Reminder {
   type: string;
   title: string;
   due_date: string;
+  due_time: string | null;
   status: string;
   priority: string;
 }
@@ -372,7 +374,7 @@ export default function AccountPetDetailPage() {
                       </span>
                     </div>
                     <div className="mt-1 text-sm text-muted-foreground">
-                      موعد: <span className="font-medium text-foreground">{formatJalaliDate(reminder.due_date)}</span>
+                      موعد: <span className="font-medium text-foreground">{formatReminderDue(reminder.due_date, reminder.due_time)}</span>
                     </div>
                   </div>
                   <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full whitespace-nowrap ${statusStyle}`}>

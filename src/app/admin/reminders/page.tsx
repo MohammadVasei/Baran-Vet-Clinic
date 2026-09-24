@@ -20,7 +20,7 @@ export default function RemindersPage() {
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center gap-3"><h1 className="text-2xl font-bold text-foreground">یادآوری‌های در انتظار</h1><PageHelp id="reminders-list" /></div>
         <div className="text-sm text-muted-foreground">
-          لیست تمام یادآوری‌های ویروس خوردن، ضد intérieure، دندان‌پزشکی و دیگر موارد باريسکلینیک
+          لیست تمام یادآوری‌های واکسیناسیون، ضدانگل، دندان‌پزشکی و سایر موارد پاراکلینیک
         </div>
       </div>
       <UpcomingReminders />

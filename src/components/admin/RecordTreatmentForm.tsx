@@ -7,9 +7,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { formatJalaliDate, calculateNextReminderDate, REMINDER_INTERVAL_UNIT_LABELS } from '@/lib/animals';
+import { formatReminderDue, calculateNextReminderDate, REMINDER_INTERVAL_UNIT_LABELS } from '@/lib/animals';
 import { supabaseClient } from '@/lib/supabase-client';
 import { PageHelp } from "@/components/admin/PageHelp";
+import { JalaliDateInput } from '@/components/admin/JalaliDateInput';
 
 interface AnimalData {
   id: string;
@@ -85,6 +86,7 @@ const { options: doctors } = useSelect({
   const [definitionType, setDefinitionType] = useState<'vaccine' | 'treatment'>('vaccine');
   const [definitionId, setDefinitionId] = useState('');
   const [performedDate, setPerformedDate] = useState(() => new Date().toISOString().slice(0, 10));
+  const [reminderTime, setReminderTime] = useState('09:00');
   const [doctorId, setDoctorId] = useState('');
   const [notes, setNotes] = useState('');
   const [batch, setBatch] = useState('');
@@ -141,6 +143,7 @@ const { options: doctors } = useSelect({
       p_doctor_id: doctorId || null,
       p_notes: notes.trim() || null,
       p_details: Object.keys(details).length ? details : null,
+      p_due_time: reminderTime || '09:00',
     });
 
     setSubmitting(false);
@@ -150,9 +153,9 @@ const { options: doctors } = useSelect({
       return;
     }
 
-    const resultData = (data as { next_reminder_date: string | null; title: string }) || {};
+    const resultData = (data as { next_reminder_date: string | null; next_reminder_time: string | null; title: string }) || {};
     const nextReminder = resultData.next_reminder_date
-      ? formatJalaliDate(resultData.next_reminder_date)
+      ? formatReminderDue(resultData.next_reminder_date, resultData.next_reminder_time)
       : null;
     setSuccess({
       message: `«${resultData.title || selectedDefinition?.name}» با موفقیت ثبت شد.`,
@@ -231,7 +234,7 @@ const { options: doctors } = useSelect({
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <Label htmlFor="performed-date">تاریخ انجام <span className="text-destructive">*</span></Label>
-            <Input id="performed-date" type="date" value={performedDate} onChange={(event) => setPerformedDate(event.target.value)} required className="mt-2" />
+            <JalaliDateInput id="performed-date" value={performedDate} onChange={setPerformedDate} ariaLabel="تاریخ انجام" required className="mt-2" />
           </div>
           <div>
             <Label>پزشک</Label>
@@ -241,6 +244,23 @@ const { options: doctors } = useSelect({
                 {doctors.map((d) => <SelectItem key={d.value} value={d.value}>{d.label} { (d as { role?: string }).role && `- ${ (d as { role?: string }).role }` }</SelectItem>)}
               </SelectContent>
             </Select>
+          </div>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <Label htmlFor="reminder-time">ساعت یادآوری</Label>
+            <Input
+              id="reminder-time"
+              type="time"
+              value={reminderTime}
+              onChange={(event) => setReminderTime(event.target.value)}
+              className="mt-2"
+              aria-label="ساعت یادآوری"
+            />
+            <p className="mt-1 text-xs text-muted-foreground">
+              اگر درمان دوره‌ای باشد، یادآوری در این ساعت فعال می‌شود (پیش‌فرض: ۰۹:۰۰).
+            </p>
           </div>
         </div>
 
@@ -262,7 +282,7 @@ const { options: doctors } = useSelect({
 
         {nextDatePreview && (
           <div className="rounded-app-lg border border-blue-100 bg-blue-50 p-4 text-sm text-blue-700">
-            یادآوری بعدی برای «{selectedDefinition?.name}»: <span className="font-bold">{formatJalaliDate(nextDatePreview)}</span>
+            یادآوری بعدی برای «{selectedDefinition?.name}»: <span className="font-bold">{formatReminderDue(nextDatePreview, reminderTime)}</span>
           </div>
         )}
       </div>

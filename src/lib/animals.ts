@@ -37,6 +37,13 @@ const JALALI_MONTHS = [
   'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند',
 ];
 
+const FA_DIGITS = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+
+/** Convert digits in a string to Persian digits (preserves leading zeros). */
+export function toPersianDigits(value: string | number | null | undefined): string {
+  return String(value ?? '').replace(/\d/g, (d) => FA_DIGITS[Number(d)]);
+}
+
 /** Format a Date as a Jalali date, e.g. «۳۰ مرداد ۱۴۰۵». */
 export function formatJalaliDate(date: Date | string | null): string {
   if (!date) return '—';
@@ -44,6 +51,23 @@ export function formatJalaliDate(date: Date | string | null): string {
   if (Number.isNaN(d.getTime())) return '—';
   const { jy, jm, jd } = toJalaali(d.getFullYear(), d.getMonth() + 1, d.getDate());
   return `${jd} ${JALALI_MONTHS[jm - 1]} ${jy}`;
+}
+
+/** Format an HH:MM[:SS] time (from a Postgres `time` column) as Persian, e.g. «۰۹:۰۰». */
+export function formatJalaliTime(time: string | null | undefined): string {
+  if (!time) return '';
+  const [h, m] = String(time).split(':');
+  if (h == null || h === '') return '';
+  const hour = toPersianDigits(h.padStart(2, '0'));
+  const minute = m != null && m !== '' ? toPersianDigits(m.padStart(2, '0')) : '';
+  return minute ? `${hour}:${minute}` : hour;
+}
+
+/** Combine a Jalali date and optional time, e.g. «۳۰ مرداد ۱۴۰۵، ساعت ۰۹:۰۰». */
+export function formatReminderDue(dueDate: Date | string | null, dueTime?: string | null): string {
+  const date = formatJalaliDate(dueDate);
+  const time = formatJalaliTime(dueTime);
+  return time ? `${date}، ساعت ${time}` : date;
 }
 
 /** Human age from a birth date; returns '—' when the birth date is unknown. */
