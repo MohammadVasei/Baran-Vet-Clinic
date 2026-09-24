@@ -21,7 +21,7 @@ export default async function CheckoutFailedPage({ searchParams }: CheckoutFaile
   if (order_id) {
     const { data } = await supabaseAdmin
       .from("orders")
-      .select("id, customer_name, customer_phone, total_rial, status, created_at, order_items(quantity,unit_price_rial,product_id,products(name,images,category))")
+      .select("id, customer_name, customer_phone, total_rial, status, created_at, order_items(quantity,unit_price_rial,product_id,product_name,selling_unit,products(name,images,category))")
       .eq("id", order_id)
       .single();
     order = data;

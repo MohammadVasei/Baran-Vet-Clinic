@@ -4,6 +4,7 @@ import { useList } from '@refinedev/core';
 import Link from 'next/link';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { EditIcon } from '@/components/icons';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 const KEY_LABELS: Record<string, string> = {
   clinic: 'اطلاعات کلینیک',
@@ -79,7 +80,7 @@ export default function SiteContentList() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold text-foreground">محتوا و اطلاعات کلینیک</h1>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">محتوا و اطلاعات کلینیک</h1><PageHelp id="site-content-list" /></div>
         <p className="text-muted-foreground mt-1">
           بخش‌ای که اطلاعات روی سایت از آن خوانده می‌شود. «اطلاعات کلینیک» فرم اختصاصی و بقیه با ویرایشگر JSON دارند.
         </p>

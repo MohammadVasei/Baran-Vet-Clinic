@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 export default function BreedCreatePage() {
   const { mutateAsync: createBreed, mutation } = useCreate();
@@ -38,7 +39,7 @@ export default function BreedCreatePage() {
   return (
     <form onSubmit={submit} className="mx-auto max-w-2xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold text-foreground">افزودن نژاد</h1>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">افزودن نژاد</h1><PageHelp id="breeds-create" /></div>
         <p className="mt-1 text-muted-foreground">نژاد جدیدی را به یک گونه اضافه کنید.</p>
       </div>
 

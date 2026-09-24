@@ -19,7 +19,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
     const { data } = await supabaseAdmin
       .from("orders")
       .select(
-        "id, customer_name, total_rial, status, zarinpal_ref_id, created_at, order_items(quantity,unit_price_rial,product_id,products(name,images,category))"
+        "id, customer_name, total_rial, status, zarinpal_ref_id, created_at, order_items(quantity,unit_price_rial,product_id,product_name,selling_unit,products(name,images,category))"
       )
       .eq("id", order_id)
       .single();

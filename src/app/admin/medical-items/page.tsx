@@ -6,6 +6,7 @@ import { AdminTable } from '@/components/admin/AdminTable';
 import { EditIcon, TrashIcon } from '@/components/icons';
 import { formatReminderInterval, TREATMENT_CATEGORY_LABELS } from '@/lib/animals';
 import { MedicalItemsTabSwitcher } from '@/components/admin/MedicalItemsTabSwitcher';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface VaccineRow {
   id: string;
@@ -229,9 +230,9 @@ export default function MedicalItemsPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">
             {activeTab === 'vaccines' ? 'مدیریت واکسن‌ها' : 'انواع درمان'}
-          </h1>
+          </h1><PageHelp id="medical-items-list" /></div>
           <p className="text-muted-foreground mt-1">
             {activeTab === 'vaccines' 
               ? 'کاتالوگ واکسن‌های موجود در کلینیک به تفکیک گونه' 

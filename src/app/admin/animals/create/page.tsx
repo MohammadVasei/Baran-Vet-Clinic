@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { ANIMAL_SEXES, ANIMAL_SEX_LABELS, normalizeDigits } from '@/lib/animals';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 export default function AnimalCreatePage() {
   const { mutateAsync: createAnimal, mutation } = useCreate();
@@ -72,7 +73,7 @@ export default function AnimalCreatePage() {
   return (
     <form onSubmit={submit} className="mx-auto max-w-3xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold text-foreground">افزودن حیوان</h1>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">افزودن حیوان</h1><PageHelp id="animals-create" /></div>
         <p className="mt-1 text-muted-foreground">
           پرونده پزشکی جدید برای یک حیوان بسازید. تلفن صاحب برای مشتری‌های بدون حساب کاربری الزامی است.
         </p>

@@ -2,6 +2,7 @@
 
 import { UpcomingReminders } from '@/components/admin/UpcomingReminders';
 import { useCan } from '@refinedev/core';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 export default function RemindersPage() {
   const canList = useCan({ resource: 'reminders', action: 'list' });
@@ -17,7 +18,7 @@ export default function RemindersPage() {
   return (
     <div className="p-6 lg:p-8">
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-foreground">یادآوری‌های در انتظار</h1>
+        <div className="flex items-center gap-3"><h1 className="text-2xl font-bold text-foreground">یادآوری‌های در انتظار</h1><PageHelp id="reminders-list" /></div>
         <div className="text-sm text-muted-foreground">
           لیست تمام یادآوری‌های ویروس خوردن، ضد intérieure، دندان‌پزشکی و دیگر موارد باريسکلینیک
         </div>

@@ -28,6 +28,8 @@ const REVALIDATE_TAGS: Record<string, string> = {
   doctors: 'cms:doctors',
   diseases: 'cms:diseases',
   testimonials: 'cms:testimonials',
+  products: 'products',
+  stock_levels: 'products',
 };
 
 const base = supabaseDataProvider(supabaseClient);

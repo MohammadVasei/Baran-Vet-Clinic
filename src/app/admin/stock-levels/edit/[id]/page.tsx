@@ -5,18 +5,20 @@ import { useNavigation, useShow, useUpdate } from '@refinedev/core';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { UNIT_LABELS, type SellingUnit } from '@/lib/products';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface StockLevelData {
   product_id: string;
   quantity_on_hand: number;
   low_stock_threshold: number;
-  products: { name: string } | null;
+  products: { name: string; selling_unit: SellingUnit | null } | null;
 }
 
 export default function StockLevelEditPage() {
   const { result, query } = useShow<StockLevelData>({
     resource: 'stock_levels',
-    meta: { idColumnName: 'product_id', select: 'product_id,quantity_on_hand,low_stock_threshold,products(name)' },
+    meta: { idColumnName: 'product_id', select: 'product_id,quantity_on_hand,low_stock_threshold,products(name,selling_unit)' },
   });
   const { mutateAsync: updateStock, mutation } = useUpdate();
   const navigation = useNavigation();
@@ -47,16 +49,19 @@ export default function StockLevelEditPage() {
     navigation.list('stock_levels');
   };
 
+  const unit = result.products?.selling_unit ?? ('PIECE' as const);
+  const unitLabel = UNIT_LABELS[unit] || unit;
+
   return (
     <form onSubmit={submit} className="mx-auto max-w-xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold">ویرایش موجودی</h1>
-        <p className="mt-1 text-muted-foreground">محصول: <span className="font-medium text-foreground">{result.products?.name || '—'}</span></p>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold">ویرایش موجودی</h1><PageHelp id="stock-levels-edit" /></div>
+        <p className="mt-1 text-muted-foreground">محصول: <span className="font-medium text-foreground">{result.products?.name || '—'}</span> <span className="text-xs">({unitLabel})</span></p>
       </div>
 
       <div className="space-y-5 rounded-app-lg border border-border bg-surface p-6">
         <div>
-          <Label htmlFor="stock-quantity">موجودی انبار <span className="text-destructive">*</span></Label>
+          <Label htmlFor="stock-quantity">موجودی انبار ({unitLabel}) <span className="text-destructive">*</span></Label>
           <Input
             id="stock-quantity"
             type="number"
@@ -78,7 +83,7 @@ export default function StockLevelEditPage() {
             onChange={(e) => setLowStockThreshold(e.target.value)}
             className="mt-2"
           />
-          <p className="mt-1 text-sm text-muted-foreground">وقتی موجودی به این عدد یا کمتر برسد، در لیست به عنوان «کم» نشان داده می‌شود.</p>
+          <p className="mt-1 text-sm text-muted-foreground">وقتی موجودی به این عدد ({unit}) یا کمتر برسد، در لیست به عنوان «کم» نشان داده می‌شود.</p>
         </div>
 
         <div className="pt-4 border-t border-border">

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useList, useNavigation, useCan } from '@refinedev/core';
 import { CalendarIcon, EditIcon, PlusIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface Doctor {
   id: string;
@@ -44,7 +45,7 @@ const { result: doctorResult, query: doctorQuery } = useList<Doctor>({
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">مدیریت پزشکان</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">مدیریت پزشکان</h1><PageHelp id="doctors-list" /></div>
           <p className="mt-1 text-muted-foreground">پزشکان، خدمات مسئول و زمان‌های غیرفعال را مدیریت کنید.</p>
         </div>
         {canCreate.data && (

@@ -7,6 +7,7 @@ import { CalendarIcon, EyeIcon, XIcon } from '@/components/icons';
 import { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface BookingRow {
   id: string;
@@ -312,7 +313,7 @@ export function BookingsList() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">مدیریت نوبت‌ها</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">مدیریت نوبت‌ها</h1><PageHelp id="bookings-list" /></div>
           <p className="text-muted-foreground mt-1">لیست تمام نوبت‌های رزرو شده</p>
         </div>
       </div>

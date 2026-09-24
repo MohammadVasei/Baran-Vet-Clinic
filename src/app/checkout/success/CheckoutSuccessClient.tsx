@@ -6,7 +6,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
 import Link from "next/link";
 import { CheckCircleIcon, PackageIcon, MapPinIcon, PhoneIcon, CreditCardIcon, ArrowIcon, ClockIcon, RotateCcwIcon, ShieldIcon, TruckIcon, UserIcon } from "@/components/icons";
-import { formatPrice, CATEGORY_LABELS } from "@/lib/products";
+import { formatPrice, formatQuantity, CATEGORY_LABELS, UNIT_LABELS, type SellingUnit } from "@/lib/products";
 import { useCms } from "@/context/CmsContext";
 
 interface Order {
@@ -21,6 +21,8 @@ interface Order {
     quantity: number;
     unit_price_rial: number;
     product_id: string;
+    product_name: string | null;
+    selling_unit: SellingUnit | null;
     products: Array<{
       name: string;
       images: string[] | null;
@@ -120,12 +122,14 @@ export function CheckoutSuccessClient({ order }: CheckoutSuccessClientProps) {
               <div className="space-y-3">
                 {order.order_items.map((item, idx) => {
                   const product = item.products?.[0];
+                  const unit = item.selling_unit ?? 'PIECE';
                   const lineTotal = item.unit_price_rial * item.quantity;
+                  const unitDenominator = UNIT_LABELS[unit] ? ` / ${UNIT_LABELS[unit]}` : "";
                   return (
                     <div key={idx} className="flex gap-4 p-4 rounded-app border border-border bg-background">
                       <div className="relative w-16 h-16 flex-shrink-0 rounded-app overflow-hidden bg-muted">
                         {product?.images?.[0] ? (
-                          <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
+                          <img src={product.images[0]} alt={item.product_name ?? product?.name ?? "محصول"} className="w-full h-full object-cover" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center">
                             <PackageIcon className="size-8 text-muted-foreground" />
@@ -133,14 +137,14 @@ export function CheckoutSuccessClient({ order }: CheckoutSuccessClientProps) {
                         )}
                       </div>
                       <div className="flex-1 min-w-0 space-y-1">
-                        <h4 className="font-medium text-foreground truncate">{product?.name || "محصول نامشخص"}</h4>
+                        <h4 className="font-medium text-foreground truncate">{item.product_name ?? product?.name ?? "محصول نامشخص"}</h4>
                         <p className="text-sm text-muted-foreground">
                           {product?.category ? CATEGORY_LABELS[product.category] || product.category : "—"}
                         </p>
                         <div className="flex items-center gap-4 text-sm">
-                          <span className="text-muted-foreground">تعداد: {item.quantity}</span>
+                          <span className="text-muted-foreground">مقدار: {formatQuantity(item.quantity, unit)}</span>
                           <span className="font-display font-bold text-primary-text">
-                            {formatPrice(lineTotal)} <span className="font-body text-xs">ریال</span>
+                            {formatPrice(lineTotal)} <span className="font-body text-xs">ریال{unitDenominator}</span>
                           </span>
                         </div>
                       </div>

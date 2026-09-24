@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { PlusIcon, XIcon } from '@/components/icons';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface SiteContentRow {
   id: string;
@@ -141,7 +142,7 @@ export default function SiteContentEditPage() {
   return (
     <form onSubmit={submit} className="mx-auto max-w-3xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold text-foreground">ویرایش محتوا</h1>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">ویرایش محتوا</h1><PageHelp id="site-content-edit" /></div>
         <p className="mt-1 font-mono text-sm text-muted-foreground">{contentKey}</p>
         <p className="mt-1 text-muted-foreground">
           {isClinic

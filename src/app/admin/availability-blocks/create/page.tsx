@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { JalaliDateInput } from '@/components/admin/JalaliDateInput';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface FormValues {
   doctor_id: string;
@@ -114,7 +115,7 @@ export function AvailabilityBlockCreate() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">افزودن بازه غیرفعال</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">افزودن بازه غیرفعال</h1><PageHelp id="availability-blocks-create" /></div>
           <p className="text-muted-foreground mt-1">مسدود کردن بازه زمانی برای پزشک</p>
         </div>
         <div className="flex gap-2">

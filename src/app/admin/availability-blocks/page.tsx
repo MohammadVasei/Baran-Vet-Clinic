@@ -5,6 +5,7 @@ import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
 import { useMemo } from 'react';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { EditIcon, TrashIcon } from '@/components/icons';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 const reasonLabels: Record<string, string> = {
   holiday: 'تعطیلی',
@@ -169,7 +170,7 @@ const doctors = (doctorsQuery.result?.data || []) as Array<{
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">مدیریت بازه‌های غیرفعال</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">مدیریت بازه‌های غیرفعال</h1><PageHelp id="availability-blocks-list" /></div>
           <p className="text-muted-foreground mt-1">لیست تمام بازه‌های زمانی مسدود شده برای پزشکان</p>
         </div>
       </div>

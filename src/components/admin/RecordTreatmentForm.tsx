@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { formatJalaliDate, calculateNextReminderDate, REMINDER_INTERVAL_UNIT_LABELS } from '@/lib/animals';
 import { supabaseClient } from '@/lib/supabase-client';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface AnimalData {
   id: string;
@@ -184,7 +185,7 @@ const { options: doctors } = useSelect({
   return (
     <form onSubmit={submit} className="mx-auto max-w-2xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold text-foreground">ثبت درمان / واکسیناسیون</h1>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">ثبت درمان / واکسیناسیون</h1><PageHelp id="animals-record-treatment" /></div>
         <p className="mt-1 text-muted-foreground">
           ثبت درمان انجام‌شده برای: <span className="font-medium text-foreground">{animal?.name}</span>
         </p>

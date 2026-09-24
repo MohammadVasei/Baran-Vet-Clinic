@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { XIcon, PlusIcon, MinusIcon, TrashIcon, ShoppingCartIcon } from "@/components/icons";
-import { formatPrice } from "@/lib/products";
+import { formatPrice, formatQuantity, getQuantityCeiling, UNIT_LABELS } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
 import { useGSAP, gsap } from "@/lib/gsap";
 import { revealUp, prefersReducedMotion } from "@/lib/motion";
@@ -121,31 +121,46 @@ export function CartDrawer() {
                     <div className="flex-1 min-w-0 space-y-2">
                       <h4 className="font-medium text-foreground truncate">{item.name}</h4>
                       <p className="text-sm text-primary-text font-display">
-                        {formatPrice(item.price_rial)} <span className="font-body text-xs">ریال</span>
+                        {formatPrice(item.price_rial)} <span className="font-body text-xs">ریال{UNIT_LABELS[item.selling_unit as keyof typeof UNIT_LABELS] ? `/ ${UNIT_LABELS[item.selling_unit as keyof typeof UNIT_LABELS]}` : ''}</span>
                       </p>
                       <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => updateQuantity(item.productId, item.quantity - 1)}
-                          disabled={item.quantity <= 1}
-                          className="p-1.5 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed"
-                          aria-label="کاهش تعداد"
-                        >
-                          <MinusIcon className="size-4" />
-                        </button>
-                        <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
-                        <button
-                          onClick={() => updateQuantity(item.productId, item.quantity + 1)}
-                          disabled={item.stock != null && item.quantity >= item.stock}
-                          className="p-1.5 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed"
-                          aria-label="افزایش تعداد"
-                        >
-                          <PlusIcon className="size-4" />
-                        </button>
-                        {item.stock != null && (
-                          <span className="text-[11px] text-muted-foreground">
-                            موجودی: {item.stock}
-                          </span>
-                        )}
+                        {(() => {
+                          const ceiling = getQuantityCeiling({
+                            stock: item.stock ?? Infinity,
+                            selling_unit: item.selling_unit,
+                            max_quantity: item.max_quantity,
+                          });
+                          const step = item.quantity_step || 1;
+                          const minQty = item.min_quantity || 1;
+                          return (
+                            <>
+                              <button
+                                onClick={() => updateQuantity(item.productId, item.quantity - step)}
+                                disabled={item.quantity <= minQty}
+                                className="p-1.5 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed"
+                                aria-label="کاهش مقدار"
+                              >
+                                <MinusIcon className="size-4" />
+                              </button>
+                              <span className="w-12 text-center text-sm font-medium">
+                                {formatQuantity(item.quantity, item.selling_unit)}
+                              </span>
+                              <button
+                                onClick={() => updateQuantity(item.productId, item.quantity + step)}
+                                disabled={item.quantity >= ceiling}
+                                className="p-1.5 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed"
+                                aria-label="افزایش مقدار"
+                              >
+                                <PlusIcon className="size-4" />
+                              </button>
+                              {item.stock != null && (
+                                <span className="text-[11px] text-muted-foreground">
+                                  موجودی: {formatQuantity(item.stock, item.selling_unit)}
+                                </span>
+                              )}
+                            </>
+                          );
+                        })()}
                         <button
                           onClick={() => removeItem(item.productId)}
                           className="ml-auto p-1.5 rounded hover:bg-red-50 hover:text-red-600 transition-colors"

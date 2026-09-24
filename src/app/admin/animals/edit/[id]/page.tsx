@@ -16,6 +16,8 @@ import {
   normalizeDigits,
 } from '@/lib/animals';
 
+import { PageHelp } from "@/components/admin/PageHelp";
+
 interface AnimalData {
   id: string;
   name: string;
@@ -121,7 +123,7 @@ export default function AnimalEditPage() {
   return (
     <form onSubmit={submit} className="mx-auto max-w-3xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold text-foreground">ویرایش {result.name}</h1>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">ویرایش {result.name}</h1><PageHelp id="animals-edit" /></div>
         <p className="mt-1 text-muted-foreground">
           سن: {getAnimalAge(result.date_of_birth)} — سابقه پزشکی این حیوان همیشه محفوظ می‌ماند.
         </p>

@@ -5,13 +5,16 @@ import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
 import Link from 'next/link';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { EditIcon, TrashIcon, SettingsIcon, PackageIcon } from '@/components/icons';
+import { UNIT_LABELS, isWeightUnit, formatQuantity, type SellingUnit } from '@/lib/products';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 export function ProductsList() {
   const listResult = useList({
     resource: 'products',
     sorters: [{ field: 'display_order', order: 'asc' }],
+    pagination: { pageSize: 500 },
     meta: {
-      select: 'id,name,description,price_rial,category,images,display_order,is_active,is_featured,created_at,stock_levels(quantity_on_hand,low_stock_threshold)',
+      select: 'id,name,description,price_rial,category,images,display_order,is_active,is_featured,selling_unit,created_at,stock_levels(quantity_on_hand,low_stock_threshold)',
     },
   });
   const { result, query } = listResult;
@@ -41,18 +44,20 @@ export function ProductsList() {
     display_order: number;
     is_active: boolean;
     is_featured: boolean;
+    selling_unit: SellingUnit | null;
     stock_levels?: { quantity_on_hand: number; low_stock_threshold: number } | null;
   }
 
-  const stockBadge = (stock: { quantity_on_hand: number; low_stock_threshold: number }) => {
+  const stockBadge = (stock: { quantity_on_hand: number; low_stock_threshold: number }, unit: SellingUnit | null) => {
     const { quantity_on_hand, low_stock_threshold } = stock;
+    const u = unit ?? 'PIECE';
     if (quantity_on_hand === 0) {
       return <span className="px-2 py-1 text-xs rounded-full bg-red-100 text-red-700">ناموجود</span>;
     }
     if (quantity_on_hand <= low_stock_threshold) {
-      return <span className="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">کم ({quantity_on_hand})</span>;
+      return <span className="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">کم ({formatQuantity(quantity_on_hand, u)})</span>;
     }
-    return <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">موجود ({quantity_on_hand})</span>;
+    return <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">موجود ({formatQuantity(quantity_on_hand, u)})</span>;
   };
 
   const columns = [
@@ -84,6 +89,19 @@ export function ProductsList() {
       },
     },
     {
+      accessorKey: 'selling_unit' as keyof ProductRow,
+      header: 'واحد فروش',
+      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
+        const unit = getValue('selling_unit') as SellingUnit | null;
+        if (!unit) return <span className="text-muted-foreground">—</span>;
+        return (
+          <span className={`px-2 py-1 text-xs rounded-full ${isWeightUnit(unit) ? 'bg-blue-100 text-blue-700' : 'bg-muted'}`}>
+            {UNIT_LABELS[unit] || unit}
+          </span>
+        );
+      },
+    },
+    {
       accessorKey: 'images' as keyof ProductRow,
       header: 'تصاویر',
       cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
@@ -100,8 +118,9 @@ export function ProductsList() {
       header: 'موجودی',
       cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
         const stock = getValue('stock_levels') as { quantity_on_hand: number; low_stock_threshold: number } | null;
+        const unit = getValue('selling_unit') as SellingUnit | null;
         if (!stock) return <span className="text-muted-foreground">—</span>;
-        return stockBadge(stock);
+        return stockBadge(stock, unit);
       },
     },
     {
@@ -150,7 +169,7 @@ export function ProductsList() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">مدیریت محصولات</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">مدیریت محصولات</h1><PageHelp id="products-list" /></div>
           <p className="text-muted-foreground mt-1">لیست تمام محصولات پت‌شاپ — مدیریت موجودی از پنل موجودی انبار</p>
         </div>
         <Link

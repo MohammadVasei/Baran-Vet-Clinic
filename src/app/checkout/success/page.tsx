@@ -24,7 +24,7 @@ export default async function CheckoutSuccessPage({ searchParams }: CheckoutSucc
 
   const { data: order, error } = await supabaseAdmin
     .from("orders")
-    .select("id, customer_name, customer_phone, total_rial, zarinpal_ref_id, status, created_at, order_items(quantity,unit_price_rial,product_id,products(name,images,category))")
+    .select("id, customer_name, customer_phone, total_rial, zarinpal_ref_id, status, created_at, order_items(quantity,unit_price_rial,product_id,product_name,selling_unit,products(name,images,category))")
     .eq("id", order_id)
     .single();
 

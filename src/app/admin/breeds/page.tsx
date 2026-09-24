@@ -4,6 +4,7 @@ export const dynamic = 'force-dynamic';
 import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { EditIcon, TrashIcon } from '@/components/icons';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface BreedRow {
   id: string;
@@ -84,7 +85,7 @@ export default function BreedsList() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">مدیریت نژادها</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">مدیریت نژادها</h1><PageHelp id="breeds-list" /></div>
           <p className="text-muted-foreground mt-1">نژادهای هر گونه؛ بدون نیاز به تغییر کد قابل افزودن هستند.</p>
         </div>
       </div>

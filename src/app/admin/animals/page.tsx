@@ -16,6 +16,8 @@ import {
   getAnimalAge,
 } from '@/lib/animals';
 
+import { PageHelp } from "@/components/admin/PageHelp";
+
 interface AnimalRow {
   id: string;
   name: string;
@@ -161,7 +163,7 @@ export default function AnimalsList() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">حیوانات</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">حیوانات</h1><PageHelp id="animals-list" /></div>
           <p className="text-muted-foreground mt-1">جستجو و مدیریت پرونده‌های حیوانات کلینیک</p>
         </div>
         <button

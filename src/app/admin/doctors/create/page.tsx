@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface ServiceOption {
   id: string;
@@ -89,7 +90,7 @@ export default function DoctorCreatePage() {
   return (
     <form onSubmit={submit} className="mx-auto max-w-2xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold text-foreground">افزودن پزشک</h1>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">افزودن پزشک</h1><PageHelp id="doctors-create" /></div>
         <p className="mt-1 text-muted-foreground">مشخصات پزشک، اطلاعات نمایش در سایت و خدمات مسئول را تنظیم کنید.</p>
       </div>
 

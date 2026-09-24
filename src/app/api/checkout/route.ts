@@ -3,6 +3,7 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 import { z } from "zod";
 import { createPaymentRequest } from "@/lib/zarinpal";
 import { createSupabaseServerClient } from "@/lib/supabase-server";
+import { getQuantityCeiling, formatQuantity, type SellingUnit } from "@/lib/products";
 
 const CheckoutSchema = z.object({
   items: z.array(
@@ -54,7 +55,7 @@ export async function POST(request: NextRequest) {
     const productIds = data.items.map((i) => i.productId);
     const { data: products, error: productsError } = await supabaseAdmin
       .from("products")
-      .select("id, name, price_rial, is_active, stock_levels(quantity_on_hand)")
+      .select("id, name, price_rial, is_active, selling_unit, quantity_step, min_quantity, max_quantity, stock_levels(quantity_on_hand)")
       .in("id", productIds);
 
     if (productsError) {
@@ -67,7 +68,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate each item
-    const orderItems: { product_id: string; quantity: number; unit_price_rial: number }[] = [];
+    const orderItems: {
+      product_id: string;
+      quantity: number;
+      unit_price_rial: number;
+      product_name: string;
+      selling_unit: SellingUnit;
+    }[] = [];
     let total = 0;
 
     for (const item of data.items) {
@@ -93,9 +100,37 @@ const stock = stockLevels
       ? stockLevels.quantity_on_hand
       : 0
   : null; // null means no stock tracking — allow any quantity
+
+      const sellingUnit: SellingUnit = (product.selling_unit as SellingUnit | null) ?? 'PIECE';
+      const quantityStep = product.quantity_step || 1;
+      const minQuantity = product.min_quantity || 1;
+      const ceiling = getQuantityCeiling({
+        stock: stock ?? Infinity,
+        selling_unit: sellingUnit,
+        max_quantity: product.max_quantity,
+      });
+
+      if (item.quantity < minQuantity) {
+        return NextResponse.json(
+          { error: `حداقل مقدار سفارش ${product.name}، ${formatQuantity(minQuantity, sellingUnit)} است` },
+          { status: 400 }
+        );
+      }
+      if ((item.quantity - minQuantity) % quantityStep !== 0) {
+        return NextResponse.json(
+          { error: `مقدار ${product.name} باید مضربی از ${quantityStep} باشد` },
+          { status: 400 }
+        );
+      }
+      if (item.quantity > ceiling) {
+        return NextResponse.json(
+          { error: `حداکثر قابل سفارش ${product.name}، ${formatQuantity(ceiling, sellingUnit)} است` },
+          { status: 400 }
+        );
+      }
       if (stock !== null && stock < item.quantity) {
         return NextResponse.json(
-          { error: `موجودی محصول ${product.name} کافی نیست (موجود: ${stock})` },
+          { error: `موجودی محصول ${product.name} کافی نیست (موجود: ${formatQuantity(stock, sellingUnit)})` },
           { status: 409 }
         );
       }
@@ -104,6 +139,8 @@ const stock = stockLevels
         product_id: product.id,
         quantity: item.quantity,
         unit_price_rial: product.price_rial,
+        product_name: product.name,
+        selling_unit: sellingUnit,
       });
       total += product.price_rial * item.quantity;
     }

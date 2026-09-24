@@ -6,6 +6,7 @@ import { EditIcon, TrashIcon, EyeIcon, CheckIcon, XIcon } from '@/components/ico
 import { CustomChartBuilderModal } from '@/components/admin/CustomChartBuilderModal';
 import { supabaseClient } from '@/lib/supabase-client';
 import { useState, useEffect } from 'react';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface CustomChart {
   id: string;
@@ -238,7 +239,7 @@ const handleSaveChart = async (chartData: Omit<CustomChart, "id" | "user_id">) =
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">مدیریت نمودارهای سفارشی</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">مدیریت نمودارهای سفارشی</h1><PageHelp id="custom-charts-list" /></div>
           <p className="text-muted-foreground mt-1">لیست تمام نمودارهای سفارشی که توسط کاربران ایجاد شده‌اند</p>
         </div>
         {canEdit.data && (

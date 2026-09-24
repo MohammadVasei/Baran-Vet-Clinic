@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useReducer, useEffect, ReactNode } from "react";
+import { getQuantityCeiling, snapToStep, type SellingUnit } from "@/lib/products";
 
 export interface CartItem {
   productId: string;
@@ -10,12 +11,24 @@ export interface CartItem {
   image?: string;
   category?: string;
   // Available stock (quantity_on_hand) at the time the item was added.
-  // Undefined = no stock tracking → treated as unbounded (capped at MAX_QTY).
+  // Undefined = no stock tracking → treated as unbounded (capped per unit).
   stock?: number;
+  // Selling-unit + purchase grid, snapshotted onto the line (unit-aware caps).
+  selling_unit?: SellingUnit;
+  quantity_step?: number;
+  min_quantity?: number;
+  max_quantity?: number;
 }
 
-// Absolute cap on any single line's quantity even when stock is untracked.
-const MAX_QTY = 99;
+// Per-line ceiling: count units cap at 99; weight units use their own
+// technical ceiling; business max_quantity overrides stock when present.
+function itemCeiling(item: CartItem): number {
+  return getQuantityCeiling({
+    stock: item.stock ?? Infinity,
+    selling_unit: item.selling_unit,
+    max_quantity: item.max_quantity,
+  });
+}
 
 type CartState = {
   items: CartItem[];
@@ -41,18 +54,33 @@ const CART_STORAGE_KEY = "baran-cart";
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "ADD_ITEM": {
-      const toAdd =
-        action.payload.stock != null
-          ? Math.min(action.payload.quantity, action.payload.stock, MAX_QTY)
-          : Math.min(action.payload.quantity, MAX_QTY);
+      const ceiling = itemCeiling(action.payload);
+      const toAdd = Math.max(1, Math.min(action.payload.quantity, ceiling));
 
       const existingIndex = state.items.findIndex((i) => i.productId === action.payload.productId);
       if (existingIndex >= 0) {
         const existing = state.items[existingIndex];
-        const cap = Math.min(existing.stock ?? action.payload.stock ?? MAX_QTY, MAX_QTY);
+        const mergedCeiling = getQuantityCeiling({
+          stock: existing.stock ?? action.payload.stock ?? Infinity,
+          selling_unit: existing.selling_unit ?? action.payload.selling_unit,
+          max_quantity: existing.max_quantity ?? action.payload.max_quantity,
+        });
+        const merged = snapToStep(
+          existing.quantity + toAdd,
+          action.payload.quantity_step ?? existing.quantity_step ?? 1,
+          action.payload.min_quantity ?? existing.min_quantity ?? 1
+        );
         return { ...state, items: state.items.map((item, idx) =>
           idx === existingIndex
-            ? { ...item, quantity: Math.min(existing.quantity + toAdd, cap), stock: existing.stock ?? action.payload.stock }
+            ? {
+                ...item,
+                quantity: Math.min(merged, Math.max(1, mergedCeiling)),
+                stock: existing.stock ?? action.payload.stock,
+                selling_unit: item.selling_unit ?? action.payload.selling_unit,
+                quantity_step: item.quantity_step ?? action.payload.quantity_step,
+                min_quantity: item.min_quantity ?? action.payload.min_quantity,
+                max_quantity: item.max_quantity ?? action.payload.max_quantity,
+              }
             : item
         ), isOpen: true, hydrated: true };
       }
@@ -67,7 +95,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       if (action.payload.quantity <= 0) {
         return { ...state, items: state.items.filter((i) => i.productId !== action.payload.productId), hydrated: true };
       }
-      const cap = existing.stock != null ? Math.min(existing.stock, MAX_QTY) : MAX_QTY;
+      const cap = itemCeiling(existing);
       return {
         ...state,
         items: state.items.map((item) =>
@@ -89,11 +117,10 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     case "HYDRATE":
       return {
         ...state,
-        items: action.payload.map((item) =>
-          item.stock != null
-            ? { ...item, quantity: Math.max(1, Math.min(item.quantity, item.stock, MAX_QTY)) }
-            : item
-        ),
+        items: action.payload.map((item) => ({
+          ...item,
+          quantity: Math.max(1, Math.min(item.quantity, itemCeiling(item))),
+        })),
         hydrated: true,
       };
     default:

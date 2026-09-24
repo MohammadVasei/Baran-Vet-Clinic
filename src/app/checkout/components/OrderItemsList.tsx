@@ -3,6 +3,7 @@
 import { formatPrice } from "@/lib/products";
 import { TrashIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
+import type { SellingUnit } from "@/lib/products";
 import { OrderItem } from "./OrderItem";
 
 interface OrderItemsListProps {
@@ -13,6 +14,10 @@ interface OrderItemsListProps {
     quantity: number;
     image?: string;
     stock?: number;
+    selling_unit?: SellingUnit;
+    quantity_step?: number;
+    min_quantity?: number;
+    max_quantity?: number;
   }[];
   onUpdateQuantity: (productId: string, quantity: number) => void;
   onRemove: (productId: string) => void;

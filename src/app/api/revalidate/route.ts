@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidateTag, revalidatePath } from "next/cache";
-import { ALL_CMS_TAGS, CMS_TAGS } from "@/lib/cms";
+import { ALL_REVALIDATE_TAGS } from "@/lib/cms";
 import { createSupabaseServerClient } from "@/lib/supabase-server";
 
 /**
@@ -39,13 +39,15 @@ export async function POST(request: NextRequest) {
         ? [body.tags]
         : [];
 
-    const known: ReadonlySet<string> = new Set(ALL_CMS_TAGS);
-    const tags = requested.filter((t): t is (typeof ALL_CMS_TAGS)[number] =>
+    const known: ReadonlySet<string> = new Set(ALL_REVALIDATE_TAGS);
+    const tags = requested.filter((t): t is (typeof ALL_REVALIDATE_TAGS)[number] =>
       known.has(t)
     );
 
     if (body?.full) {
-      revalidatePath("/", "layout");
+      // Page-level (not layout): bump the static '/' wrapper without forcing a
+      // rebuild of the entire layout cache tree.
+      revalidatePath("/", "page");
     }
 
     for (const tag of tags) {
@@ -59,4 +61,4 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export const REVALIDATE_TAGS = CMS_TAGS;
+export const REVALIDATE_TAGS = ALL_REVALIDATE_TAGS;

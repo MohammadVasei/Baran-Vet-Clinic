@@ -20,6 +20,7 @@ interface AdminTableProps<T> {
   createLabel?: string;
   isLoading?: boolean;
   error?: string;
+  searchKey?: keyof T | ((row: T) => string);
 }
 
 type SortingState = { id: string; desc: boolean }[];
@@ -57,6 +58,7 @@ export function AdminTable<T extends { id: string }>({
   createLabel = 'افزودن',
   isLoading = false,
   error,
+  searchKey,
 }: AdminTableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [pagination, setPagination] = useState<PaginationState>({
@@ -65,7 +67,7 @@ export function AdminTable<T extends { id: string }>({
   });
   const [globalFilter, setGlobalFilter] = useState('');
 
-  const filteredData = useMemo(() => filterData(data, globalFilter), [data, globalFilter]);
+  const filteredData = useMemo(() => filterData(data, globalFilter, searchKey), [data, globalFilter, searchKey]);
 
   const sortedData = useMemo(() => {
     if (sorting.length === 0) return filteredData;
@@ -104,7 +106,10 @@ export function AdminTable<T extends { id: string }>({
               type="search"
               placeholder="جستجو..."
               value={globalFilter}
-              onChange={(e) => setGlobalFilter(e.target.value)}
+              onChange={(e) => {
+                setGlobalFilter(e.target.value);
+                setPagination((prev) => ({ ...prev, pageIndex: 0 }));
+              }}
               className="pl-10 pr-4 py-2"
               aria-label="جستجو در جدول"
             />
@@ -123,9 +128,9 @@ export function AdminTable<T extends { id: string }>({
         <table className="w-full" role="table">
           <thead className="bg-muted/50">
             <tr className="border-b border-border">
-              {columns.map((column) => (
+              {columns.map((column, colIndex) => (
                 <th
-                  key={String(column.id || column.accessorKey || column.header)}
+                  key={`${String(column.id || column.accessorKey || column.header)}-${colIndex}`}
                   className="px-4 py-3 text-right text-sm font-semibold text-foreground"
                   aria-sort={
                     column.accessorKey && sorting.find((s) => s.id === column.accessorKey)
@@ -184,8 +189,11 @@ export function AdminTable<T extends { id: string }>({
             ) : (
               paginatedData.map((row) => (
                 <tr key={row.id} className="hover:bg-muted/50 transition-colors">
-                  {columns.map((column) => (
-                    <td key={String(column.id || column.accessorKey || column.header)} className="px-4 py-3 text-sm text-foreground">
+                  {columns.map((column, colIndex) => (
+                    <td
+                      key={`${String(column.id || column.accessorKey || column.header)}-${colIndex}`}
+                      className="px-4 py-3 text-sm text-foreground"
+                    >
                       {column.cellWithMeta
                         ? column.cellWithMeta({
                             getValue: (key: string) => row[key as keyof T],

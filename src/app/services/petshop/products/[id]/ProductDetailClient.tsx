@@ -9,7 +9,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { PhoneIcon, ArrowIcon, TagIcon, ShieldIcon, TruckIcon, RotateCcwIcon, ShoppingCartIcon, CheckCircleIcon, AlertCircleIcon, XCircleIcon, ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 import { useCms } from "@/context/CmsContext";
 import type { Product } from "@/lib/products";
-import { getStockLabel, getStockColor, formatPrice, CATEGORY_LABELS, getProductImages } from "@/lib/products";
+import { getStockLabel, getStockColor, formatPrice, formatQuantity, getQuantityCeiling, snapToStep, UNIT_LABELS, CATEGORY_LABELS, getProductImages } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
 
 interface ProductDetailClientProps {
@@ -24,8 +24,11 @@ export function ProductDetailClient({
   isOutOfStock,
 }: ProductDetailClientProps) {
   const CLINIC = useCms().clinic;
+  const unit = product.selling_unit ?? 'PIECE';
+  const step = product.quantity_step || 1;
+  const minQty = product.min_quantity || 1;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(minQty);
   const root = useRef<HTMLElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();
@@ -33,6 +36,11 @@ export function ProductDetailClient({
   const { addItem, openCart, state } = useCart();
   const inCart = state.items.find((i) => i.productId === product.id)?.quantity ?? 0;
   const available = Math.max(0, product.quantity_on_hand - inCart);
+  const qualifiedMax = Math.max(minQty, getQuantityCeiling({
+    stock: available,
+    selling_unit: unit,
+    max_quantity: product.max_quantity,
+  }));
 
   useGSAP(
     () => {
@@ -57,20 +65,36 @@ export function ProductDetailClient({
       productId: product.id,
       name: product.name,
       price_rial: product.price_rial,
-      quantity,
+      quantity: snapToStep(quantity, step, minQty),
       stock: product.quantity_on_hand,
       image: images[0],
       category: product.category || undefined,
+      selling_unit: unit,
+      quantity_step: step,
+      min_quantity: minQty,
+max_quantity: product.max_quantity ?? undefined,
     });
     openCart();
   };
 
   const handleIncreaseQty = () => {
-    if (quantity < available) setQuantity((q) => q + 1);
+    setQuantity((q) => Math.min(qualifiedMax, q + step));
   };
 
   const handleDecreaseQty = () => {
-    if (quantity > 1) setQuantity((q) => q - 1);
+    setQuantity((q) => Math.max(minQty, q - step));
+  };
+
+  const handleQuantityInput = (raw: number) => {
+    if (Number.isNaN(raw)) {
+      setQuantity(minQty);
+      return;
+    }
+    setQuantity(Math.max(minQty, Math.min(qualifiedMax, Math.floor(raw))));
+  };
+
+  const handleQuantityBlur = () => {
+    setQuantity(snapToStep(quantity, step, minQty));
   };
 
   return (
@@ -172,7 +196,7 @@ export function ProductDetailClient({
                   {stockStatus === 'out_of_stock' && <XCircleIcon className="size-4" />}
                   {getStockLabel(stockStatus)}
                   {stockStatus === 'low_stock' && (
-                    <span className="ml-1 text-xs opacity-80">(فقط {product.quantity_on_hand} عدد)</span>
+                    <span className="ml-1 text-xs opacity-80">(فقط {formatQuantity(product.quantity_on_hand, unit)} موجود است)</span>
                   )}
                 </span>
               </div>
@@ -190,7 +214,7 @@ export function ProductDetailClient({
                 <span className="font-display text-3xl font-bold text-primary-text">
                   {formatPrice(product.price_rial)}
                 </span>
-                <span className="text-muted-foreground">ریال</span>
+                <span className="text-muted-foreground">ریال{UNIT_LABELS[unit] ? ` / ${UNIT_LABELS[unit]}` : ''}</span>
               </div>
 
               {/* Description */}
@@ -204,16 +228,16 @@ export function ProductDetailClient({
               <div className="product-detail-cta space-y-4 pt-4 border-t border-border">
                 <div>
                   <label htmlFor="quantity" className="block text-sm font-medium text-foreground mb-2">
-                    تعداد
+                    مقدار
                   </label>
                   <div className="flex items-center gap-3">
                     <div className="flex items-center border border-border rounded-app overflow-hidden">
                       <button
                         type="button"
                         onClick={handleDecreaseQty}
-                        disabled={quantity <= 1 || isOutOfStock}
+                        disabled={quantity <= minQty || isOutOfStock}
                         className="p-3 hover:bg-muted transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                        aria-label="کاهش تعداد"
+                        aria-label="کاهش مقدار"
                       >
                         <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                           <line x1="5" x2="19" y1="12" y2="12" />
@@ -223,22 +247,21 @@ export function ProductDetailClient({
                         type="number"
                         id="quantity"
                         value={quantity}
-                        onChange={(e) => {
-                          const val = Math.max(1, Math.min(Math.max(available, 1), Number(e.target.value) || 1));
-                          setQuantity(val);
-                        }}
-                        min={1}
-                        max={Math.max(available, 1)}
+                        onChange={(e) => handleQuantityInput(Number(e.target.value))}
+                        onBlur={handleQuantityBlur}
+                        min={minQty}
+                        max={qualifiedMax}
+                        step={step}
                         className="w-16 text-center border-x border-border bg-transparent focus:outline-none"
-                        aria-label="تعداد"
+                        aria-label="مقدار"
                         disabled={isOutOfStock || available <= 0}
                       />
                       <button
                         type="button"
                         onClick={handleIncreaseQty}
-                        disabled={isOutOfStock || available <= 0 || quantity >= available}
+                        disabled={isOutOfStock || available <= 0 || quantity >= qualifiedMax}
                         className="p-3 hover:bg-muted transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                        aria-label="افزایش تعداد"
+                        aria-label="افزایش مقدار"
                       >
                         <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                           <line x1="12" x2="12" y1="5" y2="19" />
@@ -246,7 +269,11 @@ export function ProductDetailClient({
                         </svg>
                       </button>
                     </div>
-                    <span className="text-sm text-muted-foreground">{available <= 0 ? 'موجودی کامل در سبد خرید است' : `باقی‌مانده: ${available} عدد`}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {available <= 0
+                        ? 'موجودی کامل در سبد خرید است'
+                        : `باقی‌مانده: ${formatQuantity(available, unit)}`}
+                    </span>
                   </div>
                 </div>
 

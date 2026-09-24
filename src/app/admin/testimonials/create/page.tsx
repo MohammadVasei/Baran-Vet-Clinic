@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 export default function TestimonialCreatePage() {
   const { mutateAsync: createTestimonial, mutation } = useCreate();
@@ -41,7 +42,7 @@ export default function TestimonialCreatePage() {
   return (
     <form onSubmit={submit} className="mx-auto max-w-2xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold text-foreground">افزودن بازخورد</h1>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">افزودن بازخورد</h1><PageHelp id="testimonials-create" /></div>
         <p className="mt-1 text-muted-foreground">بازخورد یک مراجعه‌کننده را ثبت کنید.</p>
       </div>
 

@@ -8,6 +8,8 @@ import { AdminTable } from '@/components/admin/AdminTable';
 import { StockQtyCell } from '@/components/admin/StockQtyCell';
 import { Button } from '@/components/ui/button';
 import { EditIcon, SettingsIcon, PackageIcon, EyeIcon, EyeOffIcon, CheckCircleIcon, AlertCircleIcon, DownloadIcon, LoaderIcon } from '@/components/icons';
+import { UNIT_LABELS, isWeightUnit, formatQuantity, type SellingUnit } from '@/lib/products';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 type StockStatus = 'all' | 'out_of_stock' | 'low_stock' | 'in_stock';
 
@@ -17,7 +19,7 @@ interface StockLevelRow {
   quantity_on_hand: number;
   low_stock_threshold: number;
   updated_at: string;
-  products: { name: string; price_rial: number; category: string | null; is_active: boolean } | null;
+  products: { name: string; price_rial: number; category: string | null; is_active: boolean; selling_unit: SellingUnit | null } | null;
 }
 
 export function StockLevelsList() {
@@ -27,8 +29,9 @@ export function StockLevelsList() {
   const listResult = useList({
     resource: 'stock_levels',
     sorters: [{ field: 'quantity_on_hand', order: 'asc' }],
+    pagination: { pageSize: 500 },
     meta: {
-      select: 'product_id,quantity_on_hand,low_stock_threshold,updated_at,products(name,price_rial,category,is_active)',
+      select: 'product_id,quantity_on_hand,low_stock_threshold,updated_at,products(name,price_rial,category,is_active,selling_unit)',
     },
   });
   const { result, query } = listResult;
@@ -134,17 +137,34 @@ export function StockLevelsList() {
       },
     },
     {
+      accessorKey: 'products' as keyof StockLevelRow,
+      header: 'واحد فروش',
+      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => {
+        const unit = (getValue('products') as { selling_unit?: SellingUnit | null } | null)?.selling_unit;
+        if (!unit) return <span className="text-muted-foreground">—</span>;
+        return (
+          <span className={`px-2 py-1 text-xs rounded-full ${isWeightUnit(unit) ? 'bg-blue-100 text-blue-700' : 'bg-muted'}`}>
+            {UNIT_LABELS[unit] || unit}
+          </span>
+        );
+      },
+    },
+    {
       accessorKey: 'quantity_on_hand' as keyof StockLevelRow,
       header: 'موجودی انبار',
       cellWithMeta: ({ getValue, original }: { getValue: (key: string) => unknown; original: StockLevelRow }) => {
         const qty = getValue('quantity_on_hand') as number;
-        if (!canEdit.data) return <span className="font-mono font-medium">{qty}</span>;
+        const unit = original.products?.selling_unit ?? ('PIECE' as SellingUnit);
+        if (!canEdit.data) return <span className="font-mono font-medium">{formatQuantity(qty, unit)}</span>;
         return (
-          <StockQtyCell
-            productId={original.product_id}
-            quantity={qty}
-            onSave={handleSaveStock}
-          />
+          <div className="flex items-center gap-2">
+            <StockQtyCell
+              productId={original.product_id}
+              quantity={qty}
+              onSave={handleSaveStock}
+            />
+            <span className="text-xs text-muted-foreground">{UNIT_LABELS[unit]}</span>
+          </div>
         );
       },
     },
@@ -161,6 +181,7 @@ export function StockLevelsList() {
       header: 'وضعیت',
       cellWithMeta: ({ original }: { original: StockLevelRow }) => {
         const status = getStatus(original);
+        const unit = original.products?.selling_unit ?? ('PIECE' as SellingUnit);
         if (status === 'out_of_stock') {
           return (
             <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-red-100 text-red-700">
@@ -171,13 +192,13 @@ export function StockLevelsList() {
         if (status === 'low_stock') {
           return (
             <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">
-              <AlertCircleIcon className="size-3" /> کم ({original.quantity_on_hand})
+              <AlertCircleIcon className="size-3" /> کم ({formatQuantity(original.quantity_on_hand, unit)})
             </span>
           );
         }
         return (
           <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">
-            <CheckCircleIcon className="size-3" /> موجود ({original.quantity_on_hand})
+            <CheckCircleIcon className="size-3" /> موجود ({formatQuantity(original.quantity_on_hand, unit)})
           </span>
         );
       },
@@ -254,7 +275,7 @@ export function StockLevelsList() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">موجودی انبار</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">موجودی انبار</h1><PageHelp id="stock-levels-list" /></div>
           <p className="text-muted-foreground mt-1">مدیریت موجودی و نمایش محصولات در پت‌شاپ</p>
         </div>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -306,6 +327,13 @@ export function StockLevelsList() {
         isLoading={query.isLoading}
         onCreate={handleCreate}
         createLabel="افزودن محصول"
+        searchKey={(row) =>
+          [
+            row.products?.name ?? '',
+            row.products?.selling_unit ? UNIT_LABELS[row.products.selling_unit] : '',
+            String(row.quantity_on_hand),
+          ].join(' ')
+        }
       />
 
       {query.isError && (

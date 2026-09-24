@@ -8,6 +8,7 @@ import { ArrowIcon, CalendarIcon, ClockIcon, PhoneIcon, UserIcon, PawIcon, EditI
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 const statusLabels: Record<string, { label: string; class: string }> = {
   pending: { label: 'در انتظار', class: 'bg-yellow-100 text-yellow-700' },
@@ -133,7 +134,7 @@ export function BookingEdit() {
     <div className="space-y-6 booking-edit-card">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">ویرایش نوبت</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">ویرایش نوبت</h1><PageHelp id="bookings-edit" /></div>
           <p className="text-muted-foreground mt-1">کد پیگیری: {booking.reference_code}</p>
         </div>
         <div className="flex gap-2">

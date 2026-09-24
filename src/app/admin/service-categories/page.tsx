@@ -4,6 +4,7 @@ export const dynamic = 'force-dynamic';
 import { useList, useDelete, useNavigation, useCan, useUpdate } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { EditIcon, TrashIcon, CheckIcon, XIcon } from '@/components/icons';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface ServiceCategoryRow {
   id: string;
@@ -108,7 +109,7 @@ export default function ServiceCategoryList() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">دسته‌بندی‌های خدمت</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">دسته‌بندی‌های خدمت</h1><PageHelp id="service-categories-list" /></div>
           <p className="text-muted-foreground mt-1">مدیریت دسته‌بندی‌های خدمات در کلینیک</p>
         </div>
       </div>

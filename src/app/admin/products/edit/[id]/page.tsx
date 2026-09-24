@@ -10,6 +10,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import Link from 'next/link';
 import { supabaseClient } from '@/lib/supabase-client';
 import { TrashIcon, UploadIcon, SettingsIcon } from '@/components/icons';
+import { UNIT_CODES, UNIT_LABELS, isWeightUnit, formatQuantity, type SellingUnit } from '@/lib/products';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 const CATEGORIES = [
   { value: 'food', label: 'غذا' },
@@ -17,6 +19,8 @@ const CATEGORIES = [
   { value: 'accessories', label: 'لوازم جانبی' },
   { value: 'grooming', label: 'شستشو و اصلاح' },
 ] as const;
+
+const UNITS = UNIT_CODES.map((value) => ({ value, label: UNIT_LABELS[value] }));
 
 interface PreviewImage {
   file: File;
@@ -35,13 +39,17 @@ interface ProductData {
   display_order: number;
   is_active: boolean;
   is_featured: boolean;
+  selling_unit: SellingUnit | null;
+  quantity_step: number;
+  min_quantity: number;
+  max_quantity: number | null;
   stock_levels?: { quantity_on_hand: number; low_stock_threshold: number } | null;
 }
 
 export default function ProductEditPage() {
   const { result, query } = useShow<ProductData>({
     resource: 'products',
-    meta: { select: 'id,name,description,price_rial,category,images,display_order,is_active,is_featured,stock_levels(quantity_on_hand,low_stock_threshold)' },
+    meta: { select: 'id,name,description,price_rial,category,images,display_order,is_active,is_featured,selling_unit,quantity_step,min_quantity,max_quantity,stock_levels(quantity_on_hand,low_stock_threshold)' },
   });
   const { mutateAsync: updateProduct, mutation } = useUpdate();
   const navigation = useNavigation();
@@ -53,6 +61,10 @@ export default function ProductEditPage() {
   const [displayOrder, setDisplayOrder] = useState('0');
   const [isActive, setIsActive] = useState(true);
   const [isFeatured, setIsFeatured] = useState(false);
+  const [sellingUnit, setSellingUnit] = useState<SellingUnit>('PIECE');
+  const [quantityStep, setQuantityStep] = useState('1');
+  const [minQuantity, setMinQuantity] = useState('1');
+  const [maxQuantity, setMaxQuantity] = useState('');
   const [images, setImages] = useState<PreviewImage[]>([]);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -67,6 +79,10 @@ export default function ProductEditPage() {
     setDisplayOrder(String(result.display_order || 0));
     setIsActive(result.is_active);
     setIsFeatured(result.is_featured ?? false);
+    setSellingUnit(result.selling_unit ?? 'PIECE');
+    setQuantityStep(String(result.quantity_step || 1));
+    setMinQuantity(String(result.min_quantity || 1));
+    setMaxQuantity(result.max_quantity != null ? String(result.max_quantity) : '');
 
     // Convert existing images to preview format
     if (result.images && result.images.length > 0) {
@@ -171,6 +187,10 @@ export default function ProductEditPage() {
           display_order: Number(displayOrder) || 0,
           is_active: isActive,
           is_featured: isFeatured,
+          selling_unit: sellingUnit,
+          quantity_step: Number(quantityStep) || 1,
+          min_quantity: Number(minQuantity) || 1,
+          max_quantity: maxQuantity ? Number(maxQuantity) : null,
         },
       });
 
@@ -188,7 +208,7 @@ export default function ProductEditPage() {
   return (
     <form onSubmit={submit} className="mx-auto max-w-3xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold">ویرایش محصول</h1>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold">ویرایش محصول</h1><PageHelp id="products-edit" /></div>
         <p className="mt-1 text-muted-foreground">اطلاعات محصول را به‌روزرسانی کنید</p>
       </div>
 
@@ -201,13 +221,14 @@ export default function ProductEditPage() {
               <p className="mt-1 flex items-center gap-2">
                 {(() => {
                   const { quantity_on_hand, low_stock_threshold } = result.stock_levels!;
+                  const unit = result.selling_unit ?? ('PIECE' as SellingUnit);
                   if (quantity_on_hand === 0) {
                     return <span className="px-2 py-1 text-xs rounded-full bg-red-100 text-red-700">ناموجود</span>;
                   }
                   if (quantity_on_hand <= low_stock_threshold) {
-                    return <span className="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">کم ({quantity_on_hand})</span>;
+                    return <span className="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">کم ({formatQuantity(quantity_on_hand, unit)})</span>;
                   }
-                  return <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">موجود ({quantity_on_hand})</span>;
+                  return <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">موجود ({formatQuantity(quantity_on_hand, unit)})</span>;
                 })()}
                 <span className="text-sm text-muted-foreground">حد کمبود: {result.stock_levels.low_stock_threshold}</span>
               </p>
@@ -238,6 +259,9 @@ export default function ProductEditPage() {
           <div>
             <Label htmlFor="product-price">قیمت (ریال) <span className="text-destructive">*</span></Label>
             <Input id="product-price" type="number" min="0" value={price} onChange={(e) => setPrice(e.target.value)} required className="mt-2" />
+            {isWeightUnit(sellingUnit) && (
+              <p className="mt-1 text-xs text-muted-foreground">قیمت برای {UNIT_LABELS[sellingUnit]} — برای وزن، واحد کانونی گرم است (هر ۱ کیلوگرم = ۱۰۰۰ گرم).</p>
+            )}
           </div>
           <div>
             <Label htmlFor="product-category">دسته‌بندی</Label>
@@ -247,6 +271,35 @@ export default function ProductEditPage() {
                 {CATEGORIES.map((cat) => <SelectItem key={cat.value} value={cat.value}>{cat.label}</SelectItem>)}
               </SelectContent>
             </Select>
+          </div>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <Label>واحد فروش</Label>
+            <Select value={sellingUnit} onValueChange={(v) => setSellingUnit(v as SellingUnit)}>
+              <SelectTrigger className="mt-2"><SelectValue /></SelectTrigger>
+              <SelectContent>
+                {UNITS.map((unit) => <SelectItem key={unit.value} value={unit.value}>{unit.label}</SelectItem>)}
+              </SelectContent>
+            </Select>
+            {isWeightUnit(sellingUnit) && (
+              <p className="mt-1 text-xs text-muted-foreground">مقدار سفارش به صورت عدد صحیح بر حسب {UNIT_LABELS[sellingUnit]} ثبت می‌شود.</p>
+            )}
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            <div>
+              <Label htmlFor="product-quantity-step">گام</Label>
+              <Input id="product-quantity-step" type="number" min="1" value={quantityStep} onChange={(e) => setQuantityStep(e.target.value)} className="mt-2" />
+            </div>
+            <div>
+              <Label htmlFor="product-min-quantity">حداقل</Label>
+              <Input id="product-min-quantity" type="number" min="1" value={minQuantity} onChange={(e) => setMinQuantity(e.target.value)} className="mt-2" />
+            </div>
+            <div>
+              <Label htmlFor="product-max-quantity">حداکثر (اختیاری)</Label>
+              <Input id="product-max-quantity" type="number" min="1" value={maxQuantity} onChange={(e) => setMaxQuantity(e.target.value)} className="mt-2" />
+            </div>
           </div>
         </div>
 

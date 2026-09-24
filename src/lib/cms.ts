@@ -45,6 +45,16 @@ export const CMS_TAGS = {
 
 export const ALL_CMS_TAGS = Object.values(CMS_TAGS);
 
+/**
+ * Pet-shop catalog invalidation tag (not a CMS section). Admin product /
+ * stock mutations and checkout snapshot writes revalidate it so the static
+ * ISR homepage (which renders featured product images) refreshes immediately
+ * instead of waiting for its 300s revalidate window.
+ */
+export const PRODUCT_TAG = "products";
+
+export const ALL_REVALIDATE_TAGS = [...ALL_CMS_TAGS, PRODUCT_TAG];
+
 type ContentRowLike = { key: string; data: unknown };
 
 function pick(rows: ContentRowLike[] | null | undefined, key: string): Record<string, unknown> | null {

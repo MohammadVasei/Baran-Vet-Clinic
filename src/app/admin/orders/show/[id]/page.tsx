@@ -6,16 +6,19 @@ import { supabaseClient } from "@/lib/supabase-client";
 import { sendShippingSMS } from "@/lib/sms";
 import { ArrowIcon, UserIcon, MapPinIcon, PhoneIcon, CreditCardIcon, PackageIcon, ClockIcon, CheckCircleIcon, XCircleIcon, TruckIcon } from "@/components/icons";
 import Image from "next/image";
-import { formatPrice } from "@/lib/products";
+import { formatPrice, formatQuantity, UNIT_LABELS, type SellingUnit } from "@/lib/products";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface OrderItem {
   quantity: number;
   unit_price_rial: number;
   product_id: string;
+  product_name: string | null;
+  selling_unit: SellingUnit | null;
   products: {
     name: string;
     price_rial: number;
@@ -61,7 +64,7 @@ export function OrderShow() {
   const { query, result: order } = useShow<Order>({
     resource: "orders",
     meta: {
-      select: "id,customer_name,customer_phone,customer_address,status,shipping_method,tracking_number,courier,shipped_at,delivered_at,zarinpal_authority,zarinpal_ref_id,total_rial,created_at,updated_at,order_items(quantity,unit_price_rial,product_id,products(name,price_rial,category,images))",
+      select: "id,customer_name,customer_phone,customer_address,status,shipping_method,tracking_number,courier,shipped_at,delivered_at,zarinpal_authority,zarinpal_ref_id,total_rial,created_at,updated_at,order_items(quantity,unit_price_rial,product_id,product_name,selling_unit,products(name,price_rial,category,images))",
     },
   });
   const isLoading = query.isLoading;
@@ -95,7 +98,7 @@ export function OrderShow() {
   const refreshOrder = async () => {
     const { data: refreshed, error: refreshError } = await supabaseClient
       .from("orders")
-      .select("id,customer_name,customer_phone,customer_address,status,shipping_method,tracking_number,courier,shipped_at,delivered_at,zarinpal_authority,zarinpal_ref_id,total_rial,created_at,updated_at,order_items(quantity,unit_price_rial,product_id,products(name,price_rial,category,images))")
+      .select("id,customer_name,customer_phone,customer_address,status,shipping_method,tracking_number,courier,shipped_at,delivered_at,zarinpal_authority,zarinpal_ref_id,total_rial,created_at,updated_at,order_items(quantity,unit_price_rial,product_id,product_name,selling_unit,products(name,price_rial,category,images))")
       .eq("id", order.id)
       .single();
 
@@ -197,7 +200,7 @@ export function OrderShow() {
             <ArrowIcon direction="back" className="size-5" />
           </button>
           <div>
-            <h1 className="font-display text-2xl font-bold text-foreground">سفارش #{order.id.slice(0, 8)}</h1>
+            <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">سفارش #{order.id.slice(0, 8)}</h1><PageHelp id="orders-show" /></div>
             <p className="text-muted-foreground">تاریخ ثبت: {formatDate(order.created_at)}</p>
           </div>
         </div>
@@ -320,14 +323,17 @@ export function OrderShow() {
             <div className="space-y-3">
               {order.order_items?.map((item: OrderItem, idx: number) => {
                 const product = item.products;
+                const unit = item.selling_unit ?? ('PIECE' as SellingUnit);
+                const itemName = item.product_name ?? product?.name ?? "محصول نامشخص";
                 const lineTotal = item.unit_price_rial * item.quantity;
+                const unitDenominator = UNIT_LABELS[unit] ? ` / ${UNIT_LABELS[unit]}` : "";
                 return (
                   <div key={idx} className="flex gap-4 p-4 rounded-app border border-border bg-background">
                     <div className="relative w-16 h-16 flex-shrink-0 rounded-app overflow-hidden bg-muted">
                       {product?.images?.[0] ? (
                         <Image
                           src={product.images[0]}
-                          alt={product.name}
+                          alt={itemName}
                           fill
                           sizes="64px"
                           className="object-cover"
@@ -339,14 +345,14 @@ export function OrderShow() {
                       )}
                     </div>
                     <div className="flex-1 min-w-0 space-y-1">
-                      <h4 className="font-medium text-foreground truncate">{product?.name || "محصول نامشخص"}</h4>
+                      <h4 className="font-medium text-foreground truncate">{itemName}</h4>
                       <p className="text-sm text-muted-foreground">
                         {product?.category ? ["غذا", "دارو", "لوازم جانبی", "شستشو و اصلاح"][["food", "medicine", "accessories", "grooming"].indexOf(product.category)] || product.category : "—"}
                       </p>
                       <div className="flex items-center gap-4 text-sm">
-                        <span className="text-muted-foreground">تعداد: {item.quantity}</span>
+                        <span className="text-muted-foreground">مقدار: {formatQuantity(item.quantity, unit)}</span>
                         <span className="font-display font-bold text-primary-text">
-                          {formatPrice(lineTotal)} <span className="font-body text-xs">ریال</span>
+                          {formatPrice(lineTotal)} <span className="font-body text-xs">ریال{unitDenominator}</span>
                         </span>
                       </div>
                     </div>

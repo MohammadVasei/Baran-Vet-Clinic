@@ -9,6 +9,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { supabaseClient } from '@/lib/supabase-client';
 import { XIcon, UploadIcon } from '@/components/icons';
+import { UNIT_CODES, UNIT_LABELS, isWeightUnit, type SellingUnit } from '@/lib/products';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 const CATEGORIES = [
   { value: 'food', label: 'غذا' },
@@ -16,6 +18,8 @@ const CATEGORIES = [
   { value: 'accessories', label: 'لوازم جانبی' },
   { value: 'grooming', label: 'شستشو و اصلاح' },
 ] as const;
+
+const UNITS = UNIT_CODES.map((value) => ({ value, label: UNIT_LABELS[value] }));
 
 interface PreviewImage {
   file: File;
@@ -33,6 +37,10 @@ export default function ProductCreatePage() {
   const [displayOrder, setDisplayOrder] = useState('0');
   const [isActive, setIsActive] = useState(true);
   const [isFeatured, setIsFeatured] = useState(false);
+  const [sellingUnit, setSellingUnit] = useState<SellingUnit>('PIECE');
+  const [quantityStep, setQuantityStep] = useState('1');
+  const [minQuantity, setMinQuantity] = useState('1');
+  const [maxQuantity, setMaxQuantity] = useState('');
   const [images, setImages] = useState<PreviewImage[]>([]);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -108,6 +116,10 @@ export default function ProductCreatePage() {
           display_order: Number(displayOrder) || 0,
           is_active: isActive,
           is_featured: isFeatured,
+          selling_unit: sellingUnit,
+          quantity_step: Number(quantityStep) || 1,
+          min_quantity: Number(minQuantity) || 1,
+          max_quantity: maxQuantity ? Number(maxQuantity) : null,
         },
       });
 
@@ -135,7 +147,7 @@ export default function ProductCreatePage() {
   return (
     <form onSubmit={submit} className="mx-auto max-w-3xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold">افزودن محصول جدید</h1>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold">افزودن محصول جدید</h1><PageHelp id="products-create" /></div>
         <p className="mt-1 text-muted-foreground">اطلاعات محصول را وارد کنید</p>
       </div>
 
@@ -154,6 +166,9 @@ export default function ProductCreatePage() {
           <div>
             <Label htmlFor="product-price">قیمت (ریال) <span className="text-destructive">*</span></Label>
             <Input id="product-price" type="number" min="0" value={price} onChange={(e) => setPrice(e.target.value)} required className="mt-2" />
+            {isWeightUnit(sellingUnit) && (
+              <p className="mt-1 text-xs text-muted-foreground">قیمت برای {UNIT_LABELS[sellingUnit]} — برای وزن، واحد کانونی گرم است (هر ۱ کیلوگرم = ۱۰۰۰ گرم).</p>
+            )}
           </div>
           <div>
             <Label htmlFor="product-category">دسته‌بندی</Label>
@@ -163,6 +178,35 @@ export default function ProductCreatePage() {
                 {CATEGORIES.map((cat) => <SelectItem key={cat.value} value={cat.value}>{cat.label}</SelectItem>)}
               </SelectContent>
             </Select>
+          </div>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <Label>واحد فروش</Label>
+            <Select value={sellingUnit} onValueChange={(v) => setSellingUnit(v as SellingUnit)}>
+              <SelectTrigger className="mt-2"><SelectValue /></SelectTrigger>
+              <SelectContent>
+                {UNITS.map((unit) => <SelectItem key={unit.value} value={unit.value}>{unit.label}</SelectItem>)}
+              </SelectContent>
+            </Select>
+            {isWeightUnit(sellingUnit) && (
+              <p className="mt-1 text-xs text-muted-foreground">مقدار سفارش به صورت عدد صحیح بر حسب گرم ثبت می‌شود (مثال: ۱۰۰، ۱۵۰۰، ۱۰۰۰۰).</p>
+            )}
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            <div>
+              <Label htmlFor="product-quantity-step">گام</Label>
+              <Input id="product-quantity-step" type="number" min="1" value={quantityStep} onChange={(e) => setQuantityStep(e.target.value)} className="mt-2" />
+            </div>
+            <div>
+              <Label htmlFor="product-min-quantity">حداقل</Label>
+              <Input id="product-min-quantity" type="number" min="1" value={minQuantity} onChange={(e) => setMinQuantity(e.target.value)} className="mt-2" />
+            </div>
+            <div>
+              <Label htmlFor="product-max-quantity">حداکثر (اختیاری)</Label>
+              <Input id="product-max-quantity" type="number" min="1" value={maxQuantity} onChange={(e) => setMaxQuantity(e.target.value)} className="mt-2" />
+            </div>
           </div>
         </div>
 

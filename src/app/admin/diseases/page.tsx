@@ -3,6 +3,7 @@
 import { useDelete, useList, useNavigation, useCan } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { EditIcon, TrashIcon } from '@/components/icons';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 const ANIMAL_LABELS: Record<string, string> = {
   dog: 'سگ',
@@ -109,7 +110,7 @@ export default function DiseasesList() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold text-foreground">مدیریت بیماری‌ها</h1>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">مدیریت بیماری‌ها</h1><PageHelp id="diseases-list" /></div>
         <p className="text-muted-foreground mt-1">مقالات آموزشی دایرةالمعارف بیماری‌های حیوانات</p>
       </div>
 

@@ -17,9 +17,9 @@ const BASE = "http://localhost:3000";
 // Real products from the live DB (active, in stock). We buy 3 distinct ones.
 // Names must EXACTLY match the DB (Persian zero-width/space-sensitive).
 const PRODUCTS = [
-  { id: "0cd3748b-d3c5-4e97-ae37-9015f66c4785", name: "غذایRoyal Canin گربه بزرگسال", price: 2500000 },
-  { id: "55cbb27a-0410-4c3e-a286-59d494b27600", name: "قلاده ضد بله و کنه سولانو", price: 850000 },
-  { id: "b5971745-384f-4162-8b7a-7fbc83b13eb1", name: "شامپو ضد عفونت مدی‌داک", price: 4500000 },
+  { id: "358d471c-5959-4e6b-b396-e97add5b432c", name: "غذای خشک گربه بالغ رویال کنین رنال", price: 86000000 },
+  { id: "514cb5e3-3d12-4a64-be3f-8b08955684d0", name: "شامپو ضد عفونت مدی‌داک", price: 450000 },
+  { id: "6f26d88f-c749-4dcc-948c-3f52c982d5cb", name: "قلاده ضد بله و کنه سولانو", price: 850000 },
 ];
 
 // FIXED smoke credentials. The account is created ONCE via the UI register flow;
@@ -102,6 +102,16 @@ async function resolveSmokeUser(page: Page): Promise<string> {
     found = data?.user ?? undefined;
   } else {
     await admin.auth.admin.updateUserById(found.id, { email_confirm: true });
+  }
+  // The register form never captures a phone, so link-orders' digit-match would
+  // always no-op. Provision the same phone the guest checkout uses so the
+  // account-linking step can actually find (and link) the guest orders.
+  const desiredPhone = "98" + PHONE.slice(1);
+  const { data: fresh } = await admin.auth.admin.listUsers({ page: 1, perPage: 1000 });
+  const freshUser = fresh?.users.find((u) => u.email === EMAIL);
+  if (freshUser && (freshUser.phone || "") !== desiredPhone) {
+    await admin.auth.admin.updateUserById(freshUser.id, { phone: `+${desiredPhone}` });
+    log("provisioned smoke user phone", { desiredPhone });
   }
   expect(found, "smoke user should exist after creation").toBeTruthy();
   log("account ready", { userId: found!.id, EMAIL });
@@ -237,14 +247,16 @@ test("Guest buyer end-to-end smoke", async ({ page }) => {
   //    automatically — /api/auth/link-orders is orphaned (never called by the
   //    frontend). We call it directly to prove it works; in production a user's
   //    purchased order would NOT appear in "سفارشات من" unless this runs.
-  const linkRes = await fetch(`${BASE}/api/auth/link-orders`, {
-    method: "POST",
+  //    The call must go through the browser context (page.request) so the
+  //    logged-in session cookie is sent; link-orders requires it (401 otherwise).
+  const linkRes = await page.request.post(`${BASE}/api/auth/link-orders`, {
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ userId, phone: PHONE }),
+    data: { userId, phone: `98${PHONE.slice(1)}` },
   });
   const linkBody = await linkRes.json();
+  results["linkOrdersHttpStatus"] = linkRes.status();
   results["linkOrdersResponse"] = linkBody;
-  log("link-orders response", linkBody);
+  log("link-orders response", { status: linkRes.status(), body: linkBody });
 
   await goto(page, `${BASE}/account/orders`);
   await expect(page.getByText(/سفارشات من/).first()).toBeVisible({ timeout: 15_000 });

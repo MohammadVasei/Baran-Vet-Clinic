@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { PackageIcon, ArrowIcon, RotateCcwIcon, AlertCircleIcon, CheckCircleIcon } from "@/components/icons";
-import { formatPrice, CATEGORY_LABELS } from "@/lib/products";
+import { formatPrice, formatQuantity, CATEGORY_LABELS, UNIT_LABELS, type SellingUnit } from "@/lib/products";
 
 export interface ResumeOrder {
   id: string;
@@ -15,6 +15,8 @@ export interface ResumeOrder {
     quantity: number;
     unit_price_rial: number;
     product_id: string;
+    product_name: string | null;
+    selling_unit: SellingUnit | null;
     products: Array<{ name: string; images: string[] | null; category: string | null }> | null;
   }>;
 }
@@ -67,11 +69,14 @@ export function ResumePaymentState({ order, onResume, resuming, error }: ResumeP
           <div className="mt-6 space-y-3">
             {order.order_items.map((item, idx) => {
               const product = item.products?.[0];
+              const unit = item.selling_unit ?? 'PIECE';
+              const itemName = item.product_name ?? product?.name ?? "محصول نامشخص";
+              const unitDenominator = UNIT_LABELS[unit] ? ` / ${UNIT_LABELS[unit]}` : "";
               return (
                 <div key={idx} className="flex gap-4 p-4 rounded-app border border-border bg-background">
                   <div className="relative w-16 h-16 flex-shrink-0 rounded-app overflow-hidden bg-muted">
                     {product?.images?.[0] ? (
-                      <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
+                      <img src={product.images[0]} alt={itemName} className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
                         <PackageIcon className="size-8 text-muted-foreground" />
@@ -79,12 +84,12 @@ export function ResumePaymentState({ order, onResume, resuming, error }: ResumeP
                     )}
                   </div>
                   <div className="flex-1 min-w-0 space-y-1">
-                    <h4 className="font-medium text-foreground truncate">{product?.name || "محصول نامشخص"}</h4>
+                    <h4 className="font-medium text-foreground truncate">{itemName}</h4>
                     <p className="text-sm text-muted-foreground">
                       {product?.category ? CATEGORY_LABELS[product.category] || product.category : "—"}
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      تعداد: {item.quantity} — {formatPrice(item.unit_price_rial * item.quantity)} ریال
+                      مقدار: {formatQuantity(item.quantity, unit)} — {formatPrice(item.unit_price_rial * item.quantity)} ریال{unitDenominator}
                     </p>
                   </div>
                 </div>

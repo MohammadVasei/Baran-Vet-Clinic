@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { EditIcon, TrashIcon } from '@/components/icons';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface SpeciesRow {
   id: string;
@@ -87,7 +88,7 @@ export default function SpeciesAndBreedsList() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">مدیریت گونه‌ها و نژادها</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">مدیریت گونه‌ها و نژادها</h1><PageHelp id="species-and-breeds-list" /></div>
           <p className="text-muted-foreground mt-1"> ساختار hierarchical گونه‌ها و نژادها برای مدیریت بهتر داده‌های حیوانات</p>
         </div>
         <button onClick={handleCreateSpecies} className="inline-flex items-center gap-2 rounded-app bg-primary px-4 py-2 text-sm font-bold text-on-primary hover:opacity-90 transition-opacity" aria-label="افزودن گونه">

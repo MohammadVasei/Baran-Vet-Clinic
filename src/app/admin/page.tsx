@@ -16,6 +16,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 import { Line, Bar, Pie } from "react-chartjs-2";
 import { supabaseClient } from "@/lib/supabase-client";
 import { CustomChartBuilderModal } from "@/components/admin/CustomChartBuilderModal";
+import { PageHelp } from "@/components/admin/PageHelp";
 import { CustomChart } from "@/components/admin/CustomChart";
 
 ChartJS.register(
@@ -351,6 +352,10 @@ const fetchCustomCharts = async () => {
 return (
         <div className="p-4 lg:p-6">
           <div className="min-h-screen relative">
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <h1 className="font-display text-2xl font-bold text-foreground">نمای کلی پنل مدیریت</h1>
+              <PageHelp id="dashboard" />
+            </div>
 {/* Metric Cards Row */}
            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 mb-4">
             {/* Card 1: Pending Bookings */}

@@ -15,13 +15,14 @@ import {
   getStockStatus,
   getStockLabel,
   getStockColor,
+  getQuantityCeiling,
   formatPrice,
+  formatQuantity,
+  UNIT_LABELS,
   CATEGORY_LABELS,
   getProductImages,
 } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
-
-const MAX_QTY = 99;
 
 export function ProductCard({
   product,
@@ -31,10 +32,19 @@ export function ProductCard({
   featured?: boolean;
 }) {
   const { addItem, openCart } = useCart();
-  const [quantity, setQuantity] = useState(1);
+  const step = product.quantity_step || 1;
+  const minQty = product.min_quantity || 1;
+  const [quantity, setQuantity] = useState(minQty);
   const stockStatus = getStockStatus(product);
   const isOutOfStock = stockStatus === 'out_of_stock';
   const imageUrl = getProductImages(product)[0];
+  // Unit-aware ceiling (count units cap at 99; weight units use stock + their
+  // own technical cap; business max_quantity also applies).
+  const maxQty = getQuantityCeiling({
+    stock: product.quantity_on_hand,
+    selling_unit: product.selling_unit,
+    max_quantity: product.max_quantity,
+  });
 
   const handleAddToCart = () => {
     if (stockStatus === "out_of_stock") return;
@@ -46,12 +56,13 @@ export function ProductCard({
       stock: product.quantity_on_hand,
       image: getProductImages(product)[0],
       category: product.category || undefined,
+      selling_unit: product.selling_unit ?? 'PIECE',
+      quantity_step: step,
+      min_quantity: minQty,
+max_quantity: product.max_quantity ?? undefined,
     });
     openCart();
   };
-
-  // Never allow selecting more than what's in stock (capped at MAX_QTY).
-  const maxQty = Math.min(MAX_QTY, Math.max(1, product.quantity_on_hand));
 
   return (
     <article
@@ -117,30 +128,32 @@ export function ProductCard({
         <div className="flex flex-col pt-2 border-t border-border gap-2 sm:gap-3">
           <span className="font-display text-base font-bold text-primary-text text-center sm:text-left sm:text-xl whitespace-nowrap">
             {formatPrice(product.price_rial)}
-            <span className="font-body text-xs font-normal text-muted-foreground sm:text-sm">ریال</span>
+            <span className="font-body text-xs font-normal text-muted-foreground sm:text-sm">
+              ریال{product.selling_unit && UNIT_LABELS[product.selling_unit] ? ` / ${UNIT_LABELS[product.selling_unit]}` : ''}
+            </span>
           </span>
 
           <div className="flex flex-col items-center gap-2 sm:flex-row sm:items-stretch">
             {/* Quantity Stepper */}
-            <div className="flex items-center rounded-app border border-border overflow-hidden shrink-0" aria-label="تعداد">
+            <div className="flex items-center rounded-app border border-border overflow-hidden shrink-0" aria-label="مقدار">
               <button
                 type="button"
-                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                disabled={isOutOfStock || quantity <= 1}
+                onClick={() => setQuantity((q) => Math.max(minQty, q - step))}
+                disabled={isOutOfStock || quantity <= minQty}
                 className="w-6 h-7 flex items-center justify-center text-muted-foreground hover:bg-muted disabled:opacity-40 text-sm font-semibold sm:w-9 sm:h-10"
-                aria-label="کاهش تعداد"
+                aria-label="کاهش مقدار"
               >
                 −
               </button>
-              <span className="w-6 h-7 flex items-center justify-center text-xs font-bold text-foreground sm:w-9 sm:h-10 sm:text-sm" aria-live="polite">
-                {quantity}
+              <span className="w-9 h-7 flex items-center justify-center text-xs font-bold text-foreground sm:w-12 sm:h-10 sm:text-sm" aria-live="polite">
+                {formatQuantity(quantity, product.selling_unit)}
               </span>
               <button
                 type="button"
-                onClick={() => setQuantity((q) => Math.min(maxQty, q + 1))}
+                onClick={() => setQuantity((q) => Math.min(maxQty, q + step))}
                 disabled={isOutOfStock || quantity >= maxQty}
                 className="w-6 h-7 flex items-center justify-center text-muted-foreground hover:bg-muted disabled:opacity-40 text-sm font-semibold sm:w-9 sm:h-10"
-                aria-label="افزایش تعداد"
+                aria-label="افزایش مقدار"
               >
                 +
               </button>

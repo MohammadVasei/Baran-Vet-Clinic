@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 export default function SpeciesCreatePage() {
   const { mutateAsync: createSpecies, mutation } = useCreate();
@@ -33,7 +34,7 @@ const submit = async (event: React.FormEvent) => {
   return (
     <form onSubmit={submit} className="mx-auto max-w-2xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold text-foreground">افزودن گونه</h1>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">افزودن گونه</h1><PageHelp id="species-create" /></div>
         <p className="mt-1 text-muted-foreground">گونه جدیدی از حیوانات را به کلینیک اضافه کنید.</p>
       </div>
 

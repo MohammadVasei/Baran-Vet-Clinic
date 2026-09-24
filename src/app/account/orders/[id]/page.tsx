@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { PackageIcon, ClockIcon, CheckCircleIcon, XCircleIcon, TruckIcon, MapPinIcon, PhoneIcon, UserIcon, CreditCardIcon, ArrowIcon } from "@/components/icons";
-import { formatPrice, CATEGORY_LABELS } from "@/lib/products";
+import { formatPrice, formatQuantity, CATEGORY_LABELS, UNIT_LABELS, type SellingUnit } from "@/lib/products";
 import { supabaseClient } from "@/lib/supabase-client";
 import { useEffect, useState } from "react";
 
@@ -16,6 +16,8 @@ interface OrderItem {
   quantity: number;
   unit_price_rial: number;
   product_id: string;
+  product_name: string | null;
+  selling_unit: SellingUnit | null;
   products: { name: string; images: string[] | null; category: string | null } | null;
 }
 
@@ -188,10 +190,12 @@ function OrderShowClient({ order }: { order: Order }) {
             <div className="space-y-3">
               {order.order_items?.map((item, idx) => {
                 const product = item.products;
-                const productName = product?.name || "محصول نامشخص";
+                const unit = item.selling_unit ?? ('PIECE' as SellingUnit);
+                const productName = item.product_name ?? product?.name ?? "محصول نامشخص";
                 const productImage = product?.images?.[0];
                 const productCategory = product?.category;
                 const lineTotal = item.unit_price_rial * item.quantity;
+                const unitDenominator = UNIT_LABELS[unit] ? ` / ${UNIT_LABELS[unit]}` : "";
                 return (
                   <div key={idx} className="flex gap-4 p-4 rounded-app border border-border bg-background">
                     <div className="relative w-16 h-16 flex-shrink-0 rounded-app overflow-hidden bg-muted">
@@ -209,9 +213,9 @@ function OrderShowClient({ order }: { order: Order }) {
                         {productCategory ? CATEGORY_LABELS[productCategory] || productCategory : "—"}
                       </p>
                       <div className="flex items-center gap-4 text-sm">
-                        <span className="text-muted-foreground">تعداد: {item.quantity}</span>
+                        <span className="text-muted-foreground">مقدار: {formatQuantity(item.quantity, unit)}</span>
                         <span className="font-display font-bold text-primary-text">
-                          {formatPrice(lineTotal)} <span className="font-body text-xs">ریال</span>
+                          {formatPrice(lineTotal)} <span className="font-body text-xs">ریال{unitDenominator}</span>
                         </span>
                       </div>
                     </div>
@@ -343,7 +347,7 @@ export default function AccountOrderShowPage() {
       try {
         const { data, error } = await supabaseClient
           .from("orders")
-          .select("id, status, total_rial, created_at, updated_at, zarinpal_authority, zarinpal_ref_id, customer_address, customer_name, customer_phone, shipping_method, tracking_number, courier, shipped_at, delivered_at, order_items(quantity, unit_price_rial, product_id, products(name, price_rial, category, images))")
+          .select("id, status, total_rial, created_at, updated_at, zarinpal_authority, zarinpal_ref_id, customer_address, customer_name, customer_phone, shipping_method, tracking_number, courier, shipped_at, delivered_at, order_items(quantity, unit_price_rial, product_id, product_name, selling_unit, products(name, price_rial, category, images))")
           .eq("id", id)
           .eq("user_id", user.id)
           .single();

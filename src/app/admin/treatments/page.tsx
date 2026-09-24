@@ -5,6 +5,7 @@ import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { EditIcon, TrashIcon } from '@/components/icons';
 import { TREATMENT_CATEGORY_LABELS, formatReminderInterval } from '@/lib/animals';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface TreatmentRow {
   id: string;
@@ -114,7 +115,7 @@ export default function TreatmentsList() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">انواع درمان</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">انواع درمان</h1><PageHelp id="treatments-list" /></div>
           <p className="text-muted-foreground mt-1">کاتالوگ انواع درمان و خدمات پزشکی قابل انجام در کلینیک</p>
         </div>
       </div>

@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { PeriodicConfigFields } from '@/components/admin/PeriodicConfigFields';
 import type { ReminderIntervalUnit } from '@/lib/animals';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 export default function VaccineCreatePage() {
   const { mutateAsync: createVaccine, mutation } = useCreate();
@@ -80,7 +81,7 @@ export default function VaccineCreatePage() {
   return (
     <form onSubmit={handleSubmit} className="mx-auto max-w-2xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold text-foreground">افزودن واکسن</h1>
+        <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">افزودن واکسن</h1><PageHelp id="vaccines-create" /></div>
         <p className="mt-1 text-muted-foreground">واکسن جدیدی را به کاتالوگ یک گونه اضافه کنید.</p>
       </div>
 

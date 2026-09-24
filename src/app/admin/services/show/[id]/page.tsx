@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useNavigation, useShow } from '@refinedev/core';
 import { Button } from '@/components/ui/button';
+import { PageHelp } from "@/components/admin/PageHelp";
 
 interface ServiceData {
   id: string;
@@ -24,7 +25,7 @@ export default function ServiceShowPage() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
-      <div className="flex items-start justify-between gap-4"><div><h1 className="font-display text-2xl font-bold">{result.name}</h1><p className="mt-1 text-muted-foreground">جزئیات و تنظیمات خدمت</p></div><Button onClick={() => navigation.edit('services', result.id)}>ویرایش</Button></div>
+      <div className="flex items-start justify-between gap-4"><div><div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold">{result.name}</h1><PageHelp id="services-show" /></div><p className="mt-1 text-muted-foreground">جزئیات و تنظیمات خدمت</p></div><Button onClick={() => navigation.edit('services', result.id)}>ویرایش</Button></div>
       <div className="grid gap-4 rounded-app-lg border border-border bg-surface p-6 sm:grid-cols-2">
         <div><span className="text-sm text-muted-foreground">پزشک مسئول</span><p className="mt-1 font-medium">
   {result.doctor?.name || 'تعیین نشده'}

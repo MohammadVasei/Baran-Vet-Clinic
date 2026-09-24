@@ -6,6 +6,7 @@ import { AdminTable } from "@/components/admin/AdminTable";
 import { EyeIcon, TruckIcon, CheckCircleIcon, XCircleIcon, ClockIcon, CreditCardIcon } from "@/components/icons";
 import { formatPrice } from "@/lib/products";
 import { useState } from "react";
+import { PageHelp } from "@/components/admin/PageHelp";
 
 export function OrdersList() {
   const [filters, setFilters] = useState<Record<string, string>>({});
@@ -160,7 +161,7 @@ export function OrdersList() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">مدیریت سفارشات</h1>
+          <div className="flex items-center gap-3"><h1 className="font-display text-2xl font-bold text-foreground">مدیریت سفارشات</h1><PageHelp id="orders-list" /></div>
           <p className="text-muted-foreground mt-1">لیست تمام سفارشات پت‌شاپ</p>
         </div>
       </div>
