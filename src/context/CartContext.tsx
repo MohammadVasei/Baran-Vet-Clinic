@@ -51,6 +51,9 @@ type CartAction =
 
 const CART_STORAGE_KEY = "baran-cart";
 
+/** Window event carrying the add-to-cart trigger coords and unit count for the header cart icon. */
+export const CART_FLY_EVENT = "baran:cart-fly";
+
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "ADD_ITEM": {
@@ -82,9 +85,9 @@ function cartReducer(state: CartState, action: CartAction): CartState {
                 max_quantity: item.max_quantity ?? action.payload.max_quantity,
               }
             : item
-        ), isOpen: true, hydrated: true };
+        ), hydrated: true };
       }
-      return { ...state, items: [...state.items, { ...action.payload, quantity: toAdd }], isOpen: true, hydrated: true };
+      return { ...state, items: [...state.items, { ...action.payload, quantity: toAdd }], hydrated: true };
     }
     case "REMOVE_ITEM": {
       return { ...state, items: state.items.filter((i) => i.productId !== action.payload), hydrated: true };
@@ -130,7 +133,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 
 const CartContext = createContext<{
   state: CartState;
-  addItem: (item: CartItem) => void;
+  addItem: (item: CartItem, origin?: { x: number; y: number }) => void;
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
@@ -166,7 +169,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
     sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(state.items));
   }, [state.items, state.hydrated]);
 
-  const addItem = (item: CartItem) => dispatch({ type: "ADD_ITEM", payload: item });
+  // `origin` is the viewport coords of the button that triggered the add. The
+  // header CartIcon listens for this and flies one dot per unit into the cart.
+  // Dispatched centrally so every add site animates without opting in.
+  const addItem = (
+    item: CartItem,
+    origin?: { x: number; y: number }
+  ) => {
+    if (origin && typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent(CART_FLY_EVENT, {
+          detail: { ...origin, count: item.quantity },
+        })
+      );
+    }
+    dispatch({ type: "ADD_ITEM", payload: item });
+  };
   const removeItem = (productId: string) => dispatch({ type: "REMOVE_ITEM", payload: productId });
   const updateQuantity = (productId: string, quantity: number) =>
     dispatch({ type: "UPDATE_QUANTITY", payload: { productId, quantity } });

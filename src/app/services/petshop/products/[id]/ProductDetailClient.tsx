@@ -33,7 +33,7 @@ export function ProductDetailClient({
   const headline = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotion();
   const images = getProductImages(product);
-  const { addItem, openCart, state } = useCart();
+  const { addItem, state } = useCart();
   const inCart = state.items.find((i) => i.productId === product.id)?.quantity ?? 0;
   const available = Math.max(0, product.quantity_on_hand - inCart);
   const qualifiedMax = Math.max(minQty, getQuantityCeiling({
@@ -59,22 +59,30 @@ export function ProductDetailClient({
     { scope: root, dependencies: [reduced] }
   );
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     if (isOutOfStock || available <= 0) return;
-    addItem({
-      productId: product.id,
-      name: product.name,
-      price_rial: product.price_rial,
-      quantity: snapToStep(quantity, step, minQty),
-      stock: product.quantity_on_hand,
-      image: images[0],
-      category: product.category || undefined,
-      selling_unit: unit,
-      quantity_step: step,
-      min_quantity: minQty,
+    // Button centre, so keyboard-activated clicks fly too (clientX/Y would be 0).
+    const rect = event.currentTarget.getBoundingClientRect();
+    addItem(
+      {
+        productId: product.id,
+        name: product.name,
+        price_rial: product.price_rial,
+        quantity: snapToStep(quantity, step, minQty),
+        stock: product.quantity_on_hand,
+        image: images[0],
+        category: product.category || undefined,
+        selling_unit: unit,
+        quantity_step: step,
+        min_quantity: minQty,
 max_quantity: product.max_quantity ?? undefined,
-    });
-    openCart();
+      },
+      { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+    );
+    // Drawer is intentionally not opened here: the flying dot into the header
+    // cart is the confirmation, and the drawer only opens on an explicit click.
   };
 
   const handleIncreaseQty = () => {

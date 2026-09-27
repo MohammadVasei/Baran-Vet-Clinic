@@ -69,7 +69,7 @@ export function Header() {
             <ThemeToggle />
           </span>
           <span className="hidden lg:inline-flex">
-            <CartIcon />
+            <CartIcon animate />
           </span>
           {user ? (
             <Link

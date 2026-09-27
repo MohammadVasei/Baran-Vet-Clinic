@@ -31,7 +31,7 @@ export function ProductCard({
   product: ProductCardType;
   featured?: boolean;
 }) {
-  const { addItem, openCart } = useCart();
+  const { addItem } = useCart();
   const step = product.quantity_step || 1;
   const minQty = product.min_quantity || 1;
   const [quantity, setQuantity] = useState(minQty);
@@ -46,22 +46,30 @@ export function ProductCard({
     max_quantity: product.max_quantity,
   });
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     if (stockStatus === "out_of_stock") return;
-    addItem({
-      productId: product.id,
-      name: product.name,
-      price_rial: product.price_rial,
-      quantity,
-      stock: product.quantity_on_hand,
-      image: getProductImages(product)[0],
-      category: product.category || undefined,
-      selling_unit: product.selling_unit ?? 'PIECE',
-      quantity_step: step,
-      min_quantity: minQty,
+    // Button centre, so keyboard-activated clicks fly too (clientX/Y would be 0).
+    const rect = event.currentTarget.getBoundingClientRect();
+    addItem(
+      {
+        productId: product.id,
+        name: product.name,
+        price_rial: product.price_rial,
+        quantity,
+        stock: product.quantity_on_hand,
+        image: getProductImages(product)[0],
+        category: product.category || undefined,
+        selling_unit: product.selling_unit ?? 'PIECE',
+        quantity_step: step,
+        min_quantity: minQty,
 max_quantity: product.max_quantity ?? undefined,
-    });
-    openCart();
+      },
+      { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+    );
+    // Drawer is intentionally not opened here: the flying dot into the header
+    // cart is the confirmation, and the drawer only opens on an explicit click.
   };
 
   return (

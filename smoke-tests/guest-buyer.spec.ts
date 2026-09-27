@@ -142,11 +142,25 @@ test("Guest buyer end-to-end smoke", async ({ page }) => {
       .getByRole("button", { name: /به سبد خرید/ })
       .first();
     await addBtn.click({ timeout: 20_000 });
+
+    // Adding no longer auto-opens the drawer — the flying dot into the header
+    // cart is the confirmation. The drawer opens on an explicit cart click.
     const drawer = page.getByRole("dialog", { name: "سبد خرید" });
+    const autoOpened = await drawer
+      .waitFor({ state: "visible", timeout: 1500 })
+      .then(() => true)
+      .catch(() => false);
+    results["cartDrawerAutoOpenedOnAdd"] = autoOpened;
+    log("cart drawer auto-opened on add (should be false)", autoOpened);
+
+    const cartBtn = page
+      .getByRole("button", { name: /سبد خرید/ })
+      .first();
+    await cartBtn.click({ timeout: 10_000 });
     await drawer.waitFor({ state: "visible", timeout: 10_000 });
     const hasItem = await drawer.getByText(PRODUCTS[0].name).isVisible().catch(() => false);
     results["uiAddToCartWorks"] = hasItem;
-    log("ui add-to-cart works (item in drawer)", hasItem);
+    log("ui add-to-cart works (item in drawer after cart click)", hasItem);
 
     // Finding: drawer X (close) is intercepted by the sticky header on desktop.
     const xBlocked = await page
