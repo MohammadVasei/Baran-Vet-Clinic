@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 
 import { useList, useDelete, useNavigation, useCan, useUpdate } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, TrashIcon, CheckIcon, XIcon } from '@/components/icons';
+import { PencilIcon, TrashIcon, CheckIcon, XIcon } from '@/components/icons';
 import { PageHelp } from "@/components/admin/PageHelp";
 
 interface ServiceCategoryRow {
@@ -84,7 +84,7 @@ export default function ServiceCategoryList() {
         <div className="flex items-center gap-2">
           {canEdit.data && (
             <button onClick={() => handleEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش">
-              <EditIcon className="size-4" />
+              <PencilIcon className="size-4" />
             </button>
           )}
           {canDelete.data && (

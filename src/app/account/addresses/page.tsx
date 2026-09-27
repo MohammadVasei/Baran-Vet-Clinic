@@ -5,7 +5,7 @@ import { revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { MapPinIcon, PhoneIcon, UserIcon, CheckCircleIcon, EditIcon, TrashIcon, PlusIcon } from "@/components/icons";
+import { MapPinIcon, PhoneIcon, UserRoundIcon, CircleCheckIcon, PencilIcon, TrashIcon, PlusIcon } from "@/components/icons";
 import { supabaseClient } from "@/lib/supabase-client";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -373,7 +373,7 @@ export default function AccountAddressesPage() {
                         {address.label || "بدون برچسب"}
                         {address.is_default && (
                           <span className="ml-2 inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-full bg-primary/10 text-primary-text">
-                            <CheckCircleIcon className="size-3" /> پیش‌فرض
+                            <CircleCheckIcon className="size-3" /> پیش‌فرض
                           </span>
                         )}
                       </h3>
@@ -386,7 +386,7 @@ export default function AccountAddressesPage() {
                         className="p-1.5 rounded hover:bg-muted transition-colors text-muted-foreground hover:text-primary"
                         title="تعیین به عنوان پیش‌فرض"
                       >
-                        <CheckCircleIcon className="size-4" />
+                        <CircleCheckIcon className="size-4" />
                       </button>
                     )}
                     <button
@@ -394,7 +394,7 @@ export default function AccountAddressesPage() {
                       className="p-1.5 rounded hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
                       title="ویرایش"
                     >
-                      <EditIcon className="size-4" />
+                      <PencilIcon className="size-4" />
                     </button>
                     <button
                       onClick={() => handleDelete(address.id)}
@@ -407,7 +407,7 @@ export default function AccountAddressesPage() {
                 </div>
                 <dl className="space-y-3 text-sm">
                   <div className="flex items-center gap-2">
-                    <UserIcon className="size-4 text-muted-foreground" />
+                    <UserRoundIcon className="size-4 text-muted-foreground" />
                     <span className="font-medium">{address.recipient_name}</span>
                   </div>
                   <div className="flex items-center gap-2">

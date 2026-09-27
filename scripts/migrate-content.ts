@@ -81,34 +81,6 @@ const ABOUT = {
   },
 };
 
-const WHY = {
-  eyebrow: "چرا باران؟",
-  headline: ["سه اصل،", "یک التزام"],
-  intro:
-    "ما روی سه اصل ساده اما مهم تمرکز داریم تا مطمئن شویم پت شما بهترین مراقبت را دریافت می‌کند.",
-  steps: [
-    {
-      number: "۰۱",
-      title: "درمان دقیق",
-      text: "معاینه و مراقبت درمانی با توجه به نیاز واقعی پت شما، با آرامش و دقت کامل.",
-    },
-    {
-      number: "۰۲",
-      title: "شناسنامه سلامت",
-      text: "سوابق درمانی و واکسیناسیون در یک دفترچه منظم برای پیگیری آسان و منظم.",
-    },
-    {
-      number: "۰۳",
-      title: "مراقبت ظاهری",
-      text: "شستشو و اصلاح حرفه‌ای برای راحتی و زیبایی پت، با حوصله و مهربانی.",
-    },
-  ],
-  image: {
-    src: "/images/why-baran.jpg",
-    alt: "دقت و آرامش در معاینه حیوانات در کلینیک دامپزشکی باران",
-  },
-};
-
 const ANIMALS = {
   eyebrow: "تجربه بیماران",
   headline: ["هر بیمار کوچک،", "دنیای خودش را دارد"],
@@ -537,7 +509,6 @@ const DISCLAIMER = {
 const SITE_CONTENT_KEYS = {
   clinic: CLINIC,
   about: ABOUT,
-  why: WHY,
   animals: ANIMALS,
   marquee: MARQUEE,
   emergency: EMERGENCY,

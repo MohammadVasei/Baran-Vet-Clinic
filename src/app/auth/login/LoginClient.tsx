@@ -7,7 +7,7 @@ import { useGSAP } from "@/lib/gsap";
 import { revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
-import { EyeIcon, EyeOffIcon, MailIcon, LockIcon, PhoneIcon, ArrowIcon, AlertCircleIcon, CheckCircleIcon } from "@/components/icons";
+import { EyeIcon, EyeOffIcon, MailIcon, LockIcon, PhoneIcon, ArrowIcon, CircleAlertIcon, CircleCheckIcon } from "@/components/icons";
 import { useAuth } from "@/context/AuthContext";
 import { safeCallbackUrl } from "@/lib/callback-url";
 import { resolvePostLoginUrl } from "@/lib/dashboard-path";
@@ -151,13 +151,13 @@ export function LoginClient({ callbackUrl = "/account" }: { callbackUrl?: string
           {/* Error/Success Messages */}
           {error && (
             <div className="flex items-center gap-2 p-3 rounded-app bg-destructive-soft border border-destructive text-destructive-soft-fg text-sm" role="alert">
-              <AlertCircleIcon className="size-4" />
+              <CircleAlertIcon className="size-4" />
               <span>{error}</span>
             </div>
           )}
           {success && (
             <div className="flex items-center gap-2 p-3 rounded-app bg-accent-green-soft border border-accent-green text-accent-green-fg text-sm" role="status">
-              <CheckCircleIcon className="size-4" />
+              <CircleCheckIcon className="size-4" />
               <span>{success}</span>
             </div>
           )}

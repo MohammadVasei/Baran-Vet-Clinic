@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ShoppingCartIcon,
-  AlertCircleIcon,
-  CheckCircleIcon,
-  XCircleIcon,
+  CircleAlertIcon,
+  CircleCheckIcon,
+  CircleXIcon,
   TagIcon,
 } from "@/components/icons";
 import {
@@ -97,9 +97,9 @@ max_quantity: product.max_quantity ?? undefined,
           {/* Stock Badge */}
           <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
             <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-medium sm:gap-1 sm:px-2.5 sm:py-1 sm:text-xs ${getStockColor(stockStatus)}`}>
-              {stockStatus === 'in_stock' && <CheckCircleIcon className="size-2.5 sm:size-3" />}
-              {stockStatus === 'low_stock' && <AlertCircleIcon className="size-2.5 sm:size-3" />}
-              {stockStatus === 'out_of_stock' && <XCircleIcon className="size-2.5 sm:size-3" />}
+              {stockStatus === 'in_stock' && <CircleCheckIcon className="size-2.5 sm:size-3" />}
+              {stockStatus === 'low_stock' && <CircleAlertIcon className="size-2.5 sm:size-3" />}
+              {stockStatus === 'out_of_stock' && <CircleXIcon className="size-2.5 sm:size-3" />}
               {getStockLabel(stockStatus)}
             </span>
           </div>

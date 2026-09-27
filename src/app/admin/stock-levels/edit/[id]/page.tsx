@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { UNIT_LABELS, type SellingUnit } from '@/lib/products';
 import { PageHelp } from "@/components/admin/PageHelp";
+import { CircleIcon } from "@/components/icons";
 
 interface StockLevelData {
   product_id: string;
@@ -91,10 +92,10 @@ export default function StockLevelEditPage() {
             <p className="font-medium text-foreground">نمایش در سایت:</p>
             <p className="mt-1 text-sm text-muted-foreground">
               {Number(quantity) === 0
-                ? '🔴 <strong className="text-destructive">ناموجود</strong> — دکمه خرید غیرفعال خواهد بود'
+                ? <><CircleIcon className="size-3 fill-current inline-block" strokeWidth={0} style={{color:'#dc2626'}} /> <strong className="text-destructive">ناموجود</strong> — دکمه خرید غیرفعال خواهد بود</>
                 : Number(quantity) <= Number(lowStockThreshold || 5)
-                ? '🟡 <strong className="text-yellow-700">موجودی کم</strong> — با هشدار نمایش داده می‌شود'
-                : '🟢 <strong className="text-green-700">موجود</strong> — بدون محدودیت'}
+                ? <><CircleIcon className="size-3 fill-current inline-block" strokeWidth={0} style={{color:'#ca8a04'}} /> <strong className="text-yellow-700">موجودی کم</strong> — با هشدار نمایش داده می‌شود</>
+                : <><CircleIcon className="size-3 fill-current inline-block" strokeWidth={0} style={{color:'#16a34a'}} /> <strong className="text-green-700">موجود</strong> — بدون محدودیت</>}
             </p>
           </div>
         </div>

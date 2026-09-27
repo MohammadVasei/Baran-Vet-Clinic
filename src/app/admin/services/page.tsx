@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 
 import { useList, useDelete, useNavigation, useCan, useUpdate, useSelect } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, TrashIcon, EyeIcon, CheckIcon, XIcon } from '@/components/icons';
+import { PencilIcon, TrashIcon, EyeIcon, CheckIcon, XIcon } from '@/components/icons';
 import { PageHelp } from "@/components/admin/PageHelp";
 
 export function ServicesList() {
@@ -121,7 +121,7 @@ cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => (
       cellWithMeta: ({ original }: { original: ServiceRow }) => (
         <div className="flex items-center gap-2">
           <button onClick={() => handleShow(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="مشاهده"><EyeIcon className="size-4" /></button>
-          {canEdit.data && <button onClick={() => handleEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش"><EditIcon className="size-4" /></button>}
+          {canEdit.data && <button onClick={() => handleEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش"><PencilIcon className="size-4" /></button>}
           {canDelete.data && <button onClick={() => handleDelete(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-destructive transition-colors" aria-label="حذف"><TrashIcon className="size-4" /></button>}
           <button
             onClick={() => handleToggleActive(original.id, original.is_active)}

@@ -6,7 +6,7 @@ import { useState, useRef } from "react";
 import { useGSAP } from "@/lib/gsap";
 import { revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { PhoneIcon, ArrowIcon, TagIcon, ShieldIcon, TruckIcon, RotateCcwIcon, ShoppingCartIcon, CheckCircleIcon, AlertCircleIcon, XCircleIcon, ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
+import { PhoneIcon, ArrowIcon, TagIcon, ShieldIcon, TruckIcon, RotateCcwIcon, ShoppingCartIcon, CircleCheckIcon, CircleAlertIcon, CircleXIcon, ChevronLeftIcon, ChevronRightIcon , MinusIcon, PlusIcon} from "@/components/icons";
 import { useCms } from "@/context/CmsContext";
 import type { Product } from "@/lib/products";
 import { getStockLabel, getStockColor, formatPrice, formatQuantity, getQuantityCeiling, snapToStep, UNIT_LABELS, CATEGORY_LABELS, getProductImages } from "@/lib/products";
@@ -205,9 +205,9 @@ max_quantity: product.max_quantity ?? undefined,
                   </span>
                 )}
                 <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium ${getStockColor(stockStatus)}`}>
-                  {stockStatus === 'in_stock' && <CheckCircleIcon className="size-4" />}
-                  {stockStatus === 'low_stock' && <AlertCircleIcon className="size-4" />}
-                  {stockStatus === 'out_of_stock' && <XCircleIcon className="size-4" />}
+                  {stockStatus === 'in_stock' && <CircleCheckIcon className="size-4" />}
+                  {stockStatus === 'low_stock' && <CircleAlertIcon className="size-4" />}
+                  {stockStatus === 'out_of_stock' && <CircleXIcon className="size-4" />}
                   {getStockLabel(stockStatus)}
                   {stockStatus === 'low_stock' && (
                     <span className="ml-1 text-xs opacity-80">(فقط {formatQuantity(product.quantity_on_hand, unit)} موجود است)</span>
@@ -253,9 +253,7 @@ max_quantity: product.max_quantity ?? undefined,
                         className="p-3 hover:bg-muted transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         aria-label="کاهش مقدار"
                       >
-                        <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                          <line x1="5" x2="19" y1="12" y2="12" />
-                        </svg>
+                        <MinusIcon className="size-5" />
                       </button>
                       <input
                         type="number"
@@ -277,10 +275,7 @@ max_quantity: product.max_quantity ?? undefined,
                         className="p-3 hover:bg-muted transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         aria-label="افزایش مقدار"
                       >
-                        <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                          <line x1="12" x2="12" y1="5" y2="19" />
-                          <line x1="5" x2="19" y1="12" y2="12" />
-                        </svg>
+                        <PlusIcon className="size-5" />
                       </button>
                     </div>
                     <span className="text-sm text-muted-foreground">

@@ -6,7 +6,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import { PackageIcon, ClockIcon, CheckCircleIcon, XCircleIcon, PackageCheckIcon, ArrowIcon } from "@/components/icons";
+import { PackageIcon, ClockIcon, CircleCheckIcon, CircleXIcon, PackageCheckIcon, ArrowIcon } from "@/components/icons";
 import { formatPrice } from "@/lib/products";
 import { supabaseClient } from "@/lib/supabase-client";
 import { useEffect, useState } from "react";
@@ -80,12 +80,12 @@ export default function AccountOrdersPage() {
   const getStatusBadge = (status: string) => {
     const configs: Record<string, { label: string; className: string; icon: React.ReactNode }> = {
       pending: { label: "در انتظار پرداخت", className: "bg-yellow-100 text-yellow-700", icon: <ClockIcon className="size-3" /> },
-      paid: { label: "پرداخت شده", className: "bg-green-100 text-green-700", icon: <CheckCircleIcon className="size-3" /> },
-      failed: { label: "پرداخت ناموفق", className: "bg-red-100 text-red-700", icon: <XCircleIcon className="size-3" /> },
+      paid: { label: "پرداخت شده", className: "bg-green-100 text-green-700", icon: <CircleCheckIcon className="size-3" /> },
+      failed: { label: "پرداخت ناموفق", className: "bg-red-100 text-red-700", icon: <CircleXIcon className="size-3" /> },
       shipped: { label: "ارسال شده", className: "bg-blue-100 text-blue-700", icon: <PackageCheckIcon className="size-3" /> },
       delivered: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <PackageCheckIcon className="size-3" /> },
       fulfilled: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <PackageCheckIcon className="size-3" /> },
-      cancelled: { label: "لغو شده", className: "bg-gray-100 text-gray-700", icon: <XCircleIcon className="size-3" /> },
+      cancelled: { label: "لغو شده", className: "bg-gray-100 text-gray-700", icon: <CircleXIcon className="size-3" /> },
     };
     const c = configs[status] || { label: status, className: "bg-gray-100 text-gray-700", icon: <ClockIcon className="size-3" /> };
     return (

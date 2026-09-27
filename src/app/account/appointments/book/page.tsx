@@ -6,7 +6,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import { ArrowIcon, CheckIcon, XIcon, CheckCircleIcon } from "@/components/icons";
+import { ArrowIcon, CheckIcon, XIcon, CircleCheckIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { supabaseClient } from "@/lib/supabase-client";
 
@@ -316,7 +316,7 @@ export default function AccountAppointmentBookPage() {
       <div className="book-card rounded-app-lg border border-border bg-surface p-6 sm:p-8">
         {submitted ? (
           <div ref={panel} key="done" className="flex flex-col items-center py-6 text-center">
-            <CheckCircleIcon className="size-16 text-green-600 mx-auto mb-4" />
+            <CircleCheckIcon className="size-16 text-green-600 mx-auto mb-4" />
             <h2 ref={titleRef} tabIndex={-1} className="font-display text-2xl font-bold text-foreground outline-none">نوبت شما ثبت شد</h2>
             {referenceCode && (
               <p className="mt-4 text-muted-foreground">

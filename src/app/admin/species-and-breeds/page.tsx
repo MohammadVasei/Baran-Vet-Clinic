@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 import { useState } from 'react';
 import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, TrashIcon } from '@/components/icons';
+import { PencilIcon, TrashIcon } from '@/components/icons';
 import { PageHelp } from "@/components/admin/PageHelp";
 
 interface SpeciesRow {
@@ -129,7 +129,7 @@ export default function SpeciesAndBreedsList() {
               <div className="flex items-center gap-2">
                 {canEditSpecies.data && (
                   <button onClick={() => handleEditSpecies(species.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش">
-                    <EditIcon className="size-4" />
+                    <PencilIcon className="size-4" />
                   </button>
                 )}
                 {canDeleteSpecies.data && (
@@ -170,7 +170,7 @@ export default function SpeciesAndBreedsList() {
                     <div className="flex items-center gap-2">
                       {canEditBreed.data && (
                         <button onClick={() => handleEditBreed(breed.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش">
-                          <EditIcon className="size-4" />
+                          <PencilIcon className="size-4" />
                         </button>
                       )}
                       {canDeleteBreed.data && (

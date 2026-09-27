@@ -5,7 +5,7 @@ import { revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
 import Link from "next/link";
-import { XCircleIcon, AlertCircleIcon, PackageIcon, ArrowIcon, RotateCcwIcon, PhoneIcon, ShieldIcon, TruckIcon, RotateCcwIcon as RotateCcwIcon2 } from "@/components/icons";
+import { CircleXIcon, CircleAlertIcon, PackageIcon, ArrowIcon, RotateCcwIcon, PhoneIcon, ShieldIcon, TruckIcon, RotateCcwIcon as RotateCcwIcon2 } from "@/components/icons";
 import { formatPrice, formatQuantity, CATEGORY_LABELS, UNIT_LABELS, type SellingUnit } from "@/lib/products";
 import { useCms } from "@/context/CmsContext";
 
@@ -73,9 +73,9 @@ export function CheckoutFailedClient({ order, cancelled, error }: CheckoutFailed
         <div className="text-center mb-12">
           <div className="error-icon inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-100 mx-auto mb-6">
             {cancelled ? (
-              <XCircleIcon className="size-12 text-red-600" />
+              <CircleXIcon className="size-12 text-red-600" />
             ) : (
-              <AlertCircleIcon className="size-12 text-red-600" />
+              <CircleAlertIcon className="size-12 text-red-600" />
             )}
           </div>
           <h1 ref={headline} className="font-display text-3xl font-bold leading-[1.3] text-foreground sm:text-4xl">
@@ -114,7 +114,7 @@ export function CheckoutFailedClient({ order, cancelled, error }: CheckoutFailed
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-app bg-background">
                     <dt className="text-muted-foreground">وضعیت</dt>
                     <dd className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-700">
-                      <AlertCircleIcon className="size-4" /> {cancelled ? "لغو شده" : "در انتظار پرداخت"}
+                      <CircleAlertIcon className="size-4" /> {cancelled ? "لغو شده" : "در انتظار پرداخت"}
                     </dd>
                   </div>
                 </dl>

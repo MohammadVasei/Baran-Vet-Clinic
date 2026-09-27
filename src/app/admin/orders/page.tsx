@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic";
 import { useList, useNavigation, useCan } from "@refinedev/core";
 import { AdminTable } from "@/components/admin/AdminTable";
 import { JalaliDateInput } from "@/components/admin/JalaliDateInput";
-import { EyeIcon, TruckIcon, CheckCircleIcon, XCircleIcon, ClockIcon, CreditCardIcon, XIcon } from "@/components/icons";
+import { EyeIcon, TruckIcon, CircleCheckIcon, CircleXIcon, ClockIcon, CreditCardIcon, XIcon } from "@/components/icons";
 import { formatPrice } from "@/lib/products";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -53,12 +53,12 @@ export function OrdersList() {
   const getStatusBadge = (status: OrderRow["status"]) => {
     const config: Record<OrderRow["status"], { label: string; className: string; icon: React.ReactNode }> = {
       pending: { label: "در انتظار پرداخت", className: "bg-yellow-100 text-yellow-700", icon: <ClockIcon className="size-3" /> },
-      paid: { label: "پرداخت شده", className: "bg-green-100 text-green-700", icon: <CheckCircleIcon className="size-3" /> },
-      failed: { label: "پرداخت ناموفق", className: "bg-red-100 text-red-700", icon: <XCircleIcon className="size-3" /> },
+      paid: { label: "پرداخت شده", className: "bg-green-100 text-green-700", icon: <CircleCheckIcon className="size-3" /> },
+      failed: { label: "پرداخت ناموفق", className: "bg-red-100 text-red-700", icon: <CircleXIcon className="size-3" /> },
       shipped: { label: "ارسال شده", className: "bg-blue-100 text-blue-700", icon: <TruckIcon className="size-3" /> },
-      delivered: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <CheckCircleIcon className="size-3" /> },
-      fulfilled: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <CheckCircleIcon className="size-3" /> },
-      cancelled: { label: "لغو شده", className: "bg-gray-100 text-gray-700", icon: <XCircleIcon className="size-3" /> },
+      delivered: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <CircleCheckIcon className="size-3" /> },
+      fulfilled: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <CircleCheckIcon className="size-3" /> },
+      cancelled: { label: "لغو شده", className: "bg-gray-100 text-gray-700", icon: <CircleXIcon className="size-3" /> },
     };
     const c = config[status];
     return (

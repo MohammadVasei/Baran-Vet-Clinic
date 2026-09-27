@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic";
 import { useShow, useNavigation } from "@refinedev/core";
 import { supabaseClient } from "@/lib/supabase-client";
 import { sendShippingSMS } from "@/lib/sms";
-import { ArrowIcon, UserIcon, MapPinIcon, PhoneIcon, CreditCardIcon, PackageIcon, ClockIcon, CheckCircleIcon, XCircleIcon, TruckIcon } from "@/components/icons";
+import { ArrowIcon, UserRoundIcon, MapPinIcon, PhoneIcon, CreditCardIcon, PackageIcon, ClockIcon, CircleCheckIcon, CircleXIcon, TruckIcon } from "@/components/icons";
 import Image from "next/image";
 import { formatPrice, formatQuantity, UNIT_LABELS, type SellingUnit } from "@/lib/products";
 import { Button } from "@/components/ui/button";
@@ -162,12 +162,12 @@ export function OrderShow() {
   const getStatusConfig = (status: Order["status"]) => {
     const configs: Record<OrderStatus, { label: string; className: string; icon: React.ReactNode }> = {
       pending: { label: "در انتظار پرداخت", className: "bg-yellow-100 text-yellow-700", icon: <ClockIcon className="size-4" /> },
-      paid: { label: "پرداخت شده", className: "bg-green-100 text-green-700", icon: <CheckCircleIcon className="size-4" /> },
-      failed: { label: "پرداخت ناموفق", className: "bg-red-100 text-red-700", icon: <XCircleIcon className="size-4" /> },
+      paid: { label: "پرداخت شده", className: "bg-green-100 text-green-700", icon: <CircleCheckIcon className="size-4" /> },
+      failed: { label: "پرداخت ناموفق", className: "bg-red-100 text-red-700", icon: <CircleXIcon className="size-4" /> },
       shipped: { label: "ارسال شده", className: "bg-blue-100 text-blue-700", icon: <TruckIcon className="size-4" /> },
       delivered: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <TruckIcon className="size-4" /> },
       fulfilled: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <TruckIcon className="size-4" /> },
-      cancelled: { label: "لغو شده", className: "bg-gray-100 text-gray-700", icon: <XCircleIcon className="size-4" /> },
+      cancelled: { label: "لغو شده", className: "bg-gray-100 text-gray-700", icon: <CircleXIcon className="size-4" /> },
     };
     return configs[status];
   };
@@ -267,7 +267,7 @@ export function OrderShow() {
           {/* Customer Info */}
           <div className="rounded-app-lg border border-border bg-surface p-6">
             <h2 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-              <UserIcon className="size-5 text-primary-text" />
+              <UserRoundIcon className="size-5 text-primary-text" />
               اطلاعات مشتری
             </h2>
             <dl className="grid gap-4 sm:grid-cols-2">
@@ -389,7 +389,7 @@ export function OrderShow() {
                 <dd className="font-medium">
                   {order.zarinpal_ref_id ? (
                     <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">
-                      <CheckCircleIcon className="size-3" /> تایید شده
+                      <CircleCheckIcon className="size-3" /> تایید شده
                     </span>
                   ) : (
                     <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">
@@ -410,7 +410,7 @@ export function OrderShow() {
             <div className="space-y-4">
               <div className="flex items-start gap-3 relative before:content-[''] before:absolute before:left-[9px] before:top-0 before:h-full before:w-0.5 before:bg-border last:before:hidden">
                 <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 border-2 border-background flex items-center justify-center">
-                  <CheckCircleIcon className="size-3 text-white" />
+                  <CircleCheckIcon className="size-3 text-white" />
                 </div>
                 <div>
                   <p className="font-medium text-foreground">سفارش ثبت شد</p>
@@ -420,7 +420,7 @@ export function OrderShow() {
               {order.zarinpal_ref_id && (
                 <div className="flex items-start gap-3 relative before:content-[''] before:absolute before:left-[9px] before:top-0 before:h-full before:w-0.5 before:bg-border last:before:hidden">
                   <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 border-2 border-background flex items-center justify-center">
-                    <CheckCircleIcon className="size-3 text-white" />
+                    <CircleCheckIcon className="size-3 text-white" />
                   </div>
                   <div>
                     <p className="font-medium text-foreground">پرداخت تایید شد</p>
@@ -457,7 +457,7 @@ export function OrderShow() {
                     {order.status === "fulfilled" ? (
                       <TruckIcon className="size-3 text-white" />
                     ) : (
-                      <XCircleIcon className="size-3 text-white" />
+                      <CircleXIcon className="size-3 text-white" />
                     )}
                   </div>
                   <div>

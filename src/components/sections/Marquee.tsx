@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { PawIcon } from "@/components/icons";
+import { PawPrintIcon } from "@/components/icons";
 import { getCmsData } from "@/lib/cms";
 
 async function MarqueeGroup() {
@@ -11,7 +11,7 @@ async function MarqueeGroup() {
           <span className="whitespace-nowrap font-display text-lg font-semibold text-foreground">
             {item}
           </span>
-          <PawIcon className="size-5 shrink-0 text-primary-text" />
+          <PawPrintIcon className="size-5 shrink-0 text-primary-text" />
         </Fragment>
       ))}
     </div>

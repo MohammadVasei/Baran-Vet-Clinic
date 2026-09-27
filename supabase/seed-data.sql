@@ -42,21 +42,6 @@ INSERT INTO public.site_content (key, data) VALUES
     'signature', 'دکتر محمدی - دامpezeshkan arshad',
     'image', jsonb_build_object('src', '/about-clinic.jpg', 'alt', 'کلینیک dam‌های کوچک باران')
 )),
-('why', jsonb_build_object(
-    'eyebrow', 'چرا ما؟',
-    'headline', jsonb_build_array(
-        'دامpezeshkan mutahassis',
-        'Tajhizat sound',
-        'Servis 24 saat'
-    ),
-    'intro', 'دلایلی که باران را dampezeshkhaneye mokhtasar tarif mikonad:',
-    'steps', jsonb_build_array(
-        jsonb_build_object('number', '1', 'title', 'تیم dampezeshkar motakhassis', 'text', 'تمام dampezeshkaran ma doktor-e dampezeshki va tajribe kari dar dameh haye kuchak darand.'),
-        jsonb_build_object('number', '2', 'title', 'Tajhizat sound va kamel', 'text', 'Az taqirat sound ta laboratorikum, ma kolloh ehtiyat ra damygir mikonim.'),
-        jsonb_build_object('number', '3', 'title', 'Servis 24 saat dar morat', 'text', 'Dar howayat dampezeshki, ma hamisheh hojat ra migirim.')
-    ),
-    'image', jsonb_build_object('src', '/why-choose-us.jpg', 'alt', 'چرا باران را انتخاب کنید؟')
-)),
 ('animals', jsonb_build_object(
     'eyebrow', 'حیوانات پشتیبانی شده',
     'headline', jsonb_build_array(

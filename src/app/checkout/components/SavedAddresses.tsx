@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPinIcon, CheckCircleIcon } from "@/components/icons";
+import { MapPinIcon, CircleCheckIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 
 interface SavedAddress {
@@ -51,7 +51,7 @@ export function SavedAddresses({ addresses, selectedId, onSelect }: SavedAddress
               {addr.province}، {addr.city}
             </span>
             {addr.is_default && (
-              <CheckCircleIcon className="size-3 text-green-600 ml-1" />
+              <CircleCheckIcon className="size-3 text-green-600 ml-1" />
             )}
           </button>
         ))}

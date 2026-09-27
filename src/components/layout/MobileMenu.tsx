@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { CloseIcon, PhoneIcon } from "@/components/icons";
+import { XIcon, PhoneIcon } from "@/components/icons";
 import { Logo } from "@/components/ui/Logo";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { CartIcon } from "@/components/layout/CartIcon";
@@ -100,7 +100,7 @@ export function MobileMenu({
             aria-label="بستن منو"
             onClick={onClose}
           >
-            <CloseIcon className="size-5" />
+            <XIcon className="size-5" />
           </button>
         </div>
 

@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { formatReminderDue, calculateNextReminderDate, REMINDER_INTERVAL_UNIT_LABELS } from '@/lib/animals';
 import { supabaseClient } from '@/lib/supabase-client';
 import { PageHelp } from "@/components/admin/PageHelp";
+import { CheckIcon } from "@/components/icons";
 import { JalaliDateInput } from '@/components/admin/JalaliDateInput';
 
 interface AnimalData {
@@ -167,7 +168,7 @@ const { options: doctors } = useSelect({
     return (
       <div className="space-y-6">
         <div className="rounded-app-lg border border-green-200 bg-green-50 p-6 text-center space-y-2">
-          <p className="text-lg font-bold text-green-700">✓ {success.message}</p>
+          <p className="text-lg font-bold text-green-700"><CheckIcon className="size-5 inline-block" /> {success.message}</p>
           {success.nextReminder && (
             <p className="text-green-700">یادآوری بعدی: <span className="font-bold">{success.nextReminder}</span></p>
           )}

@@ -5,7 +5,7 @@ import { revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
 import Link from "next/link";
-import { CheckCircleIcon, PackageIcon, MapPinIcon, PhoneIcon, CreditCardIcon, ArrowIcon, ClockIcon, RotateCcwIcon, ShieldIcon, TruckIcon, UserIcon } from "@/components/icons";
+import { CircleCheckIcon, PackageIcon, MapPinIcon, PhoneIcon, CreditCardIcon, ArrowIcon, ClockIcon, RotateCcwIcon, ShieldIcon, TruckIcon, UserRoundIcon } from "@/components/icons";
 import { formatPrice, formatQuantity, CATEGORY_LABELS, UNIT_LABELS, type SellingUnit } from "@/lib/products";
 import { useCms } from "@/context/CmsContext";
 
@@ -72,7 +72,7 @@ export function CheckoutSuccessClient({ order }: CheckoutSuccessClientProps) {
         {/* Success Icon */}
         <div className="text-center mb-12">
           <div className="success-icon inline-flex items-center justify-center w-24 h-24 rounded-full bg-green-100 mx-auto mb-6">
-            <CheckCircleIcon className="size-12 text-green-600" />
+            <CircleCheckIcon className="size-12 text-green-600" />
           </div>
           <h1 ref={headline} className="font-display text-3xl font-bold leading-[1.3] text-foreground sm:text-4xl">
             سفارش شما با موفقیت ثبت شد
@@ -107,7 +107,7 @@ export function CheckoutSuccessClient({ order }: CheckoutSuccessClientProps) {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-app bg-background">
                   <dt className="text-muted-foreground">وضعیت</dt>
                   <dd className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-700">
-                    <CheckCircleIcon className="size-4" /> پرداخت شده
+                    <CircleCheckIcon className="size-4" /> پرداخت شده
                   </dd>
                 </div>
               </dl>
@@ -175,7 +175,7 @@ export function CheckoutSuccessClient({ order }: CheckoutSuccessClientProps) {
               </h2>
               <address className="space-y-3 not-italic">
                 <div className="flex items-start gap-3">
-                  <UserIcon className="size-5 text-muted-foreground mt-0.5" />
+                  <UserRoundIcon className="size-5 text-muted-foreground mt-0.5" />
                   <span className="font-medium">{order.customer_name}</span>
                 </div>
                 <div className="flex items-center gap-3">
@@ -198,7 +198,7 @@ export function CheckoutSuccessClient({ order }: CheckoutSuccessClientProps) {
               <ol className="space-y-4">
                 <li className="flex gap-3 p-3 rounded-app bg-green-50 border border-green-100">
                   <span className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-                    <CheckCircleIcon className="size-4 text-green-600" />
+                    <CircleCheckIcon className="size-4 text-green-600" />
                   </span>
                   <div>
                     <p className="font-medium text-green-800">پرداخت تایید شد</p>

@@ -7,7 +7,7 @@ import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { CalendarIcon, ClockIcon, CheckCircleIcon, XCircleIcon, AlertCircleIcon, ArrowIcon, EditIcon, PawIcon } from "@/components/icons";
+import { CalendarIcon, ClockIcon, CircleCheckIcon, CircleXIcon, CircleAlertIcon, ArrowIcon, PencilIcon, PawPrintIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { StatusBadge } from "@/components/ui/status-badge";
@@ -158,7 +158,7 @@ export default function AccountAppointmentDetailPage() {
       <div className="space-y-6">
         <h1 className="font-display text-2xl font-bold text-foreground">جزئیات نوبت</h1>
         <div className="rounded-app-lg border border-border bg-surface p-12 text-center">
-          <AlertCircleIcon className="size-16 text-muted-foreground mx-auto mb-4" />
+          <CircleAlertIcon className="size-16 text-muted-foreground mx-auto mb-4" />
           <p className="text-foreground mb-4">{error || "نوبت یافت نشد"}</p>
           <Link href="/account/appointments">
             <Button variant="outline">
@@ -198,7 +198,7 @@ export default function AccountAppointmentDetailPage() {
               : "bg-destructive-soft border-destructive text-destructive-soft-fg"
           }`}
         >
-          <CheckCircleIcon className="size-4" />
+          <CircleCheckIcon className="size-4" />
           <span>{message}</span>
         </div>
       )}
@@ -226,7 +226,7 @@ export default function AccountAppointmentDetailPage() {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <PawIcon className="size-5 text-primary shrink-0" />
+          <PawPrintIcon className="size-5 text-primary shrink-0" />
           <div>
             <span className="block text-xs text-muted-foreground">حیوان</span>
             <span className="font-medium">{booking.pet_name || "—"}</span>
@@ -240,7 +240,7 @@ export default function AccountAppointmentDetailPage() {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <PawIcon className="size-5 text-primary shrink-0" />
+          <PawPrintIcon className="size-5 text-primary shrink-0" />
           <div>
             <span className="block text-xs text-muted-foreground">نام شما</span>
             <span className="font-medium">{booking.customer_name}</span>
@@ -259,7 +259,7 @@ export default function AccountAppointmentDetailPage() {
 
       <div className="booking-notes rounded-app-lg border border-border bg-surface p-6">
         <div className="flex items-center gap-2 mb-4">
-          <EditIcon className="size-5 text-primary" />
+          <PencilIcon className="size-5 text-primary" />
           <h2 className="font-display text-lg font-bold text-foreground">یادداشت برای پزشک</h2>
         </div>
         {completed ? (
@@ -289,7 +289,7 @@ export default function AccountAppointmentDetailPage() {
                   disabled={cancelling}
                   className="text-destructive border-destructive/40 hover:bg-red-50"
                 >
-                  <XCircleIcon className="size-4" />
+                  <CircleXIcon className="size-4" />
                   لغو نوبت
                 </Button>
               )}

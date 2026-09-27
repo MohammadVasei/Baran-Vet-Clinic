@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
 import Link from 'next/link';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, TrashIcon, SettingsIcon, PackageIcon } from '@/components/icons';
+import { PencilIcon, TrashIcon, SettingsIcon, PackageIcon } from '@/components/icons';
 import { UNIT_LABELS, isWeightUnit, formatQuantity, type SellingUnit } from '@/lib/products';
 import { PageHelp } from "@/components/admin/PageHelp";
 
@@ -157,7 +157,7 @@ export function ProductsList() {
       header: 'عملیات',
       cellWithMeta: ({ original }: { original: ProductRow }) => (
         <div className="flex items-center gap-2">
-          {canEdit.data && <button onClick={() => handleEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش"><EditIcon className="size-4" /></button>}
+          {canEdit.data && <button onClick={() => handleEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش"><PencilIcon className="size-4" /></button>}
           {canEditStock.data && <button onClick={() => handleStockEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش موجودی و حد کمبود"><SettingsIcon className="size-4" /></button>}
           {canDelete.data && <button onClick={() => handleDelete(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-destructive transition-colors" aria-label="حذف"><TrashIcon className="size-4" /></button>}
         </div>

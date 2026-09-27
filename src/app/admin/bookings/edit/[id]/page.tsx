@@ -4,7 +4,7 @@ import { useShow, useUpdate, useNavigation } from '@refinedev/core';
 import { useState } from 'react';
 import { gsap, useGSAP } from '@/lib/gsap';
 import { prefersReducedMotion, duration, ease } from '@/lib/motion';
-import { ArrowIcon, CalendarIcon, ClockIcon, PhoneIcon, UserIcon, PawIcon, EditIcon } from '@/components/icons';
+import { ArrowIcon, CalendarIcon, ClockIcon, PhoneIcon, UserRoundIcon, PawPrintIcon, PencilIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -178,14 +178,14 @@ export function BookingEdit() {
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-1">خدمت</label>
                 <div className="flex items-center gap-2 text-foreground">
-                  <PawIcon className="size-4 text-muted-foreground" />
+                  <PawPrintIcon className="size-4 text-muted-foreground" />
                   <span>{booking.service_name || '—'}</span>
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-1">پزشک</label>
                 <div className="flex items-center gap-2 text-foreground">
-                  <UserIcon className="size-4 text-muted-foreground" />
+                  <UserRoundIcon className="size-4 text-muted-foreground" />
                   <span>{booking.doctor_name || '—'}</span>
                 </div>
               </div>
@@ -216,7 +216,7 @@ export function BookingEdit() {
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-1">نام مشتری</label>
                 <div className="flex items-center gap-2 text-foreground">
-                  <UserIcon className="size-4 text-muted-foreground" />
+                  <UserRoundIcon className="size-4 text-muted-foreground" />
                   <span>{booking.customer_name}</span>
                 </div>
               </div>
@@ -230,7 +230,7 @@ export function BookingEdit() {
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-1">نام حیوان</label>
                 <div className="flex items-center gap-2 text-foreground">
-                  <PawIcon className="size-4 text-muted-foreground" />
+                  <PawPrintIcon className="size-4 text-muted-foreground" />
                   <span>{booking.pet_name || '—'}</span>
                 </div>
               </div>
@@ -252,7 +252,7 @@ export function BookingEdit() {
             {booking.notes && (
               <div className="pt-4 border-t border-border">
                 <label className="block text-sm font-medium text-foreground mb-1 flex items-center gap-1">
-                  <EditIcon className="size-4 text-primary" />
+                  <PencilIcon className="size-4 text-primary" />
                   یادداشت مشتری برای پزشک
                 </label>
                 <p className="text-sm text-foreground whitespace-pre-wrap mt-1 bg-muted/50 rounded-app p-3">

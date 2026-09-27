@@ -5,7 +5,7 @@ import { revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { UserIcon, MailIcon, LockIcon, PhoneIcon, EyeIcon, EyeOffIcon, AlertCircleIcon, CheckCircleIcon } from "@/components/icons";
+import { UserRoundIcon, MailIcon, LockIcon, PhoneIcon, EyeIcon, EyeOffIcon, CircleAlertIcon, CircleCheckIcon } from "@/components/icons";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -146,7 +146,7 @@ export default function AccountProfilePage() {
                 : "text-muted-foreground hover:bg-muted"
             }`}
           >
-            <UserIcon className="size-4 mr-2 inline" /> اطلاعات پروفایل
+            <UserRoundIcon className="size-4 mr-2 inline" /> اطلاعات پروفایل
           </button>
           <button
             role="tab"
@@ -176,13 +176,13 @@ export default function AccountProfilePage() {
 
         {error && (
           <div className="flex items-center gap-2 p-3 rounded-app bg-red-50 border border-red-100 text-red-700 text-sm">
-            <AlertCircleIcon className="size-4" />
+            <CircleAlertIcon className="size-4" />
             <span>{error}</span>
           </div>
         )}
         {success && (
           <div className="flex items-center gap-2 p-3 rounded-app bg-green-50 border border-green-100 text-green-700 text-sm">
-            <CheckCircleIcon className="size-4" />
+            <CircleCheckIcon className="size-4" />
             <span>{success}</span>
           </div>
         )}
@@ -193,7 +193,7 @@ export default function AccountProfilePage() {
             <div className="space-y-2">
               <Label htmlFor="full_name">نام و نام خانوادگی</Label>
               <div className="relative">
-                <UserIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" />
+                <UserRoundIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" />
                 <Input
                   {...profileForm.register("full_name")}
                   id="full_name"

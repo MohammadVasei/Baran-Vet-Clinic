@@ -7,7 +7,7 @@ import { useGSAP } from "@/lib/gsap";
 import { revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
-import { MailIcon, LockIcon, UserIcon, EyeIcon, EyeOffIcon, AlertCircleIcon, CheckCircleIcon, ArrowIcon } from "@/components/icons";
+import { MailIcon, LockIcon, UserRoundIcon, EyeIcon, EyeOffIcon, CircleAlertIcon, CircleCheckIcon, ArrowIcon } from "@/components/icons";
 import { useAuth } from "@/context/AuthContext";
 import { safeCallbackUrl } from "@/lib/callback-url";
 import { Button } from "@/components/ui/button";
@@ -94,13 +94,13 @@ export function RegisterClient({ callbackUrl = "/account" }: { callbackUrl?: str
           {/* Error/Success Messages */}
           {error && (
             <div className="flex items-center gap-2 p-3 rounded-app bg-red-50 border border-red-100 text-red-700 text-sm">
-              <AlertCircleIcon className="size-4" />
+              <CircleAlertIcon className="size-4" />
               <span>{error}</span>
             </div>
           )}
           {success && (
             <div className="flex items-center gap-2 p-3 rounded-app bg-green-50 border border-green-100 text-green-700 text-sm">
-              <CheckCircleIcon className="size-4" />
+              <CircleCheckIcon className="size-4" />
               <span>{success}</span>
             </div>
           )}
@@ -109,7 +109,7 @@ export function RegisterClient({ callbackUrl = "/account" }: { callbackUrl?: str
             <div className="space-y-2">
               <Label htmlFor="name">نام و نام خانوادگی</Label>
               <div className="relative">
-                <UserIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" />
+                <UserRoundIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" />
                 <Input
                   {...form.register("name")}
                   id="name"

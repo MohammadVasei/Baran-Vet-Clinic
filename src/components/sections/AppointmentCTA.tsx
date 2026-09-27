@@ -6,7 +6,7 @@ import { revealLines, revealUp, prefersReducedMotion, duration, ease } from "@/l
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useCms } from "@/context/CmsContext";
 import { MagneticButton } from "@/components/motion/MagneticButton";
-import { ArrowIcon, CheckIcon, ClockIcon, PhoneIcon, PinIcon, XIcon } from "@/components/icons";
+import { ArrowIcon, CheckIcon, XIcon } from "@/components/icons";
 import { GoldieVideo } from "@/components/mascot";
 import { supabaseClient } from "@/lib/supabase-client";
 
@@ -381,7 +381,6 @@ export function AppointmentCTA() {
       revealUp(".ap-eyebrow", { once: true });
       revealUp(".ap-intro", { once: true });
       revealUp(".ap-card", { once: true, y: 32 });
-      revealUp(".ap-side", { once: true, y: 32 });
       return () => split.revert();
     },
     { scope: root, dependencies: [reduced] }
@@ -446,9 +445,9 @@ export function AppointmentCTA() {
           </p>
         </div>
 
-        <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-12">
+        <div className="mt-12">
           {/* Booking flow card */}
-          <div className="ap-card lg:col-span-8 rounded-app-lg border border-border bg-surface p-6 shadow-lg sm:p-8 lg:p-10">
+          <div className="ap-card rounded-app-lg border border-border bg-surface p-6 shadow-lg sm:p-8 lg:p-10">
             {submitted ? (
               /* ---- Confirmation (step 5) ---- */
               <div
@@ -582,7 +581,7 @@ export function AppointmentCTA() {
                 >
                   {STEPS[step].title}
                 </h3>
-                <p className="mt-2 text-muted-foreground">{STEPS[step].hint}</p>
+                <p className="mt-2 max-w-2xl text-muted-foreground">{STEPS[step].hint}</p>
 
                 <div className="mt-6">
                   {step === 0 && (
@@ -704,10 +703,10 @@ export function AppointmentCTA() {
                         e.preventDefault();
                         handleSubmit();
                       }}
-                      className="grid gap-5 sm:grid-cols-2"
+                      className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
                     >
                       {submitError && (
-                        <div className="sm:col-span-2 rounded-app border border-destructive bg-destructive/10 p-4 flex items-start gap-3" role="alert">
+                        <div className="sm:col-span-2 lg:col-span-3 rounded-app border border-destructive bg-destructive/10 p-4 flex items-start gap-3" role="alert">
                           <XIcon className="size-5 shrink-0 text-destructive mt-0.5" />
                           <p className="text-sm text-destructive">{submitError}</p>
                         </div>
@@ -776,7 +775,7 @@ export function AppointmentCTA() {
                         )}
                       </div>
 
-                      <div className="sm:col-span-2">
+                      <div className="sm:col-span-2 lg:col-span-1">
                         <label htmlFor="ap-pet" className="field-label">
                           نام حیوان خانگی (اختیاری)
                         </label>
@@ -821,62 +820,6 @@ export function AppointmentCTA() {
               </div>
             )}
           </div>
-
-          {/* Direct-contact side card */}
-          <aside
-            className="ap-side lg:col-span-4 flex flex-col gap-6 rounded-app-lg border border-border bg-surface p-6 shadow-lg sm:p-8"
-            aria-label="تماس مستقیم با کلینیک"
-          >
-            <div>
-              <h3 className="font-display text-xl font-bold text-foreground">اطلاعات بیشتر</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                ترجیح می‌دهید مستقیم با ما در تماس باشید؟ از راه‌های زیر می‌توانید اقدام کنید.
-              </p>
-            </div>
-
-            <ul className="space-y-5 text-sm">
-              <li className="flex items-start gap-3">
-                <ClockIcon className="mt-0.5 size-5 shrink-0 text-primary-text" />
-                <div>
-                  <span className="block font-semibold text-foreground">ساعت کاری</span>
-                  <span className="mt-0.5 block text-muted-foreground">
-                    {CLINIC.hoursNote}
-                  </span>
-                  {CLINIC.hours.map((h, i) => (
-                    <span key={i} className="block mt-1 text-muted-foreground">
-                      {h.days}: {h.time}
-                    </span>
-                  ))}
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <PhoneIcon className="mt-0.5 size-5 shrink-0 text-primary-text" />
-                <div>
-                  <span className="block font-semibold text-foreground">تلفن</span>
-                  <a
-                    dir="ltr"
-                    href={CLINIC.phoneHref}
-                    className="mt-0.5 block text-muted-foreground transition-colors duration-fast hover:text-primary-text-hover"
-                  >
-                    {CLINIC.phone}
-                  </a>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <PinIcon className="mt-0.5 size-5 shrink-0 text-primary-text" />
-                <div>
-                  <span className="block font-semibold text-foreground">آدرس</span>
-                  <span className="mt-0.5 block leading-relaxed text-muted-foreground">
-                    {CLINIC.address}
-                  </span>
-                </div>
-              </li>
-            </ul>
-
-            <MagneticButton href={CLINIC.phoneHref} className="btn btn-primary mt-auto">
-              تماس با کلینیک
-            </MagneticButton>
-          </aside>
         </div>
       </div>
 

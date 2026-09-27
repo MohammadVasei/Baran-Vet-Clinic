@@ -3,7 +3,7 @@
 import { useList, useUpdate, useNavigation, useCan } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { JalaliCalendar } from '@/components/admin/JalaliCalendar';
-import { CalendarIcon, EyeIcon, XIcon, DownloadIcon, LoaderIcon } from '@/components/icons';
+import { CalendarIcon, EyeIcon, XIcon, DownloadIcon, LoaderCircleIcon } from '@/components/icons';
 import { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -377,7 +377,7 @@ export function BookingsList() {
         disabled={exporting || (result?.data || []).length === 0}
         aria-label="خروجی اکسل"
       >
-        {exporting ? <LoaderIcon className="size-4" /> : <DownloadIcon className="size-4" />}
+        {exporting ? <LoaderCircleIcon className="size-4" /> : <DownloadIcon className="size-4" />}
         {exporting ? 'در حال ساخت…' : 'خروجی اکسل'}
       </Button>
 

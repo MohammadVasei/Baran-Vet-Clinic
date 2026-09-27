@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { UserIcon, PackageIcon, MapPinIcon, SettingsIcon, ArrowIcon, LogOutIcon, CalendarIcon, PawIcon } from "@/components/icons";
+import { UserRoundIcon, PackageIcon, MapPinIcon, SettingsIcon, ArrowIcon, LogOutIcon, CalendarIcon, PawPrintIcon } from "@/components/icons";
 
 const ACCOUNT_NAV = [
-  { label: "داشبورد", href: "/account", icon: UserIcon },
+  { label: "داشبورد", href: "/account", icon: UserRoundIcon },
   { label: "نوبت‌های من", href: "/account/appointments", icon: CalendarIcon },
-  { label: "حیوانات من", href: "/account/pets", icon: PawIcon },
+  { label: "حیوانات من", href: "/account/pets", icon: PawPrintIcon },
   { label: "سفارشات من", href: "/account/orders", icon: PackageIcon },
   { label: "آدرس‌ها", href: "/account/addresses", icon: MapPinIcon },
   { label: "تنظیمات", href: "/account/profile", icon: SettingsIcon },
@@ -51,7 +51,7 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
               {/* User Profile */}
               <div className="flex items-center gap-4 p-4 rounded-app bg-background">
                 <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
-                  <UserIcon className="size-7 text-primary-text" />
+                  <UserRoundIcon className="size-7 text-primary-text" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-display font-bold text-foreground truncate">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckIcon, LoaderIcon } from "@/components/icons";
+import { CheckIcon, LoaderCircleIcon } from "@/components/icons";
 
 interface StockQtyCellProps {
   productId: string;
@@ -51,7 +51,7 @@ export function StockQtyCell({ productId, quantity, onSave }: StockQtyCellProps)
         aria-label="موجودی انبار"
       />
       {saving ? (
-        <LoaderIcon className="size-4 text-muted-foreground" />
+        <LoaderCircleIcon className="size-4 text-muted-foreground" />
       ) : dirty ? (
         <button
           type="button"

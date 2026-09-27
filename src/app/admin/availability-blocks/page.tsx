@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
 import { useMemo } from 'react';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, TrashIcon } from '@/components/icons';
+import { PencilIcon, TrashIcon } from '@/components/icons';
 import { PageHelp } from "@/components/admin/PageHelp";
 
 const reasonLabels: Record<string, string> = {
@@ -159,7 +159,7 @@ const doctors = (doctorsQuery.result?.data || []) as Array<{
       header: 'عملیات',
       cellWithMeta: ({ original }: { original: AvailabilityBlockRow }) => (
         <div className="flex items-center gap-2">
-          {canEdit.data && <button onClick={() => handleEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش"><EditIcon className="size-4" /></button>}
+          {canEdit.data && <button onClick={() => handleEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش"><PencilIcon className="size-4" /></button>}
           {canDelete.data && <button onClick={() => handleDelete(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-destructive transition-colors" aria-label="حذف"><TrashIcon className="size-4" /></button>}
         </div>
       ),

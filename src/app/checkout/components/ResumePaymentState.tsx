@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { PackageIcon, ArrowIcon, RotateCcwIcon, AlertCircleIcon, CheckCircleIcon } from "@/components/icons";
+import { PackageIcon, ArrowIcon, RotateCcwIcon, CircleAlertIcon, CircleCheckIcon } from "@/components/icons";
 import { formatPrice, formatQuantity, CATEGORY_LABELS, UNIT_LABELS, type SellingUnit } from "@/lib/products";
 
 export interface ResumeOrder {
@@ -99,7 +99,7 @@ export function ResumePaymentState({ order, onResume, resuming, error }: ResumeP
 
           {error && (
             <div className="mt-6 flex items-center gap-2 p-3 rounded-app bg-red-50 border border-red-100 text-red-700 text-sm">
-              <AlertCircleIcon className="size-4 flex-shrink-0" />
+              <CircleAlertIcon className="size-4 flex-shrink-0" />
               <span>{error}</span>
             </div>
           )}
@@ -110,7 +110,7 @@ export function ResumePaymentState({ order, onResume, resuming, error }: ResumeP
                 href={`/checkout/success?order_id=${order.id}`}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-app bg-green-600 text-white font-bold hover:opacity-90 transition-opacity"
               >
-                <CheckCircleIcon className="size-5" />
+                <CircleCheckIcon className="size-5" />
                 مشاهده جزئیات سفارش
               </Link>
             ) : (

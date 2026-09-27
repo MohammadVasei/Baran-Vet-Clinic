@@ -6,7 +6,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import { PawIcon } from "@/components/icons";
+import { PawPrintIcon } from "@/components/icons";
 import {
   ANIMAL_SEX_LABELS,
   ANIMAL_STATUS_LABELS,
@@ -90,7 +90,7 @@ export default function AccountPetsPage() {
         <div className="p-12 text-center text-destructive">{error}</div>
       ) : animals.length === 0 ? (
         <div className="pets-grid rounded-app-lg border border-border bg-surface p-12 text-center">
-          <PawIcon className="size-16 text-muted-foreground mx-auto mb-4" />
+          <PawPrintIcon className="size-16 text-muted-foreground mx-auto mb-4" />
           <h3 className="font-display text-lg font-bold text-foreground mb-2">حیوانی ثبت نشده است</h3>
           <p className="text-muted-foreground mb-6">
             هنوز پرونده‌ای برای حیوان شما ثبت نشده است. برای ثبت، با کلینیک در تماس باشید.
@@ -119,7 +119,7 @@ export default function AccountPetsPage() {
                   />
                 ) : (
                   <div className="size-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <PawIcon className="size-8 text-primary" />
+                    <PawPrintIcon className="size-8 text-primary" />
                   </div>
                 )}
                 <h3 className="text-center font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors">

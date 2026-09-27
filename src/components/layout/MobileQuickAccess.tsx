@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { CalendarIcon, CloseIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
+import { CalendarIcon, XIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
 import { useCms } from "@/context/CmsContext";
 
 export function MobileQuickAccess() {
@@ -64,7 +64,7 @@ export function MobileQuickAccess() {
         aria-label={open ? "بستن دسترسی سریع تماس" : "باز کردن دسترسی سریع تماس"}
         onClick={() => setOpen((current) => !current)}
       >
-        {open ? <CloseIcon className="size-6" /> : <PhoneIcon className="size-6" />}
+        {open ? <XIcon className="size-6" /> : <PhoneIcon className="size-6" />}
       </button>
     </div>
   );

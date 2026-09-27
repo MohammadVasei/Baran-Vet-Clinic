@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { AdminTable } from '@/components/admin/AdminTable';
 import { StockQtyCell } from '@/components/admin/StockQtyCell';
 import { Button } from '@/components/ui/button';
-import { EditIcon, SettingsIcon, PackageIcon, EyeIcon, EyeOffIcon, CheckCircleIcon, AlertCircleIcon, DownloadIcon, LoaderIcon } from '@/components/icons';
+import { PencilIcon, SettingsIcon, PackageIcon, EyeIcon, EyeOffIcon, CircleCheckIcon, CircleAlertIcon, DownloadIcon, LoaderCircleIcon } from '@/components/icons';
 import { UNIT_LABELS, isWeightUnit, formatQuantity, type SellingUnit } from '@/lib/products';
 import { PageHelp } from "@/components/admin/PageHelp";
 
@@ -185,20 +185,20 @@ export function StockLevelsList() {
         if (status === 'out_of_stock') {
           return (
             <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-red-100 text-red-700">
-              <AlertCircleIcon className="size-3" /> ناموجود
+              <CircleAlertIcon className="size-3" /> ناموجود
             </span>
           );
         }
         if (status === 'low_stock') {
           return (
             <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">
-              <AlertCircleIcon className="size-3" /> کم ({formatQuantity(original.quantity_on_hand, unit)})
+              <CircleAlertIcon className="size-3" /> کم ({formatQuantity(original.quantity_on_hand, unit)})
             </span>
           );
         }
         return (
           <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">
-            <CheckCircleIcon className="size-3" /> موجود ({formatQuantity(original.quantity_on_hand, unit)})
+            <CircleCheckIcon className="size-3" /> موجود ({formatQuantity(original.quantity_on_hand, unit)})
           </span>
         );
       },
@@ -263,7 +263,7 @@ export function StockLevelsList() {
               className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
               aria-label="ویرایش محصول"
             >
-              <EditIcon className="size-4" />
+              <PencilIcon className="size-4" />
             </button>
           )}
         </div>
@@ -317,7 +317,7 @@ export function StockLevelsList() {
               disabled={exporting || rows.length === 0}
               aria-label="خروجی اکسل"
             >
-              {exporting ? <LoaderIcon className="size-4" /> : <DownloadIcon className="size-4" />}
+              {exporting ? <LoaderCircleIcon className="size-4" /> : <DownloadIcon className="size-4" />}
               {exporting ? 'در حال ساخت…' : 'خروجی اکسل'}
             </Button>
             <Link

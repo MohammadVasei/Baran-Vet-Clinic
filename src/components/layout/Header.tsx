@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { MenuIcon, CloseIcon, UserIcon } from "@/components/icons";
+import { MenuIcon, XIcon, UserRoundIcon } from "@/components/icons";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
@@ -91,7 +91,7 @@ export function Header() {
               aria-label="حساب کاربری"
               title={user.user_metadata?.full_name || user.email?.split("@")[0] || "کاربر"}
             >
-              <UserIcon className="size-5" />
+              <UserRoundIcon className="size-5" />
             </Link>
           ) : (
             <>
@@ -106,7 +106,7 @@ export function Header() {
                 className="btn btn-outline size-10 !p-0 lg:hidden"
                 aria-label="ورود یا عضویت"
               >
-                <UserIcon className="size-5" />
+                <UserRoundIcon className="size-5" />
               </Link>
             </>
           )}
@@ -122,7 +122,7 @@ export function Header() {
             aria-label={open ? "بستن منوی موبایل" : "باز کردن منوی موبایل"}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? <CloseIcon className="size-5" /> : <MenuIcon className="size-5" />}
+            {open ? <XIcon className="size-5" /> : <MenuIcon className="size-5" />}
           </button>
         </div>
       </div>

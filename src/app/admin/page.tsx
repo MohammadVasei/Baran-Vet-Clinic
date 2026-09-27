@@ -2,10 +2,10 @@
 
 import { useList, useNavigation } from "@refinedev/core";
 import {
-  FilterIcon,
+  SlidersHorizontalIcon,
   CalendarIcon,
   ChevronDownIcon,
-  AlertCircleIcon,
+  CircleAlertIcon,
   ArrowIcon,
 } from "@/components/icons";
 import { Button } from "@/components/ui/button";
@@ -382,7 +382,7 @@ return (
                   </p>
                 </div>
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <AlertCircleIcon className="size-5 text-primary" />
+                  <CircleAlertIcon className="size-5 text-primary" />
                 </div>
               </div>
             </div>
@@ -440,7 +440,7 @@ return (
                   </p>
                 </div>
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <FilterIcon className="size-5 text-primary" />
+                  <SlidersHorizontalIcon className="size-5 text-primary" />
                 </div>
               </div>
             </div>
@@ -605,9 +605,9 @@ return (
                               severityColors[alert.severity].icon
                           )}>
                             {alert.severity === "critical"
-                                ? <AlertCircleIcon className="size-4" />
+                                ? <CircleAlertIcon className="size-4" />
                                 : alert.severity === "warning"
-                                    ? <FilterIcon className="size-4" />
+                                    ? <SlidersHorizontalIcon className="size-4" />
                                     : <CalendarIcon className="size-4" />}
                           </div>
                           <div className="flex-1 min-w-0">

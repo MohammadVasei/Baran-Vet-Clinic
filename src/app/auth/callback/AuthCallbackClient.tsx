@@ -6,7 +6,7 @@ import { useGSAP } from "@/lib/gsap";
 import { revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
-import { CheckCircleIcon, AlertCircleIcon, LoaderIcon } from "@/components/icons";
+import { CircleCheckIcon, CircleAlertIcon, LoaderCircleIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { safeCallbackUrl } from "@/lib/callback-url";
 
@@ -76,7 +76,7 @@ export function AuthCallbackClient({ initialParams }: AuthCallbackClientProps) {
           {status === "loading" && (
             <>
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mx-auto mb-6">
-                <LoaderIcon className="size-10 text-primary animate-spin" />
+                <LoaderCircleIcon className="size-10 text-primary animate-spin" />
               </div>
               <h1 ref={headline} className="font-display text-2xl font-bold text-foreground mb-4">
                 در حال پردازش...
@@ -90,7 +90,7 @@ export function AuthCallbackClient({ initialParams }: AuthCallbackClientProps) {
           {status === "success" && (
             <>
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mx-auto mb-6">
-                <CheckCircleIcon className="size-10 text-green-600" />
+                <CircleCheckIcon className="size-10 text-green-600" />
               </div>
               <h1 ref={headline} className="font-display text-2xl font-bold text-foreground mb-4">
                 موفقیت‌آمیز
@@ -105,7 +105,7 @@ export function AuthCallbackClient({ initialParams }: AuthCallbackClientProps) {
           {status === "error" && (
             <>
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-red-100 mx-auto mb-6">
-                <AlertCircleIcon className="size-10 text-red-600" />
+                <CircleAlertIcon className="size-10 text-red-600" />
               </div>
               <h1 ref={headline} className="font-display text-2xl font-bold text-foreground mb-4">
                 خطا

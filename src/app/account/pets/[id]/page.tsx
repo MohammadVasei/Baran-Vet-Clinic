@@ -7,7 +7,7 @@ import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { PawIcon, AlertCircleIcon, ArrowIcon, EditIcon, CheckCircleIcon } from "@/components/icons";
+import { PawPrintIcon, CircleAlertIcon, ArrowIcon, PencilIcon, CircleCheckIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import {
@@ -181,7 +181,7 @@ export default function AccountPetDetailPage() {
     return (
       <div className="space-y-6">
         <div className="rounded-app-lg border border-border bg-surface p-12 text-center">
-          <AlertCircleIcon className="size-16 text-muted-foreground mx-auto mb-4" />
+          <CircleAlertIcon className="size-16 text-muted-foreground mx-auto mb-4" />
           <p className="text-foreground mb-4">{error || "حیوان یافت نشد"}</p>
           <Link href="/account/pets">
             <Button variant="outline">
@@ -207,7 +207,7 @@ export default function AccountPetDetailPage() {
             <img src={animal.profile_image} alt={animal.name} className="size-16 rounded-full object-cover" />
           ) : (
             <div className="size-16 rounded-full bg-primary/10 flex items-center justify-center">
-              <PawIcon className="size-8 text-primary" />
+              <PawPrintIcon className="size-8 text-primary" />
             </div>
           )}
           <div>
@@ -229,7 +229,7 @@ export default function AccountPetDetailPage() {
             saved ? "bg-green-50 border-green-100 text-green-700" : "bg-red-50 border-red-100 text-red-700"
           }`}
         >
-          {saved ? <CheckCircleIcon className="size-4" /> : <AlertCircleIcon className="size-4" />}
+          {saved ? <CircleCheckIcon className="size-4" /> : <CircleAlertIcon className="size-4" />}
           <span>{message}</span>
         </div>
       )}
@@ -271,7 +271,7 @@ export default function AccountPetDetailPage() {
       {/* Notes for doctor */}
       <div className="pet-notes rounded-app-lg border border-border bg-surface p-6">
         <div className="flex items-center gap-2 mb-4">
-          <EditIcon className="size-5 text-primary" />
+          <PencilIcon className="size-5 text-primary" />
           <h2 className="font-display text-lg font-bold text-foreground">یادداشت برای پزشک</h2>
         </div>
         <div className="space-y-2">

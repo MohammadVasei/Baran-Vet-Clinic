@@ -7,7 +7,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { PackageIcon, ClockIcon, CheckCircleIcon, XCircleIcon, TruckIcon, MapPinIcon, PhoneIcon, UserIcon, ArrowIcon } from "@/components/icons";
+import { PackageIcon, ClockIcon, CircleCheckIcon, CircleXIcon, TruckIcon, MapPinIcon, PhoneIcon, UserRoundIcon, ArrowIcon } from "@/components/icons";
 import { formatPrice, formatQuantity, CATEGORY_LABELS, UNIT_LABELS, type SellingUnit } from "@/lib/products";
 import { supabaseClient } from "@/lib/supabase-client";
 import { useEffect, useState } from "react";
@@ -61,12 +61,12 @@ function OrderTrackingShowClient({ order }: { order: Order }) {
   const getStatusConfig = (status: string) => {
     const configs: Record<string, { label: string; className: string; icon: React.ReactNode }> = {
       pending: { label: "در انتظار پرداخت", className: "bg-yellow-100 text-yellow-700", icon: <ClockIcon className="size-4" /> },
-      paid: { label: "پرداخت شده", className: "bg-green-100 text-green-700", icon: <CheckCircleIcon className="size-4" /> },
-      failed: { label: "پرداخت ناموفق", className: "bg-red-100 text-red-700", icon: <XCircleIcon className="size-4" /> },
+      paid: { label: "پرداخت شده", className: "bg-green-100 text-green-700", icon: <CircleCheckIcon className="size-4" /> },
+      failed: { label: "پرداخت ناموفق", className: "bg-red-100 text-red-700", icon: <CircleXIcon className="size-4" /> },
       shipped: { label: "ارسال شده", className: "bg-blue-100 text-blue-700", icon: <TruckIcon className="size-4" /> },
       delivered: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <TruckIcon className="size-4" /> },
       fulfilled: { label: "تحویل داده شده", className: "bg-lime-100 text-lime-700", icon: <TruckIcon className="size-4" /> },
-      cancelled: { label: "لغو شده", className: "bg-gray-100 text-gray-700", icon: <XCircleIcon className="size-4" /> },
+      cancelled: { label: "لغو شده", className: "bg-gray-100 text-gray-700", icon: <CircleXIcon className="size-4" /> },
     };
     return configs[status] || { label: status, className: "bg-gray-100 text-gray-700", icon: <ClockIcon className="size-4" /> };
   };
@@ -109,7 +109,7 @@ function OrderTrackingShowClient({ order }: { order: Order }) {
           {/* Customer Info */}
           <div className="rounded-app-lg border border-border bg-surface p-6">
             <h2 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-              <UserIcon className="size-5 text-primary-text" />
+              <UserRoundIcon className="size-5 text-primary-text" />
               اطلاعات مشتری
             </h2>
             <dl className="grid gap-4 sm:grid-cols-2">
@@ -240,7 +240,7 @@ function OrderTrackingShowClient({ order }: { order: Order }) {
             <div className="space-y-4">
               <div className="flex items-start gap-3 relative before:content-[''] before:absolute before:left-[9px] before:top-0 before:h-full before:w-0.5 before:bg-border last:before:hidden">
                 <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 border-2 border-background flex items-center justify-center">
-                  <CheckCircleIcon className="size-3 text-white" />
+                  <CircleCheckIcon className="size-3 text-white" />
                 </div>
                 <div>
                   <p className="font-medium text-foreground">سفارش ثبت شد</p>
@@ -250,7 +250,7 @@ function OrderTrackingShowClient({ order }: { order: Order }) {
               {order.zarinpal_ref_id && (
                 <div className="flex items-start gap-3 relative before:content-[''] before:absolute before:left-[9px] before:top-0 before:h-full before:w-0.5 before:bg-border last:before:hidden">
                   <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 border-2 border-background flex items-center justify-center">
-                    <CheckCircleIcon className="size-3 text-white" />
+                    <CircleCheckIcon className="size-3 text-white" />
                   </div>
                   <div>
                     <p className="font-medium text-foreground">پرداخت تایید شد</p>
@@ -288,7 +288,7 @@ function OrderTrackingShowClient({ order }: { order: Order }) {
               {order.status === "cancelled" && (
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 w-5 h-5 rounded-full bg-red-500 border-2 border-background flex items-center justify-center">
-                    <XCircleIcon className="size-3 text-white" />
+                    <CircleXIcon className="size-3 text-white" />
                   </div>
                   <div>
                     <p className="font-medium text-foreground">لغو شده</p>

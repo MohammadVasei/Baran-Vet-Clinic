@@ -295,7 +295,6 @@ async function loadContent(): Promise<CmsContent> {
   const clinic = { ...fallbackClinic(), ...(clinicRow ?? {}) } as CmsContent["clinic"];
 
   const aboutRow = pick(rows, "about");
-  const whyRow = pick(rows, "why");
   const animalsRow = pick(rows, "animals");
   const marqueeRow = pick(rows, "marquee");
   const facilitiesRow = pick(rows, "facilities");
@@ -306,10 +305,6 @@ async function loadContent(): Promise<CmsContent> {
   const about = aboutRow
     ? { ...aboutRow, image: (aboutRow.image as { src?: string; alt?: string; [k: string]: unknown } | null) ?? { src: "", alt: "" } } as CmsContent["about"]
     : { eyebrow: "", statement: [], body: "", signature: "", image: { src: "", alt: "" } };
-
-  const why = whyRow
-    ? { ...whyRow, steps: Array.isArray(whyRow.steps) ? whyRow.steps : [], image: (whyRow.image as { src?: string; alt?: string } | null) ?? { src: "", alt: "" } } as CmsContent["why"]
-    : { eyebrow: "", headline: [], intro: "", steps: [], image: { src: "", alt: "" } };
 
   const animals = {
     ...sectionMin(animalsRow),
@@ -454,7 +449,6 @@ let services = toServices(
   return {
     clinic,
     about,
-    why,
     animals,
     marquee,
     services,

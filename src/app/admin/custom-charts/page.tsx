@@ -2,7 +2,7 @@
 
 import { useList, useDelete, useNavigation, useCan, useUpdate } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, TrashIcon, EyeIcon, CheckIcon, XIcon } from '@/components/icons';
+import { PencilIcon, TrashIcon, EyeIcon, CheckIcon, XIcon , CircleAlertIcon, PlusIcon} from '@/components/icons';
 import { CustomChartBuilderModal } from '@/components/admin/CustomChartBuilderModal';
 import { supabaseClient } from '@/lib/supabase-client';
 import { useState, useEffect } from 'react';
@@ -215,17 +215,13 @@ const handleSaveChart = async (chartData: Omit<CustomChart, "id" | "user_id">) =
             aria-label={original.is_active ? 'غیرفعال کردن' : 'فعال کردن'}
           >
             {original.is_active ? (
-              <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <XIcon className="size-4" />
             ) : (
-              <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.776-1.333-2.082-2-3.464-2H6.074c-1.382 0-2.688.667-3.464 2l-.012 1.172c-.77 1.333-.192 3 1.732 3z" />
-              </svg>
+              <CircleAlertIcon className="size-4" />
             )}
           </button>
           <button onClick={() => handleEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش">
-            {canEdit.data && <EditIcon className="size-4" />}
+            {canEdit.data && <PencilIcon className="size-4" />}
           </button>
           <button onClick={() => handleDelete(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-destructive transition-colors" aria-label="حذف">
             {canDelete.data && <TrashIcon className="size-4" />}
@@ -244,7 +240,7 @@ const handleSaveChart = async (chartData: Omit<CustomChart, "id" | "user_id">) =
         </div>
         {canEdit.data && (
           <button onClick={handleCreate} className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors">
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+            <PlusIcon className="w-4 h-4 mr-2" />
             نمودار جدید
           </button>
         )}

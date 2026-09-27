@@ -155,20 +155,6 @@ export type AboutSection = {
   image: { src: string; alt: string };
 };
 
-export type WhyStep = {
-  number: string;
-  title: string;
-  text: string;
-};
-
-export type WhySection = {
-  eyebrow: string;
-  headline: string[];
-  intro: string;
-  steps: WhyStep[];
-  image: { src: string; alt: string };
-};
-
 export type MarqueeSection = {
   label: string;
   items: string[];
@@ -235,7 +221,6 @@ export type DiseasesContent = {
 export type SiteContentKeys =
   | "clinic"
   | "about"
-  | "why"
   | "animals"
   | "marquee"
   | "emergency"
@@ -261,7 +246,6 @@ export type SiteContentRow = {
 export type CmsContent = {
   clinic: Clinic;
   about: AboutSection;
-  why: WhySection;
   animals: AnimalsSection;
   marquee: MarqueeSection;
   services: ServicesSection;

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, TrashIcon } from '@/components/icons';
+import { PencilIcon, TrashIcon } from '@/components/icons';
 import { formatReminderInterval, TREATMENT_CATEGORY_LABELS } from '@/lib/animals';
 import { MedicalItemsTabSwitcher } from '@/components/admin/MedicalItemsTabSwitcher';
 import { PageHelp } from "@/components/admin/PageHelp";
@@ -136,7 +136,7 @@ export default function MedicalItemsPage() {
         <div className="flex items-center gap-2">
           {canEditVaccine.data && (
             <button onClick={() => handleEditVaccine(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش">
-              <EditIcon className="size-4" />
+              <PencilIcon className="size-4" />
             </button>
           )}
           {canDeleteVaccine.data && (
@@ -206,7 +206,7 @@ export default function MedicalItemsPage() {
         <div className="flex items-center gap-2">
           {canEditTreatment.data && (
             <button onClick={() => handleEditTreatment(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش">
-              <EditIcon className="size-4" />
+              <PencilIcon className="size-4" />
             </button>
           )}
           {canDeleteTreatment.data && (

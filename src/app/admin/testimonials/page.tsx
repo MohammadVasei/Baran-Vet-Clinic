@@ -2,7 +2,7 @@
 
 import { useDelete, useList, useNavigation, useCan } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, TrashIcon } from '@/components/icons';
+import { PencilIcon, StarIcon, TrashIcon } from '@/components/icons';
 import { PageHelp } from "@/components/admin/PageHelp";
 
 const ANIMAL_LABELS: Record<string, string> = {
@@ -54,7 +54,7 @@ export default function TestimonialsList() {
     {
       accessorKey: 'rating' as keyof TestimonialRow,
       header: 'امتیاز',
-      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => <span>{'★'.repeat(getValue('rating') as number)}</span>,
+      cellWithMeta: ({ getValue }: { getValue: (key: string) => unknown }) => <span className="text-yellow-400">{(Array.from({length: getValue('rating') as number}, (_, i) => (<StarIcon key={i} className="size-4 inline-block" fill="currentColor" />))).join(' ')}</span>,
     },
     {
       accessorKey: 'animal_type' as keyof TestimonialRow,
@@ -96,7 +96,7 @@ export default function TestimonialsList() {
         <div className="flex items-center gap-2">
           {canEdit.data && (
             <button onClick={() => navigation.edit('testimonials', original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش">
-              <EditIcon className="size-4" />
+              <PencilIcon className="size-4" />
             </button>
           )}
           {canDelete.data && (

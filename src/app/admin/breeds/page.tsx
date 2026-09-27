@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 
 import { useList, useDelete, useNavigation, useCan } from '@refinedev/core';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon, TrashIcon } from '@/components/icons';
+import { PencilIcon, TrashIcon } from '@/components/icons';
 import { PageHelp } from "@/components/admin/PageHelp";
 
 interface BreedRow {
@@ -68,7 +68,7 @@ export default function BreedsList() {
         <div className="flex items-center gap-2">
           {canEdit.data && (
             <button onClick={() => handleEdit(original.id)} className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors" aria-label="ویرایش">
-              <EditIcon className="size-4" />
+              <PencilIcon className="size-4" />
             </button>
           )}
           {canDelete.data && (

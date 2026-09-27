@@ -6,7 +6,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import { PackageIcon, MapPinIcon, SettingsIcon, PackageCheckIcon, ClockIcon, CheckCircleIcon } from "@/components/icons";
+import { PackageIcon, MapPinIcon, SettingsIcon, PackageCheckIcon, ClockIcon, CircleCheckIcon } from "@/components/icons";
 import { formatPrice } from "@/lib/products";
 import { supabaseClient } from "@/lib/supabase-client";
 import { useEffect, useState } from "react";
@@ -67,10 +67,10 @@ export default function AccountDashboard() {
   const getStatusBadge = (status: string) => {
     const configs: Record<string, { label: string; className: string; icon: React.ReactNode }> = {
       pending: { label: "در انتظار پرداخت", className: "bg-yellow-100 text-yellow-700", icon: <ClockIcon className="size-3" /> },
-      paid: { label: "پرداخت شده", className: "bg-green-100 text-green-700", icon: <CheckCircleIcon className="size-3" /> },
-      failed: { label: "پرداخت ناموفق", className: "bg-red-100 text-red-700", icon: <CheckCircleIcon className="size-3" /> },
+      paid: { label: "پرداخت شده", className: "bg-green-100 text-green-700", icon: <CircleCheckIcon className="size-3" /> },
+      failed: { label: "پرداخت ناموفق", className: "bg-red-100 text-red-700", icon: <CircleCheckIcon className="size-3" /> },
       fulfilled: { label: "تحویل داده شده", className: "bg-blue-100 text-blue-700", icon: <PackageCheckIcon className="size-3" /> },
-      cancelled: { label: "لغو شده", className: "bg-gray-100 text-gray-700", icon: <CheckCircleIcon className="size-3" /> },
+      cancelled: { label: "لغو شده", className: "bg-gray-100 text-gray-700", icon: <CircleCheckIcon className="size-3" /> },
     };
     const c = configs[status] || { label: status, className: "bg-gray-100 text-gray-700", icon: <ClockIcon className="size-3" /> };
     return (
@@ -130,7 +130,7 @@ export default function AccountDashboard() {
         <Link href="/account/orders" className="rounded-app-lg border border-border bg-surface p-6 hover:shadow-lg transition-shadow group">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-app bg-green-100 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <CheckCircleIcon className="size-6 text-green-600" />
+              <CircleCheckIcon className="size-6 text-green-600" />
             </div>
             <div>
               <p className="text-sm text-muted-foreground">سفارشات تحویل شده</p>

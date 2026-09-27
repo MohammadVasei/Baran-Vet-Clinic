@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useList, useNavigation, useCan } from '@refinedev/core';
-import { CalendarIcon, EditIcon, PlusIcon } from '@/components/icons';
+import { CalendarIcon, PencilIcon, PlusIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { PageHelp } from "@/components/admin/PageHelp";
 
@@ -83,7 +83,7 @@ const { result: doctorResult, query: doctorQuery } = useList<Doctor>({
               </div>
               <div className="mt-5 flex gap-2">
                 <Link href="/admin/availability-blocks" className="btn btn-outline text-sm"><CalendarIcon className="size-4" /> زمان‌های غیرفعال</Link>
-                <Link href={`/admin/doctors/edit/${doctor.id}`} className="btn btn-outline text-sm"><EditIcon className="size-4" /> ویرایش پزشک</Link>
+                <Link href={`/admin/doctors/edit/${doctor.id}`} className="btn btn-outline text-sm"><PencilIcon className="size-4" /> ویرایش پزشک</Link>
               </div>
             </article>
           );

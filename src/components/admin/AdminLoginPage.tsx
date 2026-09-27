@@ -5,7 +5,7 @@ import { useLogin } from '@refinedev/core';
 import { useState, useRef } from 'react';
 import { useGSAP } from '@/lib/gsap';
 import { revealLines, revealUp, prefersReducedMotion } from '@/lib/motion';
-import { LockIcon, MailIcon, EyeIcon, EyeOffIcon } from '@/components/icons';
+import { LockIcon, MailIcon, EyeIcon, EyeOffIcon , MapPinIcon, LoaderCircleIcon} from '@/components/icons';
 
 export function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -166,10 +166,7 @@ export function AdminLoginPage() {
           >
             {isPending ? (
               <span className="flex items-center justify-center gap-2">
-                <svg className="animate-spin size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" />
-                  <path className="opacity-75" d="M12 2a10 10 0 0 1 10 10" />
-                </svg>
+                <LoaderCircleIcon className="size-5" />
                 در حال ورود...
               </span>
             ) : (

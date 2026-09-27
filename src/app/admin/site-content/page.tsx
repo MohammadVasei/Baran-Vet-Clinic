@@ -3,13 +3,12 @@
 import { useList } from '@refinedev/core';
 import Link from 'next/link';
 import { AdminTable } from '@/components/admin/AdminTable';
-import { EditIcon } from '@/components/icons';
+import { PencilIcon } from '@/components/icons';
 import { PageHelp } from "@/components/admin/PageHelp";
 
 const KEY_LABELS: Record<string, string> = {
   clinic: 'اطلاعات کلینیک',
   about: 'درباره ما',
-  why: 'چرا باران',
   animals: 'حیوانات',
   marquee: 'نوار متحرک',
   emergency: 'اضطراری',
@@ -71,7 +70,7 @@ export default function SiteContentList() {
           className="p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors inline-flex"
           aria-label="ویرایش"
         >
-          <EditIcon className="size-4" />
+          <PencilIcon className="size-4" />
         </Link>
       ),
     },

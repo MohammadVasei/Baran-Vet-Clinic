@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { gsap, useGSAP } from '@/lib/gsap';
 import { prefersReducedMotion, duration, ease } from '@/lib/motion';
-import { ArrowIcon, MenuIcon, XIcon, LogOutIcon, ChevronDownIcon } from '@/components/icons';
+import { ArrowIcon, MenuIcon, XIcon, LogOutIcon, ChevronDownIcon , MapPinIcon} from '@/components/icons';
 
 const NAV_GROUPS = [
   {
@@ -164,10 +164,7 @@ className={`fixed inset-0 z-40 bg-[var(--sidebar-overlay-background)] lg:hidden 
           <div className="flex items-center justify-between p-4 border-b border-border">
             <Link href="/admin" className="flex items-center gap-2" aria-label="صفحه اصلی پنل مدیریت">
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <svg className="w-5 h-5 text-on-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                  <path d="M12 21s-6.5-5.4-6.5-10A6.5 6.5 0 0 1 12 4.5 6.5 6.5 0 0 1 18.5 11c0 4.6-6.5 10-6.5 10Z" />
-                  <circle cx="12" cy="11" r="2.4" />
-                </svg>
+                <MapPinIcon className="w-5 h-5 text-on-primary" />
               </div>
               <span className="font-display text-lg font-bold text-foreground">باران</span>
             </Link>

@@ -9,7 +9,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useCms } from "@/context/CmsContext";
 import { ANIMAL_ACCENTS } from "@/lib/accents";
-import { PhoneIcon, ChevronDownIcon, SearchIcon, XIcon, FilterIcon, PawIcon } from "@/components/icons";
+import { PhoneIcon, ChevronDownIcon, SearchIcon, XIcon, SlidersHorizontalIcon, PawPrintIcon , TriangleAlertIcon} from "@/components/icons";
 
 export function CommonDiseasesPage() {
   const cms = useCms();
@@ -117,7 +117,7 @@ export function CommonDiseasesPage() {
                       }`}
                       aria-pressed={selectedAnimal === key}
                     >
-                      <span className="inline-flex items-center gap-1.5"><PawIcon className="size-4" aria-hidden="true" /> {label}</span>
+                      <span className="inline-flex items-center gap-1.5"><PawPrintIcon className="size-4" aria-hidden="true" /> {label}</span>
                     </button>
                   );
                 })}
@@ -186,7 +186,7 @@ export function CommonDiseasesPage() {
                   }}
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline whitespace-nowrap"
                 >
-                  <FilterIcon className="size-4" />
+                  <SlidersHorizontalIcon className="size-4" />
                   پاک کردن فیلترها
                 </button>
               )}
@@ -216,7 +216,7 @@ export function CommonDiseasesPage() {
                       }`}
                       aria-pressed={selectedAnimal === key}
                     >
-                      <span className="inline-flex items-center gap-2 justify-end"><PawIcon className="size-4" aria-hidden="true" /> {label}</span>
+                      <span className="inline-flex items-center gap-2 justify-end"><PawPrintIcon className="size-4" aria-hidden="true" /> {label}</span>
                     </button>
                   );
                 })}
@@ -286,7 +286,7 @@ export function CommonDiseasesPage() {
                       }}
                       className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline whitespace-nowrap"
                     >
-                      <FilterIcon className="size-4" />
+                      <SlidersHorizontalIcon className="size-4" />
                       پاک کردن فیلترها
                     </button>
                   )}
@@ -301,11 +301,7 @@ export function CommonDiseasesPage() {
             <div className="diseases-disclaimer rounded-app-lg border border-destructive/30 bg-destructive/5 p-6 mb-10" role="alert">
               <div className="flex items-start gap-3">
                 <div className="mt-0.5 shrink-0 text-destructive" aria-hidden>
-                  <svg className="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-                    <line x1="12" x2="12" y1="9" y2="13" />
-                    <line x1="12" x2="12.01" y1="17" y2="17" />
-                  </svg>
+                  <TriangleAlertIcon className="size-6" />
                 </div>
                 <div>
                   <h3 className="font-display text-lg font-bold text-destructive">{DISCLAIMER.title}</h3>

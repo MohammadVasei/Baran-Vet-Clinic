@@ -7,7 +7,7 @@ import { useGSAP } from "@/lib/gsap";
 import { revealLines, revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useCms } from "@/context/CmsContext";
-import { PhoneIcon } from "@/components/icons";
+import { PhoneIcon , ChevronRightIcon} from "@/components/icons";
 
 export function DoctorsPage() {
   const { doctors: DOCTORS, clinic: CLINIC } = useCms();
@@ -85,9 +85,7 @@ export function DoctorsPage() {
               </div>
 
               <span className="absolute end-4 top-4 z-10 flex size-9 items-center justify-center rounded-full bg-background/70 text-foreground opacity-100 backdrop-blur-sm transition-all duration-normal md:opacity-0 md:group-hover:opacity-100" aria-hidden>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="size-4 rtl:rotate-180">
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
+                <ChevronRightIcon className="size-4 rtl:rotate-180" />
               </span>
             </Link>
           ))}

@@ -106,33 +106,6 @@ export const FACILITY_ACCENTS: Record<FacilityAccentKey, AccentClasses> = {
   },
 };
 
-export const WHY_STEP_ACCENTS: Record<number, AccentClasses> = {
-  0: {
-    chip: "bg-accent-purple-soft text-accent-purple-fg",
-    dot: "bg-accent-purple",
-    bar: "bg-accent-purple",
-    fg: "text-accent-purple",
-  },
-  1: {
-    chip: "bg-accent-orange-soft text-accent-orange-fg",
-    dot: "bg-accent-orange",
-    bar: "bg-accent-orange",
-    fg: "text-accent-orange",
-  },
-  2: {
-    chip: "bg-accent-lime-soft text-accent-lime-fg",
-    dot: "bg-accent-lime",
-    bar: "bg-accent-lime",
-    fg: "text-accent-lime",
-  },
-  3: {
-    chip: "bg-accent-magenta-soft text-accent-magenta-fg",
-    dot: "bg-accent-magenta",
-    bar: "bg-accent-magenta",
-    fg: "text-accent-magenta",
-  },
-};
-
 export const ABOUT_CARD_ACCENTS: Record<number, AccentClasses> = {
   0: {
     chip: "bg-accent-purple-soft text-accent-purple-fg",

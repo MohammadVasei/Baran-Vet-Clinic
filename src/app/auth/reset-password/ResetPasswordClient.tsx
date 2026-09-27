@@ -7,7 +7,7 @@ import { useGSAP } from "@/lib/gsap";
 import { revealUp, prefersReducedMotion } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useRef } from "react";
-import { MailIcon, LockIcon, EyeIcon, EyeOffIcon, AlertCircleIcon, CheckCircleIcon, ArrowIcon } from "@/components/icons";
+import { MailIcon, LockIcon, EyeIcon, EyeOffIcon, CircleAlertIcon, CircleCheckIcon, ArrowIcon } from "@/components/icons";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -114,13 +114,13 @@ export function ResetPasswordClient({ type }: { type?: string | null }) {
         <div className="rounded-app-lg border border-border bg-surface p-6 space-y-6">
           {error && (
             <div className="flex items-center gap-2 p-3 rounded-app bg-red-50 border border-red-100 text-red-700 text-sm">
-              <AlertCircleIcon className="size-4" />
+              <CircleAlertIcon className="size-4" />
               <span>{error}</span>
             </div>
           )}
           {success && (
             <div className="flex items-center gap-2 p-3 rounded-app bg-green-50 border border-green-100 text-green-700 text-sm">
-              <CheckCircleIcon className="size-4" />
+              <CircleCheckIcon className="size-4" />
               <span>{success}</span>
             </div>
           )}

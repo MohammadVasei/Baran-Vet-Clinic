@@ -1,5 +1,4 @@
 import { Hero } from "@/components/sections/Hero";
-import { WhyBaran } from "@/components/sections/WhyBaran";
 import { Services } from "@/components/sections/Services";
 import { Doctors } from "@/components/sections/Doctors";
 import { TestimonialsSection } from "@/components/sections/AnimatedTestimonials";
@@ -13,12 +12,11 @@ export default async function Home() {
   return (
     <>
       <Hero />
-      <WhyBaran />
       <PetshopBanner products={featuredProducts} />
       <Services />
       <Doctors />
-      <TestimonialsSection />
       <AppointmentCTA />
+      <TestimonialsSection />
     </>
   );
 }

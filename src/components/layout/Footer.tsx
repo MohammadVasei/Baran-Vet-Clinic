@@ -1,5 +1,6 @@
-import { PinIcon, PhoneIcon, ClockIcon, InstagramIcon, ThreadsIcon } from "@/components/icons";
+import { InstagramIcon, ThreadsIcon } from "@/components/icons";
 import { Logo } from "@/components/ui/Logo";
+import { FooterContact } from "@/components/layout/FooterContact";
 
 const QUICK_LINKS = [
   { label: "خانه", href: "/" },
@@ -9,20 +10,6 @@ const QUICK_LINKS = [
   { label: "درباره ما", href: "/about" },
   { label: "تماس با ما", href: "/contact" },
 ];
-
-const CONTACT = {
-  address: "مشهد، احمدآباد، بلوار بعثت، بین بلوار رضا و ابوذر غفاری، پلاک ۹۴",
-  phones: [
-    { label: "تلفن ثابت", number: "۰۵۱-۳۸۴۷-۵۳۷۷", href: "tel:+985138475377" },
-    { label: "موبایل و واتساپ ۱", number: "۰۹۱۵-۳۵۸-۸۱۶۰", href: "tel:+989153588160", whatsapp: "https://wa.me/989153588160" },
-    { label: "موبایل و واتساپ ۲", number: "۰۹۱۵-۹۹۰-۵۹۰۰", href: "tel:+989159905900", whatsapp: "https://wa.me/989159905900" },
-  ],
-  hours: [
-    { days: "شنبه تا پنج‌شنبه", time: "۱۰ صبح تا ۹:۳۰ شب" },
-    { days: "جمعه", time: "۴ عصر تا ۹ شب" },
-  ],
-  hoursNote: "لطفاً قبل از مراجعه تماس بگیرید",
-};
 
 const SOCIALS = [
   { label: "اینستاگرام", href: "https://www.instagram.com/baran_clinic_petshop/", Icon: InstagramIcon },
@@ -75,39 +62,7 @@ export function Footer() {
           </ul>
         </nav>
 
-        <div className="col-span-2 lg:col-span-1">
-          <h2 className="font-display text-base font-bold text-foreground">تماس با ما</h2>
-          <ul className="mt-3 space-y-2 text-sm text-muted-foreground lg:mt-4 lg:space-y-3">
-            <li className="flex items-start gap-2.5">
-              <PinIcon className="mt-0.5 size-4 shrink-0 text-primary-text" />
-              <span className="leading-relaxed">{CONTACT.address}</span>
-            </li>
-            {CONTACT.phones.map((phone) => (
-              <li key={phone.label} className="flex items-center gap-2.5">
-                <PhoneIcon className="size-4 shrink-0 text-primary-text" />
-                <a href={phone.href} className="transition-colors duration-fast hover:text-primary-text-hover" dir="ltr">
-                  {phone.number}
-                </a>
-                {phone.whatsapp && (
-                  <a href={phone.whatsapp} className="text-primary-text hover:underline text-xs" target="_blank" rel="noopener">
-                    واتساپ
-                  </a>
-                )}
-              </li>
-            ))}
-            <li className="flex items-start gap-2.5">
-              <ClockIcon className="mt-0.5 size-4 shrink-0 text-primary-text" />
-              <div>
-                <p className="font-label text-xs text-primary-text">{CONTACT.hoursNote}</p>
-                {CONTACT.hours.map((h, i) => (
-                  <span key={i} className="block leading-relaxed">
-                    {h.days}: {h.time}
-                  </span>
-                ))}
-              </div>
-            </li>
-          </ul>
-        </div>
+        <FooterContact />
       </div>
 
 <div className="border-t border-border">
