@@ -266,6 +266,9 @@
     font-weight: var(--weight-medium);
     padding-block: var(--space-2);
     padding-inline: var(--space-1);
+    /* Persian labels must never break onto a second line inside the h-16 bar —
+     * at 1024-1150px the nav has no slack and used to wrap and overflow. */
+    white-space: nowrap;
     transition: color var(--duration-fast) var(--ease-out);
   }
   .nav-link::after {
@@ -275,7 +278,7 @@
     bottom: 0;
     height: 2px;
     border-radius: var(--radius-full);
-    background: var(--nav-link-underline, var(--nav-link-hover-fg));
+    background: var(--primary);
     transform: scaleX(0);
     transition: transform var(--duration-normal) var(--ease-out);
   }

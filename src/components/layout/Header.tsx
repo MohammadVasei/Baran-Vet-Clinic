@@ -13,13 +13,13 @@ import { useAuth } from "@/context/AuthContext";
 import { useDashboardPath } from "@/hooks/useDashboardPath";
 
 const NAV_LINKS = [
-  { label: "خانه", href: "/", underline: "var(--nav-underline-1)" },
-  { label: "خدمات", href: "/services", underline: "var(--nav-underline-2)" },
-  { label: "پت‌شاپ", href: "/services/petshop", underline: "var(--nav-underline-3)" },
-  { label: "بیماری‌های شایع", href: "/common-diseases", underline: "var(--nav-underline-4)" },
-  { label: "پزشکان", href: "/doctors", underline: "var(--nav-underline-5)" },
-  { label: "درباره ما", href: "/about", underline: "var(--nav-underline-6)" },
-  { label: "تماس با ما", href: "/contact", underline: "var(--nav-underline-7)" },
+  { label: "خانه", href: "/" },
+  { label: "خدمات", href: "/services" },
+  { label: "پت‌شاپ", href: "/services/petshop" },
+  { label: "بیماری‌های شایع", href: "/common-diseases" },
+  { label: "پزشکان", href: "/doctors" },
+  { label: "درباره ما", href: "/about" },
+  { label: "تماس با ما", href: "/contact" },
 ];
 
 export function Header() {
@@ -48,7 +48,7 @@ export function Header() {
           </span>
         </Link>
 
-        <nav aria-label="ناوبری اصلی" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="ناوبری اصلی" className="hidden flex-1 items-center justify-center gap-1.5 lg:flex">
           {NAV_LINKS.map((link) => {
             const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
             return (
@@ -57,7 +57,6 @@ export function Header() {
                 href={link.href}
                 className={`nav-link ${isActive ? "text-primary-text" : ""}`}
                 aria-current={isActive ? "page" : undefined}
-                style={{ "--nav-link-underline": link.underline } as React.CSSProperties}
               >
                 {link.label}
               </Link>
@@ -73,26 +72,19 @@ export function Header() {
             <CartIcon />
           </span>
           {user ? (
-            <div className="flex items-center gap-2">
-              <Link
-                href={dashboardPath}
-                className="hidden text-sm text-foreground truncate hover:underline lg:inline"
-              >
-                {user.user_metadata?.full_name || user.email?.split("@")[0] || "کاربر"}
-              </Link>
-              <Link
-                href={dashboardPath}
-                className="btn btn-outline size-10 !p-0 lg:hidden"
-                aria-label="حساب کاربری"
-              >
-                <UserIcon className="size-5" />
-              </Link>
-            </div>
+            <Link
+              href={dashboardPath}
+              className="btn btn-outline size-10 !p-0"
+              aria-label="حساب کاربری"
+              title={user.user_metadata?.full_name || user.email?.split("@")[0] || "کاربر"}
+            >
+              <UserIcon className="size-5" />
+            </Link>
           ) : (
             <>
               <MagneticButton
                 href="/auth/register"
-                className="btn btn-primary hidden lg:inline-flex"
+                className="btn btn-outline hidden lg:inline-flex"
               >
                 عضویت
               </MagneticButton>
