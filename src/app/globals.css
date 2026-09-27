@@ -543,13 +543,25 @@
 /* Petshop page backdrop (catalog + product detail). Art only in light mode —
    tokens/components.tokens.css swaps --petshop-bg-image per breakpoint and
    sets it to `none` under .dark, so --petshop-bg-color paints the flat
-   --background there. Replaces bg-background on these sections. */
-.petshop-bg {
+   --background there.
+
+   The art rides on a `position: fixed` pseudo-element instead of
+   `background-attachment: fixed`. A fixed-attachment background is
+   re-rasterized over the whole viewport on every scroll frame, which reads
+   as lag/bounce on a section as tall as the catalog; a fixed element gets
+   its own compositor layer and is not repainted as content scrolls over it.
+   `z-index: -1` drops it beneath the in-flow content (painting step 2 rather
+   than 3+), so the section itself must stay transparent. */
+.petshop-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background-color: var(--petshop-bg-color);
   background-image: var(--petshop-bg-image);
   background-size: var(--petshop-bg-size);
   background-position: var(--petshop-bg-position);
-  background-attachment: var(--petshop-bg-attachment);
   background-repeat: var(--petshop-bg-repeat);
 }
 
