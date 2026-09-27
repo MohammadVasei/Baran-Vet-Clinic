@@ -83,6 +83,19 @@
   --emergency-bg: var(--destructive);
   --emergency-fg: var(--destructive-foreground);
 
+  /* ---------- Petshop page background (light mode only) ----------
+     Art direction: separate source per breakpoint. `--petshop-bg-color`
+     stays as the fallback paint so dark mode needs no scrim. */
+  --petshop-bg-color: var(--background);
+  --petshop-bg-image: image-set(
+    url("/images/petshop-bg-desktop.avif") type("image/avif"),
+    url("/images/petshop-bg-desktop.webp") type("image/webp")
+  );
+  --petshop-bg-size: cover;
+  --petshop-bg-position: center;
+  --petshop-bg-attachment: fixed;
+  --petshop-bg-repeat: no-repeat;
+
   /* ---------- Focus & selection ---------- */
   --focus-ring-width: 3px;
   --focus-ring-offset: 3px;
@@ -104,4 +117,30 @@
 
   /* ---------- Sticky Services panel offset ---------- */
   --services-panel-top: calc(var(--header-height) + var(--space-6));
+}
+
+/* Mobile art direction — matches the 768px breakpoint used by
+   hooks/useIsMobile.ts. Declared after :root so it wins on narrow
+   viewports, and before .dark so dark mode still overrides it. */
+@media (max-width: 767px) {
+  :root {
+    --petshop-bg-image: image-set(
+      url("/images/petshop-bg-mobile.avif") type("image/avif"),
+      url("/images/petshop-bg-mobile.webp") type("image/webp")
+    );
+  }
+}
+
+/* Dark mode keeps the flat --background paint; no image, no scrim.
+   Declared after the media query above so it wins regardless of width. */
+.dark {
+  --petshop-bg-image: none;
+}
+
+/* System preference fallback, mirroring semantic.tokens.css — applies
+   only before next-themes writes an explicit .light/.dark class. */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --petshop-bg-image: none;
+  }
 }

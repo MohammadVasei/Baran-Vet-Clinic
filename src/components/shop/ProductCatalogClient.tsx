@@ -52,7 +52,7 @@ export function ProductCatalogClient({ products, isLoading = false }: ProductCat
         );
 
   return (
-    <section id="petshop-listing" className="py-16 lg:py-24 bg-background">
+    <section id="petshop-listing" className="petshop-bg py-16 lg:py-24">
       <div className="container-site">
         {isLoading ? (
           <div className="min-h-screen flex items-center justify-center py-16">
@@ -93,7 +93,7 @@ export function ProductCatalogClient({ products, isLoading = false }: ProductCat
 
             {/* Search Input */}
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <div className="relative w-full max-w-md">
+              <div className="relative w-full max-w-md mx-auto">
                 <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" />
                 <input
                   type="text"

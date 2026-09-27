@@ -540,6 +540,19 @@
   will-change: transform;
 }
 
+/* Petshop page backdrop (catalog + product detail). Art only in light mode —
+   tokens/components.tokens.css swaps --petshop-bg-image per breakpoint and
+   sets it to `none` under .dark, so --petshop-bg-color paints the flat
+   --background there. Replaces bg-background on these sections. */
+.petshop-bg {
+  background-color: var(--petshop-bg-color);
+  background-image: var(--petshop-bg-image);
+  background-size: var(--petshop-bg-size);
+  background-position: var(--petshop-bg-position);
+  background-attachment: var(--petshop-bg-attachment);
+  background-repeat: var(--petshop-bg-repeat);
+}
+
 /* Marquee drift — translateX(-50%) = exactly one duplicated copy, so the
    loop is seamless. Right→left matches Persian (RTL) reading direction. */
 @keyframes marquee-drift {

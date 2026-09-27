@@ -98,7 +98,13 @@ max_quantity: product.max_quantity ?? undefined,
   };
 
   return (
-    <section id="product-detail" ref={root} className="relative overflow-hidden bg-background py-16 lg:py-24">
+    <section id="product-detail" ref={root} className="relative overflow-hidden petshop-bg py-16 lg:py-24">
+      {/* Light-mode legibility veil. The petshop art carries dark accent
+          strokes in its outer margins; this knocks them back so body copy
+          clears WCAG AA. Uses --background like every other scrim in the
+          app, and is hidden in dark mode where --petshop-bg-image is
+          already `none` and the backdrop is flat. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-background/70 dark:hidden" />
       <div className="container-site relative">
         {/* Breadcrumb */}
         <nav className="mb-8 flex items-center gap-2 text-sm text-muted-foreground" aria-label="مسیر صفحه">
