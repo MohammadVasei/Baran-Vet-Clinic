@@ -183,11 +183,15 @@ export function CartIcon({ animate = false }: { animate?: boolean }) {
       className="btn btn-outline size-10 relative !p-0"
       aria-label={`سبد خرید${count > 0 ? `، ${count} مورد` : "، خالی"}`}
     >
-      <span
-        ref={pulseRef}
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 rounded-app border-2 border-primary opacity-0"
-      />
+      {/* Only mounted when there is something to pulse, so an empty cart has
+          no ring element at all. */}
+      {count > 0 && (
+        <span
+          ref={pulseRef}
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 rounded-app border-2 border-primary opacity-0"
+        />
+      )}
       <span ref={iconRef} className="inline-flex">
         <ShoppingCartIcon className="size-5 text-foreground" />
       </span>

@@ -30,6 +30,19 @@ export function Header() {
 
   const dashboardPath = useDashboardPath();
 
+  // A prefix match alone is not enough to mark a link active: on
+  // /services/petshop it lights up both the /services link and the
+  // petshop link, so two items carry the accent underline and two get
+  // aria-current="page". Pick the longest matching href instead, so a
+  // child page highlights only itself and its parent stays neutral.
+  const activeHref = NAV_LINKS.reduce<string | null>((best, link) => {
+    const matches =
+      pathname === link.href ||
+      (link.href !== "/" && pathname.startsWith(`${link.href}/`));
+    if (!matches) return best;
+    return best === null || link.href.length > best.length ? link.href : best;
+  }, null);
+
   return (
     <header className="sticky top-0 z-header">
       <div className="container-site flex h-16 items-center justify-between gap-2 border-b border-border bg-[var(--nav-bg)] backdrop-blur-lg rounded-app sm:gap-6">
@@ -50,7 +63,7 @@ export function Header() {
 
         <nav aria-label="ناوبری اصلی" className="hidden flex-1 items-center justify-center gap-1.5 lg:flex">
           {NAV_LINKS.map((link) => {
-            const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+            const isActive = link.href === activeHref;
             return (
               <Link
                 key={link.href}
