@@ -331,9 +331,10 @@ export function UploadIcon(props: IconProps) {
 export function ShoppingCartIcon(props: IconProps) {
   return (
     <svg {...stroke} {...props}>
-      <circle cx="9" cy="21" r="1" />
-      <circle cx="20" cy="21" r="1" />
-      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+      <path d="M4.5 4h2.4l2 7.5" />
+      <path d="M6.5 11.5h12.6l-1.2 5.4a2 2 0 0 1-1.93 1.5H9.63a2 2 0 0 1-1.93-1.5L6.5 11.5Z" />
+      <circle cx="10.8" cy="19.8" r="1.25" />
+      <circle cx="17.6" cy="19.8" r="1.25" />
     </svg>
   );
 }

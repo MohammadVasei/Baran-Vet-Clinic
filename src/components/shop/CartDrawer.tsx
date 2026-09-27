@@ -93,7 +93,10 @@ export function CartDrawer() {
         <div ref={contentRef} className="flex-1 overflow-y-auto p-4 space-y-4">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-64 text-center text-muted-foreground">
-              <ShoppingCartIcon className="size-16 mb-4 opacity-50" />
+              {/* size-20, not size-16: the redrawn cart fills 61% of its box
+                  rather than 92%, so the hero needs a bigger box to keep its
+                  visual weight. */}
+              <ShoppingCartIcon className="size-20 mb-4 opacity-50" />
               <p className="font-medium">سبد خرید خالی است</p>
               <p className="text-sm mt-1">محصولاتی را به سبد اضافه کنید</p>
             </div>
