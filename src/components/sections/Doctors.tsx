@@ -43,10 +43,11 @@ function DoctorsDesktop() {
     <section
       id="doctors"
       ref={root}
-      className="relative overflow-hidden bg-surface-alt py-16 lg:py-24"
+      className="relative overflow-hidden bg-surface-alt py-16 lg:py-28"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute start-1/2 top-[-4rem] size-[30rem] -translate-x-1/2 rounded-full bg-primary-soft opacity-40 blur-3xl" />
+        <div className="absolute end-[-4rem] bottom-16 size-80 rounded-full bg-accent-soft opacity-40 blur-3xl" />
       </div>
 
       <div className="container-site relative">
@@ -68,7 +69,7 @@ function DoctorsDesktop() {
           </p>
         </div>
 
-        <div className="doc-grid mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+        <div className="doc-grid mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {DOCTORS.items.map((doc) => (
             <Link
               key={doc.key}

@@ -1,6 +1,4 @@
-import { InstagramIcon, ThreadsIcon } from "@/components/icons";
 import { Logo } from "@/components/ui/Logo";
-import { FooterContact } from "@/components/layout/FooterContact";
 
 const QUICK_LINKS = [
   { label: "خانه", href: "/" },
@@ -11,77 +9,45 @@ const QUICK_LINKS = [
   { label: "تماس با ما", href: "/contact" },
 ];
 
-const SOCIALS = [
-  { label: "اینستاگرام", href: "https://www.instagram.com/baran_clinic_petshop/", Icon: InstagramIcon },
-  { label: "ترددز", href: "https://www.threads.com/@baran_clinic_petshop/", Icon: ThreadsIcon },
-];
-
 export function Footer() {
   return (
     <footer className="border-t border-border bg-surface">
-      <div className="container-site grid grid-cols-2 gap-6 py-10 lg:grid-cols-3 lg:gap-10 lg:py-16">
-        <div className="space-y-4">
-          <a href="#top" className="flex items-center gap-2.5">
-            <Logo className="transition-transform duration-normal ease-out group-hover:-rotate-6" width={48} height={48} />
-            <span className="leading-tight">
-              <span className="block font-display text-lg font-bold text-foreground">باران</span>
-              <span className="block font-label text-xs text-muted-foreground">کلینیک دام‌های کوچک باران</span>
-            </span>
-          </a>
-          <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-            درمان • شناسنامه سلامت • شستشو و اصلاح حرفه‌ای • پت‌شاپ
-          </p>
-          <ul className="flex items-center gap-2">
-            {SOCIALS.map(({ label, href, Icon }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  aria-label={label}
-                  className="grid size-11 place-items-center rounded-full border border-border text-muted-foreground transition-colors duration-fast hover:border-primary hover:text-primary-text-hover"
-                >
-                  <Icon className="size-5" />
-                </a>
-              </li>
-            ))}
-          </ul>
+      <div className="container-site flex flex-col items-center justify-between gap-8 py-8 lg:flex-row lg:py-10">
+        <div className="flex items-center gap-2">
+          <Logo width={32} height={32} />
+          <span className="font-display text-base font-bold text-foreground">باران</span>
+          <span className="font-label text-xs text-muted-foreground">دام های کوچک</span>
         </div>
 
-        <nav aria-label="دسترسی سریع">
-          <h2 className="font-display text-base font-bold text-foreground">دسترسی سریع</h2>
-          <ul className="mt-3 space-y-2.5 lg:mt-4">
-            {QUICK_LINKS.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-fast hover:text-primary-text-hover"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+        <nav aria-label="دسترسی سریع" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+          {QUICK_LINKS.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="transition-colors duration-fast hover:text-primary-text-hover"
+            >
+              {link.label}
+            </a>
+          ))}
         </nav>
-
-        <FooterContact />
       </div>
 
-<div className="border-t border-border">
-          <div className="container-site flex flex-col items-center justify-between gap-2 py-4 text-xs text-muted-foreground sm:flex-row sm:py-6">
-            <p>© ۱۴۰۵ کلینیک dam‌های کوچک باران — تمامی حقوق محفوظ است.</p>
-            <p className="font-label">
-              Developed by{" "}
-              <a
-                href="https://Moahmmadvasei.ir"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:no-underline"
-              >
-                Mohammad Vasi
-              </a>
-            </p>
-            <p className="font-label">ساخته‌شده با دقت و مهربانی</p>
-          </div>
+      <div className="border-t border-border">
+        <div className="container-site flex flex-col items-center justify-between gap-2 py-4 text-xs text-muted-foreground sm:flex-row sm:py-6">
+          <p>© ۱۴۰۵ دام های کوچک باران — تمامی حقوق محفوظ است.</p>
+          <p className="font-label">
+            ساخته‌شده توسط{" "}
+            <a
+              href="https://Moahmmadvasei.ir"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-text transition-colors hover:text-primary-text-hover underline"
+            >
+              Mohammad Vasei
+            </a>
+          </p>
         </div>
+      </div>
     </footer>
   );
 }

@@ -43,9 +43,9 @@ export function Header() {
     return best === null || link.href.length > best.length ? link.href : best;
   }, null);
 
-  return (
-    <header className="sticky top-0 z-header">
-      <div className="container-site flex h-16 items-center justify-between gap-2 border-b border-border bg-[var(--nav-bg)] backdrop-blur-lg rounded-app sm:gap-6">
+return (
+    <header className="sticky top-0 z-header border-b border-border/50 bg-[var(--nav-bg)]/95 backdrop-blur-lg">
+      <div className="container-site flex h-16 items-center justify-between gap-2 sm:gap-6">
         <Link href="/" className="group flex items-center gap-1.5 sm:gap-2.5" aria-label="کلینیک دام‌های کوچک باران — صفحه اصلی">
           <Image
             src="/baran-logo-navbar.png"
@@ -68,7 +68,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`nav-link ${isActive ? "text-primary-text" : ""}`}
+                className={`nav-link ${isActive ? "text-primary-text font-semibold" : ""}`}
                 aria-current={isActive ? "page" : undefined}
               >
                 {link.label}
@@ -110,7 +110,7 @@ export function Header() {
               </Link>
             </>
           )}
-          <MagneticButton href="/#appointment" className="btn btn-primary hidden lg:inline-flex">
+          <MagneticButton href="/#appointment" className="btn btn-primary hidden lg:inline-flex px-6">
             تماس و نوبت
           </MagneticButton>
           <button

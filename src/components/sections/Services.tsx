@@ -53,10 +53,11 @@ function ServicesDesktop() {
     <section
       id="services"
       ref={root}
-      className="relative overflow-hidden bg-surface-alt py-16 lg:py-24"
+      className="relative overflow-hidden bg-surface-alt py-16 lg:py-28"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute end-[-6rem] top-24 size-96 rounded-full bg-accent-soft opacity-60 blur-3xl" />
+        <div className="absolute start-[-4rem] bottom-16 size-80 rounded-full bg-primary-soft opacity-40 blur-3xl" />
       </div>
 
       <div className="container-site relative">
@@ -78,7 +79,7 @@ function ServicesDesktop() {
           </p>
         </div>
 
-        <div className="mt-12">
+        <div className="mt-14">
           <CircularTestimonials
             testimonials={testimonials}
             autoplay={true}

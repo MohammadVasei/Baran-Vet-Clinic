@@ -418,7 +418,7 @@ export function AppointmentCTA() {
       id="appointment"
       ref={root}
       aria-labelledby="appointment-heading"
-      className="relative overflow-hidden bg-background py-16 lg:py-24"
+      className="relative overflow-hidden bg-background py-16 lg:py-28"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute start-[-5rem] top-16 size-80 rounded-full bg-primary-soft opacity-50 blur-3xl" />
@@ -445,7 +445,7 @@ export function AppointmentCTA() {
           </p>
         </div>
 
-        <div className="mt-12">
+        <div className="mt-14">
           {/* Booking flow card */}
           <div className="ap-card rounded-app-lg border border-border bg-surface p-6 shadow-lg sm:p-8 lg:p-10">
             {submitted ? (

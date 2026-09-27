@@ -68,14 +68,14 @@ function AboutDesktop() {
     <section
       id="about"
       ref={root}
-      className="relative overflow-hidden bg-background py-20 lg:py-32"
+      className="relative overflow-hidden bg-background py-20 lg:py-36"
     >
       {/* Decorative soft orb */}
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute start-[-6rem] top-24 size-96 rounded-full bg-primary-soft opacity-70 blur-3xl" />
       </div>
 
-      <div className="container-site relative grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
+      <div className="container-site relative grid items-center gap-14 lg:grid-cols-12 lg:gap-12">
         {/* Statement — inline-start (right in RTL) */}
         <div className="lg:col-span-6 xl:col-span-6">
           <p className="about-eyebrow eyebrow">{ABOUT.eyebrow}</p>

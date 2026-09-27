@@ -568,6 +568,47 @@
   background-repeat: var(--petshop-bg-repeat);
 }
 
+/* Section spacing consistency — desktop */
+@media (min-width: 1024px) {
+  section[id] {
+    padding-top: var(--spacing-section);
+    padding-bottom: var(--spacing-section);
+  }
+}
+
+/* Card hover enhancement — desktop */
+@media (hover: hover) {
+  .card-hover:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+}
+
+/* Better link hover states — desktop */
+@media (hover: hover) {
+  a:hover {
+    opacity: 0.85;
+  }
+  a:active {
+    opacity: 0.7;
+  }
+}
+
+/* Text selection color improvement */
+::selection {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+/* Improved focus ring — desktop */
+@media (hover: hover) {
+  :focus-visible {
+    outline: var(--focus-ring-width) solid var(--ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
 /* Marquee drift — translateX(-50%) = exactly one duplicated copy, so the
    loop is seamless. Right→left matches Persian (RTL) reading direction. */
 @keyframes marquee-drift {
@@ -584,11 +625,29 @@
   clip-path: inset(0% 0% 100% 0%);
 }
 
-/* Hero (Step 7.1) — status hints for the continuously-animated transform
-   layers. The `.hero-orb` wrappers are GSAP-transformed and CONTAIN the static
-   `blur` + `opacity` inner circle (filter not re-rasterized per frame). */
+/* Hero — status hints for the continuously-animated transform layers */
 .hero-orb {
   will-change: transform;
+}
+
+/* Emergency bar — desktop visual enhancement */
+@media (min-width: 1024px) {
+  .emergency-bar {
+    background: var(--emergency-bg);
+    background-image: linear-gradient(135deg, var(--emergency-bg) 0%, color-mix(in srgb, var(--emergency-bg) 85%, black) 100%);
+  }
+}
+
+/* Header — desktop shadow transition on scroll */
+@media (min-width: 1024px) {
+  header.sticky.top-0.z-header {
+    transition: box-shadow var(--duration-normal) var(--ease-out);
+  }
+}
+
+/* Section spacing normalization — desktop */
+section[id] {
+  scroll-margin-top: calc(var(--header-height) + var(--space-4));
 }
 
 /* TEMP-EXPERIMENT: content-visibility on footer disabled to isolate CLS */
