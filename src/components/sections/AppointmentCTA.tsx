@@ -380,7 +380,6 @@ export function AppointmentCTA() {
       });
       revealUp(".ap-eyebrow", { once: true });
       revealUp(".ap-intro", { once: true });
-      revealUp(".ap-card", { once: true, y: 32 });
       return () => split.revert();
     },
     { scope: root, dependencies: [reduced] }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ArrowLeftIcon } from "@/components/icons";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { ProductCard as ProductCardData } from "@/lib/products";
 import { SnapCarousel } from "@/components/sections/mobile/SnapCarousel";
@@ -21,9 +22,19 @@ export function PetshopBanner({ products }: { products: ProductCardData[] }) {
               پت‌شاپ باران
             </Link>
 
-            <h2 className="mt-8 font-display text-3xl font-bold leading-[1.35] text-foreground sm:text-4xl lg:text-[2.75rem]">
-              محصولات ویژه پت‌شاپ
-            </h2>
+            <div className="flex items-center justify-between gap-3 sm:block">
+              <h2 className="mt-8 font-display text-3xl font-bold leading-[1.35] text-foreground sm:text-4xl lg:text-[2.75rem]">
+                محصولات ویژه پت‌شاپ
+              </h2>
+              <Link
+                href="/services/petshop"
+                className="btn btn-outline size-11 shrink-0 !p-0 sm:hidden"
+                aria-label="مشاهده همه محصولات"
+                title="مشاهده همه محصولات"
+              >
+                <ArrowLeftIcon className="size-5" aria-hidden="true" />
+              </Link>
+            </div>
 
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
               تمام نیازهای روزمره پت‌تان در یکجا
@@ -31,9 +42,10 @@ export function PetshopBanner({ products }: { products: ProductCardData[] }) {
           </div>
           <Link
             href="/services/petshop"
-            className="btn btn-outline mt-6 lg:mt-0 lg:inline-flex shrink-0"
+            className="btn btn-outline group mt-6 hidden shrink-0 gap-2 sm:inline-flex lg:mt-0"
           >
-            مشاهده همه محصولات
+            <span>مشاهده همه محصولات</span>
+            <ArrowLeftIcon className="hidden size-4 transition-transform duration-normal group-hover:-translate-x-1 lg:block" aria-hidden="true" />
           </Link>
         </div>
 

@@ -74,7 +74,7 @@ max_quantity: product.max_quantity ?? undefined,
 
   return (
     <article
-      className={`relative rounded-app-lg border ${featured ? "border-2 border-accent-yellow bg-accent-yellow-soft" : "border-border bg-surface"} overflow-hidden transition-all duration-300 hover:shadow-lg ${isOutOfStock ? 'opacity-60' : ''}`}
+      className={`relative rounded-app-lg border ${featured ? "border-accent-yellow bg-surface" : "border-border bg-surface"} overflow-hidden transition-all duration-300 hover:shadow-lg ${isOutOfStock ? 'opacity-60' : ''}`}
       role="listitem"
     >
       {/* Product Image */}

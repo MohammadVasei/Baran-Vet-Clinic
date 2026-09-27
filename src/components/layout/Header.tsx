@@ -43,8 +43,9 @@ export function Header() {
     return best === null || link.href.length > best.length ? link.href : best;
   }, null);
 
-return (
-    <header className="sticky top-0 z-header border-b border-border/50 bg-[var(--nav-bg)]/95 backdrop-blur-lg">
+  return (
+    <>
+      <header className="sticky top-0 z-header border-b border-border/50 bg-[var(--nav-bg)]/95 backdrop-blur-lg">
       <div className="container-site flex h-16 items-center justify-between gap-2 sm:gap-6">
         <Link href="/" className="group flex items-center gap-1.5 sm:gap-2.5" aria-label="کلینیک دام‌های کوچک باران — صفحه اصلی">
           <Image
@@ -127,7 +128,8 @@ return (
         </div>
       </div>
 
+      </header>
       <MobileMenu open={open} onClose={() => setOpen(false)} triggerRef={menuTriggerRef} />
-    </header>
+    </>
   );
 }
